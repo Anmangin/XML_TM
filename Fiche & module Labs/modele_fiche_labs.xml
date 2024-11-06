@@ -1,0 +1,2061 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TrialLibrary ver="5.0.3.27.Update 3b" dateCreated="10/30/2023 11:35:03" IsSingleTrial="false" Format="4.2.1" CompatibleVersion="5.0.1.0.Version">
+  <CustomObjects>
+    <Types>
+      <ProVisitTypes />
+      <ProFormCategories>
+        <ProFormCategory>
+          <ProObjectGuid>8ed96fb2-6a10-4c59-893a-23621a9e9b13</ProObjectGuid>
+          <Caption>Lab tests</Caption>
+          <Description>Lab tests</Description>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>0</Version>
+          <UserRoleId>0</UserRoleId>
+        </ProFormCategory>
+      </ProFormCategories>
+      <ProItemCategories>
+        <ProItemCategory>
+          <ProObjectGuid>fc765897-b2af-44c1-8572-3abe66f50159</ProObjectGuid>
+          <Caption>Site Data</Caption>
+          <Description>Site Data</Description>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>0</Version>
+          <UserRoleId>0</UserRoleId>
+        </ProItemCategory>
+      </ProItemCategories>
+    </Types>
+    <Protocols>
+      <ProTrials />
+      <ProSites />
+      <ProPatients />
+      <ProVisits />
+      <ProForms>
+        <ProForm>
+          <ProObjectGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</ProObjectGuid>
+          <ProRenderTypeId>1</ProRenderTypeId>
+          <HeaderGroupGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</HeaderGroupGuid>
+          <ProFormCategoryGuid>8ed96fb2-6a10-4c59-893a-23621a9e9b13</ProFormCategoryGuid>
+          <Caption>Laboratory Tests</Caption>
+          <Description>Laboratory Tests</Description>
+          <PublicId>
+          </PublicId>
+          <ProNumberingModeId>1</ProNumberingModeId>
+          <StartingNumber>1</StartingNumber>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <SasName>Lab</SasName>
+          <SasLabel>Laboratory Tests</SasLabel>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LAB</OID>
+          <Version>10</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProForm>
+      </ProForms>
+      <ProGroups>
+        <ProGroup>
+          <ProObjectGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProObjectGuid>
+          <ProGroupTypeId>7</ProGroupTypeId>
+          <ProRenderTypeId>1</ProRenderTypeId>
+          <ProControlsRenderTypeId>0</ProControlsRenderTypeId>
+          <ProGroupLayoutTypeId>2</ProGroupLayoutTypeId>
+          <Columns>1</Columns>
+          <HeaderHeight>7</HeaderHeight>
+          <Caption>LAB2</Caption>
+          <Description>List of laboratory tests</Description>
+          <PublicId>
+          </PublicId>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <StartingNumber>1</StartingNumber>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <HTML><![CDATA[]]></HTML>
+          <SasName>LAB2</SasName>
+          <SasLabel>List of laboratory tests</SasLabel>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LAB2</OID>
+          <Version>3</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProGroup>
+        <ProGroup>
+          <ProObjectGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProObjectGuid>
+          <ProGroupTypeId>4</ProGroupTypeId>
+          <ProRenderTypeId>1</ProRenderTypeId>
+          <ProControlsRenderTypeId>0</ProControlsRenderTypeId>
+          <ProGroupLayoutTypeId>1</ProGroupLayoutTypeId>
+          <Columns>0</Columns>
+          <HeaderHeight>0</HeaderHeight>
+          <Caption>LAB1</Caption>
+          <Description>Laboratory</Description>
+          <PublicId>
+          </PublicId>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <StartingNumber>1</StartingNumber>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <HTML><![CDATA[]]></HTML>
+          <SasName>LAB1</SasName>
+          <SasLabel>Laboratory</SasLabel>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LAB1</OID>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProGroup>
+      </ProGroups>
+      <ProItems>
+        <ProItem>
+          <ProObjectGuid>08de9ba1-2ca3-4fe5-b40f-0df2266cbf3f</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LabtestN</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>2</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Laboratory Test</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>20</ControlSize>
+          <SasName>LabtestN</SasName>
+          <SasLabel>Laboratory Test</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABTESTN</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>6</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>c1a217f3-6c34-46d8-b630-fcf9ece76ca3</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>4</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LABND</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Not done</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>200</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <CheckedValue>1</CheckedValue>
+          <UnCheckedValue>0</UnCheckedValue>
+          <ControlSize>1</ControlSize>
+          <Value>0</Value>
+          <SasName>LABND</SasName>
+          <SasLabel>Not done</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABND</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>5</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>22c97b93-4038-4737-aa28-4e42f3008b96</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>5</ProControlTypeId>
+          <ProCodeListGuid>601a7bc7-340f-479d-b056-beb655423020</ProCodeListGuid>
+          <ProRequiredTypeId>1</ProRequiredTypeId>
+          <Caption>LabtestR</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Result</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>1</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <SasName>LABTESTR</SasName>
+          <SasLabel>Result</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>1</SasLength>
+          <SasDisplayLength>1</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABTESTR</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>8</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>3d8d7ba7-6c52-4b87-aca9-d2e2957b33b1</ProObjectGuid>
+          <ProDataTypeId>3</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LabtestV</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>5</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Value</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>8</MaxLength>
+          <Scale>3</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>8</ControlSize>
+          <SasName>LabtestV</SasName>
+          <SasLabel>Value</SasLabel>
+          <SasType>Num</SasType>
+          <SasLength>8</SasLength>
+          <SasDisplayLength>8</SasDisplayLength>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABTESTV</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>17</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>6e04c5b3-1f6f-4295-bab0-e123d59610e5</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LabUnits</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>6</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Units</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>True</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>10</ControlSize>
+          <SasName>LabUnits</SasName>
+          <SasLabel>Units</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABUNITS</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>5</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>3ec8dc64-9c0d-4142-8bc3-c65d56b8839b</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LLN</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>3</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>LLN</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>True</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>10</ControlSize>
+          <SasName>LLN</SasName>
+          <SasLabel>LLN</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LLN</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>5</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>3568edcc-140c-45a6-a009-7bc813b8a010</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>ULN</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>4</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>ULN</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>True</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>10</ControlSize>
+          <SasName>labtestM</SasName>
+          <SasLabel>ULN</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>ULN</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>6</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>4d5767e9-c155-4082-8155-d70893e4b6ec</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>ExportUnit</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>10</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Export unit</Description>
+          <Hidden>True</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>20</ControlSize>
+          <SasName>ExportUn</SasName>
+          <SasLabel>Export unit</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>EXPORTUNIT</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>370e2e2c-7f02-43e5-96b0-7fd8ec532afb</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>4</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LabRND</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Tests Not done</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>200</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <CheckedValue>1</CheckedValue>
+          <UnCheckedValue>0</UnCheckedValue>
+          <ControlSize>1</ControlSize>
+          <Value>0</Value>
+          <SasName>LabRND</SasName>
+          <SasLabel>Biology Tests Not done</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABRND</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>13</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>01381ac5-1a93-42de-a1fd-0c902a65ca5e</ProObjectGuid>
+          <ProDataTypeId>5</ProDataTypeId>
+          <ProControlTypeId>8</ProControlTypeId>
+          <ProRequiredTypeId>1</ProRequiredTypeId>
+          <Caption>LabDT</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Date of sampling</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>1</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>s:10;c:0;p:1;</ControlSize>
+          <SasName>LabDT</SasName>
+          <SasLabel>Date of sampling</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABDT</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>7</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>df8ea050-dc8c-41c2-943a-37d32a40a176</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LABVTIME</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Visit timepoint</Description>
+          <Hidden>False</Hidden>
+          <Disabled>True</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>6</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <ControlSize>6</ControlSize>
+          <SasName>LABVTIME</SasName>
+          <SasLabel>Visit timepoint</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>6</SasLength>
+          <SasDisplayLength>6</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABVTIME</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>8</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>ddd7ab37-b7a0-43bc-82a2-cc862cbe1e65</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>5</ProControlTypeId>
+          <ProRequiredTypeId>1</ProRequiredTypeId>
+          <Caption>Labname</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>1</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Name of the laboratory</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <SasName>Labname</SasName>
+          <SasLabel>Name of the laboratory</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABNAME</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>9</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>f0606bc7-1785-4c9e-855a-0d86107e4705</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>13</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>LABCOM</Caption>
+          <ProNumberingModeId>3</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>&lt;font color="#ff0000"&gt;A significantly abnormal laboratory value should be reported in the AE section.\r\n\r\nAn abnormal laboratory value is considered significant if it has a grade ≥2 according to NCI-CTCAE v5.0.&lt;/font&gt;</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>True</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>1</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <SasName>LABCOM</SasName>
+          <SasLabel>lab com</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>False</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABCOM</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>7</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+      </ProItems>
+      <ProCodeLists>
+        <ProCodeList>
+          <ProObjectGuid>601a7bc7-340f-479d-b056-beb655423020</ProObjectGuid>
+          <ProCodeListTypeId>2</ProCodeListTypeId>
+          <Caption>RESULT</Caption>
+          <Description>
+          </Description>
+          <PublicId>
+          </PublicId>
+          <CustomAction>
+          </CustomAction>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>RESULT</OID>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+          <HasFilter>False</HasFilter>
+        </ProCodeList>
+      </ProCodeLists>
+      <ProCodeListItems>
+        <ProCodeListItem>
+          <ProObjectGuid>18bfe5e1-028f-41b2-bfc2-86b597189e9b</ProObjectGuid>
+          <ProCodeListGuid>601a7bc7-340f-479d-b056-beb655423020</ProCodeListGuid>
+          <Caption>Normal</Caption>
+          <Value>1</Value>
+          <PublicId>
+          </PublicId>
+          <OrderNo>1</OrderNo>
+          <PrefillNo>1</PrefillNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+          <Filter>
+          </Filter>
+        </ProCodeListItem>
+        <ProCodeListItem>
+          <ProObjectGuid>53407b07-2a62-42ff-9f76-5590c4ff59ec</ProObjectGuid>
+          <ProCodeListGuid>601a7bc7-340f-479d-b056-beb655423020</ProCodeListGuid>
+          <Caption>Abnormal (Not Clinically Significant)</Caption>
+          <Value>2</Value>
+          <PublicId>
+          </PublicId>
+          <OrderNo>2</OrderNo>
+          <PrefillNo>2</PrefillNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+          <Filter>
+          </Filter>
+        </ProCodeListItem>
+        <ProCodeListItem>
+          <ProObjectGuid>b8a0c6a2-d977-481a-abcf-f777c5a9bcb8</ProObjectGuid>
+          <ProCodeListGuid>601a7bc7-340f-479d-b056-beb655423020</ProCodeListGuid>
+          <Caption>Abnormal (Clinically Significant)</Caption>
+          <Value>3</Value>
+          <PublicId>
+          </PublicId>
+          <OrderNo>3</OrderNo>
+          <PrefillNo>3</PrefillNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+          <Filter>
+          </Filter>
+        </ProCodeListItem>
+      </ProCodeListItems>
+      <ProEdits>
+        <ProEdit>
+          <ProObjectGuid>3e4cf934-157c-4dde-869a-2a76215fe633</ProObjectGuid>
+          <ProEditActionId>5</ProEditActionId>
+          <TargetLevelId>2</TargetLevelId>
+          <RootLevelId>3</RootLevelId>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <ProFormGroupGuid>ac5b76ed-f79d-4435-a398-358c73ba3728</ProFormGroupGuid>
+          <ProGroupItemGuid>67bf3a46-4245-4670-86b8-fab1e26d166d</ProGroupItemGuid>
+          <ProItemGuid>01381ac5-1a93-42de-a1fd-0c902a65ca5e</ProItemGuid>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetPath>[Laboratory Tests.*][LAB1.*][LabDT]</TargetPath>
+          <ActionExpression><![CDATA[[Laboratory Tests][LAB1][LabRND] == '0';]]></ActionExpression>
+          <DataExpression><![CDATA[]]></DataExpression>
+          <Message><![CDATA[This item is required.]]></Message>
+          <OrderNo>1</OrderNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</TargetProGroupGuid>
+          <TargetProItemGuid>01381ac5-1a93-42de-a1fd-0c902a65ca5e</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABDT_RQE_1</OID>
+          <OutOfFormOnly>False</OutOfFormOnly>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEdit>
+        <ProEdit>
+          <ProObjectGuid>13c33eb7-e8b5-46af-afb6-7264b00478b3</ProObjectGuid>
+          <ProEditActionId>5</ProEditActionId>
+          <TargetLevelId>2</TargetLevelId>
+          <RootLevelId>3</RootLevelId>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <ProFormGroupGuid>2cffb3fa-eb2e-429e-ac85-9d23925d812d</ProFormGroupGuid>
+          <ProGroupItemGuid>92d49ccb-4ccc-4fe3-80a4-8320b02db8df</ProGroupItemGuid>
+          <ProItemGuid>3d8d7ba7-6c52-4b87-aca9-d2e2957b33b1</ProItemGuid>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetPath>[Laboratory Tests.*][LAB2.*][LabtestV]</TargetPath>
+          <ActionExpression><![CDATA[[Laboratory Tests][LAB2][LabtestR] == '3';]]></ActionExpression>
+          <DataExpression><![CDATA[]]></DataExpression>
+          <Message><![CDATA[This item is required.]]></Message>
+          <OrderNo>1</OrderNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</TargetProGroupGuid>
+          <TargetProItemGuid>3d8d7ba7-6c52-4b87-aca9-d2e2957b33b1</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABTESTV_REQ_1</OID>
+          <OutOfFormOnly>False</OutOfFormOnly>
+          <Version>3</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEdit>
+        <ProEdit>
+          <ProObjectGuid>06bf064e-5a21-48e3-935a-b9f6f8da9b6f</ProObjectGuid>
+          <ProEditActionId>5</ProEditActionId>
+          <TargetLevelId>2</TargetLevelId>
+          <RootLevelId>3</RootLevelId>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <ProFormGroupGuid>ac5b76ed-f79d-4435-a398-358c73ba3728</ProFormGroupGuid>
+          <ProGroupItemGuid>b2144875-9a46-45b5-9c1a-2a25639ef50b</ProGroupItemGuid>
+          <ProItemGuid>ddd7ab37-b7a0-43bc-82a2-cc862cbe1e65</ProItemGuid>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetPath>[Laboratory Tests.*][LAB1.*][Labname]</TargetPath>
+          <ActionExpression><![CDATA[[Laboratory Tests][LAB1][LabRND] == '0';]]></ActionExpression>
+          <DataExpression><![CDATA[]]></DataExpression>
+          <Message><![CDATA[This item is required.]]></Message>
+          <OrderNo>1</OrderNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</TargetProGroupGuid>
+          <TargetProItemGuid>ddd7ab37-b7a0-43bc-82a2-cc862cbe1e65</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABNAME_RQE_1</OID>
+          <OutOfFormOnly>False</OutOfFormOnly>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEdit>
+        <ProEdit>
+          <ProObjectGuid>f13335f9-d88e-4f72-a230-dd2f9823d505</ProObjectGuid>
+          <ProEditActionId>5</ProEditActionId>
+          <TargetLevelId>2</TargetLevelId>
+          <RootLevelId>3</RootLevelId>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <ProFormGroupGuid>2cffb3fa-eb2e-429e-ac85-9d23925d812d</ProFormGroupGuid>
+          <ProGroupItemGuid>0629b599-4e3f-4544-aebd-23c5524a3c2d</ProGroupItemGuid>
+          <ProItemGuid>22c97b93-4038-4737-aa28-4e42f3008b96</ProItemGuid>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetPath>[Laboratory Tests.*][LAB2.*][LabtestR]</TargetPath>
+          <ActionExpression><![CDATA[[Laboratory Tests][LAB2][LABND] == 0;]]></ActionExpression>
+          <DataExpression><![CDATA[]]></DataExpression>
+          <Message><![CDATA[This item is required.]]></Message>
+          <OrderNo>1</OrderNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</TargetProGroupGuid>
+          <TargetProItemGuid>22c97b93-4038-4737-aa28-4e42f3008b96</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABTESTR_RQE_2</OID>
+          <OutOfFormOnly>False</OutOfFormOnly>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEdit>
+        <ProEdit>
+          <ProObjectGuid>2acf459c-fb9c-49a5-887b-5c21d4d02787</ProObjectGuid>
+          <ProEditActionId>10</ProEditActionId>
+          <TargetLevelId>2</TargetLevelId>
+          <RootLevelId>3</RootLevelId>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <ProFormGroupGuid>2cffb3fa-eb2e-429e-ac85-9d23925d812d</ProFormGroupGuid>
+          <ProGroupItemGuid>e62c40f1-a139-4001-8fcf-163bb16fe202</ProGroupItemGuid>
+          <ProItemGuid>c1a217f3-6c34-46d8-b630-fcf9ece76ca3</ProItemGuid>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetPath>[Laboratory Tests.*][LAB2.*][LABND]</TargetPath>
+          <ActionExpression><![CDATA[true;]]></ActionExpression>
+          <DataExpression><![CDATA[if ([Laboratory Tests][LAB1][LabRND] == '1') '1'
+else [Laboratory Tests][LAB2][LABND];]]></DataExpression>
+          <Message><![CDATA[]]></Message>
+          <OrderNo>1</OrderNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</TargetProGroupGuid>
+          <TargetProItemGuid>c1a217f3-6c34-46d8-b630-fcf9ece76ca3</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <OID>LABND_DVA_1</OID>
+          <OutOfFormOnly>False</OutOfFormOnly>
+          <Version>3</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEdit>
+      </ProEdits>
+      <ProEditShadows />
+      <ProEditDependencies>
+        <ProEditDependency>
+          <ProObjectGuid>1aa858e1-8527-4c2d-8df6-28907c2deee3</ProObjectGuid>
+          <ProEditGuid>3e4cf934-157c-4dde-869a-2a76215fe633</ProEditGuid>
+          <DisplayPath>[Laboratory Tests][LAB1][LabRND]</DisplayPath>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <MatchHierarchyLevelId>45</MatchHierarchyLevelId>
+          <ProEditDependencyTypeId>1</ProEditDependencyTypeId>
+          <ProFormGroupGuid>ac5b76ed-f79d-4435-a398-358c73ba3728</ProFormGroupGuid>
+          <ProGroupItemGuid>32632a74-a72e-4da1-a70f-cc1ef6d65b43</ProGroupItemGuid>
+          <SystemFormLevelId>0</SystemFormLevelId>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</TargetProGroupGuid>
+          <TargetProItemGuid>370e2e2c-7f02-43e5-96b0-7fd8ec532afb</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <ProEditDependencyExtensionId>0</ProEditDependencyExtensionId>
+          <PatientInstanceTypeId>0</PatientInstanceTypeId>
+          <VisitInstanceTypeId>0</VisitInstanceTypeId>
+          <FormInstanceTypeId>0</FormInstanceTypeId>
+          <GroupInstanceTypeId>0</GroupInstanceTypeId>
+          <GUID>3d236297-ec2a-474e-93ee-d9d68891fb70</GUID>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEditDependency>
+        <ProEditDependency>
+          <ProObjectGuid>71270683-ab0f-463c-9b67-e0fbfb7e18f0</ProObjectGuid>
+          <ProEditGuid>13c33eb7-e8b5-46af-afb6-7264b00478b3</ProEditGuid>
+          <DisplayPath>[Laboratory Tests][LAB2][LabtestR]</DisplayPath>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <MatchHierarchyLevelId>45</MatchHierarchyLevelId>
+          <ProEditDependencyTypeId>1</ProEditDependencyTypeId>
+          <ProFormGroupGuid>2cffb3fa-eb2e-429e-ac85-9d23925d812d</ProFormGroupGuid>
+          <ProGroupItemGuid>0629b599-4e3f-4544-aebd-23c5524a3c2d</ProGroupItemGuid>
+          <SystemFormLevelId>0</SystemFormLevelId>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</TargetProGroupGuid>
+          <TargetProItemGuid>22c97b93-4038-4737-aa28-4e42f3008b96</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <ProEditDependencyExtensionId>0</ProEditDependencyExtensionId>
+          <PatientInstanceTypeId>0</PatientInstanceTypeId>
+          <VisitInstanceTypeId>0</VisitInstanceTypeId>
+          <FormInstanceTypeId>0</FormInstanceTypeId>
+          <GroupInstanceTypeId>0</GroupInstanceTypeId>
+          <GUID>95058ff0-97be-4967-b561-851f86353b1f</GUID>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEditDependency>
+        <ProEditDependency>
+          <ProObjectGuid>49cb2c8f-f27e-4e12-8e83-8661d1ae7f91</ProObjectGuid>
+          <ProEditGuid>06bf064e-5a21-48e3-935a-b9f6f8da9b6f</ProEditGuid>
+          <DisplayPath>[Laboratory Tests][LAB1][LabRND]</DisplayPath>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <MatchHierarchyLevelId>45</MatchHierarchyLevelId>
+          <ProEditDependencyTypeId>1</ProEditDependencyTypeId>
+          <ProFormGroupGuid>ac5b76ed-f79d-4435-a398-358c73ba3728</ProFormGroupGuid>
+          <ProGroupItemGuid>32632a74-a72e-4da1-a70f-cc1ef6d65b43</ProGroupItemGuid>
+          <SystemFormLevelId>0</SystemFormLevelId>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</TargetProGroupGuid>
+          <TargetProItemGuid>370e2e2c-7f02-43e5-96b0-7fd8ec532afb</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <ProEditDependencyExtensionId>0</ProEditDependencyExtensionId>
+          <PatientInstanceTypeId>0</PatientInstanceTypeId>
+          <VisitInstanceTypeId>0</VisitInstanceTypeId>
+          <FormInstanceTypeId>0</FormInstanceTypeId>
+          <GroupInstanceTypeId>0</GroupInstanceTypeId>
+          <GUID>04af2872-0075-42bc-a32d-d68bf4c8715f</GUID>
+          <Version>0</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEditDependency>
+        <ProEditDependency>
+          <ProObjectGuid>e641eb97-ea18-48be-8b27-e335b2e14755</ProObjectGuid>
+          <ProEditGuid>f13335f9-d88e-4f72-a230-dd2f9823d505</ProEditGuid>
+          <DisplayPath>[Laboratory Tests][LAB2][LABND]</DisplayPath>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <MatchHierarchyLevelId>45</MatchHierarchyLevelId>
+          <ProEditDependencyTypeId>1</ProEditDependencyTypeId>
+          <ProFormGroupGuid>2cffb3fa-eb2e-429e-ac85-9d23925d812d</ProFormGroupGuid>
+          <ProGroupItemGuid>e62c40f1-a139-4001-8fcf-163bb16fe202</ProGroupItemGuid>
+          <SystemFormLevelId>0</SystemFormLevelId>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</TargetProGroupGuid>
+          <TargetProItemGuid>c1a217f3-6c34-46d8-b630-fcf9ece76ca3</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <ProEditDependencyExtensionId>0</ProEditDependencyExtensionId>
+          <PatientInstanceTypeId>0</PatientInstanceTypeId>
+          <VisitInstanceTypeId>0</VisitInstanceTypeId>
+          <FormInstanceTypeId>0</FormInstanceTypeId>
+          <GroupInstanceTypeId>0</GroupInstanceTypeId>
+          <GUID>749f1c11-5e2b-4e02-87c7-ebdae97ebe97</GUID>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEditDependency>
+        <ProEditDependency>
+          <ProObjectGuid>f8f00525-64db-4715-8f2d-4923d0a445bc</ProObjectGuid>
+          <ProEditGuid>2acf459c-fb9c-49a5-887b-5c21d4d02787</ProEditGuid>
+          <DisplayPath>[Laboratory Tests][LAB1][LabRND]</DisplayPath>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <MatchHierarchyLevelId>44</MatchHierarchyLevelId>
+          <ProEditDependencyTypeId>2</ProEditDependencyTypeId>
+          <ProFormGroupGuid>ac5b76ed-f79d-4435-a398-358c73ba3728</ProFormGroupGuid>
+          <ProGroupItemGuid>32632a74-a72e-4da1-a70f-cc1ef6d65b43</ProGroupItemGuid>
+          <SystemFormLevelId>0</SystemFormLevelId>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</TargetProGroupGuid>
+          <TargetProItemGuid>370e2e2c-7f02-43e5-96b0-7fd8ec532afb</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <ProEditDependencyExtensionId>0</ProEditDependencyExtensionId>
+          <PatientInstanceTypeId>0</PatientInstanceTypeId>
+          <VisitInstanceTypeId>0</VisitInstanceTypeId>
+          <FormInstanceTypeId>0</FormInstanceTypeId>
+          <GroupInstanceTypeId>0</GroupInstanceTypeId>
+          <GUID>0365eada-5cbe-4169-a2dd-6f8b985b95b6</GUID>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEditDependency>
+        <ProEditDependency>
+          <ProObjectGuid>6ded7f2f-e284-45fd-9a24-41c47e5c8cab</ProObjectGuid>
+          <ProEditGuid>2acf459c-fb9c-49a5-887b-5c21d4d02787</ProEditGuid>
+          <DisplayPath>[Laboratory Tests][LAB2][LABND]</DisplayPath>
+          <ProHierarchyLevelId>46</ProHierarchyLevelId>
+          <MatchHierarchyLevelId>46</MatchHierarchyLevelId>
+          <ProEditDependencyTypeId>2</ProEditDependencyTypeId>
+          <ProFormGroupGuid>2cffb3fa-eb2e-429e-ac85-9d23925d812d</ProFormGroupGuid>
+          <ProGroupItemGuid>e62c40f1-a139-4001-8fcf-163bb16fe202</ProGroupItemGuid>
+          <SystemFormLevelId>0</SystemFormLevelId>
+          <VisitInstanceNo>0</VisitInstanceNo>
+          <FormInstanceNo>0</FormInstanceNo>
+          <GroupInstanceNo>0</GroupInstanceNo>
+          <TargetProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</TargetProFormGuid>
+          <TargetProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</TargetProGroupGuid>
+          <TargetProItemGuid>c1a217f3-6c34-46d8-b630-fcf9ece76ca3</TargetProItemGuid>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <ProEditDependencyExtensionId>0</ProEditDependencyExtensionId>
+          <PatientInstanceTypeId>0</PatientInstanceTypeId>
+          <VisitInstanceTypeId>0</VisitInstanceTypeId>
+          <FormInstanceTypeId>0</FormInstanceTypeId>
+          <GroupInstanceTypeId>0</GroupInstanceTypeId>
+          <GUID>8d3c9c7b-197d-4500-b747-8ffe43a48da5</GUID>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProEditDependency>
+      </ProEditDependencies>
+      <ProEditClones />
+      <ProEditCloneTargetForms />
+      <CustomNotifications />
+      <ProScriptFunctions />
+      <ProUnitMaps />
+      <ProUnits />
+      <ProUnitConversionMaps />
+      <ProUnitConversions />
+      <ProStopWordGroups />
+      <ProStopWords />
+      <ProtocolPlanes>
+      </ProtocolPlanes>
+    </Protocols>
+    <Relations>
+      <ProTrialSites />
+      <ProSitePatients />
+      <ProPatientVisits />
+      <ProPatientVisitLocations />
+      <ProVisitForms />
+      <ProFormGroups>
+        <ProFormGroup>
+          <ProObjectGuid>2cffb3fa-eb2e-429e-ac85-9d23925d812d</ProObjectGuid>
+          <ProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</ProFormGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <MaxOccurance>31</MaxOccurance>
+          <MinOccurance>31</MinOccurance>
+          <SasSuffix>01</SasSuffix>
+          <OrderNo>2</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>14</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <AllowRowDelete>False</AllowRowDelete>
+        </ProFormGroup>
+        <ProFormGroup>
+          <ProObjectGuid>ac5b76ed-f79d-4435-a398-358c73ba3728</ProObjectGuid>
+          <ProFormGuid>e602b413-3ed2-464d-a6ba-d28e5ea70062</ProFormGuid>
+          <ProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProGroupGuid>
+          <MaxOccurance>1</MaxOccurance>
+          <MinOccurance>1</MinOccurance>
+          <SasSuffix>02</SasSuffix>
+          <OrderNo>1</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>11</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <AllowRowDelete>False</AllowRowDelete>
+        </ProFormGroup>
+      </ProFormGroups>
+      <ProGroupItems>
+        <ProGroupItem>
+          <ProObjectGuid>420b62c4-bb8e-4d23-90e9-7d2f01c525da</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>08de9ba1-2ca3-4fe5-b40f-0df2266cbf3f</ProItemGuid>
+          <OrderNo>1</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>e62c40f1-a139-4001-8fcf-163bb16fe202</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>c1a217f3-6c34-46d8-b630-fcf9ece76ca3</ProItemGuid>
+          <OrderNo>2</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>0629b599-4e3f-4544-aebd-23c5524a3c2d</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>22c97b93-4038-4737-aa28-4e42f3008b96</ProItemGuid>
+          <OrderNo>3</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>92d49ccb-4ccc-4fe3-80a4-8320b02db8df</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>3d8d7ba7-6c52-4b87-aca9-d2e2957b33b1</ProItemGuid>
+          <OrderNo>4</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>0a363a66-d2a7-4f91-afa8-6141cb6d5976</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>6e04c5b3-1f6f-4295-bab0-e123d59610e5</ProItemGuid>
+          <OrderNo>5</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>74adec1a-8998-4db3-83df-67832349fc6e</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>3ec8dc64-9c0d-4142-8bc3-c65d56b8839b</ProItemGuid>
+          <OrderNo>6</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>a463d648-a858-4223-8f64-5252c0d9003f</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>3568edcc-140c-45a6-a009-7bc813b8a010</ProItemGuid>
+          <OrderNo>7</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>1caa0362-33b3-4f91-a7e4-20231eb4fa92</ProObjectGuid>
+          <ProGroupGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProGroupGuid>
+          <ProItemGuid>4d5767e9-c155-4082-8155-d70893e4b6ec</ProItemGuid>
+          <OrderNo>8</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>4</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>32632a74-a72e-4da1-a70f-cc1ef6d65b43</ProObjectGuid>
+          <ProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProGroupGuid>
+          <ProItemGuid>370e2e2c-7f02-43e5-96b0-7fd8ec532afb</ProItemGuid>
+          <OrderNo>1</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>67bf3a46-4245-4670-86b8-fab1e26d166d</ProObjectGuid>
+          <ProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProGroupGuid>
+          <ProItemGuid>01381ac5-1a93-42de-a1fd-0c902a65ca5e</ProItemGuid>
+          <OrderNo>2</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>5</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>3b78939c-bf4a-45b6-9e7a-7c60a037a7bb</ProObjectGuid>
+          <ProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProGroupGuid>
+          <ProItemGuid>df8ea050-dc8c-41c2-943a-37d32a40a176</ProItemGuid>
+          <OrderNo>3</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>b2144875-9a46-45b5-9c1a-2a25639ef50b</ProObjectGuid>
+          <ProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProGroupGuid>
+          <ProItemGuid>ddd7ab37-b7a0-43bc-82a2-cc862cbe1e65</ProItemGuid>
+          <OrderNo>4</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>5</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>be6f47d5-6e63-4ec8-a639-69060c30b892</ProObjectGuid>
+          <ProGroupGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProGroupGuid>
+          <ProItemGuid>f0606bc7-1785-4c9e-855a-0d86107e4705</ProItemGuid>
+          <OrderNo>5</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>ba893589-62f5-47f7-9abe-86695a37d1d0</ProObjectGuid>
+          <ProGroupGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</ProGroupGuid>
+          <ProItemGuid>33bc334b-6b9d-4fbb-b778-08bb9461c2ee</ProItemGuid>
+          <OrderNo>1</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>88fa598b-a87f-4136-8653-b45b6688bd2c</ProObjectGuid>
+          <ProGroupGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</ProGroupGuid>
+          <ProItemGuid>2353a2a9-06fd-429d-8b4b-6502c493b8bc</ProItemGuid>
+          <OrderNo>2</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>fa31397a-fb54-4f35-a912-5ff09b7d8904</ProObjectGuid>
+          <ProGroupGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</ProGroupGuid>
+          <ProItemGuid>4966b3bb-f69a-4677-bf2e-2ee3497e0459</ProItemGuid>
+          <OrderNo>3</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>9ee27ed4-917a-4cf3-a7ad-e18307abd415</ProObjectGuid>
+          <ProGroupGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</ProGroupGuid>
+          <ProItemGuid>e4d483ce-f99e-4571-ba78-78e16c913ceb</ProItemGuid>
+          <OrderNo>4</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+        <ProGroupItem>
+          <ProObjectGuid>addbee39-807d-4026-8493-ac61f36ee240</ProObjectGuid>
+          <ProGroupGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</ProGroupGuid>
+          <ProItemGuid>ed617efd-dae6-4ce2-986a-050c2843d314</ProItemGuid>
+          <OrderNo>5</OrderNo>
+          <ProObjectStateBitMask>0</ProObjectStateBitMask>
+          <Version>1</Version>
+          <UserRoleId>1</UserRoleId>
+          <CustomizationInconsistency>False</CustomizationInconsistency>
+          <ProIndentationTypeId>1</ProIndentationTypeId>
+        </ProGroupItem>
+      </ProGroupItems>
+      <DependentProVisitForms />
+      <ProEditScriptFunctions />
+      <ProMonitoringLevels />
+    </Relations>
+    <Dictionaries />
+    <ImportTemplates>
+      <ImpTemplates />
+      <ImpTrialTemplates />
+      <ImpColumnDelimiters />
+      <ImpColumnMappings />
+      <ImpFixedColumns />
+      <ImpVisitCodes />
+      <ImpVisitCodeMaps />
+      <ImpTestCodes />
+      <ImpTestCodeMaps />
+      <ImpHL7Mappings />
+    </ImportTemplates>
+    <ExportTemplates>
+      <ProExpressionScriptFunctions />
+      <ProExportDataSources />
+      <ProExportExpressionDataSources />
+      <ProSDTMVariableValidators />
+      <ProSDTMVariableOrigins />
+      <ProSDTMCodeListItems />
+      <ProSDTMVariableCodeListItems />
+      <ProExportSDTMCodeLists />
+      <ProExportSDTMCodeListItems />
+      <ProSDTMVariables />
+      <ProExportSDTMVariables />
+      <ProExportVariables />
+      <ProSDTMDomains />
+      <ProExportSearches />
+      <ProExportExpressions />
+      <ProExportSDTMDomains />
+      <ProExportTemplateSDTMDomains />
+      <ProExportDomainUnionProperties />
+      <ProExportDomains />
+      <ProExportTemplateIndustryStandards />
+      <ProExportSASTypes />
+      <ProIndustryStandards />
+      <ProExportTemplates />
+    </ExportTemplates>
+    <UniqueNumbering>
+      <UNTables />
+      <UNColumns />
+      <UNRows />
+      <UNColumnValues />
+    </UniqueNumbering>
+    <ProRedactionTemplates>
+      <ProRedactionTemplateAreas />
+    </ProRedactionTemplates>
+    <ProGridPdfTemplates>
+    </ProGridPdfTemplates>
+    <TBTree>
+      <TBNode>
+        <ProObjectGuid>c6c86d7d-b94a-4758-a4e4-d5e632e55835</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>d568210e-5848-4bcf-9eb6-1fd766e8471c</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>837fb468-c8c1-4e20-b41d-3a50a23df331</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>7bcbf01b-6561-4a59-994d-6891c6ced7ad</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>2506c706-17fc-47d2-bf02-e01dfd9a4df1</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>b9b8dcb6-99b8-4ed9-a51e-a2e2dd059cab</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>ab3707e0-1d71-445f-9e99-1d707c52b37e</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>641364b1-1a51-4913-a680-9401ba49f49a</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>27d7448e-f339-442c-861f-f165d3b48b61</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>d0a4e547-022d-4d5d-98e1-2f7bbd061279</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>ab4543b6-245e-42ef-9aa0-0cef359e0cc4</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>7b02b5a2-8151-4033-9bb5-23a62d9cf5af</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>67c68f57-5c44-4bcd-9e25-946fdecef270</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>d054932c-60e6-40a5-acd5-c1432e5b1ed8</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>9a17252f-751c-4f9d-a87f-64929d4f2172</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>4de5f03a-806f-46dd-ad76-cd1030b8eac1</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>5b9b6209-d32c-4eb1-8840-1634823666ae</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>a07ce1ec-321b-44f9-bfb7-775817de5582</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>4daa74cd-ea3e-471b-9c65-565ef4db7fd6</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>19386f15-1571-427c-badb-631e0e28b93f</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>4d5767e9-c155-4082-8155-d70893e4b6ec</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>e4d483ce-f99e-4571-ba78-78e16c913ceb</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>575e4ce1-bcca-4235-9b80-d39afe8b71c2</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>f0606bc7-1785-4c9e-855a-0d86107e4705</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>01381ac5-1a93-42de-a1fd-0c902a65ca5e</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>ddd7ab37-b7a0-43bc-82a2-cc862cbe1e65</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>c1a217f3-6c34-46d8-b630-fcf9ece76ca3</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>370e2e2c-7f02-43e5-96b0-7fd8ec532afb</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>08de9ba1-2ca3-4fe5-b40f-0df2266cbf3f</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>22c97b93-4038-4737-aa28-4e42f3008b96</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>3d8d7ba7-6c52-4b87-aca9-d2e2957b33b1</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>6e04c5b3-1f6f-4295-bab0-e123d59610e5</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>df8ea050-dc8c-41c2-943a-37d32a40a176</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>69c0ee67-fae1-4887-ad7b-a9b8c83d8215</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>8f9446e2-1576-4adf-b40d-0f792f92752f</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>3ec8dc64-9c0d-4142-8bc3-c65d56b8839b</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>163d8851-b59a-4b1c-be23-95d26a117068</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>6c0941b6-9b01-460b-82d3-49b20b65bb51</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>82f7abb5-e4e5-4f05-9e68-4a31657b92e5</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>4966b3bb-f69a-4677-bf2e-2ee3497e0459</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>3bf53d37-6797-49a2-bd78-e196b58d8bde</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>60eeb9ac-fcb4-4fcc-bfcc-48dcb6167c37</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>e17b41d0-cdb4-4189-959b-59cfb44460e4</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>c710a2fd-7830-4848-aa0b-5e87dc7a029b</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>4a45ae78-b886-4fec-a6c9-344ca4db5637</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>ad95eaff-140a-49cd-82cb-817641811118</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>076c04b6-8084-4cd8-a7e9-64155e233b7e</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>39696870-3b16-4f01-b584-791eed9bb2f9</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>a58d4812-fee1-4239-a56c-97c22f19ab2b</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>33bc334b-6b9d-4fbb-b778-08bb9461c2ee</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>f7fea946-d8cd-413f-925d-4489e74f4425</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>7083d88a-96a4-4bfe-b173-b145b3d354f0</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>8c850988-fa71-47c3-aebc-da1721bf5dbe</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>518096a3-5e1e-4b9e-81d5-621d10db38eb</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>42bf3410-ff9c-420e-b07e-da7e20ef1695</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>512920ef-9449-4a48-9756-6c50218926b5</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>b725aff9-276f-4ac0-8095-6b7e359061a5</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>ca702f9b-9a6a-4026-b057-6012cc0fe68c</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>4d4f9d9b-380f-4dae-a698-fc969c7a2986</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>e11181aa-0985-4c28-b5f1-0c0e6889b3ab</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>2353a2a9-06fd-429d-8b4b-6502c493b8bc</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>519a4400-2fcc-4d16-9d85-b7caae52d17b</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>3568edcc-140c-45a6-a009-7bc813b8a010</ProObjectGuid>
+        <ParentTBNodeId>570</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>3b7d4bb7-ed36-48c5-b7c8-00e6fa723ea9</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>6299083b-d8be-459e-8fff-c71862a6c3e0</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>86a56c16-5df3-4008-8f8f-3376901bb330</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>ed617efd-dae6-4ce2-986a-050c2843d314</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>e00dba47-b03b-4b8f-b00a-a9b8d9a807c3</ProObjectGuid>
+        <ParentTBNodeId>556</ParentTBNodeId>
+        <TBNodeTypeId>16384</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</ProObjectGuid>
+        <ParentTBNodeId>558</ParentTBNodeId>
+        <TBNodeTypeId>268435456</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>eb4d0e6e-b67c-47ba-92fd-82ac5ec9508e</ProObjectGuid>
+        <ParentTBNodeId>571</ParentTBNodeId>
+        <TBNodeTypeId>8192</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>5a52c6c5-f0e4-4910-961c-9f7e1218627c</ProObjectGuid>
+        <ParentTBNodeId>571</ParentTBNodeId>
+        <TBNodeTypeId>8192</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>52c55c79-b706-41c4-b79c-6168cd2d5cb3</ProObjectGuid>
+        <ParentTBNodeId>558</ParentTBNodeId>
+        <TBNodeTypeId>8192</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>a3dd497b-99b6-4707-880e-12c447db2691</ProObjectGuid>
+        <ParentTBNodeId>558</ParentTBNodeId>
+        <TBNodeTypeId>8192</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>a4d518d0-bd60-4db9-90ff-361ef3035afd</ProObjectGuid>
+        <ParentTBNodeId>558</ParentTBNodeId>
+        <TBNodeTypeId>8192</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>1b2a881d-b127-468b-a4f8-43fc15fa7c20</ProObjectGuid>
+        <ParentTBNodeId>558</ParentTBNodeId>
+        <TBNodeTypeId>8192</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>020d4f4e-c35f-4835-9498-8fd0cb28c07b</ProObjectGuid>
+        <ParentTBNodeId>558</ParentTBNodeId>
+        <TBNodeTypeId>8192</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>ff5cbb48-1d92-4f49-9a71-eaf03752cf35</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>fe7095fd-df6b-4e3b-876a-41f2fe1d561f</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>0fb34c57-d794-4414-a9d7-6af83b388ed2</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>6050196e-ed5d-4fb9-8176-126ddc2a1cf0</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>8fa2af36-d94a-4fbb-b387-6e7c6a2b3138</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>601a7bc7-340f-479d-b056-beb655423020</ProObjectGuid>
+        <ParentTBNodeId>524</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>eb7dc88c-ce83-43a0-9167-583b3d5c35e8</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>eb41278f-3d85-4031-8c58-f71ededd239d</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <ProObjectGuid>33fa8eca-273e-4402-a310-f84d028f1748</ProObjectGuid>
+        <ParentTBNodeId>557</ParentTBNodeId>
+        <TBNodeTypeId>32768</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <TBNodeId>524</TBNodeId>
+        <ProObjectGuid>163718f7-099b-4d69-88bf-1b9cfcb1c260</ProObjectGuid>
+        <ParentTBNodeId>8</ParentTBNodeId>
+        <Caption>COMMUN</Caption>
+        <TBNodeTypeId>17179869184</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <TBNodeId>556</TBNodeId>
+        <ProObjectGuid>e50699ee-19a5-4c80-b9c9-59a8cb0716cd</ProObjectGuid>
+        <ParentTBNodeId>7</ParentTBNodeId>
+        <Caption>SYSTEM</Caption>
+        <TBNodeTypeId>17179869184</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <TBNodeId>557</TBNodeId>
+        <ProObjectGuid>0132977e-9a44-46b0-8253-86aae6a67651</ProObjectGuid>
+        <ParentTBNodeId>8</ParentTBNodeId>
+        <Caption>SYSTEM</Caption>
+        <TBNodeTypeId>17179869184</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <TBNodeId>558</TBNodeId>
+        <ProObjectGuid>35ec647a-27e5-47e5-a17c-fce58411672a</ProObjectGuid>
+        <ParentTBNodeId>6</ParentTBNodeId>
+        <Caption>SYSTEM</Caption>
+        <TBNodeTypeId>17179869184</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <TBNodeId>570</TBNodeId>
+        <ProObjectGuid>b0d61921-e959-4f38-a038-d8809b240a14</ProObjectGuid>
+        <ParentTBNodeId>7</ParentTBNodeId>
+        <Caption>LAB</Caption>
+        <TBNodeTypeId>17179869184</TBNodeTypeId>
+      </TBNode>
+      <TBNode>
+        <TBNodeId>571</TBNodeId>
+        <ProObjectGuid>65dc2503-75c4-4a43-b1ac-af10ede2349a</ProObjectGuid>
+        <ParentTBNodeId>6</ParentTBNodeId>
+        <Caption>LAB</Caption>
+        <TBNodeTypeId>17179869184</TBNodeTypeId>
+      </TBNode>
+    </TBTree>
+  </CustomObjects>
+  <SystemObjects>
+    <Types>
+      <ProVisitTypes />
+      <ProRenderTypes />
+      <ProGroupTypes />
+      <ProControlTypes />
+      <ProGroupLayoutTypes />
+      <ProRequiredTypes />
+      <ProDataTypes />
+      <ProFormCategories />
+      <ProItemCategories />
+      <ImpTypes />
+      <ImpColumnTypes />
+      <ImpHL7SegmentTypes />
+    </Types>
+    <Protocols>
+      <ProTrials />
+      <ProSites />
+      <ProPatients />
+      <ProVisits />
+      <ProForms />
+      <ProGroups>
+        <ProGroup>
+          <ProObjectGuid>d78c47de-9ae1-48d0-b4fd-babd5d1b151e</ProObjectGuid>
+          <ProGroupTypeId>2</ProGroupTypeId>
+          <ProRenderTypeId>1</ProRenderTypeId>
+          <ProControlsRenderTypeId>1</ProControlsRenderTypeId>
+          <ProGroupLayoutTypeId>1</ProGroupLayoutTypeId>
+          <Columns>2</Columns>
+          <HeaderHeight>2</HeaderHeight>
+          <Caption>CRFHeader</Caption>
+          <Description>CRF Header Group</Description>
+          <PublicId>
+          </PublicId>
+          <ProNumberingModeId>1</ProNumberingModeId>
+          <StartingNumber>1</StartingNumber>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <HTML><![CDATA[]]></HTML>
+          <SasName>CRFHeade</SasName>
+          <SasLabel>CRF Header Group</SasLabel>
+          <ProObjectStateBitMask>2</ProObjectStateBitMask>
+          <OID>CRFHEADER</OID>
+          <Version>1</Version>
+          <UserRoleId>1245195</UserRoleId>
+        </ProGroup>
+      </ProGroups>
+      <ProItems>
+        <ProItem>
+          <ProObjectGuid>33bc334b-6b9d-4fbb-b778-08bb9461c2ee</ProObjectGuid>
+          <ProDataTypeId>2</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>1</ProRequiredTypeId>
+          <Caption>Site Number</Caption>
+          <ProNumberingModeId>1</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Site Number</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <CheckedValue>true</CheckedValue>
+          <UnCheckedValue>false</UnCheckedValue>
+          <ControlSize>30</ControlSize>
+          <SasName>STNO</SasName>
+          <SasLabel>Site Number</SasLabel>
+          <SasType>Num</SasType>
+          <SasLength>8</SasLength>
+          <SasDisplayLength>8</SasDisplayLength>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>True</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>2</ProObjectStateBitMask>
+          <OID>SITE_NUMBER</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>2353a2a9-06fd-429d-8b4b-6502c493b8bc</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>1</ProRequiredTypeId>
+          <Caption>Trial Number</Caption>
+          <ProNumberingModeId>1</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Trial Number</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <CheckedValue>true</CheckedValue>
+          <UnCheckedValue>false</UnCheckedValue>
+          <ControlSize>20</ControlSize>
+          <SasName>TRNO</SasName>
+          <SasLabel>Trial Number</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>True</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>2</ProObjectStateBitMask>
+          <OID>TRIAL_NUMBER</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>1</Version>
+          <UserRoleId>1245195</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>4966b3bb-f69a-4677-bf2e-2ee3497e0459</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>Patient Number</Caption>
+          <ProNumberingModeId>1</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <ProItemCategoryGuid>fc765897-b2af-44c1-8572-3abe66f50159</ProItemCategoryGuid>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Patient Number</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>True</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>3</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <CheckedValue>true</CheckedValue>
+          <UnCheckedValue>false</UnCheckedValue>
+          <ControlSize>3</ControlSize>
+          <SasName>PTNO</SasName>
+          <SasLabel>Patient Number</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>3</SasLength>
+          <SasDisplayLength>3</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>True</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>2</ProObjectStateBitMask>
+          <OID>PATIENT_NUMBER</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>e4d483ce-f99e-4571-ba78-78e16c913ceb</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>1</ProRequiredTypeId>
+          <Caption>First name initial</Caption>
+          <ProNumberingModeId>1</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>First name initial</Description>
+          <Hidden>False</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>False</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>1</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>2</TextCasing>
+          <CheckedValue>true</CheckedValue>
+          <UnCheckedValue>false</UnCheckedValue>
+          <ControlSize>1</ControlSize>
+          <SasName>FNAME</SasName>
+          <SasLabel>First name initial</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>1</SasLength>
+          <SasDisplayLength>1</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>True</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>2</ProObjectStateBitMask>
+          <OID>PATIENT_INITIALS</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+        <ProItem>
+          <ProObjectGuid>ed617efd-dae6-4ce2-986a-050c2843d314</ProObjectGuid>
+          <ProDataTypeId>4</ProDataTypeId>
+          <ProControlTypeId>1</ProControlTypeId>
+          <ProRequiredTypeId>0</ProRequiredTypeId>
+          <Caption>Visit Name</Caption>
+          <ProNumberingModeId>1</ProNumberingModeId>
+          <ProItemTypeId>0</ProItemTypeId>
+          <Number>
+          </Number>
+          <Comment>
+          </Comment>
+          <PublicId>
+          </PublicId>
+          <Description>Visit Name</Description>
+          <Hidden>True</Hidden>
+          <Disabled>False</Disabled>
+          <ReadOnly>True</ReadOnly>
+          <MinLength>0</MinLength>
+          <MaxLength>50</MaxLength>
+          <Scale>0</Scale>
+          <TextCasing>0</TextCasing>
+          <CheckedValue>true</CheckedValue>
+          <UnCheckedValue>false</UnCheckedValue>
+          <ControlSize>50</ControlSize>
+          <SasName>VISITN</SasName>
+          <SasLabel>Visit Name</SasLabel>
+          <SasType>Char</SasType>
+          <SasLength>50</SasLength>
+          <SasDisplayLength>50</SasDisplayLength>
+          <SasFormat>$CHAR</SasFormat>
+          <SasInFormat>$CHAR</SasInFormat>
+          <RequiredText>This item is required</RequiredText>
+          <CheckFutureDate>True</CheckFutureDate>
+          <CheckFutureDateMessage>Future date is not allowed</CheckFutureDateMessage>
+          <ProObjectStateBitMask>2</ProObjectStateBitMask>
+          <OID>VISIT_NAME</OID>
+          <SecondPassSameAsFirstPass>False</SecondPassSameAsFirstPass>
+          <Version>2</Version>
+          <UserRoleId>1</UserRoleId>
+        </ProItem>
+      </ProItems>
+      <ProCodeLists />
+      <ProCodeListItems />
+      <ProEdits />
+      <ProEditShadows />
+      <ProEditDependencies />
+      <ProEditClones />
+      <ProEditCloneTargetForms />
+      <CustomNotifications />
+      <ProScriptFunctions />
+      <ProUnitMaps />
+      <ProUnits />
+      <ProUnitConversionMaps />
+      <ProUnitConversions />
+      <ProStopWordGroups />
+      <ProStopWords />
+    </Protocols>
+    <Relations>
+      <ProTrialSites />
+      <ProSitePatients />
+      <ProPatientVisits />
+      <ProPatientVisitLocations />
+      <ProVisitForms />
+      <ProFormGroups />
+      <ProGroupItems />
+      <DependentProVisitForms />
+      <ProEditScriptFunctions />
+      <ProMonitoringLevels />
+    </Relations>
+    <ExportTemplates>
+      <ProExpressionScriptFunctions />
+      <ProExportDataSources />
+      <ProExportExpressionDataSources />
+      <ProSDTMVariableValidators />
+      <ProSDTMVariableOrigins />
+      <ProSDTMCodeListItems />
+      <ProSDTMVariableCodeListItems />
+      <ProExportSDTMCodeLists />
+      <ProExportSDTMCodeListItems />
+      <ProSDTMVariables />
+      <ProExportSDTMVariables />
+      <ProExportVariables />
+      <ProSDTMDomains />
+      <ProExportSearches />
+      <ProExportExpressions />
+      <ProExportSDTMDomains />
+      <ProExportDomainUnionProperties />
+      <ProExportDomains />
+      <ProExportTemplateIndustryStandards />
+      <ProExportSASTypes />
+      <ProIndustryStandards />
+      <ProExportTemplates />
+    </ExportTemplates>
+    <ProRedactionTemplates>
+      <ProRedactionTemplateAreas />
+    </ProRedactionTemplates>
+    <ProGridPdfTemplates>
+    </ProGridPdfTemplates>
+  </SystemObjects>
+  <AppConfigOptions />
+</TrialLibrary>
+<!--TrialBuilder Trial XML Export file.-->
