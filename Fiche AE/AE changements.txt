@@ -1,1 +1,0 @@
-ajout V2 : changement des paramètres de configuration serveur par défaut (pas de changement de contenu).
