@@ -30,7 +30,7 @@ jobs:
     - name: Run XML to Markdown script
       run: |
         for file in data/*.xml; do
-          python votre_script.py "$file"
+          python update.py "$file"
         done
 
     # 5. Ajouter et commettre le fichier Markdown généré
