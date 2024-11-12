@@ -4,8 +4,7 @@ name: Convert XML to Markdown
 on:
   push:
     paths:
-      - '*.xml'
-
+      - '**/*.xml'
 jobs:
   build:
     runs-on: ubuntu-latest
