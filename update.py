@@ -94,11 +94,11 @@ def lire_et_trier_donnees(pathfileXML):
 def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
 
 
-
+    pathfileXML.replace('.xml', '.md')
 
 
     # Ouvrir le fichier markdown en écriture
-    with open(pathfileXML + '.md', 'w', encoding='utf-8') as f:
+    with open(pathfileXML , 'w', encoding='utf-8') as f:
         # Titre principal du fichier
         # f.write("# Maquette CRF de l'étude *****\n\n")
         
@@ -179,7 +179,7 @@ def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
                             f.write(f" <tr> \n<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> {SasName_Question} </b></td> \n  <td style='width:600px; text-align:left;'> {Label}   </td>\n <td style='width:300px; text-align:center;'>  {rep} </td> \n </tr>\n")
                             # f.write("\n")
                     f.write("</table>\n")
-    print(f"Le fichier Markdown a été créé avec succès : {pathfileXML + '.md'}")
+    print(f"Le fichier Markdown a été créé avec succès : {pathfileXML}")
 
 
 
