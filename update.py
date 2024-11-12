@@ -92,16 +92,22 @@ def lire_et_trier_donnees(pathfileXML):
     }
 
 def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
+
+
+
+    donnees = [fiche for fiche in donnees if fiche['FD'] != 'Patient Information']
+
+
     # Ouvrir le fichier markdown en écriture
     with open(pathfileXML + '.md', 'w', encoding='utf-8') as f:
         # Titre principal du fichier
-        f.write("# Maquette CRF de l'étude *****\n\n")
+        # f.write("# Maquette CRF de l'étude *****\n\n")
         
         # Parcours des fiches et ajout des informations en Markdown
         for FDA in donnees["FD"]:
             Description = FDA[0]
             SasName = FDA[1]
-            f.write(f"<div style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>{Description}</div>\n")
+            f.write(f"<H1 style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>{Description}</H1>\n")
             f.write(f"<div style='color: red; text-align: center; font-style: italic;'>{SasName}</div>\n\n")
 
             
@@ -112,7 +118,7 @@ def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
                 for GDA in GDT:
                     Description_Groupe = GDA[1]
                     # f.write(f"### {Description_Groupe}\n\n")
-                    f.write(f"<div style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>{Description_Groupe}</div>\n")
+                    f.write(f"<h2 style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>{Description_Groupe}</h2>\n")
                     # Démarrer un tableau Markdown pour chaque groupe
 
 
