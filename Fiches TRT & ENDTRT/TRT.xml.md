@@ -1,6 +1,6 @@
 # Maquette CRF de l'étude *****
 
-<div style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>Patient Information</div>
+<h1 style="color: #add8e6; text-align: center;">Patient Information</h1>
 <div style='color: red; text-align: center; font-style: italic;'>PAT</div>
 
 <div style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>You cannot enroll a new patient now</div>
