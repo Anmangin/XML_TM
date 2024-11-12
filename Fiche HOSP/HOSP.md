@@ -16,6 +16,46 @@
  <td style='width:300px; text-align:center;'>   DD/MM/YYYY 📅 </td> 
  </tr>
  <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOEDT </b></td> 
+  <td style='width:600px; text-align:left;'> End date   </td>
+ <td style='width:300px; text-align:center;'>   DD/MM/YYYY 📅 </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOENCTYN </b></td> 
+  <td style='width:600px; text-align:left;'> Hospitalisation in the recruitment centre   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOENCT_S </b></td> 
+  <td style='width:600px; text-align:left;'> If no, centre name   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOGHM </b></td> 
+  <td style='width:600px; text-align:left;'> GHM   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPCOM </b></td> 
+  <td style='width:600px; text-align:left;'> Type of cares (multiple responses possible)   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPS </b></td> 
+  <td style='width:600px; text-align:left;'> Surgery   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPCT </b></td> 
+  <td style='width:600px; text-align:left;'> Chemotherapy   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPRT </b></td> 
+  <td style='width:600px; text-align:left;'> Radiotherapy   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPSC </b></td> 
   <td style='width:600px; text-align:left;'> Supportive care   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
@@ -66,11 +106,6 @@
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
  <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOEDT </b></td> 
-  <td style='width:600px; text-align:left;'> End date   </td>
- <td style='width:300px; text-align:center;'>   DD/MM/YYYY 📅 </td> 
- </tr>
- <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOWICUNB </b></td> 
   <td style='width:600px; text-align:left;'> If intensive care unit, number of days   </td>
  <td style='width:300px; text-align:center;'>  TXT </td> 
@@ -114,41 +149,6 @@
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> MISSING_ </b></td> 
   <td style='width:600px; text-align:left;'> MISSING_VAR   </td>
  <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOENCTYN </b></td> 
-  <td style='width:600px; text-align:left;'> Hospitalisation in the recruitment centre   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOENCT_S </b></td> 
-  <td style='width:600px; text-align:left;'> If no, centre name   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOGHM </b></td> 
-  <td style='width:600px; text-align:left;'> GHM   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPCOM </b></td> 
-  <td style='width:600px; text-align:left;'> Type of cares (multiple responses possible)   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPS </b></td> 
-  <td style='width:600px; text-align:left;'> Surgery   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPCT </b></td> 
-  <td style='width:600px; text-align:left;'> Chemotherapy   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> HOTYPRT </b></td> 
-  <td style='width:600px; text-align:left;'> Radiotherapy   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
 </table>
 <H1 style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>Hospitalisation Yes/No</H1>

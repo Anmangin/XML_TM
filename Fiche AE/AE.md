@@ -141,16 +141,6 @@
 </tr>
 <tr>
  <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FLAG </b></td> 
-  <td style='width:600px; text-align:left;'> FLAG   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> MISSING_ </b></td> 
-  <td style='width:600px; text-align:left;'> MISSING_VAR   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> AEGR </b></td> 
   <td style='width:600px; text-align:left;'> Grade   </td>
  <td style='width:300px; text-align:center;'>  TXT </td> 
@@ -164,6 +154,16 @@
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> AESER </b></td> 
   <td style='width:600px; text-align:left;'> SAE   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FLAG </b></td> 
+  <td style='width:600px; text-align:left;'> FLAG   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> MISSING_ </b></td> 
+  <td style='width:600px; text-align:left;'> MISSING_VAR   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
  </tr>
 </table>
 <h2 style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>SAE</h2>

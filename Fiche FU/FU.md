@@ -16,26 +16,6 @@
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
  <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUTRT_S </b></td> 
-  <td style='width:600px; text-align:left;'> If yes, treatment name   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUSAEYN </b></td> 
-  <td style='width:600px; text-align:left;'> SAE since the last visit?   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUSAE_S </b></td> 
-  <td style='width:600px; text-align:left;'> If yes, term(s)   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> MISSING_ </b></td> 
-  <td style='width:600px; text-align:left;'> MISSING_VAR   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUNO_R </b></td> 
   <td style='width:600px; text-align:left;'> If no, reason   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Consent withdrawn</b> <br> 🔘 2 - <b>Lost to follow-up</b> <br> 🔘 99 - <b>Other</b> <br> </td> 
@@ -74,5 +54,25 @@
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUTRTGO </b></td> 
   <td style='width:600px; text-align:left;'> New anticancer treatment ongoing?   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUTRT_S </b></td> 
+  <td style='width:600px; text-align:left;'> If yes, treatment name   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUSAEYN </b></td> 
+  <td style='width:600px; text-align:left;'> SAE since the last visit?   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> FUSAE_S </b></td> 
+  <td style='width:600px; text-align:left;'> If yes, term(s)   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> MISSING_ </b></td> 
+  <td style='width:600px; text-align:left;'> MISSING_VAR   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
  </tr>
 </table>

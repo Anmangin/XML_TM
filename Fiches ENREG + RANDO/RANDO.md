@@ -37,36 +37,6 @@
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
  <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC10 </b></td> 
-  <td style='width:600px; text-align:left;'> IC10   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC11 </b></td> 
-  <td style='width:600px; text-align:left;'> IC11   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC12 </b></td> 
-  <td style='width:600px; text-align:left;'> IC12   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC13 </b></td> 
-  <td style='width:600px; text-align:left;'> IC13   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC14 </b></td> 
-  <td style='width:600px; text-align:left;'> IC14   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC15 </b></td> 
-  <td style='width:600px; text-align:left;'> IC15   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC02 </b></td> 
   <td style='width:600px; text-align:left;'> IC02   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
@@ -106,6 +76,36 @@
   <td style='width:600px; text-align:left;'> IC09   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC10 </b></td> 
+  <td style='width:600px; text-align:left;'> IC10   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC11 </b></td> 
+  <td style='width:600px; text-align:left;'> IC11   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC12 </b></td> 
+  <td style='width:600px; text-align:left;'> IC12   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC13 </b></td> 
+  <td style='width:600px; text-align:left;'> IC13   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC14 </b></td> 
+  <td style='width:600px; text-align:left;'> IC14   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> IC15 </b></td> 
+  <td style='width:600px; text-align:left;'> IC15   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
 </table>
 <H1 style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>Non inclusion Criteria</H1>
 <div style='color: red; text-align: center; font-style: italic;'>ECF</div>
@@ -121,36 +121,6 @@
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC01 </b></td> 
   <td style='width:600px; text-align:left;'> EC01   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC10 </b></td> 
-  <td style='width:600px; text-align:left;'> EC10   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC11 </b></td> 
-  <td style='width:600px; text-align:left;'> EC11   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC12 </b></td> 
-  <td style='width:600px; text-align:left;'> EC12   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC13 </b></td> 
-  <td style='width:600px; text-align:left;'> EC13   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC14 </b></td> 
-  <td style='width:600px; text-align:left;'> EC14   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC15 </b></td> 
-  <td style='width:600px; text-align:left;'> EC15   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
  <tr> 
@@ -191,6 +161,36 @@
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC09 </b></td> 
   <td style='width:600px; text-align:left;'> EC09   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC10 </b></td> 
+  <td style='width:600px; text-align:left;'> EC10   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC11 </b></td> 
+  <td style='width:600px; text-align:left;'> EC11   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC12 </b></td> 
+  <td style='width:600px; text-align:left;'> EC12   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC13 </b></td> 
+  <td style='width:600px; text-align:left;'> EC13   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC14 </b></td> 
+  <td style='width:600px; text-align:left;'> EC14   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> EC15 </b></td> 
+  <td style='width:600px; text-align:left;'> EC15   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
 </table>

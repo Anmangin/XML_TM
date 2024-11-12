@@ -16,6 +16,46 @@
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
  <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDDT </b></td> 
+  <td style='width:600px; text-align:left;'> Date of cancer progression or relapse   </td>
+ <td style='width:300px; text-align:center;'>   DD/MM/YYYY 📅 </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDTYP </b></td> 
+  <td style='width:600px; text-align:left;'> Progression or relapse?   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Progression</b> <br> 🔘 2 - <b>Relapse</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDDIAGC </b></td> 
+  <td style='width:600px; text-align:left;'> Diagnostic of progression or relapse based on:   </td>
+ <td style='width:300px; text-align:center;'>  TXT </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDIMGYN </b></td> 
+  <td style='width:600px; text-align:left;'> Imaging   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDCLINYN </b></td> 
+  <td style='width:600px; text-align:left;'> Clinical exam   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDBIOYN </b></td> 
+  <td style='width:600px; text-align:left;'> Tumor markers   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDLOCYN </b></td> 
+  <td style='width:600px; text-align:left;'> Local progression or relapse   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
+<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDREGYN </b></td> 
+  <td style='width:600px; text-align:left;'> Regional progression or relapse   </td>
+ <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
+ </tr>
+ <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDMETAYN </b></td> 
   <td style='width:600px; text-align:left;'> Metastasis progression or relapse   </td>
  <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
@@ -59,45 +99,5 @@
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> MISSING_ </b></td> 
   <td style='width:600px; text-align:left;'> MISSING_VAR   </td>
  <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDDT </b></td> 
-  <td style='width:600px; text-align:left;'> Date of cancer progression or relapse   </td>
- <td style='width:300px; text-align:center;'>   DD/MM/YYYY 📅 </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDTYP </b></td> 
-  <td style='width:600px; text-align:left;'> Progression or relapse?   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Progression</b> <br> 🔘 2 - <b>Relapse</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDDIAGC </b></td> 
-  <td style='width:600px; text-align:left;'> Diagnostic of progression or relapse based on:   </td>
- <td style='width:300px; text-align:center;'>  TXT </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDIMGYN </b></td> 
-  <td style='width:600px; text-align:left;'> Imaging   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDCLINYN </b></td> 
-  <td style='width:600px; text-align:left;'> Clinical exam   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDBIOYN </b></td> 
-  <td style='width:600px; text-align:left;'> Tumor markers   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDLOCYN </b></td> 
-  <td style='width:600px; text-align:left;'> Local progression or relapse   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PDREGYN </b></td> 
-  <td style='width:600px; text-align:left;'> Regional progression or relapse   </td>
- <td style='width:300px; text-align:center;'>   🔘 1 - <b>Yes</b> <br> 🔘 0 - <b>No</b> <br> </td> 
  </tr>
 </table>
