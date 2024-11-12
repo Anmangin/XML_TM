@@ -1,5 +1,9 @@
 name: Convert XML to Markdown
 
+
+permissions:
+  contents: write  # Donne l'accès en écriture aux contenus du dépôt
+  
 # Ce workflow sera déclenché à chaque modification de fichiers XML dans le répertoire "data/"
 on:
   push:
