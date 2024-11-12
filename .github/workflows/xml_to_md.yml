@@ -1,0 +1,45 @@
+name: Convert XML to Markdown
+
+# Ce workflow sera déclenché à chaque modification de fichiers XML dans le répertoire "data/"
+on:
+  push:
+    paths:
+      - 'data/*.xml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Cloner le dépôt
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # 2. Configurer Python
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    # 3. Installer les dépendances Python, si nécessaire
+    - name: Install dependencies
+      run: |
+        pip install openpyxl
+
+    # 4. Exécuter le script Python sur chaque fichier XML du répertoire data/
+    - name: Run XML to Markdown script
+      run: |
+        for file in data/*.xml; do
+          python votre_script.py "$file"
+        done
+
+    # 5. Ajouter et commettre le fichier Markdown généré
+    - name: Commit and push changes
+      run: |
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git add data/*.md
+        git commit -m "Generate Markdown from XML updates"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
