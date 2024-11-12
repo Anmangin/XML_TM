@@ -91,81 +91,6 @@ def lire_et_trier_donnees(pathfileXML):
         "CD": CD
     }
 
-
-
-
-
-
-from openpyxl import Workbook
-from openpyxl.styles import Font
-
-# def exporter_donnees_excel(donnees, pathfileXML):
-#     # Création d'un nouveau fichier Excel
-#     wb = Workbook()
-#     ws = wb.active
-#     ws.title = "Maquette CRF"
-
-#     # Ajouter un titre à la première ligne
-#     ws.merge_cells('A1:F1')
-#     ws['A1'] = "Maquette CRF de l'étude *****"
-#     ws['A1'].font = Font(size=14, bold=True)
-
-#     # Ajouter les titres des colonnes dans le fichier Excel
-#     ws.append(["Nom de la Fiche", "Nom du Groupe", "SasName", "Label de la Question", "Type de Question", "Rep"])
-
-#     # Parcours des fiches et ajout des informations dans le fichier Excel
-#     for FDA in donnees["FD"]:
-#         Description = FDA[0]
-#         SasName = FDA[1]
-        
-#         # Recherche des groupes associés à chaque fiche
-#         GLT = filter(lambda x: x[0] == FDA[2], donnees["GL"])
-#         for GLA in GLT:
-#             GDT = filter(lambda x: x[0] == GLA[1], donnees["GD"])
-#             for GDA in GDT:
-#                 Description_Groupe = GDA[1]
-                
-#                 # Recherche des questions du groupe
-#                 QLT = filter(lambda x: x[1] == GDA[0], donnees["QL"])
-#                 for QLA in QLT:
-#                     QDT = filter(lambda x: x[0] == QLA[2], donnees["QD"])
-#                     for QDA in QDT:
-#                         OrderNo = QLA[0]
-#                         Label = QDA[1]
-#                         SasName_Question = QDA[2]
-#                         MinLength = QDA[3]
-#                         MaxLength = QDA[4]
-#                         Scale = QDA[5]
-#                         ProControlTypeId = QDA[6]
-#                         ProDataTypeId = QDA[9]
-#                         ProCodeListGuid = QDA[10]
-                        
-#                         # Déterminer le type de question et le champ rep
-#                         ProDataType = ""
-#                         rep = ""
-#                         if ProControlTypeId == "3":
-#                             ProDataType = "RADIO"
-#                             CDT = filter(lambda x: x[1] == ProCodeListGuid, donnees["CD"])
-#                             for CDA in CDT:
-#                                 Caption = CDA[2]
-#                                 Value = CDA[3]
-#                                 rep += f" [{Value}:{Caption}]"
-#                         elif ProDataTypeId == "5":
-#                             ProDataType = "DATE"
-#                             rep = "DD/MM/YYYY"
-#                         else:
-#                             ProDataType = "AUTRE"
-
-#                         # Ajouter une ligne avec les informations de la question
-#                         ws.append([Description, Description_Groupe, SasName_Question, Label, ProDataType, rep])
-
-#     # Sauvegarder le fichier Excel
-#     wb.save(pathfileXML + '.xlsx')
-
-
-
-
-
 def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
     # Ouvrir le fichier markdown en écriture
     with open(pathfileXML + '.md', 'w', encoding='utf-8') as f:
@@ -248,8 +173,9 @@ def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
     print(f"Le fichier Markdown a été créé avec succès : {pathfileXML + '.md'}")
 
 
-from tkinter.filedialog import askopenfilename
+
 pathfileXML = sys.argv[1]
+print(pathfileXML)
 donnees = lire_et_trier_donnees(pathfileXML)
 print(donnees)
 
