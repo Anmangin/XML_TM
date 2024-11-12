@@ -4,7 +4,7 @@ name: Convert XML to Markdown
 on:
   push:
     paths:
-      - 'data/*.xml'
+      - '*.xml'
 
 jobs:
   build:
