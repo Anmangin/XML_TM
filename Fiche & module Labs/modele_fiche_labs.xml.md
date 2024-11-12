@@ -1,9 +1,7 @@
-# Maquette CRF de l'étude *****
-
-<div style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>Laboratory Tests</div>
+<H1 style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>Laboratory Tests</H1>
 <div style='color: red; text-align: center; font-style: italic;'>Lab</div>
 
-<div style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>List of laboratory tests</div>
+<h2 style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>List of laboratory tests</h2>
 <table style='width:100%;'>
 <tr>
 <th style='width:50px; text-align:center;'><strong>Sas</strong></th>
@@ -52,7 +50,7 @@
  <td style='width:300px; text-align:center;'>  TXT </td> 
  </tr>
 </table>
-<div style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>Laboratory</div>
+<h2 style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>Laboratory</h2>
 <table style='width:100%;'>
 <tr>
 <th style='width:50px; text-align:center;'><strong>Sas</strong></th>
