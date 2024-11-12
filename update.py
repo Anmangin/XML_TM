@@ -108,7 +108,7 @@ def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
             SasName = FDA[1]
 
                         # Vérifier si la description est 'Patient Information', et passer au suivant si c'est le cas
-            if Description == 'Patient Information' or Description == 'Trial Site Setup & Information' or Description == 'VISITHIDE'  or Description == 'Visit':
+            if Description == 'Patient Information' or Description == 'Trial Site Setup & Information' or Description == 'VISITHIDE'  or Description == 'Visit'    or Description == 'Trial' :
                 continue  # Passer à l'élément suivant
             f.write(f"<H1 style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>{Description}</H1>\n")
             f.write(f"<div style='color: red; text-align: center; font-style: italic;'>{SasName}</div>\n\n")
