@@ -7,14 +7,13 @@ def lire_et_trier_donnees(pathfileXML):
     tree = ET.parse(pathfileXML)
     root = tree.getroot()
 
-    # Liste des fiches
     FD = []
     for FWAW in root.iter('ProForm'):
         Description_F = FWAW.findtext("Description")
         SasName_F = FWAW.findtext("SasName")
         ProObjectGuid_F = FWAW.findtext("ProObjectGuid")
         FD.append((Description_F, SasName_F, ProObjectGuid_F))
-    FD.sort()
+    FD.sort(key=lambda x: x[0])  # Tri par Description
 
     # Liste des groupes
     GL = []
@@ -22,7 +21,7 @@ def lire_et_trier_donnees(pathfileXML):
         ProFormGuid_g = GRAW.findtext("ProFormGuid")
         ProGroupGuid_F = GRAW.findtext("ProGroupGuid")
         GL.append((ProFormGuid_g, ProGroupGuid_F))
-    GL.sort()
+    GL.sort(key=lambda x: x[1])  # Tri par ProGroupGuid_F
 
     # Liste des groupes avec descriptions
     GD = []
@@ -30,7 +29,7 @@ def lire_et_trier_donnees(pathfileXML):
         ProObjectGuid = GRAW.findtext("ProObjectGuid")
         Description = GRAW.findtext("Description")
         GD.append((ProObjectGuid, Description))
-    GD.sort()
+    GD.sort(key=lambda x: x[1])  # Tri par Description (ou un autre critère)
 
     # Liste des questions
     QL = []
@@ -39,7 +38,7 @@ def lire_et_trier_donnees(pathfileXML):
         ProGroupGuid = GRAW.findtext("ProGroupGuid")
         ProItemGuid = GRAW.findtext("ProItemGuid")
         QL.append((OrderNo, ProGroupGuid, ProItemGuid))
-    QL.sort()
+    QL.sort(key=lambda x: int(x[0]))  # Tri par OrderNo
 
     # Liste des questions avec description
     QD = []
@@ -60,7 +59,7 @@ def lire_et_trier_donnees(pathfileXML):
         ProDataTypeId = GRAW.findtext("ProDataTypeId")
         ProCodeListGuid = GRAW.findtext("ProCodeListGuid")
         QD.append((ProObjectGuid, Description, SasName, MinLength, MaxLength, Scale, ProControlTypeId, Hidden, ReadOnly, ProDataTypeId, ProCodeListGuid))
-    QD.sort()
+    QD.sort(key=lambda x: x[1])  # Tri par Description ou un autre critère
 
     # Liste des catégories
     CL = []
@@ -68,7 +67,7 @@ def lire_et_trier_donnees(pathfileXML):
         ProObjectGuid = GRAW.findtext("ProObjectGuid")
         Caption = GRAW.findtext("Caption")
         CL.append((ProObjectGuid, Caption))
-    CL.sort()
+    CL.sort(key=lambda x: x[1])  # Tri par Caption
 
     # Liste des catégories avec description
     CD = []
@@ -78,9 +77,8 @@ def lire_et_trier_donnees(pathfileXML):
         Caption = GRAW.findtext("Caption")
         Value = GRAW.findtext("Value")
         CD.append((OrderNo, ProCodeListGuid, Caption, Value))
-    CD.sort()
+    CD.sort(key=lambda x: int(x[0]))  # Tri par OrderNo
 
-    # Retourner les données sous forme de dictionnaire trié
     return {
         "FD": FD,
         "GL": GL,
