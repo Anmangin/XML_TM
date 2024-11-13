@@ -18,10 +18,11 @@ def lire_et_trier_donnees(pathfileXML):
     # Liste des groupes
     GL = []
     for GRAW in root.iter('ProFormGroup'):
+         OrderNo = GRAW.findtext("OrderNo")
         ProFormGuid_g = GRAW.findtext("ProFormGuid")
         ProGroupGuid_F = GRAW.findtext("ProGroupGuid")
-        GL.append((ProFormGuid_g, ProGroupGuid_F))
-    GL.sort(key=lambda x: x[1])  # Tri par ProGroupGuid_F
+        GL.append((ProFormGuid_g, ProGroupGuid_F,OrderNo))
+    GL.sort(key=lambda x: x[2])  # Tri par ProGroupGuid_F
 
     # Liste des groupes avec descriptions
     GD = []
