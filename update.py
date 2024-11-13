@@ -95,7 +95,7 @@ def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
 
     pathfileXML2=pathfileXML.replace('.xml', '.md')
     pathfileXML2=pathfileXML2.replace('INFILE', 'OUTFILE')
-    pathfileXML2=pathfileXML2.replace('\\XML\\', '\\MD\\')
+    pathfileXML2=pathfileXML2.replace('/XML/', '/MD/')
 
 
     # Ouvrir le fichier markdown en écriture
