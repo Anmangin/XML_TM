@@ -8,7 +8,7 @@ permissions:
 on:
   push:
     paths:
-      - '**/*.xml'
+      - 'INFILE/XML/*.xml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
     # 4. Exécuter le script Python sur chaque fichier XML du répertoire data/
     - name: Run XML to Markdown script
       run: |
-        for file in **/*.xml; do
+        for file in INFILE/XML/*.xml; do
           python update.py "$file"
         done
 

@@ -18,7 +18,7 @@ def lire_et_trier_donnees(pathfileXML):
     # Liste des groupes
     GL = []
     for GRAW in root.iter('ProFormGroup'):
-         OrderNo = GRAW.findtext("OrderNo")
+        OrderNo = GRAW.findtext("OrderNo")
         ProFormGuid_g = GRAW.findtext("ProFormGuid")
         ProGroupGuid_F = GRAW.findtext("ProGroupGuid")
         GL.append((ProFormGuid_g, ProGroupGuid_F,OrderNo))
@@ -94,6 +94,8 @@ def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
 
 
     pathfileXML2=pathfileXML.replace('.xml', '.md')
+    pathfileXML2=pathfileXML2.replace('INFILE', 'OUTFILE')
+    pathfileXML2=pathfileXML2.replace('\\XML\\', '\\MD\\')
 
 
     # Ouvrir le fichier markdown en écriture

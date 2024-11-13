@@ -2,3 +2,5 @@ xml.etree.ElementTree
 re
 openpyxl
 sys
+markdown
+python-docx
