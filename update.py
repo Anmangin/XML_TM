@@ -94,12 +94,12 @@ def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
 
 
     pathfileXML2=pathfileXML.replace('.xml', '.md')
-    pathfileXML2=pathfileXML2.replace('INFILE', 'OUTFILE')
-    pathfileXML2=pathfileXML2.replace('\\XML\\', '\\MD\\')
+    pathfileXML3=pathfileXML2.replace('INFILE', 'OUTFILE')
+    pathfileXML4=pathfileXML3.replace('/XML/', '/MD/')
 
 
     # Ouvrir le fichier markdown en écriture
-    with open(pathfileXML2 , 'w', encoding='utf-8') as f:
+    with open(pathfileXML4 , 'w', encoding='utf-8') as f:
         # Titre principal du fichier
         # f.write("# Maquette CRF de l'étude *****\n\n")
         
