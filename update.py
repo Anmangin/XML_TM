@@ -1,192 +1,184 @@
+
 import xml.etree.ElementTree as ET
 import re
-import sys
+import sys     
+
+def Get_objt(root, racine, keyname, fields):
+        ProForm = {}
+        for FWAW in root.iter(racine):
+            key = FWAW.findtext(keyname)
+            if key:  # Vérifie que la clé existe
+                ProForm[key] = {field: FWAW.findtext(field) for field in fields}
+        return ProForm
+
+def filtrer_par_cle(dictionnaire, champ, valeur):
+    return {key: val for key, val in dictionnaire.items() if val.get(champ) == valeur}
 
 def lire_et_trier_donnees(pathfileXML):
-    # Analyse du fichier XML
     tree = ET.parse(pathfileXML)
     root = tree.getroot()
-
-    FD = []
-    for FWAW in root.iter('ProForm'):
-        Description_F = FWAW.findtext("Description")
-        SasName_F = FWAW.findtext("SasName")
-        ProObjectGuid_F = FWAW.findtext("ProObjectGuid")
-        FD.append((Description_F, SasName_F, ProObjectGuid_F))
-    FD.sort(key=lambda x: x[0])  # Tri par Description
-
-    # Liste des groupes
-    GL = []
-    for GRAW in root.iter('ProFormGroup'):
-        OrderNo = GRAW.findtext("OrderNo")
-        ProFormGuid_g = GRAW.findtext("ProFormGuid")
-        ProGroupGuid_F = GRAW.findtext("ProGroupGuid")
-        GL.append((ProFormGuid_g, ProGroupGuid_F,OrderNo))
-    GL.sort(key=lambda x: x[2])  # Tri par ProGroupGuid_F
-
-    # Liste des groupes avec descriptions
-    GD = []
-    for GRAW in root.iter('ProGroup'):
-        ProObjectGuid = GRAW.findtext("ProObjectGuid")
-        Description = GRAW.findtext("Description")
-        GD.append((ProObjectGuid, Description))
-    GD.sort(key=lambda x: x[1])  # Tri par Description (ou un autre critère)
-
-    # Liste des questions
-    QL = []
-    for GRAW in root.iter('ProGroupItem'):
-        OrderNo = GRAW.findtext("OrderNo")
-        ProGroupGuid = GRAW.findtext("ProGroupGuid")
-        ProItemGuid = GRAW.findtext("ProItemGuid")
-        QL.append((OrderNo, ProGroupGuid, ProItemGuid))
-    QL.sort(key=lambda x: int(x[0]))  # Tri par OrderNo
-
-    # Liste des questions avec description
-    QD = []
-    for GRAW in root.iter('ProItem'):
-        ProObjectGuid = GRAW.findtext("ProObjectGuid")
-        Description = GRAW.findtext("Description")
-        Description = re.sub("<[/]?\\w*>", "", Description)
-        Description = re.sub("&nbsp;", "", Description)
-        Description = re.sub("</font>", "", Description)
-        Description = re.sub('<font color="#' + "\\w*" + '">', "", Description)
-        SasName = GRAW.findtext("SasName")
-        MinLength = GRAW.findtext("MinLength")
-        MaxLength = GRAW.findtext("MaxLength")
-        Scale = GRAW.findtext("Scale")
-        ProControlTypeId = GRAW.findtext("ProControlTypeId")
-        Hidden = GRAW.findtext("Hidden")
-        ReadOnly = GRAW.findtext("ReadOnly")
-        ProDataTypeId = GRAW.findtext("ProDataTypeId")
-        ProCodeListGuid = GRAW.findtext("ProCodeListGuid")
-        QD.append((ProObjectGuid, Description, SasName, MinLength, MaxLength, Scale, ProControlTypeId, Hidden, ReadOnly, ProDataTypeId, ProCodeListGuid))
-    QD.sort(key=lambda x: x[1])  # Tri par Description ou un autre critère
-
-    # Liste des catégories
-    CL = []
-    for GRAW in root.iter('ProCodeList'):
-        ProObjectGuid = GRAW.findtext("ProObjectGuid")
-        Caption = GRAW.findtext("Caption")
-        CL.append((ProObjectGuid, Caption))
-    CL.sort(key=lambda x: x[1])  # Tri par Caption
-
-    # Liste des catégories avec description
-    CD = []
-    for GRAW in root.iter('ProCodeListItem'):
-        OrderNo = GRAW.findtext("OrderNo")
-        ProCodeListGuid = GRAW.findtext("ProCodeListGuid")
-        Caption = GRAW.findtext("Caption")
-        Value = GRAW.findtext("Value")
-        CD.append((OrderNo, ProCodeListGuid, Caption, Value))
-    CD.sort(key=lambda x: int(x[0]))  # Tri par OrderNo
-
-    return {
-        "FD": FD,
-        "GL": GL,
-        "GD": GD,
-        "QL": QL,
-        "QD": QD,
-        "CL": CL,
-        "CD": CD
+    data = {
+        "ProPatientVisit": Get_objt(root, "ProPatientVisit", "ProObjectGuid", fields=("ProPatientGuid", "ProVisitGuid", "MinOccurance", "MaxOccurance", "OrderNo")),
+        "ProVisit": Get_objt(root, "ProVisit", "ProObjectGuid", fields=("Description",)),
+        "ProVisitForm": Get_objt(root, "ProVisitForm", "ProObjectGuid", fields=("ProVisitGuid", "ProFormGuid", "MinOccurance", "MaxOccurance", "OrderNo")),
+        "ProForm": Get_objt(root, "ProForm", "ProObjectGuid", fields=("Description", "SasName")),
+        "ProFormGroup": Get_objt(root, "ProFormGroup", "ProObjectGuid", fields=("OrderNo", "ProFormGuid", "ProGroupGuid")),
+        "ProGroupItem": Get_objt(root, "ProGroupItem", "ProObjectGuid", fields=("ProGroupGuid", "ProItemGuid", "OrderNo")),
+        "ProGroup": Get_objt(root, "ProGroup", "ProObjectGuid", fields=("Caption",)),
+        "ProItem": Get_objt(root, "ProItem", "ProObjectGuid", fields=("Description", "Scale", "SasName", "MinLength", "MaxLength", "ProControlTypeId", "SasType","ProCodeListGuid","ProDataTypeId","Hidden","ReadOnly","Disabled")),
+        "ProCodeList": Get_objt(root, "ProCodeList", "ProObjectGuid", fields=("OrderNo", "Caption")),
+        "ProCodeListItem": Get_objt(root, "ProCodeListItem", "ProObjectGuid", fields=("ProCodeListGuid","OrderNo", "Caption", "Value")),
+        "ProEdit": Get_objt(root, "ProEdit", "ProObjectGuid", fields=("ProEditActionId","TargetLevelId", "ProVisitFormGuid","TargetProGroupGuid","TargetProFormGuid","ProGroupGuid","ProGroupItemGuid", "ProItemGuid","ActionExpression","DataExpression","Message","TargetPath")),
     }
 
-def exporter_donnees_markdown_eCRF(donnees, pathfileXML):
+    for key in ["ProPatientVisit", "ProVisitForm", "ProFormGroup", "ProGroupItem","ProCodeListItem"]:
+        data[key] = dict(sorted(data[key].items(), key=lambda item: int(item[1].get("OrderNo", 0))))
 
 
-    pathfileXML2=pathfileXML.replace('.xml', '.md')
-    pathfileXML3=pathfileXML2.replace('INFILE', 'OUTFILE')
-    pathfileXML4=pathfileXML3.replace('/XML/', '/MD/')
+    #  affichage des catégories
+    for key, value in data["ProCodeList"].items():
+            rep = ""
+            # Filtrer les items associés à la ProCodeList actuelle
+            filtered_items = {k: v for k, v in data["ProCodeListItem"].items() if v["ProCodeListGuid"] == key}
+
+            # Construire la chaîne de caractères pour le champ Display
+            if len(filtered_items) < 15:
+                for item in filtered_items.values():
+                    rep += f"🔘 {item['Value']} - <b>{item['Caption']}</b> <br>"
+            else:
+                rep = "🔘 Radio boutton trop long"
+
+            # Ajouter le champ Display
+            data["ProCodeList"][key]["Display"] = rep
+
+    for key, value in data["ProItem"].items():
+            SasType=value["SasType"]
+            MaxLength=value["MaxLength"]
+            rep=""
+            if value["ProDataTypeId"] =="5": rep = "📅 DD/MM/YYYY "
+            else :rep=  f"{SasType} - {MaxLength}"
+
+            # Ajouter le champ Display
+            data["ProItem"][key]["Display"] = rep
+
+    return data
+
+# Appel de la fonction
 
 
-    # Ouvrir le fichier markdown en écriture
-    with open(pathfileXML4 , 'w', encoding='utf-8') as f:
-        # Titre principal du fichier
-        # f.write("# Maquette CRF de l'étude *****\n\n")
-        
-        # Parcours des fiches et ajout des informations en Markdown
-        for FDA in donnees["FD"]:
-            Description = FDA[0]
-            SasName = FDA[1]
+def exporter_donnees_markdown_eCRF(data,pathout):
 
-                        # Vérifier si la description est 'Patient Information', et passer au suivant si c'est le cas
-            if Description == 'Patient Information' or Description == 'Trial Site Setup & Information' or Description == 'VISITHIDE'  or Description == 'Visit'    or Description == 'Trial' :
-                continue  # Passer à l'élément suivant
-            f.write(f"<H1 style='background-color: #add8e6; color: white; width: 100%; text-align: center; padding: 20px 0; font-size: 24px; font-weight: bold;'>{Description}</H1>\n")
-            f.write(f"<div style='color: red; text-align: center; font-style: italic;'>{SasName}</div>\n\n")
 
-            
-            # Recherche des groupes associés à chaque fiche
-            GLT = filter(lambda x: x[0] == FDA[2], donnees["GL"])
-            for GLA in GLT:
-                GDT = filter(lambda x: x[0] == GLA[1], donnees["GD"])
-                for GDA in GDT:
-                    Description_Groupe = GDA[1]
-                    # f.write(f"### {Description_Groupe}\n\n")
-                    f.write(f"<h2 style='background-color: #6fa3d3; color: white; width: 100%; text-align: left; padding: 10px 0; font-size: 16px; font-weight: bold;'>{Description_Groupe}</h2>\n")
-                    # Démarrer un tableau Markdown pour chaque groupe
+ with open( pathout , 'w', encoding='utf-8') as f:
+
+# Parcourir les données
+    for  PVkey,PatientVisit in data["ProPatientVisit"].items():
+        ProVisitGuid=PatientVisit["ProVisitGuid"]
+        V_description = data["ProVisit"][ProVisitGuid]["Description"]
+        V_OrderNo=PatientVisit["OrderNo"]
+        f.write(f"# {V_description} \n")
 
 
 
-                    f.write("<table style='width:100%;'>\n")
-                    f.write("<tr>\n")
-                    f.write("<th style='width:50px; text-align:center;'><strong>Sas</strong></th>\n")
-                    f.write("<th style='width:600px; text-align:center;'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Label&nbsp;de&nbsp;la&nbsp;Question&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></th>\n")
-                    f.write("<th style='width:300px; text-align:center;'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Réponses possibles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></th>\n")
-                    f.write("</tr>\n")
-                    f.write("<tr>\n")
+        ProVisitForm=filtrer_par_cle( data["ProVisitForm"],"ProVisitGuid",ProVisitGuid)
+
+        for  VFkey,VisitForm in ProVisitForm.items():
+            ProFormGuid=VisitForm.get("ProFormGuid")     
+            F_OrderNo=VisitForm["OrderNo"]
+            F_description=data["ProForm"][ProFormGuid]["Description"]
+
+            f.write(f"## {F_description} \n")
+            ProFormGroup=filtrer_par_cle( data["ProFormGroup"],"ProFormGuid",ProFormGuid)
+            for  key,FormGroup in ProFormGroup.items():
+                ProGroupGuid=FormGroup["ProGroupGuid"]
+                G_description=data["ProGroup"][ProGroupGuid]["Caption"]
+                f.write(f"### {G_description} \n\n") 
 
 
+                ProGroupItem=filtrer_par_cle( data["ProGroupItem"],"ProGroupGuid",ProGroupGuid)
 
-                    # f.write("| <strong style='width:600px; text-align:center;'>**Label de la Question**</strong> | <strong style='width:300px; text-align:center;'>**Réponses possibles**</strong> |\n")
-                    # # f.write("| **Label de la Question** | **Réponses possibles** |\n")
-                    # f.write("|---------------------------|-------------------------|\n")
+
+                f.write("<table style='width:100%;'>\n")
+                f.write("<tr>\n")
+                f.write("<th style='width:50px; text-align:center;'><strong>Sas</strong></th>\n")
+                f.write("<th style='width:600px; text-align:center;'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Label de la Question&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></th>\n")
+                f.write("<th style='width:300px; text-align:center;'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></th>\n")
+                f.write("<th style='width:300px; text-align:center;'><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Réponses possibles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></th>\n")
+                f.write("</tr>\n")
+                f.write("<tr>\n")
+
+
+                for  GI_key,GroupItem in ProGroupItem.items():
+                    I_OrderNo=GroupItem["OrderNo"]
+                    ProItemGuid=GroupItem.get("ProItemGuid")
+                    I_description=data["ProItem"][ProItemGuid]["Description"]
+                    i_SasName=data["ProItem"][ProItemGuid]["SasName"]
+                    ProCodeListGuid=data["ProItem"][ProItemGuid]["ProCodeListGuid"]
+                    Hidden=data["ProItem"][ProItemGuid]["Hidden"]
+                    Disabled=data["ProItem"][ProItemGuid]["Disabled"]
+                    ReadOnly=data["ProItem"][ProItemGuid]["ReadOnly"]
+                    rep=""
+                    rep=data["ProItem"][ProItemGuid]["Display"]
+                    if ProCodeListGuid :rep=data["ProCodeList"][ProCodeListGuid]["Display"]
+
+                    if Hidden=="True": Hidden="👻"
+                    else: Hidden=""
+                    if ReadOnly=="True": ReadOnly="🔒"
+                    else: ReadOnly=""
+
                     
-                    # Recherche des questions du groupe
-                    QLT = filter(lambda x: x[1] == GDA[0], donnees["QL"])
-                    for QLA in QLT:
-                        QDT = filter(lambda x: x[0] == QLA[2], donnees["QD"])
-                        for QDA in QDT:
-                            OrderNo = QLA[0]
-                            Label = QDA[1]
-                            SasName_Question = QDA[2]
-                            MinLength = QDA[3]
-                            MaxLength = QDA[4]
-                            Scale = QDA[5]
-                            ProControlTypeId = QDA[6]
-                            ProDataTypeId = QDA[9]
-                            ProCodeListGuid = QDA[10]
-                            
-                            # Déterminer le type de question et les réponses possibles
-                            ProDataType = ""
-                            rep = ""
-                            if ProControlTypeId == "3":
-                                ProDataType = "RADIO"
-                                CDT = filter(lambda x: x[1] == ProCodeListGuid, donnees["CD"])
-                                for CDA in CDT:
-                                    Caption = CDA[2]
-                                    Value = CDA[3]
-                                    rep += f" 🔘 {Value} - <b>{Caption}</b> <br>"
-                            elif ProDataTypeId == "5":
-                                ProDataType = "DATE"
-                                rep = " DD/MM/YYYY 📅"
-                            else:
-                                ProDataType = "AUTRE"
-                                rep = "TXT"
+                    ProEdit=filtrer_par_cle( data["ProEdit"],"ProItemGuid",ProItemGuid)
 
-                            # Ajouter une ligne dans le tableau pour cette question
-                            
+                    i=0
+                    Message= ""               
+                    for  key,Edit in ProEdit.items():
+                      if (Edit["ProItemGuid"] == ProItemGuid) and (Edit["TargetProFormGuid"]==ProFormGuid or Edit["TargetProFormGuid"] is None) and (Edit["TargetProGroupGuid"]==ProGroupGuid or Edit["TargetProGroupGuid"] is None)  :
+                        i+=1
+                        EditACtion= Edit["ProEditActionId"]
+                        if EditACtion=="1":EditACtion="Valid"
+                        elif EditACtion=="3":EditACtion="Enabled"
+                        elif EditACtion=="6":EditACtion="Hidden"
+                        elif EditACtion=="10":EditACtion="DVA"
+                        elif EditACtion=="11":EditACtion="Email"
+                        elif EditACtion=="9":EditACtion="Read Only"
+                        elif EditACtion=="23":EditACtion="Dynamic codelist filter"
+                        msg=Edit["Message"]
+                        chk=Edit["ActionExpression"]
+                        DTE = Edit['DataExpression']
+                        path=Edit["TargetPath"]
 
+                        Message+=f"<tr><td> {EditACtion}:{path}</td> </tr>"
+                        Message+=f"<tr> <td> <pre><code class='javascript'>#Action Expression \n{chk} \n#data Expression \n{DTE} \n</code></pre> </td>"
+                        Message+=f"<td> {msg}</td> </tr>"
 
-                            f.write(f" <tr> \n<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> {SasName_Question} </b></td> \n  <td style='width:600px; text-align:left;'> {Label}   </td>\n <td style='width:300px; text-align:center;'>  {rep} </td> \n </tr>\n")
-                            # f.write("\n")
-                    f.write("</table>\n")
-    print(f"Le fichier Markdown a été créé avec succès : {pathfileXML2}")
+                    Message+="</table></details>"
+                    if i==0:Message=""
+                    else: Message= f"<details> <summary>{i} EditCheck </summary><table>" + Message
+                  
 
 
 
-pathfileXML = sys.argv[1]
-print(pathfileXML)
-donnees = lire_et_trier_donnees(pathfileXML)
-print(donnees)
+                    f.write(
+    " <tr> \n" +
+    f"<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> {Hidden}{ReadOnly}{i_SasName} </b></td> \n" +
+    f" <td style='width:600px; text-align:left;'> {I_description}</td>\n" +
+     f" <td style='width:600px; text-align:left;'>  {Message} </td>\n" +
+    f" <td style='width:300px; text-align:center;'> {rep} </td> \n </tr>\n"
+)
+                    
 
-exporter_donnees_markdown_eCRF(donnees, pathfileXML)
+                f.write("</table>\n\n")
+
+
+
+Pathin = sys.argv[1]
+
+Pathout_0=Pathin.replace('.xml', '.md')
+Pathout_1=Pathout_0.replace('INFILE', 'OUTFILE')
+Pathout=Pathout_1.replace('/XML/', '/MD/')
+
+
+data = lire_et_trier_donnees(Pathin)
+exporter_donnees_markdown_eCRF(data, Pathout )
+# data = lire_et_trier_donnees(r"C:\Users\a_mangin\Documents\GitHub\XML_TM\Codebreak01.10.2024.xml")
+# exporter_donnees_markdown_eCRF(data, r"C:\Users\a_mangin\Documents\GitHub\XML_TM\Codebreak01.10.2024.md" )
