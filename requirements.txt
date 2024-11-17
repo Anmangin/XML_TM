@@ -4,3 +4,4 @@ openpyxl
 sys
 markdown
 python-docx
+os
