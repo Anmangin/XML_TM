@@ -190,7 +190,7 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                                 elif EditACtion=="6":EditACtion="Hidden"
                                 elif EditACtion=="10":EditACtion="DVA"
                                 elif EditACtion=="11":EditACtion="Email"
-                                elif EditACtion=="9":EditACtion="Read Only"
+                                elif EditACtion=="9":EditACtion="DVC"
                                 elif EditACtion=="23":EditACtion="Dynamic codelist filter"
                                 msg=Edit["Message"]
                                 chk=Edit["ActionExpression"]
