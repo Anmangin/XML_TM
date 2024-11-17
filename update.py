@@ -77,7 +77,7 @@ def find_arbo(TBNode):
             elif TBNode["ParentTBNodeId"]=="7":source="groupe"
             elif TBNode["ParentTBNodeId"]=="8":source="item"
             elif TBNode["ParentTBNodeId"]=="9":source="codelist"
-            elif TBNode["ParentTBNodeId"]< 10 : source="unknown"
+            elif int(TBNode["ParentTBNodeId"]) < 10 : source="unknown"
             return source
     
 
