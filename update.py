@@ -83,10 +83,10 @@ def find_arbo(TBNode):
     
 
 def exporter_donnees_markdown_eCRF(data,pathin,pathout):
+        
     with open( pathout , 'w', encoding='utf-8') as f:
-
         version=data["version"]
-        f.write(f"# Version de TB pour ce fichier : {version}  \n")
+        # f.write(f"# Version de TB pour ce fichier : {version}  \n")
         dossier = os.path.dirname(os.path.dirname(pathin))
 
         with open(f"{dossier}/VersionTM.txt", "r", encoding="utf-8") as fichier:
