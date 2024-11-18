@@ -109,7 +109,7 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                     if errortitle==0:
                         errortitle+=1
                         f.write(f"# ERREUR DANS LES DOSSIERS DU FICHIER  \n")
-                        f.write(f"{find_arbo(TBNode)}/{Caption} est vide\n")
+                        f.write(f"{find_arbo(TBNode)}/{Caption} est vide TBNodeId:{TBNodeId}\n")
 
         # Parcourir les données
         print(len(data["ProPatientVisit"]), "Patients visit")
