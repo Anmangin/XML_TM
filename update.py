@@ -122,26 +122,32 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
             ProVisitGuid=PatientVisit["ProVisitGuid"]
             V_description = data["ProVisit"][ProVisitGuid]["Description"]
             V_OrderNo=PatientVisit["OrderNo"]
-            f.write(f"# {V_description} \n")
-            print("écriture de #",V_description)
+            if not unic_form: 
+                f.write(f"# {V_description} \n")
+                print("écriture de #",V_description)
 
 
 
             ProVisitForm=filtrer_par_cle( data["ProVisitForm"],"ProVisitGuid",ProVisitGuid)
             for  VFkey,VisitForm in ProVisitForm.items():
-                ProFormGuid=VisitForm.get("ProFormGuid")     
+                ProFormGuid=VisitForm.get("ProFormGuid")
+                written=data["ProForm"][ProFormGuid].get("written", False)
+                if written and unic_form: continue    
                 F_OrderNo=VisitForm["OrderNo"]
                 F_description=data["ProForm"][ProFormGuid]["Description"]
+                data["ProForm"][ProFormGuid]["written"]=True
 
                 f.write(f"## {F_description} \n")
                 print("écriture de ##",F_description)
                 ListVisit=filtrer_par_cle( data["ProVisitForm"],"ProFormGuid",ProFormGuid)
-                Li="Liste des visites avec cette fiches :"
-                for  VFkey,LV in ListVisit.items():
-                    Vgui_temp=LV["ProVisitGuid"]
-                    V_description_temp = data["ProVisit"][Vgui_temp]["Description"]
-                    Li+= f"{V_description_temp}"
-                f.write(f"{Li} \n\n") 
+
+                if unic_form: # cas ou on imprime qu'une version de la fiche, alors on liste les visites ou elle apparait.
+                    Li="Liste des visites avec cette fiches :"
+                    for  VFkey,LV in ListVisit.items():
+                        Vgui_temp=LV["ProVisitGuid"]
+                        V_description_temp = data["ProVisit"][Vgui_temp]["Description"]
+                        Li+= f"{V_description_temp}"
+                    f.write(f"{Li} \n\n") 
 
                     
 
@@ -245,6 +251,7 @@ Pathout_0=Pathin.replace('.xml', '.md')
 Pathout_1=Pathout_0.replace('INFILE', 'OUTFILE')
 Pathout=Pathout_1.replace('/XML/', '/MD/')
 
+unic_form=True
 data = lire_et_trier_donnees(Pathin)
 exporter_donnees_markdown_eCRF(data,Pathin, Pathout )
 # data = lire_et_trier_donnees(r"E:\Users\tony\Documents\GitHub\XML_TM\INFILE\XML\FA12.xml")
