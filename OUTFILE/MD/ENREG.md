@@ -540,49 +540,6 @@ invList;
  </tr>
 </table>
 
-### CONSENT 
-
-<table style='width:100%;'>
-<tr>
-<th style='width:50px; text-align:center;'><strong>Sas</strong></th>
-<th style='width:600px; text-align:center;'><strong>Label de la question </strong></th>
-<th style='width:300px; text-align:center;'><strong>Check</strong></th>
-<th style='width:300px; text-align:center;'><strongRéponses possibles</strong></th>
-</tr>
-<tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> PCONSDT </b></td> 
- <td style='width:600px; text-align:left;'> Informed consent signature date by the patient</td>
- <td style='width:600px; text-align:left;'>   </td>
- <td style='width:300px; text-align:center;'> 📅 DD/MM/YYYY  </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> ICONSDT </b></td> 
- <td style='width:600px; text-align:left;'> Informed consent signature date by the investigator</td>
- <td style='width:600px; text-align:left;'>   </td>
- <td style='width:300px; text-align:center;'> 📅 DD/MM/YYYY  </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 🔒AGE </b></td> 
- <td style='width:600px; text-align:left;'> <i>Age of the patient</i></td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Trial Template][Site template][Patient Template][Registration.*][3-Registration request.*][CONSENT.*][AGE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][PCONSDT])
- && !isEmpty([Trial Template][Site template][Patient Template][PAT][Patient Information][DNAIS]); 
-#data Expression 
-var dnais=[Trial Template][Site template][Patient Template][PAT][Patient Information][DNAIS]+ '/01';
-var consent=[Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][PCONSDT];
-AgeAtGivenDate(dnais,consent); 
-</code></pre> </td><td> </td> </tr></table></details> </td>
- <td style='width:300px; text-align:center;'> Num - 3 </td> 
- </tr>
- <tr> 
-<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> CONSVERS </b></td> 
- <td style='width:600px; text-align:left;'> Version of informed consent signed</td>
- <td style='width:600px; text-align:left;'>   </td>
- <td style='width:300px; text-align:center;'> Char - 5 </td> 
- </tr>
-</table>
-
 ### OTHERQ 
 
 <table style='width:100%;'>
@@ -699,34 +656,13 @@ else '0';
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 🔒CHECKREQ </b></td> 
  <td style='width:600px; text-align:left;'> <i><font color="#808080">Checks are ok for the form 3: inclusion request</font></i></td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Trial Template][Site template][Patient Template][Registration.*][3-Registration request.*][REQCC.*][CHECKREQ]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
-true; 
-#data Expression 
-if (
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][CT][CRA]) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][CT][INV]) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][PCONSDT]) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][ICONSDT]) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][CONSVERS]) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][OTHERQ][OPTN1]) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][OTHERQ][OPTN2]) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][TAS][PLSDT]) ) '1';
-else '0' 
-</code></pre> </td><td> </td> </tr></table></details> </td>
+ <td style='width:600px; text-align:left;'>   </td>
  <td style='width:300px; text-align:center;'> 🔘 1 - <b>Yes</b> <br>🔘 0 - <b>No</b> <br> </td> 
  </tr>
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 🔒HARDCHEC </b></td> 
  <td style='width:600px; text-align:left;'> <i><font color="#808080">Hard Checks are ok for the inclusion</font></i></td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Trial Template][Site template][Patient Template][Registration.*][3-Registration request.*][REQCC.*][HARDCHECK]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
-true; 
-#data Expression 
-if (
-isDate1LEDate2([Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][PCONSDT],TodayDate()) &&
-isDate1LEDate2([Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][ICONSDT],TodayDate()) &&
-!isEmpty([Trial Template][Site template][Patient Template][Registration][3-Registration request][CONSENT][PCONSDT])) '1';
-else '0'; 
-</code></pre> </td><td> </td> </tr></table></details> </td>
+ <td style='width:600px; text-align:left;'>   </td>
  <td style='width:300px; text-align:center;'> 🔘 1 - <b>Yes</b> <br>🔘 0 - <b>No</b> <br> </td> 
  </tr>
  <tr> 

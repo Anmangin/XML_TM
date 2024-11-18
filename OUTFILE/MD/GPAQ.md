@@ -1,4 +1,3 @@
-# Fichier non compatible avec la version en cours de TM : actuel:5.0.3.27.Update 3b, version du fichier : 4.2.1.23  
 # ERREUR DANS LES DOSSIERS DU FICHIER  
 unknown/GPAQ est vide TBNodeId:7384
 ## GPAQ 
