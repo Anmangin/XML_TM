@@ -1,4 +1,3 @@
-# Hospitalisation 
 ## Hospitalisation Yes/No 
 Liste des visites avec cette fiches :Hospitalisation 
 

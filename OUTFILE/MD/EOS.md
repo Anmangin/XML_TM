@@ -1,4 +1,3 @@
-# End of Study 
 ## End of Study 
 Liste des visites avec cette fiches :End of Study 
 

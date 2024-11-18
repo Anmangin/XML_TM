@@ -1,6 +1,5 @@
 # ERREUR DANS LES DOSSIERS DU FICHIER  
 Fiche/COMMUN est vide
-# Baseline 
 ## Vital sign and Clinical Examination 
 Liste des visites avec cette fiches :Baseline 
 

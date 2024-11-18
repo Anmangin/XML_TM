@@ -1,4 +1,3 @@
-# Registration 
 ## Inclusion Criteria 
 Liste des visites avec cette fiches :Registration 
 

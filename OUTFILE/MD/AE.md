@@ -1,6 +1,5 @@
 # ERREUR DANS LES DOSSIERS DU FICHIER  
 Fiche/System est vide
-# Adverse Events 
 ## Adverse Event 
 Liste des visites avec cette fiches :Adverse Events 
 

@@ -1,4 +1,3 @@
-# RECIST 
 ## RECIST Evaluation 
 Liste des visites avec cette fiches :RECIST 
 

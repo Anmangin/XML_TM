@@ -1,4 +1,3 @@
-# Concomitant Treatments 
 ## Concomitant Treatment 
 Liste des visites avec cette fiches :Concomitant Treatments 
 
