@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TrialLibrary ver="4.2.1.23" dateCreated="07/21/2020 16:40:44" IsSingleTrial="false" Format="4.2.1">
+<TrialLibrary ver="4.2.1.23" dateCreated="07/21/2020 16:40:43" IsSingleTrial="false" Format="4.2.1">
   <CustomObjects>
     <Types>
       <ProVisitTypes />
       <ProFormCategories>
-        <ProFormCategory>
+        <ProFormCategory>s
           <ProObjectGuid>0f071abe-533b-4c37-ab9e-0f9706d707e4</ProObjectGuid>
           <Caption>Inclusion</Caption>
           <Description>Form - Inclusion</Description>

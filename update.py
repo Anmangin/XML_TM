@@ -135,6 +135,24 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
 
                 f.write(f"## {F_description} \n")
                 print("écriture de ##",F_description)
+                ListVisit=filtrer_par_cle( data["ProVisitForm"],"ProFormGuid",ProFormGuid)
+                Li="Liste des visites avec cette fiches :"
+                for  VFkey,LV in ListVisit.items():
+                    Vgui_temp=ListVisit["ProVisitGuid"]
+                    V_description = data["ProVisit"][Vgui_temp]["Description"]
+                    li+= "[" + V_description + "]  "
+                f.write(f"{Li} \n\n") 
+
+                    
+
+
+
+
+
+
+
+
+
                 ProFormGroup=filtrer_par_cle( data["ProFormGroup"],"ProFormGuid",ProFormGuid)
                 for  key,FormGroup in ProFormGroup.items():
                     ProGroupGuid=FormGroup["ProGroupGuid"]
