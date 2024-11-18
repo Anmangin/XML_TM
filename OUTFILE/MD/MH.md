@@ -1,5 +1,5 @@
 # ERREUR DANS LES DOSSIERS DU FICHIER  
-Fiche/COMMUN est vide
+Fiche/COMMUN est vide TBNodeId:17576
 ## Medical History 
 Liste des visites avec cette fiches :Baseline 
 
