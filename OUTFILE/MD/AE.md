@@ -1,5 +1,3 @@
-# ERREUR DANS LES DOSSIERS DU FICHIER  
-Fiche/System est vide TBNodeId:39052
 ## Adverse Event 
 Liste des visites avec cette fiches :Adverse Events 
 
