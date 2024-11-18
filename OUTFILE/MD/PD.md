@@ -1,6 +1,7 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # Events 
 ## Progression 
+Liste des visites avec cette fiches :Events 
+
 ### PD 
 
 <table style='width:100%;'>

@@ -1,6 +1,7 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # End of Study 
 ## End of Study 
+Liste des visites avec cette fiches :End of Study 
+
 ### EOS 
 
 <table style='width:100%;'>

@@ -1,6 +1,7 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # Hospitalisation 
 ## Hospitalisation Yes/No 
+Liste des visites avec cette fiches :Hospitalisation 
+
 ### HO1 
 
 <table style='width:100%;'>
@@ -38,7 +39,7 @@
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 👻FLAGHOYN </b></td> 
  <td style='width:600px; text-align:left;'> Flag Hosp YN</td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> Read Only:[Hospitalisation YN.*][HO1.*][FLAGHOYN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
+ <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Hospitalisation YN.*][HO1.*][FLAGHOYN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
 true; 
 #data Expression 
 if ([Hospitalisation YN][HO1][HOYN] == '1')
@@ -57,6 +58,8 @@ else
 </table>
 
 ## Hospitalisation 
+Liste des visites avec cette fiches :Hospitalisation 
+
 ### HO2 
 
 <table style='width:100%;'>

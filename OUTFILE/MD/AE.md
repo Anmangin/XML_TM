@@ -1,8 +1,9 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # ERREUR DANS LES DOSSIERS DU FICHIER  
 Fiche/System est vide
 # Adverse Events 
 ## Adverse Event 
+Liste des visites avec cette fiches :Adverse Events 
+
 ### AE1 
 
 <table style='width:100%;'>
@@ -181,7 +182,7 @@ isDate1LEDate2([Adverse Event][AE3][AESDT],[Adverse Event][AE3][AEEDT]);
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 👻FLAG </b></td> 
  <td style='width:600px; text-align:left;'> FLAG</td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> Read Only:[Adverse Event.*][AE4.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
+ <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Adverse Event.*][AE4.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
 true; 
 #data Expression 
 '1' 

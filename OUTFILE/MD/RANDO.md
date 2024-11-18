@@ -1,6 +1,7 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # Randomisation 
 ## Inclusion Criteria 
+Liste des visites avec cette fiches :Randomisation 
+
 ### IC 
 
 <table style='width:100%;'>
@@ -164,6 +165,8 @@
 </table>
 
 ## Non inclusion Criteria 
+Liste des visites avec cette fiches :Randomisation 
+
 ### EC 
 
 <table style='width:100%;'>
@@ -327,6 +330,8 @@
 </table>
 
 ## Randomisation request 
+Liste des visites avec cette fiches :Randomisation 
+
 ### CT 
 
 <table style='width:100%;'>
@@ -658,7 +663,7 @@ AgeAtGivenDate(dnais,consent);
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 🔒ENRREQDT </b></td> 
  <td style='width:600px; text-align:left;'> <font color="#808080">Inclusion request date</font></td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> Read Only:[Trial Template][Site template][Patient Template][Randomisation.*][3-Randomisation request.*][REQCC.*][ENRREQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
+ <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Trial Template][Site template][Patient Template][Randomisation.*][3-Randomisation request.*][REQCC.*][ENRREQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
 isEmpty([Trial Template][Site template][Patient Template][Randomisation][3-Randomisation request][REQCC][GETNUM]) && [Trial Template][Site template][Patient Template][Randomisation][3-Randomisation request][CRACONF][REQCONF]=='1' || ([Trial Template][Site template][Patient Template][Randomisation][3-Randomisation request][WAIV][WAIVYN]=='1'); 
 #data Expression 
 TodayDate(); 
@@ -941,6 +946,8 @@ isEmpty([Randomisation][3-Randomisation request][CRACONF][REQSTATUS])
 </table>
 
 ## Randomisation result 
+Liste des visites avec cette fiches :Randomisation 
+
 ### RRESG 
 
 <table style='width:100%;'>
@@ -954,7 +961,7 @@ isEmpty([Randomisation][3-Randomisation request][CRACONF][REQSTATUS])
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 🔒ENROLLDT </b></td> 
  <td style='width:600px; text-align:left;'> Date of inclusion</td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> Read Only:[Trial Template][Site template][Patient Template][Randomisation.*][4-Randomisation result.*][RRESG.*][ENROLLDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
+ <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Trial Template][Site template][Patient Template][Randomisation.*][4-Randomisation result.*][RRESG.*][ENROLLDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
 isEmpty([Trial Template][Site template][Patient Template][Randomisation][4-Randomisation result][RRESG][ENROLLDT]); 
 #data Expression 
 TodayDate(); 
@@ -974,7 +981,7 @@ TodayDate();
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 👻🔒FLAGNOTI </b></td> 
  <td style='width:600px; text-align:left;'> FLAGNOTIF</td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> Read Only:[Randomisation.*][4-Randomisation result.*][RRESG.*][FLAGNOTIF]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
+ <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Randomisation.*][4-Randomisation result.*][RRESG.*][FLAGNOTIF]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
 true; 
 #data Expression 
 "1"; 
@@ -996,6 +1003,8 @@ true;
 </table>
 
 ## Correction of randomisation criteria 
+Liste des visites avec cette fiches :Randomisation 
+
 ### COR_G 
 
 <table style='width:100%;'>

@@ -1,6 +1,7 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # Events 
 ## Death 
+Liste des visites avec cette fiches :Events 
+
 ### DTH 
 
 <table style='width:100%;'>

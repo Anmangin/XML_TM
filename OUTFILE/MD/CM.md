@@ -1,6 +1,7 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # Concomitant Treatments 
 ## Concomitant Treatment 
+Liste des visites avec cette fiches :Concomitant Treatments 
+
 ### CM1 
 
 <table style='width:100%;'>
@@ -26,7 +27,7 @@
  <tr> 
 <td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> 👻FLAG </b></td> 
  <td style='width:600px; text-align:left;'> FLAG</td>
- <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> Read Only:[Concomitant Treatment.*][CM1.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
+ <td style='width:600px; text-align:left;'>  <details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Concomitant Treatment.*][CM1.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression 
 [Concomitant Treatment][CM1][CMYN] == '1'; 
 #data Expression 
 '1'; 

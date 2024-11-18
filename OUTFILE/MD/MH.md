@@ -1,8 +1,9 @@
-# Version de TB pour ce fichier : 5.0.3.27.Update 3b  
 # ERREUR DANS LES DOSSIERS DU FICHIER  
 Fiche/COMMUN est vide
 # Baseline 
 ## Medical History 
+Liste des visites avec cette fiches :Baseline 
+
 ### MH1 
 
 <table style='width:100%;'>
