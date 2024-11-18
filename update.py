@@ -140,7 +140,7 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                 for  VFkey,LV in ListVisit.items():
                     Vgui_temp=LV["ProVisitGuid"]
                     V_description_temp = data["ProVisit"][Vgui_temp]["Description"]
-                    li+= f"{V_description_temp}"
+                    Li+= f"{V_description_temp}"
                 f.write(f"{Li} \n\n") 
 
                     
