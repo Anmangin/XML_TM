@@ -138,9 +138,9 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                 ListVisit=filtrer_par_cle( data["ProVisitForm"],"ProFormGuid",ProFormGuid)
                 Li="Liste des visites avec cette fiches :"
                 for  VFkey,LV in ListVisit.items():
-                    Vgui_temp=ListVisit["ProVisitGuid"]
-                    V_description = data["ProVisit"][Vgui_temp]["Description"]
-                    li+= "[" + V_description + "]  "
+                    Vgui_temp=LV["ProVisitGuid"]
+                    V_description_temp = data["ProVisit"][Vgui_temp]["Description"]
+                    li+= f"{V_description_temp}"
                 f.write(f"{Li} \n\n") 
 
                     
