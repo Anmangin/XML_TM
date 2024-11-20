@@ -246,11 +246,12 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
 
 
 Pathin = sys.argv[1]
+print("chemin du fichier",Pathin)
 
 Pathout_0=Pathin.replace('.xml', '.md')
 Pathout_1=Pathout_0.replace('INFILE', 'OUTFILE')
 Pathout=Pathout_1.replace('/XML/', '/MD/')
-
+file = os.path.basename(Pathin)
 unic_form=True
 data = lire_et_trier_donnees(Pathin)
 exporter_donnees_markdown_eCRF(data,Pathin, Pathout )
