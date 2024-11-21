@@ -3,6 +3,14 @@ import xml.etree.ElementTree as ET
 import re
 import sys     
 import os
+import json
+def remove_details_tags(text):
+    # Utilisation de l'expression régulière pour supprimer les balises <details>...</details>
+    cleaned_text = re.sub(r'<(th|td)\s+class=["\']check["\'][^>]*>.*?<!--\$htmlbalise-->.', '', text, flags=re.DOTALL)
+    # cleaned_text = re.sub(r'<(th|td)\s+class=["\']check["\'][^>]*>.*?<!--\$htmlbalise-->.*?</\1>', '', text, flags=re.DOTALL)
+
+
+    return cleaned_text
 
 def Get_objt(root, racine, keyname, fields):
         ProForm = {}
@@ -15,60 +23,74 @@ def Get_objt(root, racine, keyname, fields):
 def filtrer_par_cle(dictionnaire, champ, valeur):
     return {key: val for key, val in dictionnaire.items() if val.get(champ) == valeur}
 
-def lire_et_trier_donnees(pathfileXML):
-    
+
+
+
+
+def lire_et_trier_donnees(pathfileXML, config_path='config.json'):
+    # Charger la configuration
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
+    # Charger et analyser l'XML
     tree = ET.parse(pathfileXML)
     root = tree.getroot()
     version = root.attrib.get('ver')
-    data = {
-        "ProPatientVisit": Get_objt(root, "ProPatientVisit", "ProObjectGuid", fields=("ProPatientGuid", "ProVisitGuid", "MinOccurance", "MaxOccurance", "OrderNo")),
-        "ProVisit": Get_objt(root, "ProVisit", "ProObjectGuid", fields=("Description",)),
-        "ProVisitForm": Get_objt(root, "ProVisitForm", "ProObjectGuid", fields=("ProVisitGuid", "ProFormGuid", "MinOccurance", "MaxOccurance", "OrderNo")),
-        "ProForm": Get_objt(root, "ProForm", "ProObjectGuid", fields=("Description", "SasName")),
-        "ProFormGroup": Get_objt(root, "ProFormGroup", "ProObjectGuid", fields=("OrderNo", "ProFormGuid", "ProGroupGuid")),
-        "ProGroupItem": Get_objt(root, "ProGroupItem", "ProObjectGuid", fields=("ProGroupGuid", "ProItemGuid", "OrderNo")),
-        "ProGroup": Get_objt(root, "ProGroup", "ProObjectGuid", fields=("Caption",)),
-        "ProItem": Get_objt(root, "ProItem", "ProObjectGuid", fields=("Description", "Scale", "SasName", "MinLength", "MaxLength", "ProControlTypeId", "SasType","ProCodeListGuid","ProDataTypeId","Hidden","ReadOnly","Disabled")),
-        "ProCodeList": Get_objt(root, "ProCodeList", "ProObjectGuid", fields=("OrderNo", "Caption")),
-        "ProCodeListItem": Get_objt(root, "ProCodeListItem", "ProObjectGuid", fields=("ProCodeListGuid","OrderNo", "Caption", "Value")),
-        "ProEdit": Get_objt(root, "ProEdit", "ProObjectGuid", fields=("ProEditActionId","TargetLevelId", "ProVisitFormGuid","TargetProGroupGuid","TargetProFormGuid","ProGroupGuid","ProGroupItemGuid", "ProItemGuid","ActionExpression","DataExpression","Message","TargetPath")),
-        "TBNode": Get_objt(root, "TBNode", "ProObjectGuid", fields=("TBNodeId","ParentTBNodeId", "Caption","TBNodeTypeId")),
-        "version":version,
-    
-    
-    }
+    data = {"version": version}
 
-    for key in ["ProPatientVisit", "ProVisitForm", "ProFormGroup", "ProGroupItem","ProCodeListItem"]:
-        data[key] = dict(sorted(data[key].items(), key=lambda item: int(item[1].get("OrderNo", 0))))
+    # Extraire et transformer les données à partir du fichier XML selon la config
+    for key, params in config.items():
+        racine = params["racine"]
+        keyname = params["keyname"]
+        fields = params["fields"]
+        data[key] = Get_objt(root, racine, keyname, fields)
 
+    # Trier les clés spécifiques
+    trier_cles = ["ProPatientVisit", "ProVisitForm", "ProFormGroup", "ProGroupItem", "ProCodeListItem"]
+    for key in trier_cles:
+        if key in data:
+            data[key] = dict(sorted(data[key].items(), key=lambda item: int(item[1].get("OrderNo", 0))))
 
-    #  affichage des catégories
-    for key, value in data["ProCodeList"].items():
-            rep = ""
-            # Filtrer les items associés à la ProCodeList actuelle
-            filtered_items = {k: v for k, v in data["ProCodeListItem"].items() if v["ProCodeListGuid"] == key}
+    # Ajouter le champ "Display" pour ProCodeList
+    data["ProCodeList"] = ajouter_display_pro_codelist(data)
 
-            # Construire la chaîne de caractères pour le champ Display
-            if len(filtered_items) < 15:
-                for item in filtered_items.values():
-                    rep += f"🔘 {item['Value']} - <b>{item['Caption']}</b> <br>"
-            else:
-                rep = "🔘 Radio boutton trop long"
-
-            # Ajouter le champ Display
-            data["ProCodeList"][key]["Display"] = rep
-
-    for key, value in data["ProItem"].items():
-            SasType=value["SasType"]
-            MaxLength=value["MaxLength"]
-            rep=""
-            if value["ProDataTypeId"] =="5": rep = "📅 DD/MM/YYYY "
-            else :rep=  f"{SasType} - {MaxLength}"
-
-            # Ajouter le champ Display
-            data["ProItem"][key]["Display"] = rep
+    # Ajouter le champ "Display" pour ProItem
+    data["ProItem"] = ajouter_display_pro_item(data)
 
     return data
+
+
+def ajouter_display_pro_codelist(data):
+    """Ajoute un champ 'Display' pour les ProCodeList."""
+    for key, value in data["ProCodeList"].items():
+        # Filtrer les items associés à la ProCodeList actuelle
+        filtered_items = {k: v for k, v in data["ProCodeListItem"].items() if v["ProCodeListGuid"] == key}
+
+        # Construire la chaîne de caractères pour le champ Display
+        if len(filtered_items) < 15:
+            rep = "<br>".join(f"🔘 {item['Value']} - <b>{item['Caption']}</b>" for item in filtered_items.values())
+        else:
+            rep = "🔘 Radio bouton trop long"
+
+        # Ajouter le champ Display
+        data["ProCodeList"][key]["Display"] = rep
+
+    return data["ProCodeList"]
+
+
+def ajouter_display_pro_item(data):
+    """Ajoute un champ 'Display' pour les ProItem."""
+    for key, value in data["ProItem"].items():
+            if value["ProDataTypeId"] == "5":
+                rep = "📅 DD/MM/YYYY"
+            else:
+                rep = f"{value['SasType']} - {value['MaxLength']}"
+
+            # Ajouter le champ Display
+            if rep :data["ProItem"][key]["Display"] = rep
+
+
+    return data["ProItem"]
 
 # Appel de la fonction
 
@@ -82,19 +104,18 @@ def find_arbo(TBNode):
             return source
     
 
-def exporter_donnees_markdown_eCRF(data,pathin,pathout):
-        
-    with open( pathout , 'w', encoding='utf-8') as f:
-        version=data["version"]
-        # f.write(f"# Version de TB pour ce fichier : {version}  \n")
-        dossier = os.path.dirname(os.path.dirname(pathin))
 
-        with open(f"{dossier}/VersionTM.txt", "r", encoding="utf-8") as fichier:
-            OngoingVer = fichier.read()
+
+
+def exporter_donnees_markdown_eCRF(data,pathout,file,ACTversion):
 
         
-        if OngoingVer != version :
-             f.write(f"# Fichier non compatible avec la version en cours de TM : actuel:{OngoingVer}, version du fichier : {version}  \n")
+ 
+        content=f"<body>\n\n\n"
+
+        
+        if ACTversion != version :
+             content+=f"# Fichier non compatible avec la version en cours de TM : actuel:{OngoingVer}, version du fichier : {version}  \n"
              
         
 
@@ -108,27 +129,28 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                 if len(listItm)==0 :
                     if errortitle==0:
                         errortitle+=1
-                        f.write(f"# ERREUR DANS LES DOSSIERS DU FICHIER  \n")
-                        f.write(f"{find_arbo(TBNode)}/{Caption} est vide TBNodeId:{TBNodeId}\n")
+                        content+=f"# ERREUR DANS LES DOSSIERS DU FICHIER  \n"
+                        content+=f"{find_arbo(TBNode)}/{Caption} est vide TBNodeId:{TBNodeId}\n"
 
         # Parcourir les données
         print(len(data["ProPatientVisit"]), "Patients visit")
         if len(data["ProPatientVisit"])==0 : 
             if errortitle==0:
                         errortitle+=1
-                        f.write(f"# ERREUR DANS LES DOSSIERS DU FICHIER  \n")
-            f.write(f"Pas d'arborescence patient ! \n")
+                        content+=f"# ERREUR DANS LES DOSSIERS DU FICHIER  \n"
+            content+=f"Pas d'arborescence patient ! \n"
         for  PVkey,PatientVisit in data["ProPatientVisit"].items():
             ProVisitGuid=PatientVisit["ProVisitGuid"]
             V_description = data["ProVisit"][ProVisitGuid]["Description"]
             V_OrderNo=PatientVisit["OrderNo"]
             if not unic_form: 
-                f.write(f"# {V_description} \n")
+                content+=f"<h1> {V_description} </h1> \n"
                 print("écriture de #",V_description)
 
 
 
             ProVisitForm=filtrer_par_cle( data["ProVisitForm"],"ProVisitGuid",ProVisitGuid)
+           
             for  VFkey,VisitForm in ProVisitForm.items():
                 ProFormGuid=VisitForm.get("ProFormGuid")
                 written=data["ProForm"][ProFormGuid].get("written", False)
@@ -136,8 +158,7 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                 F_OrderNo=VisitForm["OrderNo"]
                 F_description=data["ProForm"][ProFormGuid]["Description"]
                 data["ProForm"][ProFormGuid]["written"]=True
-
-                f.write(f"## {F_description} \n")
+                content+=f"<h2> {F_description}  </h2>\n"
                 print("écriture de ##",F_description)
                 ListVisit=filtrer_par_cle( data["ProVisitForm"],"ProFormGuid",ProFormGuid)
 
@@ -147,7 +168,7 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                         Vgui_temp=LV["ProVisitGuid"]
                         V_description_temp = data["ProVisit"][Vgui_temp]["Description"]
                         Li+= f"{V_description_temp}"
-                    f.write(f"{Li} \n\n") 
+                    content+=f"{Li} \n\n"
 
                     
 
@@ -163,7 +184,7 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                 for  key,FormGroup in ProFormGroup.items():
                     ProGroupGuid=FormGroup["ProGroupGuid"]
                     G_description=data["ProGroup"][ProGroupGuid]["Caption"]
-                    f.write(f"### {G_description} \n\n")
+                    content+=f"<h3> {G_description} </h3> \n\n"
                     
 
 
@@ -172,14 +193,14 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
 
 
 
-                    f.write("<table style='width:100%;'>\n")
-                    f.write("<tr>\n")
-                    f.write("<th style='width:50px; text-align:center;'><strong>Sas</strong></th>\n")
-                    f.write("<th style='width:600px; text-align:center;'><strong>Label de la question </strong></th>\n")
-                    f.write("<th style='width:300px; text-align:center;'><strong>Check</strong></th>\n")
-                    f.write("<th style='width:300px; text-align:center;'><strongRéponses possibles</strong></th>\n")
-                    f.write("</tr>\n")
-                    f.write("<tr>\n")
+                    content+="<table style='width:100%;'>\n"
+                    content+="<tr>\n"
+                    content+="<th style='width:600px; text-align:center;'><strong>Label de la question </strong></th>\n"
+                    content+="<th class='check' style='width:300px; text-align:center;'><strong>Check</strong></th> <!--$htmlbalise-->\n"
+                    content+="<th style='width:300px; text-align:center;'><strong>Réponses possibles</strong></th>\n"
+                    content+="<th style='width:50px; text-align:center;'><strong>Sas</strong></th>\n"
+                    content+="</tr>\n"
+                    content+="<tr>\n"
 
 
                     for  GI_key,GroupItem in ProGroupItem.items():
@@ -229,31 +250,49 @@ def exporter_donnees_markdown_eCRF(data,pathin,pathout):
                         if i==0:Message=""
                         else: Message= f"<details> <summary>{i} EditCheck </summary><table>" + Message
                             
-
-                        f.write(
-                                    " <tr> \n" +
-                                    f"<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> {Hidden}{ReadOnly}{i_SasName} </b></td> \n" +
-                                    f" <td style='width:600px; text-align:left;'> {I_description}</td>\n" +
-                                    f" <td style='width:600px; text-align:left;'>  {Message} </td>\n" +
-                                    f" <td style='width:300px; text-align:center;'> {rep} </td> \n </tr>\n"
-                                    )
+                        content+=" <tr> \n"                       
+                        content+=            f" <td style='width:600px; text-align:left;'> {I_description}</td>\n" 
+                        content+=             f" <td class='check' style='width:600px; text-align:left;'>  {Message} </td> <!--$htmlbalise--> \n\n" 
+                        content+=             f" <td style='width:300px; text-align:center;'> {rep} </td> \n"
+                        content+=            f"<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> {Hidden}{ReadOnly}{i_SasName} </b></td> \n" 
+                        content+=" </tr> \n"            
                         print("écriture de ",I_description)
                         
 
-                    f.write("</table>\n\n")
-    print(f"fin d'écriture dans {pathout}")
+                    content+="</table>\n\n"
+                content+=f"<pre><br clear=all style='mso-special-character:line-break;page-break-before:always'></pre>"
+        content+=f"</body>\n\n\n"
+        with open( f"{pathout}/HTML/{file}.html" , 'w', encoding='utf-8') as f:
+            htmlcontent= f"    <head>   \n    <meta charset='UTF-8'>    \n   <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n <title>test fiche</title> \n   <link rel='stylesheet' href='style.css'> \n </head> \n\n" + remove_details_tags(content)
+            f.write(htmlcontent)
+        with open( f"{pathout}/MD/{file}.md" , 'w', encoding='utf-8') as f:
+            f.write(content)
 
+
+        print(f"fin d'écriture dans {pathout}")
+
+
+
+unic_form=True
 
 
 Pathin = sys.argv[1]
-print("chemin du fichier",Pathin)
+file_t = os.path.basename(Pathin)
+file=file_t.replace('.xml', '')
 
-Pathout_0=Pathin.replace('.xml', '.md')
-Pathout_1=Pathout_0.replace('INFILE', 'OUTFILE')
-Pathout=Pathout_1.replace('/XML/', '/MD/')
-file = os.path.basename(Pathin)
-unic_form=True
-data = lire_et_trier_donnees(Pathin)
-exporter_donnees_markdown_eCRF(data,Pathin, Pathout )
-# data = lire_et_trier_donnees(r"E:\Users\tony\Documents\GitHub\XML_TM\INFILE\XML\FA12.xml")
-# exporter_donnees_markdown_eCRF(data,r"E:\Users\tony\Documents\GitHub\XML_TM\INFILE\XML\TRT.xml",  r"E:\Users\tony\Documents\GitHub\XML_TM\TRT.md" )
+
+directory = os.path.dirname(Pathin)
+path= os.path.dirname(os.path.dirname(directory)) + r"\OUTFILE"
+
+
+config_path=os.path.dirname(os.path.dirname(directory)) + "/config.json"
+data = lire_et_trier_donnees(Pathin,config_path)
+
+version=data["version"]
+        #content+=f"# Version de TB pour ce fichier : {version}  \n")
+
+with open(f"{os.path.dirname(directory)}/VersionTM.txt", "r", encoding="utf-8") as fichier:
+    ACTversion = fichier.read()
+
+
+exporter_donnees_markdown_eCRF(data,path,file,ACTversion)

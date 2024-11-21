@@ -1,0 +1,63 @@
+{
+    "ProPatientVisit": {
+      "racine": "ProPatientVisit",
+      "keyname": "ProObjectGuid",
+      "fields": ["ProPatientGuid", "ProVisitGuid", "MinOccurance", "MaxOccurance", "OrderNo"]
+    },
+    "ProVisit": {
+      "racine": "ProVisit",
+      "keyname": "ProObjectGuid",
+      "fields": ["Description"]
+    },
+    "ProVisitForm": {
+      "racine": "ProVisitForm",
+      "keyname": "ProObjectGuid",
+      "fields": ["ProVisitGuid", "ProFormGuid", "MinOccurance", "MaxOccurance", "OrderNo"]
+    },
+    "ProForm": {
+      "racine": "ProForm",
+      "keyname": "ProObjectGuid",
+      "fields": ["Description", "SasName"]
+    },
+    "ProFormGroup": {
+      "racine": "ProFormGroup",
+      "keyname": "ProObjectGuid",
+      "fields": ["OrderNo", "ProFormGuid", "ProGroupGuid"]
+    },
+    "ProGroupItem": {
+      "racine": "ProGroupItem",
+      "keyname": "ProObjectGuid",
+      "fields": ["ProGroupGuid", "ProItemGuid", "OrderNo"]
+    },
+    "ProGroup": {
+      "racine": "ProGroup",
+      "keyname": "ProObjectGuid",
+      "fields": ["Caption"]
+    },
+    "ProItem": {
+      "racine": "ProItem",
+      "keyname": "ProObjectGuid",
+      "fields": ["Description", "Scale", "SasName", "MinLength", "MaxLength", "ProControlTypeId", "SasType", "ProCodeListGuid", "ProDataTypeId", "Hidden", "ReadOnly", "Disabled","Display"]
+    },
+    "ProCodeList": {
+      "racine": "ProCodeList",
+      "keyname": "ProObjectGuid",
+      "fields": ["OrderNo", "Caption","Display"]
+    },
+    "ProCodeListItem": {
+      "racine": "ProCodeListItem",
+      "keyname": "ProObjectGuid",
+      "fields": ["ProCodeListGuid", "OrderNo", "Caption", "Value"]
+    },
+    "ProEdit": {
+      "racine": "ProEdit",
+      "keyname": "ProObjectGuid",
+      "fields": ["ProEditActionId", "TargetLevelId", "ProVisitFormGuid", "TargetProGroupGuid", "TargetProFormGuid", "ProGroupGuid", "ProGroupItemGuid", "ProItemGuid", "ActionExpression", "DataExpression", "Message", "TargetPath"]
+    },
+    "TBNode": {
+      "racine": "TBNode",
+      "keyname": "ProObjectGuid",
+      "fields": ["TBNodeId", "ParentTBNodeId", "Caption", "TBNodeTypeId"]
+    }
+  }
+  
