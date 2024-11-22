@@ -4,6 +4,17 @@ import re
 import sys     
 import os
 import json
+import tkinter as tk
+from tkinter.filedialog import askopenfilename
+from tkinter import messagebox
+
+
+
+# Paramètres globaux
+logprint = False
+unic_form = True
+DICO = {}
+
 
 def Get_objt(root, racine, keyname, fields):
         ProForm = {}
@@ -18,6 +29,7 @@ def filtrer_par_cle(dictionnaire, champ, valeur):
 
 
 def lire_et_trier_donnees(pathfileXML, config_path='config.json'):
+    print(f"lecture des données de {pathfileXML}")
     # Charger la configuration
     with open(config_path, 'r') as f:
         config = json.load(f)
@@ -139,41 +151,61 @@ def exporter_donnees_markdown_eCRF(data,display_Edit=True):
         if logprint:print(f"fin d'écriture dans {pathout}")
 
 
-logprint=False
-unic_form=True
-
-DICO={}
-
-Pathin = sys.argv[1]
-file_t = os.path.basename(Pathin)
-file=file_t.replace('.xml', '')
 
 
-directory = os.path.dirname(Pathin)
-path= os.path.dirname(os.path.dirname(directory)) + r"\OUTFILE"
+def get_path_input():
+    """Récupère le chemin du fichier à partir des arguments ou via un sélecteur de fichier."""
+    if len(sys.argv) > 1:
+        return sys.argv[1]
+    return askopenfilename()
 
+def ensure_directories(base_path, sub_dirs=None):
+    """Crée un dossier de base et les sous-dossiers nécessaires s'ils n'existent pas."""
+    if not os.path.exists(base_path):
+        os.makedirs(base_path)
+    if sub_dirs:
+        for sub_dir in sub_dirs:
+            full_path = os.path.join(base_path, sub_dir)
+            if not os.path.exists(full_path):
+                os.makedirs(full_path)
 
-config_path=os.path.dirname(os.path.dirname(directory)) + "/config.json"
-data = lire_et_trier_donnees(Pathin,config_path)
+def confirm_execution(path):
+    """Demande confirmation à l'utilisateur pour continuer l'exécution."""
+    return messagebox.askyesno("Confirmation", f"Path : {path}\nVoulez-vous continuer ?")
 
-version=data["version"]
-        #content+=f"# Version de TB pour ce fichier : {version}  \n")
+def save_json(data, path, filename):
+    """Enregistre les données en JSON dans le chemin spécifié."""
+    with open(os.path.join(path, filename), 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4)
 
-with open(f"{os.path.dirname(directory)}/VersionTM.txt", "r", encoding="utf-8") as fichier:
-    ACTversion = fichier.read()
+def main():
+    # Initialisation
+    execution_path = os.getcwd()
+    Pathin = get_path_input()
+    file_name = os.path.basename(Pathin).replace('.xml', '')
+    directory = os.path.dirname(Pathin)
+    output_path = os.path.join(execution_path, "OUTFILE")
 
+    # Gestion des chemins locaux
+    if len(sys.argv) <= 1:
+        output_path += "_LOCAL"
+        ensure_directories(output_path, sub_dirs=["JSON"])
+        if not confirm_execution(output_path):
+            return
 
-checks,DICO = exporter_donnees_markdown_eCRF(data,False)
+    # Lecture des données et configuration
+    config_path = os.path.join(execution_path, "config.json")
+    data = lire_et_trier_donnees(Pathin, config_path)
+   
+    # Export des données
+    checks, DICO = exporter_donnees_markdown_eCRF(data, False)
+    
+    if len(checks)>0:save_json(checks, os.path.join(output_path, "JSON"), f"{file_name}_check.json")
+    else: print("Liste des checks vide!")
+    if len(DICO)>0:save_json(DICO, os.path.join(output_path, "JSON"), f"{file_name}_dico.json")
+    else: print("DICO vide!")
+    if len(data.get("ProScriptFunction", {}))>0:save_json(data.get("ProScriptFunction", {}), os.path.join(output_path, "JSON"), f"{file_name}_function.json")
+    else: print("pas de fonction trouvé!")
 
-json_output = json.dumps(checks, indent=4)
-with open( f"{path}/JSON/{file}_check.json" , 'w', encoding='utf-8') as f:
-        f.write(json_output)
-json_DICO = json.dumps(DICO, indent=4)
-with open( f"{path}/JSON/{file}_dico.json" , 'w', encoding='utf-8') as f:
-        f.write(json_DICO)
-JSON_FUNC = json.dumps(data["ProScriptFunction"], indent=4)
-with open( f"{path}/JSON/{file}_function.json" , 'w', encoding='utf-8') as f:
-        f.write(JSON_FUNC)
-
-
-             
+if __name__ == "__main__":
+    main()
