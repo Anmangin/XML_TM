@@ -22,11 +22,20 @@ h2, h3 {
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size:16px;
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: 14px;
+    text-align: left; /* Aligne le texte à gauche */
+    background-color: #3b7bc0; /* Couleur de fond bleue */
+    color: white; /* Couleur du texte */
+    padding: 10px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    margin: 10px 0; /* Espacement externe (haut et bas) */
+    display: block; /* Assure que l'élément prend toute la largeur disponible */
+    width: 100%; /* Assure que l'élément couvre toute la largeur */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
 /* Table Styles */
@@ -39,9 +48,9 @@ table {
 }
 
 th, td {
-    padding: 10px 15px;
+     padding: 3px 5px; 
     text-align: left;
-    border: 1px solid #dee2e6;
+     border: 1px solid #dee2e6; 
 }
 
 th {
@@ -52,7 +61,8 @@ th {
 }
 
 td {
-    vertical-align: top;
+    vertical-align: center;
+    font-size: 10px;
 }
 
 tr:nth-child(even) {

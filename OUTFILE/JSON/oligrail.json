@@ -1,0 +1,296 @@
+[
+    {
+        "ActionExpression": "[IC01]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC01]",
+        "i_SasName": "IC01",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC02]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC02]",
+        "i_SasName": "IC02",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC03]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC03]",
+        "i_SasName": "IC03",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC04]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC04]",
+        "i_SasName": "IC04",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC05]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC05]",
+        "i_SasName": "IC05",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC06]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC06]",
+        "i_SasName": "IC06",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC07]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC07]",
+        "i_SasName": "IC07",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC08]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC08]",
+        "i_SasName": "IC08",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC09]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC09]",
+        "i_SasName": "IC09",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC10]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC10]",
+        "i_SasName": "IC10",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC11]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC11]",
+        "i_SasName": "IC11",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC12]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC12]",
+        "i_SasName": "IC12",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC13]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC13]",
+        "i_SasName": "IC13",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[IC14]!='0';",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[IC14]",
+        "i_SasName": "IC14",
+        "F_SasName": "ICF"
+    },
+    {
+        "ActionExpression": "[EC01]!='1'",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[EC01]",
+        "i_SasName": "EC01",
+        "F_SasName": "ECF"
+    },
+    {
+        "ActionExpression": "[EC02] != '1'",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[EC02]",
+        "i_SasName": "EC02",
+        "F_SasName": "ECF"
+    },
+    {
+        "ActionExpression": "[EC03] != '1'",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[EC03]",
+        "i_SasName": "EC03",
+        "F_SasName": "ECF"
+    },
+    {
+        "ActionExpression": "[EC04] != '1'",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[EC04]",
+        "i_SasName": "EC04",
+        "F_SasName": "ECF"
+    },
+    {
+        "ActionExpression": "[EC05] != '1'",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[EC05]",
+        "i_SasName": "EC05",
+        "F_SasName": "ECF"
+    },
+    {
+        "ActionExpression": "[EC06] != '1'",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[EC06]",
+        "i_SasName": "EC06",
+        "F_SasName": "ECF"
+    },
+    {
+        "ActionExpression": "[EC07] != '1'",
+        "Message": "Protocol deviation detected, please verify.",
+        "path": "[EC07]",
+        "i_SasName": "EC07",
+        "F_SasName": "ECF"
+    },
+    {
+        "ActionExpression": "var value=[Trial Template][Site template][Patient Template][V01 Randomisation][3-Randomisation request][CT][CRA];\nNotAnyNumberInString(value);",
+        "Message": "a number is detected, please correct",
+        "path": "[Trial Template][Site template][Patient Template][V01 Randomisation.*][3-Randomisation request.*][CT.*][CRA]",
+        "i_SasName": "CRA",
+        "F_SasName": "REQ"
+    },
+    {
+        "ActionExpression": "//investigateur choisi dans la codelist :\nvar invused = [Trial Template][Site template][Patient Template][V01 Randomisation][3-Randomisation request][CT][INV];\n\nvar inventry;\nvar inactiventry;\nvar deactentry;\nvar enreqdt;\n\n//tableau contenant tous les noms d'investigateurs d\u00e9clar\u00e9s dans le groupe r\u00e9p\u00e9t\u00e9 de la fiche syst\u00e8me Site :\nvar invCL = new Array(\n    [Trial Template][Site template.@][SITE][LISTINV.1][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.2][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.3][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.4][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.5][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.6][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.7][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.8][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.9][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.10][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.11][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.12][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.13][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.14][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.15][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.16][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.17][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.18][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.19][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.20][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.21][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.22][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.23][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.24][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.25][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.26][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.27][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.28][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.29][INVSYS],\n    [Trial Template][Site template.@][SITE][LISTINV.30][INVSYS]);\n\n//tableau contenant toutes les valeurs de la variable \"Active Y/N\" :\nvar inactiv = new Array(\n    [Trial Template][Site template][SITE][LISTINV.1][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.2][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.3][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.4][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.5][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.6][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.7][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.8][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.9][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.10][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.11][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.12][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.13][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.14][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.15][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.16][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.17][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.18][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.19][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.20][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.21][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.22][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.23][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.24][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.25][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.26][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.27][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.28][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.29][DESACINV],\n    [Trial Template][Site template][SITE][LISTINV.30][DESACINV]);\n\n//tableau contenant toutes les dates de d\u00e9sactivation :\nvar deact = new Array(\n    [Trial Template][Site template][SITE][LISTINV.1][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.2][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.3][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.4][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.5][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.6][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.7][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.8][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.9][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.10][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.11][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.12][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.13][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.14][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.15][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.16][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.17][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.18][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.19][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.20][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.21][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.22][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.23][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.24][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.25][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.26][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.27][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.28][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.29][INVDAT],\n    [Trial Template][Site template][SITE][LISTINV.30][INVDAT],);\n\nfor (var i = 0 ; i < invCL.length ; i++) {\n    //On parcourt tout le tableau contenant les noms des investigateurs et on r\u00e9cup\u00e8re la valeur \u00e0 chaque ligne (c'est-\u00e0-dire chaque \"i\") :\n    inventry = ReturnEntryAtPosition(invCL,i);\n    if (inventry == invused) {\n        //si le nom \u00e0 la ligne i correspond au nom utilis\u00e9 dans la fiche \"registration\", on r\u00e9cup\u00e8re la valeur de la variable \"Active\" et de la variable \"Date d\u00e9sactivation\" \u00e0 cette ligne :\n        inactiventry = ReturnEntryAtPosition(inactiv,i);\n        deactentry = ReturnEntryAtPosition(deact,i);\n    }\n}\n\n//On r\u00e9cup\u00e8re la date d'enregistrement du patient (si elle n'est pas encore connue car la fiche est en train d'\u00eatre remplie pour la premi\u00e8re fois, date d'enregistrement = date du jour) :\nif (!isEmpty([Trial Template][Site template][Patient Template][V01 Randomisation][4-Randomisation result][RRESG][ENROLLDT]))\n    enreqdt = [Trial Template][Site template][Patient Template][V01 Randomisation][4-Randomisation result][RRESG][ENROLLDT];\nelse\n    enreqdt = TodayDate();\n\n//Le nom choisi est accept\u00e9 si l'investigateur n'est pas inactif ou si la date d'enregistrement est ant\u00e9rieure \u00e0 la date de d\u00e9sactivation :\nisEmpty(inactiventry) || isDate1LDate2Partial(enreqdt,deactentry);",
+        "Message": "This item is invalid.",
+        "path": "[Trial Template][Site template][Patient Template][V01 Randomisation.*][3-Randomisation request.*][CT.*][INV]",
+        "i_SasName": "INV",
+        "F_SasName": "REQ"
+    },
+    {
+        "ActionExpression": "[3-Randomisation request][OTHERQ][NBMETA]<6",
+        "Message": "D\u00e9viation au protocole, un maximum de 5 l\u00e9sion est autoris\u00e9",
+        "path": "[3-Randomisation request.*][OTHERQ.*][NBMETA]",
+        "i_SasName": "NBMETA",
+        "F_SasName": "REQ"
+    },
+    {
+        "ActionExpression": "[V01 Randomisation][3-Randomisation request][REQCC][HARDCHECK]=='1'\n||\n(\n[V01 Randomisation][3-Randomisation request][REQCC][HARDCHECK]=='0' && \n[V01 Randomisation][3-Randomisation request][CRACONF][REQSTATUS]=='0'\n)\n;",
+        "Message": "Hard check activated, missing data, please verify your entry.",
+        "path": "[V01 Randomisation.*][3-Randomisation request.*][CRACONF.*][REQSTATUS]",
+        "i_SasName": "REQSTATU",
+        "F_SasName": "REQ"
+    },
+    {
+        "ActionExpression": "[V01 Randomisation][3-Randomisation request][REQCC][FCHECK] == '1'\n||\n(\n[V01 Randomisation][3-Randomisation request][REQCC][FCHECK] == '0'\n&&\n([V01 Randomisation][3-Randomisation request][CRACONF][REQSTATUS] == '2' || [V01 Randomisation][3-Randomisation request][CRACONF][REQSTATUS] == '0')\n)\n;",
+        "Message": "Protocol(s) deviation(s) detected for the form.",
+        "path": "[V01 Randomisation.*][3-Randomisation request.*][CRACONF.*][REQSTATUS]",
+        "i_SasName": "REQSTATU",
+        "F_SasName": "REQ"
+    },
+    {
+        "ActionExpression": "[V01 Randomisation][3-Randomisation request][REQCC][FCHECK] == '0'\n||\n(\n[V01 Randomisation][3-Randomisation request][REQCC][FCHECK] == '1'\n&&\n([V01 Randomisation][3-Randomisation request][CRACONF][REQSTATUS] == '1' || [V01 Randomisation][3-Randomisation request][CRACONF][REQSTATUS] == '0')\n)\n;",
+        "Message": "No Protocol(s) deviation(s) detected.",
+        "path": "[V01 Randomisation.*][3-Randomisation request.*][CRACONF.*][REQSTATUS]",
+        "i_SasName": "REQSTATU",
+        "F_SasName": "REQ"
+    },
+    {
+        "ActionExpression": "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TNMT_I]==\"0\";",
+        "Message": "T0\u00a0: Protocol deviation, please fill the F05 protocol deviation form.",
+        "path": "[V03 Baseline.*][F08-Lung Cancer Description.*][2-CANCER AT INCLUSION.*][TNMT_I]",
+        "i_SasName": "TNMT_I",
+        "F_SasName": "F08_CD"
+    },
+    {
+        "ActionExpression": "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TNMT_N] == '0';",
+        "Message": "Protocol deviation, please fill the F05 protocol deviation form.",
+        "path": "[V03 Baseline.*][F08-Lung Cancer Description.*][2-CANCER AT INCLUSION.*][TNMT_N]",
+        "i_SasName": "TNMT_N",
+        "F_SasName": "F08_CD"
+    },
+    {
+        "ActionExpression": "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TNMT_M] == '0';",
+        "Message": "Protocol deviation, please fill the F05 protocol deviation form.",
+        "path": "[V03 Baseline.*][F08-Lung Cancer Description.*][2-CANCER AT INCLUSION.*][TNMT_M]",
+        "i_SasName": "TNMT_M",
+        "F_SasName": "F08_CD"
+    },
+    {
+        "ActionExpression": "[V03 Baseline][F08-Lung Cancer Description][3-OTHER INFORMATION][PDL1STAT] !=\"2\";",
+        "Message": "PD-L1 Protocol deviation, please fill the F05 protocol deviation form.",
+        "path": "[V03 Baseline.*][F08-Lung Cancer Description.*][3-OTHER INFORMATION.*][PDL1STAT]",
+        "i_SasName": "PDL1STAT",
+        "F_SasName": "F08_CD"
+    },
+    {
+        "ActionExpression": "[F08-Lung Cancer Description][3-OTHER INFORMATION][META_YN] != \"0\";",
+        "Message": "metastase Protocol deviation, please fill the F05 protocol deviation form.",
+        "path": "[F08-Lung Cancer Description.*][3-OTHER INFORMATION.*][META_YN]",
+        "i_SasName": "META_YN",
+        "F_SasName": "F08_CD"
+    },
+    {
+        "ActionExpression": "([VSHEIGHT] == '') ||\n((140 <= [VSHEIGHT]) && ([VSHEIGHT] <= 200))",
+        "Message": "The height of the patient should be between 140 and 200cm. Please confirm the data.",
+        "path": "[VSHEIGHT]",
+        "i_SasName": "HEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "var height=[F10-Vital sign and Clinical Examination][VS2][VSHEIGHT];\nisEmpty(height) || height >= 140 && height<=200;",
+        "Message": "The height of the patient should be between 140 and 200cm. Please confirm the data.",
+        "path": "[F10-Vital sign and Clinical Examination.*][VS2.*][VSHEIGHT]",
+        "i_SasName": "HEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "([VSWEIGHT] == '') ||\n((40 <= [VSWEIGHT]) && ([VSWEIGHT] <= 180))",
+        "Message": "The weight of the patient should be between 40 and 180kg. Please confirm the data.",
+        "path": "[VSWEIGHT]",
+        "i_SasName": "WEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "var height=[F10-Vital sign and Clinical Examination][VS2][VSWEIGHT]\nisEmpty(height) || height >= 40 && height<=120;",
+        "Message": "The weight of the patient should be between 40 and 120kg. Please confirm the data.",
+        "path": "[F10-Vital sign and Clinical Examination.*][VS2.*][VSWEIGHT]",
+        "i_SasName": "WEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "([VSPS] == '') ||\n((0 <= [VSPS]) && ([VSPS] <= 4))",
+        "Message": "The ECOG performance status must be between 0 and 4. Please correct the data.",
+        "path": "[VSPS]",
+        "i_SasName": "VSPS",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "var q29 = [Q29];\n\nNumber(q29) >= 1 && Number(q29) <= 7;",
+        "Message": "The answer to this question can only be between 1 and 7. Please verify and correct.",
+        "path": "[Q29]",
+        "i_SasName": "Q29",
+        "F_SasName": "QLQC30"
+    },
+    {
+        "ActionExpression": "var q30 = [Q30];\n\nNumber(q30) >= 1 && Number(q30) <= 7;",
+        "Message": "The answer to this question can only be between 1 and 7. Please verify and correct.",
+        "path": "[Q30]",
+        "i_SasName": "Q30",
+        "F_SasName": "QLQC30"
+    },
+    {
+        "ActionExpression": "isDate1LEDate2([F14-Adverse Event][AE3][AESDT],[F14-Adverse Event][AE3][AEEDT]);",
+        "Message": "The toxicity end date has to be after the toxicity start date, please correct.",
+        "path": "[F14-Adverse Event.*][AE3.*][AEEDT]",
+        "i_SasName": "AEEDT",
+        "F_SasName": "AE"
+    },
+    {
+        "ActionExpression": "[AEGR] > 0 && [AEGR] < 6;",
+        "Message": "The grade should be between 1 and 5. Please correct.",
+        "path": "[AEGR]",
+        "i_SasName": "AEGR",
+        "F_SasName": "AE"
+    },
+    {
+        "ActionExpression": "var cioms = [AECIOMS];\nvar lg = cioms.length;\n\nlg == 9 || lg == 0;",
+        "Message": "The CIOMS number must contain 9 digits. Please correct.",
+        "path": "[AECIOMS]",
+        "i_SasName": "AECIOMS",
+        "F_SasName": "AE"
+    }
+]

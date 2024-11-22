@@ -7,7 +7,8 @@
     "ProVisit": {
       "racine": "ProVisit",
       "keyname": "ProObjectGuid",
-      "fields": ["Description"]
+      "prefix":"V_",
+      "fields": ["Description","Caption"]
     },
     "ProVisitForm": {
       "racine": "ProVisitForm",
@@ -17,11 +18,13 @@
     "ProForm": {
       "racine": "ProForm",
       "keyname": "ProObjectGuid",
-      "fields": ["Description", "SasName"]
+      "prefix":"F_",
+      "fields": ["Description", "SasName","Caption"]
     },
     "ProFormGroup": {
       "racine": "ProFormGroup",
       "keyname": "ProObjectGuid",
+      
       "fields": ["OrderNo", "ProFormGuid", "ProGroupGuid"]
     },
     "ProGroupItem": {
@@ -32,12 +35,14 @@
     "ProGroup": {
       "racine": "ProGroup",
       "keyname": "ProObjectGuid",
+      "prefix":"G_",
       "fields": ["Caption"]
     },
     "ProItem": {
       "racine": "ProItem",
       "keyname": "ProObjectGuid",
-      "fields": ["Description", "Scale", "SasName", "MinLength", "MaxLength", "ProControlTypeId", "SasType", "ProCodeListGuid", "ProDataTypeId", "Hidden", "ReadOnly", "Disabled","Display"]
+      "prefix":"I_",
+      "fields": ["Description", "Scale", "SasName", "MinLength", "MaxLength", "ProControlTypeId", "SasType", "ProCodeListGuid", "ProDataTypeId", "Hidden", "ReadOnly", "Disabled","Display","Caption","Status"]
     },
     "ProCodeList": {
       "racine": "ProCodeList",
@@ -58,6 +63,11 @@
       "racine": "TBNode",
       "keyname": "ProObjectGuid",
       "fields": ["TBNodeId", "ParentTBNodeId", "Caption", "TBNodeTypeId"]
+    },
+    "ProScriptFunction":{
+        "racine": "ProScriptFunction",
+        "keyname": "ProObjectGuid",
+      "fields": ["Prototype", "Description", "Body"]
     }
   }
   

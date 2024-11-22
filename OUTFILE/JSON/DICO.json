@@ -1,0 +1,1182 @@
+{
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC01] ": {
+        "i_SasName": "IC01",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC02] ": {
+        "i_SasName": "IC02",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC03] ": {
+        "i_SasName": "IC03",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC04] ": {
+        "i_SasName": "IC04",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC05] ": {
+        "i_SasName": "IC05",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC06] ": {
+        "i_SasName": "IC06",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC07] ": {
+        "i_SasName": "IC07",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC08] ": {
+        "i_SasName": "IC08",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC09] ": {
+        "i_SasName": "IC09",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC10] ": {
+        "i_SasName": "IC10",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC11] ": {
+        "i_SasName": "IC11",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC12] ": {
+        "i_SasName": "IC12",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC13] ": {
+        "i_SasName": "IC13",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][1-Inclusion Criteria][IC][IC14] ": {
+        "i_SasName": "IC14",
+        "F_SasName": "ICF"
+    },
+    "[V01 Randomisation][2-Non inclusion Criteria][EC][EC01] ": {
+        "i_SasName": "EC01",
+        "F_SasName": "ECF"
+    },
+    "[V01 Randomisation][2-Non inclusion Criteria][EC][EC02] ": {
+        "i_SasName": "EC02",
+        "F_SasName": "ECF"
+    },
+    "[V01 Randomisation][2-Non inclusion Criteria][EC][EC03] ": {
+        "i_SasName": "EC03",
+        "F_SasName": "ECF"
+    },
+    "[V01 Randomisation][2-Non inclusion Criteria][EC][EC04] ": {
+        "i_SasName": "EC04",
+        "F_SasName": "ECF"
+    },
+    "[V01 Randomisation][2-Non inclusion Criteria][EC][EC05] ": {
+        "i_SasName": "EC05",
+        "F_SasName": "ECF"
+    },
+    "[V01 Randomisation][2-Non inclusion Criteria][EC][EC06] ": {
+        "i_SasName": "EC06",
+        "F_SasName": "ECF"
+    },
+    "[V01 Randomisation][2-Non inclusion Criteria][EC][EC07] ": {
+        "i_SasName": "EC07",
+        "F_SasName": "ECF"
+    },
+    "[V01 Randomisation][3-Randomisation request][CT][CENTER] ": {
+        "i_SasName": "CENTER",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CT][CRA] ": {
+        "i_SasName": "CRA",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CT][INV] ": {
+        "i_SasName": "INV",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CONSENT][PCONSDT] ": {
+        "i_SasName": "PCONSDT",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CONSENT][ICONSDT] ": {
+        "i_SasName": "ICONSDT",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CONSENT][AGE] ": {
+        "i_SasName": "AGE",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CONSENT][CONSVERS] ": {
+        "i_SasName": "CONSVERS",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][OTHERQ][NBMETA] ": {
+        "i_SasName": "NBMETA",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][OTHERQ][SCAN_DT] ": {
+        "i_SasName": "SCAN_DT",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][OTHERQ][RAD_YN] ": {
+        "i_SasName": "OPTN11",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][OTHERQ][BR_YN] ": {
+        "i_SasName": "BR_YN",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][STRAT][STRAT1] ": {
+        "i_SasName": "STRAT1",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][STRAT][STRAT2] ": {
+        "i_SasName": "STRAT2",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][List of metastatic sites][SITE_N] ": {
+        "i_SasName": "SITE_N",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][List of metastatic sites][ANASITE] ": {
+        "i_SasName": "ANASITE",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][List of metastatic sites][ANASITE_S] ": {
+        "i_SasName": "ANASITE_",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][List of metastatic sites][DISCO_DT] ": {
+        "i_SasName": "DISCO_DT",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][List of metastatic sites][RADLES] ": {
+        "i_SasName": "RADLES",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][List of metastatic sites][ABLARES] ": {
+        "i_SasName": "ABLARES",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][List of metastatic sites][SITECMT] ": {
+        "i_SasName": "SITECMT",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][TAS][PLSDT] ": {
+        "i_SasName": "PLSDT",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][ENRREQDT] ": {
+        "i_SasName": "ENRREQDT",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][CHECKIC] ": {
+        "i_SasName": "CHECKIC",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][CHECKEC] ": {
+        "i_SasName": "CHECKEC",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][CHECKREQ] ": {
+        "i_SasName": "CHECKREQ",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][HARDCHECK] ": {
+        "i_SasName": "HARDCHEC",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][FCHECK] ": {
+        "i_SasName": "FCHECK",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][DMOVER] ": {
+        "i_SasName": "DMOVER",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][REQCC][GETNUM] ": {
+        "i_SasName": "GETNUM",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CRACONF][REQSTATUS] ": {
+        "i_SasName": "REQSTATU",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CRACONF][DISCONF] ": {
+        "i_SasName": "DISCONF",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][CRACONF][REQCONF] ": {
+        "i_SasName": "REQCONF",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][WAIV][WAIVCOM] ": {
+        "i_SasName": "WAIVCOM",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][WAIV][WAIVYN] ": {
+        "i_SasName": "WAIVYN",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][WAIV][WAIV_R] ": {
+        "i_SasName": "WAIV_R",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][SF][SF_R] ": {
+        "i_SasName": "SF_R",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][3-Randomisation request][SF][SF_S] ": {
+        "i_SasName": "SF_S",
+        "F_SasName": "REQ"
+    },
+    "[V01 Randomisation][4-Randomisation result][RRESG][ENROLLDT] ": {
+        "i_SasName": "ENROLLDT",
+        "F_SasName": "RES"
+    },
+    "[V01 Randomisation][4-Randomisation result][RRESG][ENROLLID] ": {
+        "i_SasName": "ENROLLID",
+        "F_SasName": "RES"
+    },
+    "[V01 Randomisation][4-Randomisation result][RRESG][FLAGNOTIF] ": {
+        "i_SasName": "FLAGNOTI",
+        "F_SasName": "RES"
+    },
+    "[V01 Randomisation][4-Randomisation result][RRESG][ARM] ": {
+        "i_SasName": "ARM",
+        "F_SasName": "RES"
+    },
+    "[V01 Randomisation][4-Randomisation result][RRESG][RREAD] ": {
+        "i_SasName": "RREAD",
+        "F_SasName": "RES"
+    },
+    "[V01 Randomisation][5-Correction of randomisation criteria][COR_G][COR_R] ": {
+        "i_SasName": "COR_R",
+        "F_SasName": "COR"
+    },
+    "[V01 Randomisation][5-Correction of randomisation criteria][COR_G][COR_S] ": {
+        "i_SasName": "COR_S",
+        "F_SasName": "COR"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][NB] ": {
+        "i_SasName": "NB",
+        "F_SasName": "F05_PDC"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][FROM] ": {
+        "i_SasName": "FROM",
+        "F_SasName": "F05_PDC"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][CAT] ": {
+        "i_SasName": "CAT",
+        "F_SasName": "F05_PDC"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][DETAIL] ": {
+        "i_SasName": "DETAIL",
+        "F_SasName": "F05_PDC"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][STATUS] ": {
+        "i_SasName": "STATUS",
+        "F_SasName": "F05_PDC"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][ABOUT] ": {
+        "i_SasName": "ABOUT",
+        "F_SasName": "F05_PDC"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][DEVDAT] ": {
+        "i_SasName": "DEVDAT",
+        "F_SasName": "F05_PDC"
+    },
+    "[V02 Protocol deviation and comments][F05-Protocol deviation and comments][1-LIST OF DEVIATION AND COMMENTS_MAX(99)_][AC_YN] ": {
+        "i_SasName": "AC_YN",
+        "F_SasName": "F05_PDC"
+    },
+    "[V03 Baseline][F06-Alcohol and Tobbaco][1-TOBBACO][SMOK_YN] ": {
+        "i_SasName": "SMOK_YN",
+        "F_SasName": "F06_ALTA"
+    },
+    "[V03 Baseline][F06-Alcohol and Tobbaco][1-TOBBACO][SMOKING] ": {
+        "i_SasName": "SMOKING",
+        "F_SasName": "F06_ALTA"
+    },
+    "[V03 Baseline][F06-Alcohol and Tobbaco][1-TOBBACO][PACK_YEA] ": {
+        "i_SasName": "PACK_YEA",
+        "F_SasName": "F06_ALTA"
+    },
+    "[V03 Baseline][F06-Alcohol and Tobbaco][2-ALCOHOL][MHALCOHOL] ": {
+        "i_SasName": "MHALCOHO",
+        "F_SasName": "F06_ALTA"
+    },
+    "[V03 Baseline][F07-Medical History][1-MEDICAL HISTORY_MAX15_][MHYN] ": {
+        "i_SasName": "MHYN",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][2-IF YES  PLEASE COMPLETE BELOW_MAX][MHSYST] ": {
+        "i_SasName": "MHSYST",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][2-IF YES  PLEASE COMPLETE BELOW_MAX][MHDET] ": {
+        "i_SasName": "MHDET",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][2-IF YES  PLEASE COMPLETE BELOW_MAX][MHONGO] ": {
+        "i_SasName": "MHONGO",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][2-IF YES  PLEASE COMPLETE BELOW_MAX][MHYR] ": {
+        "i_SasName": "MHYR",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][3-PREVIOUS CANCER][PRCANC] ": {
+        "i_SasName": "PRCANC",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][4-PREVIOUS CANCER DETAILS _MAX(15)_][MHORGAN] ": {
+        "i_SasName": "MHORGAN",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][4-PREVIOUS CANCER DETAILS _MAX(15)_][MHHISTO] ": {
+        "i_SasName": "MHHISTO",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][4-PREVIOUS CANCER DETAILS _MAX(15)_][PCANCD] ": {
+        "i_SasName": "PCANCD",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][4-PREVIOUS CANCER DETAILS _MAX(15)_][PCTPTREAT] ": {
+        "i_SasName": "PCTPTREA",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][4-PREVIOUS CANCER DETAILS _MAX(15)_][ICDONGO] ": {
+        "i_SasName": "ICDONGO",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F07-Medical History][4-PREVIOUS CANCER DETAILS _MAX(15)_][MHCANC_Y] ": {
+        "i_SasName": "MHCANC_Y",
+        "F_SasName": "F07_MH"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][1-CANCER AT DIAGNOSIS][DIAGDT] ": {
+        "i_SasName": "DIAGDT",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TNMT_I] ": {
+        "i_SasName": "TNMT_I",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TNMT_N] ": {
+        "i_SasName": "TNMT_N",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TNMT_M] ": {
+        "i_SasName": "TNMT_M",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TYPNSCLC] ": {
+        "i_SasName": "TYPNSCLC",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][2-CANCER AT INCLUSION][TYPNSCLS] ": {
+        "i_SasName": "TYPNSCLS",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][3-OTHER INFORMATION][KRAS] ": {
+        "i_SasName": "KRAS",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][3-OTHER INFORMATION][PDL1STAT] ": {
+        "i_SasName": "PDL1STAT",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][3-OTHER INFORMATION][PDL1_P] ": {
+        "i_SasName": "PDL1_P",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][3-OTHER INFORMATION][META_YN] ": {
+        "i_SasName": "META_YN",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F08-Lung Cancer Description][3-OTHER INFORMATION][META_DT] ": {
+        "i_SasName": "META_DT",
+        "F_SasName": "F08_CD"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][1-PRIOR SURGERY][PRSITE] ": {
+        "i_SasName": "PRSITE",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][1-PRIOR SURGERY][PRITR] ": {
+        "i_SasName": "PRITR",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][1-PRIOR SURGERY][PRISR] ": {
+        "i_SasName": "PRISR",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][1-PRIOR SURGERY][PRIDT] ": {
+        "i_SasName": "PRIDT",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRSITE] ": {
+        "i_SasName": "PRSITE",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRIRT] ": {
+        "i_SasName": "PRIRT",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRSTER] ": {
+        "i_SasName": "PRSTER",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRSURG] ": {
+        "i_SasName": "PRSURG",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRIRTST] ": {
+        "i_SasName": "PRIRTST",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRIRTND] ": {
+        "i_SasName": "PRIRTND",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRDOS] ": {
+        "i_SasName": "PRDOS",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F09-prior inclusion locoregional treatment for met][2-PRIOR RADIOTHERAPY][PRFRAC] ": {
+        "i_SasName": "PRFRAC",
+        "F_SasName": "F09_PRLO"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][VS1][VSYN] ": {
+        "i_SasName": "VSYN",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][VS1][VSDT] ": {
+        "i_SasName": "VSDT",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][VS2][VSHEIGHT] ": {
+        "i_SasName": "HEIGHT",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][VS2][VSWEIGHT] ": {
+        "i_SasName": "WEIGHT",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][VS2][VSPS] ": {
+        "i_SasName": "VSPS",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][Other form to fill][TE] ": {
+        "i_SasName": "TE",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][Other form to fill][AE_INT] ": {
+        "i_SasName": "AE_INT",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F10-Vital sign and Clinical Examination][Other form to fill][CM_YN] ": {
+        "i_SasName": "CM_YN",
+        "F_SasName": "VS"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][2-AT C2D1][TB7] ": {
+        "i_SasName": "TB7",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][2-AT C2D1][TB7_D] ": {
+        "i_SasName": "TB7_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB8] ": {
+        "i_SasName": "TB8",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB8_D] ": {
+        "i_SasName": "TB8_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB9] ": {
+        "i_SasName": "TB9",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB9_D] ": {
+        "i_SasName": "TB9_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB10_D] ": {
+        "i_SasName": "TB10_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB10] ": {
+        "i_SasName": "TB10",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB11] ": {
+        "i_SasName": "TB11",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB11_D] ": {
+        "i_SasName": "TB11_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB12] ": {
+        "i_SasName": "TB12",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][3-AT C5D1][TB12_D] ": {
+        "i_SasName": "TB12_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB1] ": {
+        "i_SasName": "TB1",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB1_D] ": {
+        "i_SasName": "TB1_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB2] ": {
+        "i_SasName": "TB2",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB2_D] ": {
+        "i_SasName": "TB2_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB3] ": {
+        "i_SasName": "TB3",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB3_D] ": {
+        "i_SasName": "TB3_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB4] ": {
+        "i_SasName": "TB4",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB4_D] ": {
+        "i_SasName": "TB4_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB5] ": {
+        "i_SasName": "TB5",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB5_D] ": {
+        "i_SasName": "TB5_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB6] ": {
+        "i_SasName": "TB6",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F11-Translational biopsy (optional)][1-AT BASELINE][TB6_D] ": {
+        "i_SasName": "TB6_D",
+        "F_SasName": "F12_TRAN"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][3-GLOBAL RESPONSE][RCRESP] ": {
+        "i_SasName": "RCRESP",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][2-SUB RESPONSE][RCTLRESP] ": {
+        "i_SasName": "RCTLRESP",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][2-SUB RESPONSE][RCNTLRES] ": {
+        "i_SasName": "RCNTLRES",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][2-SUB RESPONSE][RCNEW] ": {
+        "i_SasName": "RCNEW",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][1-TUMOR EVALUATION][LABEL_RE] ": {
+        "i_SasName": "LABEL_RE",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][1-TUMOR EVALUATION][RCDT] ": {
+        "i_SasName": "RCDT",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][1-TUMOR EVALUATION][RAD_BRAI] ": {
+        "i_SasName": "RAD_BRAI",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F13-Tumor Evaluation][1-TUMOR EVALUATION][EVALBR] ": {
+        "i_SasName": "EVALBR",
+        "F_SasName": "F12_RECI"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQEHEAD][QLQEYN] ": {
+        "i_SasName": "QLQEYN",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQEHEAD][QLQEDT] ": {
+        "i_SasName": "QLQEDT",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQEHEAD][QLQENO_R] ": {
+        "i_SasName": "QLQENO_R",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQEHEAD][QLQEEXPDT] ": {
+        "i_SasName": "QLQEEXPD",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQEHEAD][COMMISSING_VAR] ": {
+        "i_SasName": "MISSING_",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G1][Q01] ": {
+        "i_SasName": "Q01",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G1][Q02] ": {
+        "i_SasName": "Q02",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G1][Q03] ": {
+        "i_SasName": "Q03",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G1][Q04] ": {
+        "i_SasName": "Q04",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G1][Q05] ": {
+        "i_SasName": "Q05",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q06] ": {
+        "i_SasName": "Q06",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q07] ": {
+        "i_SasName": "Q07",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q08] ": {
+        "i_SasName": "Q08",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q09] ": {
+        "i_SasName": "Q09",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q10] ": {
+        "i_SasName": "Q10",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q11] ": {
+        "i_SasName": "Q11",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q12] ": {
+        "i_SasName": "Q12",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q13] ": {
+        "i_SasName": "Q13",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q14] ": {
+        "i_SasName": "Q14",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q15] ": {
+        "i_SasName": "Q15",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q16] ": {
+        "i_SasName": "Q16",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q17] ": {
+        "i_SasName": "Q17",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q18] ": {
+        "i_SasName": "Q18",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q19] ": {
+        "i_SasName": "Q19",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q20] ": {
+        "i_SasName": "Q20",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q21] ": {
+        "i_SasName": "Q21",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q22] ": {
+        "i_SasName": "Q22",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q23] ": {
+        "i_SasName": "Q23",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q24] ": {
+        "i_SasName": "Q24",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q25] ": {
+        "i_SasName": "Q25",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q26] ": {
+        "i_SasName": "Q26",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q27] ": {
+        "i_SasName": "Q27",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G2][Q28] ": {
+        "i_SasName": "Q28",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G3][Q29] ": {
+        "i_SasName": "Q29",
+        "F_SasName": "QLQC30"
+    },
+    "[V03 Baseline][F15-QLQ-C30][QLQC30G3][Q30] ": {
+        "i_SasName": "Q30",
+        "F_SasName": "QLQC30"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE1][AETERM] ": {
+        "i_SasName": "AETERM",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE2][AESOC] ": {
+        "i_SasName": "AESOC",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE2][AEPT] ": {
+        "i_SasName": "AEPT",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE3][AESGO] ": {
+        "i_SasName": "AESGO",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE3][AESDT] ": {
+        "i_SasName": "AESDT",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE3][AEEGO] ": {
+        "i_SasName": "AEEGO",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE3][AEEDT] ": {
+        "i_SasName": "AEEDT",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE3][AECYCLE] ": {
+        "i_SasName": "AECYCLE",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE4][AEGR] ": {
+        "i_SasName": "AEGR",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE4][AEDLT] ": {
+        "i_SasName": "AEDLT",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE4][AESER] ": {
+        "i_SasName": "AESER",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE4][COMFLAG] ": {
+        "i_SasName": "FLAG",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE4][COMMISSING_VAR] ": {
+        "i_SasName": "MISSING_",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE5][AESERDT] ": {
+        "i_SasName": "AESERDT",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE5][AECIOMS] ": {
+        "i_SasName": "AECIOMS",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE6][AEREL] ": {
+        "i_SasName": "AEREL",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE6][AEREL_S] ": {
+        "i_SasName": "AEREL_S",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE6][AEACN] ": {
+        "i_SasName": "AEACN",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE6][AEACN_S] ": {
+        "i_SasName": "AEACN_S",
+        "F_SasName": "AE"
+    },
+    "[V04 Cycle 1-4 _Max_8][F14-Adverse Event][AE6][AETRTYN] ": {
+        "i_SasName": "AETRTYN",
+        "F_SasName": "AE"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][1-GERENAL][RLT_YN] ": {
+        "i_SasName": "RLT_YN",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][1-GERENAL][RLT_REAS] ": {
+        "i_SasName": "RLT_REAS",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][1-GERENAL][RLT_CHIR] ": {
+        "i_SasName": "RLT_CHIR",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][1-GERENAL][RLT_RAD] ": {
+        "i_SasName": "RLT_RAD",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][1-GERENAL][RLT_INT] ": {
+        "i_SasName": "RLT_INT",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][4-INTERVENTIONAL RADIOLOGY _MAX(5)_][RADI_SIT] ": {
+        "i_SasName": "RADI_SIT",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][4-INTERVENTIONAL RADIOLOGY _MAX(5)_][RADI_DT] ": {
+        "i_SasName": "RADI_DT",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][4-INTERVENTIONAL RADIOLOGY _MAX(5)_][DADITEC] ": {
+        "i_SasName": "DADITEC",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][4-INTERVENTIONAL RADIOLOGY _MAX(5)_][DADITEC_S] ": {
+        "i_SasName": "DADITEC_",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][2-RADIOTHERAPIE _MAX(5)_][RAD_SITE] ": {
+        "i_SasName": "RAD_SITE",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][2-RADIOTHERAPIE _MAX(5)_][RAD_TYPE] ": {
+        "i_SasName": "RAD_TYPE",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][2-RADIOTHERAPIE _MAX(5)_][RAD_DOS] ": {
+        "i_SasName": "RAD_DOS",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][2-RADIOTHERAPIE _MAX(5)_][RAD_FR] ": {
+        "i_SasName": "RAD_FR",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][2-RADIOTHERAPIE _MAX(5)_][RAD_DB] ": {
+        "i_SasName": "RAD_DB",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][2-RADIOTHERAPIE _MAX(5)_][RAD_FN] ": {
+        "i_SasName": "RAD_FN",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][3-SURGERY _MAX(5)_][CHIR_SITE] ": {
+        "i_SasName": "CHIR_SIT",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][3-SURGERY _MAX(5)_][CHR_DT] ": {
+        "i_SasName": "CHR_DT",
+        "F_SasName": "F18_RLT"
+    },
+    "[V05 Primary tumour management][F18-RLT modality][3-SURGERY _MAX(5)_][CHR_TEC] ": {
+        "i_SasName": "CHR_TEC",
+        "F_SasName": "F18_RLT"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRT_TP] ": {
+        "i_SasName": "TRT_TP",
+        "F_SasName": "F13_TREA"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRT_S] ": {
+        "i_SasName": "TRT_S",
+        "F_SasName": "F13_TREA"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRTDT] ": {
+        "i_SasName": "TRTDT",
+        "F_SasName": "F13_TREA"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRTRES] ": {
+        "i_SasName": "TRTRES",
+        "F_SasName": "F13_TREA"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRTRES_S] ": {
+        "i_SasName": "TRTRES_S",
+        "F_SasName": "F13_TREA"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRTDOSMOD] ": {
+        "i_SasName": "TRTDOSMO",
+        "F_SasName": "F13_TREA"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRTREAS] ": {
+        "i_SasName": "TRTREAS",
+        "F_SasName": "F13_TREA"
+    },
+    "[V06 Maintenance_Max_99][F12-Immunotherapy based SoC][1-IMMUNOTHERAPY BASED SOC][TRTREAS_S] ": {
+        "i_SasName": "TRTREAS_",
+        "F_SasName": "F13_TREA"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][SYSTREAT] ": {
+        "i_SasName": "SYSTREAT",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][NBINJ] ": {
+        "i_SasName": "NBINJ",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][C1DT] ": {
+        "i_SasName": "C1DT",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][LDDT] ": {
+        "i_SasName": "LDDT",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][OETREAS] ": {
+        "i_SasName": "OETREAS",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][OETREAS_S] ": {
+        "i_SasName": "OETREAS_",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][TTDOS] ": {
+        "i_SasName": "TTDOS",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][1-END OF SYSTEMIC TREATMENT][TOX_S] ": {
+        "i_SasName": "TOX_S",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][TOX_S] ": {
+        "i_SasName": "TOX_S",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][MA_TR] ": {
+        "i_SasName": "MA_TR",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][MAINJ] ": {
+        "i_SasName": "MAINJ",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][MA_SDT] ": {
+        "i_SasName": "MA_SDT",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][MA_EDT] ": {
+        "i_SasName": "MA_EDT",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][MATREAS] ": {
+        "i_SasName": "MATREAS",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][MATREAS_S] ": {
+        "i_SasName": "MATREAS_",
+        "F_SasName": "F20_EOT"
+    },
+    "[V07_ End of Treatment Visit][F19-End of treatment summary of care][2-MAINTENANCE][MADO] ": {
+        "i_SasName": "MADO",
+        "F_SasName": "F20_EOT"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CM_C] ": {
+        "i_SasName": "CM_C",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CMINN] ": {
+        "i_SasName": "CMINN",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CM_REAS] ": {
+        "i_SasName": "CM_REAS",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CM_DOSAG] ": {
+        "i_SasName": "CM_DOSAG",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CM_FREQ] ": {
+        "i_SasName": "CM_FREQ",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CMSGO] ": {
+        "i_SasName": "CMSGO",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CMSDT] ": {
+        "i_SasName": "CMSDT",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CMEGO] ": {
+        "i_SasName": "CMEGO",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][2-DETAILS _MAX(99)_][CMEDT] ": {
+        "i_SasName": "CMEDT",
+        "F_SasName": "F20_CM"
+    },
+    "[V08 Concomitant Treatments][F20-Concomitant Treatment_Max_50_][1-GENERAL][CMYN] ": {
+        "i_SasName": "CMYN",
+        "F_SasName": "F20_CM"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUYN] ": {
+        "i_SasName": "FUYN",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUNO_R] ": {
+        "i_SasName": "FUNO_R",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUNO_S] ": {
+        "i_SasName": "FUNO_S",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUDT] ": {
+        "i_SasName": "FUDT",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUCS] ": {
+        "i_SasName": "FUCS",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUDISCS] ": {
+        "i_SasName": "FUDISCS",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FU2NDK] ": {
+        "i_SasName": "FU2NDK",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUTRTGO] ": {
+        "i_SasName": "FUTRTGO",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUTRT_S] ": {
+        "i_SasName": "FUTRT_S",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUSAEYN] ": {
+        "i_SasName": "FUSAEYN",
+        "F_SasName": "F21_FU"
+    },
+    "[V09 Follow-Up _Max_9_][F21-FU (every 12 weeks)_Max_99_][1-FOLLOW-UP][FUSAE_S] ": {
+        "i_SasName": "FUSAE_S",
+        "F_SasName": "F21_FU"
+    },
+    "[V10 Events][F23-Progression][PD][PDYN] ": {
+        "i_SasName": "PDYN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDDT] ": {
+        "i_SasName": "PDDT",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDTYP] ": {
+        "i_SasName": "PDTYP",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDDIAGC] ": {
+        "i_SasName": "PDDIAGC",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDIMGYN] ": {
+        "i_SasName": "PDIMGYN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDCLINYN] ": {
+        "i_SasName": "PDCLINYN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDBIOYN] ": {
+        "i_SasName": "PDBIOYN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDLOCYN] ": {
+        "i_SasName": "PDLOCYN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDREGYN] ": {
+        "i_SasName": "PDREGYN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMETAYN] ": {
+        "i_SasName": "PDMETAYN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMTLOC] ": {
+        "i_SasName": "PDMTLOC",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMTBR] ": {
+        "i_SasName": "PDMTBR",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMTLG] ": {
+        "i_SasName": "PDMTLG",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMTBN] ": {
+        "i_SasName": "PDMTBN",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMTLV] ": {
+        "i_SasName": "PDMTLV",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMTOTH] ": {
+        "i_SasName": "PDMTOTH",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][PDMTOT_S] ": {
+        "i_SasName": "PDMTOT_S",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F23-Progression][PD][COMMISSING_VAR] ": {
+        "i_SasName": "MISSING_",
+        "F_SasName": "PD"
+    },
+    "[V10 Events][F24-Late Toxicity][1-LATE TOXICITY][LAT_YN] ": {
+        "i_SasName": "LAT_YN",
+        "F_SasName": "F23_LATT"
+    },
+    "[V10 Events][F25-Death][1-DEATH][DTHDT] ": {
+        "i_SasName": "DTHDT",
+        "F_SasName": "F25_DC"
+    },
+    "[V10 Events][F25-Death][1-DEATH][DTH_R] ": {
+        "i_SasName": "DTH_R",
+        "F_SasName": "F25_DC"
+    },
+    "[V10 Events][F25-Death][1-DEATH][DTH_S] ": {
+        "i_SasName": "DTH_S",
+        "F_SasName": "F25_DC"
+    },
+    "[V11 End of Study][F26-End of Study][EOS][EOSDT] ": {
+        "i_SasName": "EOSDT",
+        "F_SasName": "EOS"
+    },
+    "[V11 End of Study][F26-End of Study][EOS][EOS_R] ": {
+        "i_SasName": "EOS_R",
+        "F_SasName": "EOS"
+    },
+    "[V11 End of Study][F26-End of Study][EOS][EOS_S] ": {
+        "i_SasName": "EOS_S",
+        "F_SasName": "EOS"
+    }
+}

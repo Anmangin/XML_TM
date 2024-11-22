@@ -1,0 +1,527 @@
+[
+    {
+        "ActionExpression": "[IC1] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC1]",
+        "i_SasName": "IC1",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC2] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC2]",
+        "i_SasName": "IC2",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC3] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC3]",
+        "i_SasName": "IC3",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC4] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC4]",
+        "i_SasName": "IC4",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC5] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC5]",
+        "i_SasName": "IC5",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC6] == '1' || [IC6] == '2';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC6]",
+        "i_SasName": "IC6",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC7] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC7]",
+        "i_SasName": "IC7",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC8] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC8]",
+        "i_SasName": "IC8",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[IC9] == '1';",
+        "Message": "All inclusion criteria must be \"Yes\".",
+        "path": "[IC9]",
+        "i_SasName": "IC9",
+        "F_SasName": "IC"
+    },
+    {
+        "ActionExpression": "[EC1] == '0';",
+        "Message": "All exclusion criteria must be \"No\".",
+        "path": "[EC1]",
+        "i_SasName": "EC1",
+        "F_SasName": "EC"
+    },
+    {
+        "ActionExpression": "[EC2] == '0';",
+        "Message": "All exclusion criteria must be \"No\".",
+        "path": "[EC2]",
+        "i_SasName": "EC2",
+        "F_SasName": "EC"
+    },
+    {
+        "ActionExpression": "[EC3] == '0' || [EC3] == '2';",
+        "Message": "All exclusion criteria must be \"No\".",
+        "path": "[EC3]",
+        "i_SasName": "EC3",
+        "F_SasName": "EC"
+    },
+    {
+        "ActionExpression": "[EC4] == '0';",
+        "Message": "All exclusion criteria must be \"No\".",
+        "path": "[EC4]",
+        "i_SasName": "EC4",
+        "F_SasName": "EC"
+    },
+    {
+        "ActionExpression": "[EC5] == '0';",
+        "Message": "All exclusion criteria must be \"No\".",
+        "path": "[EC5]",
+        "i_SasName": "EC5",
+        "F_SasName": "EC"
+    },
+    {
+        "ActionExpression": "//investigateur choisi dans la codelist :\nvar invused = [Site][Patient][Screening][F03 - Randomization Request][SITE][INVNAM];\n\nvar inventry;\nvar activentry;\nvar deactentry;\nvar enreqdt;\n\n//tableau contenant tous les noms d'investigateurs d\u00e9clar\u00e9s dans le groupe r\u00e9p\u00e9t\u00e9 de la fiche syst\u00e8me Site :\nvar invCL = new Array(\n    [Site.@][SITE][LISTINV.1][INV],\n    [Site.@][SITE][LISTINV.2][INV],\n    [Site.@][SITE][LISTINV.3][INV],\n    [Site.@][SITE][LISTINV.4][INV],\n    [Site.@][SITE][LISTINV.5][INV],\n    [Site.@][SITE][LISTINV.6][INV],\n    [Site.@][SITE][LISTINV.7][INV],\n    [Site.@][SITE][LISTINV.8][INV],\n    [Site.@][SITE][LISTINV.9][INV],\n    [Site.@][SITE][LISTINV.10][INV],\n    [Site.@][SITE][LISTINV.11][INV],\n    [Site.@][SITE][LISTINV.12][INV],\n    [Site.@][SITE][LISTINV.13][INV],\n    [Site.@][SITE][LISTINV.14][INV],\n    [Site.@][SITE][LISTINV.15][INV],\n    [Site.@][SITE][LISTINV.16][INV],\n    [Site.@][SITE][LISTINV.17][INV],\n    [Site.@][SITE][LISTINV.18][INV],\n    [Site.@][SITE][LISTINV.19][INV],\n    [Site.@][SITE][LISTINV.20][INV],\n    [Site.@][SITE][LISTINV.21][INV],\n    [Site.@][SITE][LISTINV.22][INV],\n    [Site.@][SITE][LISTINV.23][INV],\n    [Site.@][SITE][LISTINV.24][INV],\n    [Site.@][SITE][LISTINV.25][INV],\n    [Site.@][SITE][LISTINV.26][INV],\n    [Site.@][SITE][LISTINV.27][INV],\n    [Site.@][SITE][LISTINV.28][INV],\n    [Site.@][SITE][LISTINV.29][INV],\n    [Site.@][SITE][LISTINV.30][INV]);\n\n//tableau contenant toutes les valeurs de la variable \"Active Y/N\" :\nvar activ = new Array(\n    [Site][SITE][LISTINV.1][INVACTIV],\n    [Site][SITE][LISTINV.2][INVACTIV],\n    [Site][SITE][LISTINV.3][INVACTIV],\n    [Site][SITE][LISTINV.4][INVACTIV],\n    [Site][SITE][LISTINV.5][INVACTIV],\n    [Site][SITE][LISTINV.6][INVACTIV],\n    [Site][SITE][LISTINV.7][INVACTIV],\n    [Site][SITE][LISTINV.8][INVACTIV],\n    [Site][SITE][LISTINV.9][INVACTIV],\n    [Site][SITE][LISTINV.10][INVACTIV],\n    [Site][SITE][LISTINV.11][INVACTIV],\n    [Site][SITE][LISTINV.12][INVACTIV],\n    [Site][SITE][LISTINV.13][INVACTIV],\n    [Site][SITE][LISTINV.14][INVACTIV],\n    [Site][SITE][LISTINV.15][INVACTIV],\n    [Site][SITE][LISTINV.16][INVACTIV],\n    [Site][SITE][LISTINV.17][INVACTIV],\n    [Site][SITE][LISTINV.18][INVACTIV],\n    [Site][SITE][LISTINV.19][INVACTIV],\n    [Site][SITE][LISTINV.20][INVACTIV],\n    [Site][SITE][LISTINV.21][INVACTIV],\n    [Site][SITE][LISTINV.22][INVACTIV],\n    [Site][SITE][LISTINV.23][INVACTIV],\n    [Site][SITE][LISTINV.24][INVACTIV],\n    [Site][SITE][LISTINV.25][INVACTIV],\n    [Site][SITE][LISTINV.26][INVACTIV],\n    [Site][SITE][LISTINV.27][INVACTIV],\n    [Site][SITE][LISTINV.28][INVACTIV],\n    [Site][SITE][LISTINV.29][INVACTIV],\n    [Site][SITE][LISTINV.30][INVACTIV]);\n\n//tableau contenant toutes les dates de d\u00e9sactivation :\nvar deact = new Array(\n    [Site][SITE][LISTINV.1][DEACTDT],\n    [Site][SITE][LISTINV.2][DEACTDT],\n    [Site][SITE][LISTINV.3][DEACTDT],\n    [Site][SITE][LISTINV.4][DEACTDT],\n    [Site][SITE][LISTINV.5][DEACTDT],\n    [Site][SITE][LISTINV.6][DEACTDT],\n    [Site][SITE][LISTINV.7][DEACTDT],\n    [Site][SITE][LISTINV.8][DEACTDT],\n    [Site][SITE][LISTINV.9][DEACTDT],\n    [Site][SITE][LISTINV.10][DEACTDT],\n    [Site][SITE][LISTINV.11][DEACTDT],\n    [Site][SITE][LISTINV.12][DEACTDT],\n    [Site][SITE][LISTINV.13][DEACTDT],\n    [Site][SITE][LISTINV.14][DEACTDT],\n    [Site][SITE][LISTINV.15][DEACTDT],\n    [Site][SITE][LISTINV.16][DEACTDT],\n    [Site][SITE][LISTINV.17][DEACTDT],\n    [Site][SITE][LISTINV.18][DEACTDT],\n    [Site][SITE][LISTINV.19][DEACTDT],\n    [Site][SITE][LISTINV.20][DEACTDT],\n    [Site][SITE][LISTINV.21][DEACTDT],\n    [Site][SITE][LISTINV.22][DEACTDT],\n    [Site][SITE][LISTINV.23][DEACTDT],\n    [Site][SITE][LISTINV.24][DEACTDT],\n    [Site][SITE][LISTINV.25][DEACTDT],\n    [Site][SITE][LISTINV.26][DEACTDT],\n    [Site][SITE][LISTINV.27][DEACTDT],\n    [Site][SITE][LISTINV.28][DEACTDT],\n    [Site][SITE][LISTINV.29][DEACTDT],\n    [Site][SITE][LISTINV.30][DEACTDT]);\n\nfor (var i = 0 ; i < invCL.length ; i++) {\n    //On parcourt tout le tableau contenant les noms des investigateurs et on r\u00e9cup\u00e8re la valeur \u00e0 chaque ligne (c'est-\u00e0-dire chaque \"i\") :\n    inventry = ReturnEntryAtPosition(invCL,i);\n    if (inventry == invused) {\n        //si le nom \u00e0 la ligne i correspond au nom utilis\u00e9 dans la fiche \"demande enregistrement\", on r\u00e9cup\u00e8re la valeur de la variable \"Active\" et de la variable \"Date d\u00e9sactivation\" \u00e0 cette ligne :\n        activentry = ReturnEntryAtPosition(activ,i);\n        deactentry = ReturnEntryAtPosition(deact,i);\n    }\n}\n\n//On r\u00e9cup\u00e8re la date d'enregistrement du patient (si elle n'est pas encore connue car la fiche est en train d'\u00eatre remplie pour la premi\u00e8re fois, date d'enregistrement = date du jour) :\nif (!isEmpty([Site][Patient][Screening][F03 - Randomization Request][IEC][ENRREQDT]))\n    enreqdt = [Site][Patient][Screening][F03 - Randomization Request][IEC][ENRREQDT];\nelse\n    enreqdt = TodayDate();\n\n//Le nom choisi est accept\u00e9 si l'investigateur est actif ou si la date d'enregistrement est ant\u00e9rieure \u00e0 la date de d\u00e9sactivation :\nactiventry == 1 || isDate1LDate2Partial(enreqdt,deactentry);",
+        "Message": "This investigator is not declared for this site anymore. Please choose another investigator.",
+        "path": "[Site][Patient][Screening.*][F03 - Randomization Request.*][SITE.*][INVNAM]",
+        "i_SasName": "INVNAM",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "NotAnyNumberInString([F03 - Randomization Request][SITE][CRANAM])",
+        "Message": "Number not allowed",
+        "path": "[F03 - Randomization Request.*][SITE.*][CRANAM]",
+        "i_SasName": "CRANAM",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "DaysBetween([F03 - Randomization Request][CONS][CONSDT]  ,  TodayDate())<60 || !isEmpty([F03 - Randomization Request][IEC][ENRREQDT]);",
+        "Message": "Consent date is 2 month old or more, please verify.",
+        "path": "[F03 - Randomization Request.*][CONS.*][CONSDT]",
+        "i_SasName": "CONSDT",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "Number([F03 - Randomization Request][CONS][AGE])>=4 && Number([F03 - Randomization Request][CONS][AGE])<= 25;",
+        "Message": "Le patient doit avoir entre 4 et 25 ans",
+        "path": "[F03 - Randomization Request.*][CONS.*][CONSDT]",
+        "i_SasName": "CONSDT",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "isDate1LEDate2Partial( [Site][Patient][PAT][Patient Information][BRTHDT] ,[Site][Patient][Screening][F03 - Randomization Request][CONS][CONSDT])",
+        "Message": "Consent date is before birth date, please correct",
+        "path": "[Site][Patient][Screening.*][F03 - Randomization Request.*][CONS.*][CONSDT]",
+        "i_SasName": "CONSDT",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "var var1=[Patient][Screening][F03 - Randomization Request][CONS][CONSDT];\nvar reg=[Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT];\nif (isEmpty(reg)) reg=TodayDate();\nDaysBetween(var1,reg)<31;",
+        "Message": "delai de consentement sup\u00e9rieur \u00e0 1  mois, merci de revoir la donn\u00e9e.",
+        "path": "[Patient][Screening.*][F03 - Randomization Request.*][CONS.*][CONSDT]",
+        "i_SasName": "CONSDT",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "isDate1LEDate2(  TodayDate() ,[Site][Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT])|| !isEmpty([Site][Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLID]) ;",
+        "Message": "Planned start date can't be in the past, please correct",
+        "path": "[Site][Patient][Screening.*][F03 - Randomization Request.*][Type of Treatment.*][PLSTDT]",
+        "i_SasName": "PLSTDT",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "DaysBetween(TodayDate(),[Site][Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT] ) < 15 || !isEmpty([Site][Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLID]) ;",
+        "Message": "start expected in 14 day after randomization max, please verify",
+        "path": "[Site][Patient][Screening.*][F03 - Randomization Request.*][Type of Treatment.*][PLSTDT]",
+        "i_SasName": "PLSTDT",
+        "F_SasName": "RAND"
+    },
+    {
+        "ActionExpression": "isDate1LEDate2([Site][Patient][V1 - Baseline assessment][F07 - Prior anticancer therapies][F07_2][PRIOSTDT],[Site][Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT])",
+        "Message": "Prior therapy date has to be before the enrollment, please correct",
+        "path": "[Site][Patient][V1 - Baseline assessment.*][F07 - Prior anticancer therapies.*][F07_2.*][PRIOSTDT]",
+        "i_SasName": "PRIOSTDT",
+        "F_SasName": "PAC"
+    },
+    {
+        "ActionExpression": "isDate1LEDate2Partial([Site][Patient][PAT][Patient Information][BRTHDT]\n,\n[Site][Patient][V1 - Baseline assessment][F07 - Prior anticancer therapies][F07_2][PRIOSTDT])",
+        "Message": "Prior therapy date has to be after birthdate, please correct",
+        "path": "[Site][Patient][V1 - Baseline assessment.*][F07 - Prior anticancer therapies.*][F07_2.*][PRIOSTDT]",
+        "i_SasName": "PRIOSTDT",
+        "F_SasName": "PAC"
+    },
+    {
+        "ActionExpression": "isDate1LEDate2([Site][Patient][V1 - Baseline assessment][F08 - Description of cancer][F08_1][DIAGDT],[Site][Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT])",
+        "Message": "date has to be before inclusion, please correct",
+        "path": "[Site][Patient][V1 - Baseline assessment.*][F08 - Description of cancer.*][F08_1.*][DIAGDT]",
+        "i_SasName": "DIAGDT",
+        "F_SasName": "DES1"
+    },
+    {
+        "ActionExpression": "isDate1LDate2Partial([Site][Patient][PAT][Patient Information][BRTHDT],[Site][Patient][V1 - Baseline assessment][F08 - Description of cancer][F08_1][DIAGDT])",
+        "Message": "date has to be after birthdate, please verify",
+        "path": "[Site][Patient][V1 - Baseline assessment.*][F08 - Description of cancer.*][F08_1.*][DIAGDT]",
+        "i_SasName": "DIAGDT",
+        "F_SasName": "DES1"
+    },
+    {
+        "ActionExpression": "var var1=[Patient][V1 - Baseline assessment][F09 - Clinical Examination][VS1][VSDT];\nvar planned=[Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT];\nDaysBetween(var1,planned)<2;",
+        "Message": "La date est attendu au D1 du traitement (d\u00e9clar\u00e9 le [Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT] a l'enregistrement), merci d'expliquer la d\u00e9viation au protocole.",
+        "path": "[Patient][V1 - Baseline assessment.*][F09 - Clinical Examination.*][VS1.*][VSDT]",
+        "i_SasName": "VSDT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "Number([HEIGHT])> 60",
+        "Message": "heigth < 60 , please verify",
+        "path": "[HEIGHT]",
+        "i_SasName": "HEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "Number([HEIGHT])<210",
+        "Message": "height > 210, please verify",
+        "path": "[HEIGHT]",
+        "i_SasName": "HEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "[WEIGHT]<10|| true;",
+        "Message": "[WEIGHT]<10",
+        "path": "[WEIGHT]",
+        "i_SasName": "WEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "[WEIGHT]>80|| true;",
+        "Message": "weight > 80, please verify",
+        "path": "[WEIGHT]",
+        "i_SasName": "WEIGHT",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "[Lansky _V]>=0 && [Lansky _V]<101",
+        "Message": "landky has to be between 0 and 100",
+        "path": "[Lansky _V]",
+        "i_SasName": "Lansky__",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "[KARN_V]>=0 && [KARN_V]<101",
+        "Message": "karnofky has to be between 0 and 100",
+        "path": "[KARN_V]",
+        "i_SasName": "KARN_V",
+        "F_SasName": "VS"
+    },
+    {
+        "ActionExpression": "var val=[F10 - Hematology tests][F10_2.@][LABRES];\nNumber(val)<7;",
+        "Message": "une valeur sup\u00e9rieure \u00e0 7  10^9/L  est une valeur extr\u00eame, merci de revoir la saisie et l'unit\u00e9 demand\u00e9e.",
+        "path": "[F10 - Hematology tests.*][F10_2.3][LABRES]",
+        "i_SasName": "LABRES",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "var val=[F10 - Hematology tests][F10_2.@][LABRES];\nNumber(val)>14;",
+        "Message": "une valeur inf\u00e9rieure \u00e0 14 g/dL est une valeur extr\u00eame, merci de revoir la saisie et l'unit\u00e9 demand\u00e9e.",
+        "path": "[F10 - Hematology tests.*][F10_2.4][LABRES]",
+        "i_SasName": "LABRES",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "var val=[F10 - Hematology tests][F10_2.@][LABRES];\nNumber(val)<508;",
+        "Message": "une valeur sup\u00e9rieure \u00e0 508  10^9/L  est une valeur extr\u00eame, merci de revoir la saisie et l'unit\u00e9 demand\u00e9e.",
+        "path": "[F10 - Hematology tests.*][F10_2.4][LABRES]",
+        "i_SasName": "LABRES",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "var val=[F10 - Hematology tests][F10_2.@][LABRES];\nNumber(val)<20;",
+        "Message": "une valeur sup\u00e9rieure \u00e0 20 g/dL est une valeur extr\u00eame, merci de revoir la saisie et l'unit\u00e9 demand\u00e9e.",
+        "path": "[F10 - Hematology tests.*][F10_2.1][LABRES]",
+        "i_SasName": "LABRES",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "var val=[F10 - Hematology tests][F10_2.@][LABRES];\nNumber(val)>5;",
+        "Message": "une valeur inf\u00e9rieure \u00e0 5 g/dL est une valeur extr\u00eame, merci de revoir la saisie et l'unit\u00e9 demand\u00e9e.",
+        "path": "[F10 - Hematology tests.*][F10_2.1][LABRES]",
+        "i_SasName": "LABRES",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "var val=[F10 - Hematology tests][F10_2.@][LABRES];\nNumber(val)<10;",
+        "Message": "une valeur sup\u00e9rieure \u00e0 10  10^9/L  est une valeur extr\u00eame, merci de revoir la saisie et l'unit\u00e9 demand\u00e9e.",
+        "path": "[F10 - Hematology tests.*][F10_2.2][LABRES]",
+        "i_SasName": "LABRES",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "var val=[F10 - Hematology tests][F10_2.@][LABRES];\nNumber(val)>0.1;",
+        "Message": "une valeur inf\u00e9rieure \u00e0 0.1 10^9/L  est une valeur extr\u00eame, merci de revoir la saisie et l'unit\u00e9 demand\u00e9e.",
+        "path": "[F10 - Hematology tests.*][F10_2.2][LABRES]",
+        "i_SasName": "LABRES",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "[Patient][V2 - Assessment visit][F10 - Hematology tests][F10_3][NEUTRO]==0 ||\n([Patient][V2 - Assessment visit][F10 - Hematology tests][F10_3][NEUTRO] == '1' && !isEmpty([Patient][V2 - Assessment visit][F10 - Hematology tests][F10_2][LABRES]) && Number([Patient][V2 - Assessment visit][F10 - Hematology tests][F10_2][LABRES])<0.5);",
+        "Message": "Neutop\u00e9nie est not\u00e9 comme <0.5, merci de remplir les valeurs de laboratoire en concordance avec le tableau.",
+        "path": "[Patient][V2 - Assessment visit.*][F10 - Hematology tests.*][F10_3.*][NEUTRO]",
+        "i_SasName": "NEUTRO",
+        "F_SasName": "Hemato"
+    },
+    {
+        "ActionExpression": "var value = [Patient][V2 - Assessment visit][F11 - Chemotherapy treatment][F11_0][Date D1 cycle];\nvar borninf =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],2)\n var bornsup =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],2);\n\n borninf < value  && value   < bornsup ;",
+        "Message": "la date attendu saisie a l'enregistrement \u00e9tait [Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT], merci de v\u00e9rifier la donn\u00e9e.",
+        "path": "[Patient][V2 - Assessment visit.*][F11 - Chemotherapy treatment.*][F11_0.*][Date D1 cycle]",
+        "i_SasName": "Date_D1_",
+        "F_SasName": "Treatmen"
+    },
+    {
+        "ActionExpression": "var atc=[Patient][V2 - Assessment visit][F11 - Chemotherapy treatment][F11_0][WEIGHT];\nvar clin=[Patient][V1 - Baseline assessment][F09 - Clinical Examination][VS2][WEIGHT] ;\n\nisEmpty(clin)|| 0.9<Number(atc)/Number(clin)<1.1;",
+        "Message": "perde de poids significative (<10%) depuis la baceline (12jours). Merci de corriger.",
+        "path": "[Patient][V2 - Assessment visit.*][F11 - Chemotherapy treatment.*][F11_0.*][WEIGHT]",
+        "i_SasName": "WEIGHT",
+        "F_SasName": "Treatmen"
+    },
+    {
+        "ActionExpression": "[WEIGHT]<10|| true;",
+        "Message": "[WEIGHT]<10",
+        "path": "[WEIGHT]",
+        "i_SasName": "WEIGHT",
+        "F_SasName": "Treatmen"
+    },
+    {
+        "ActionExpression": "[WEIGHT]>80|| true;",
+        "Message": "weight > 80, please verify",
+        "path": "[WEIGHT]",
+        "i_SasName": "WEIGHT",
+        "F_SasName": "Treatmen"
+    },
+    {
+        "ActionExpression": "[Patient][V2 - Assessment visit][F11 - Chemotherapy treatment][F11_0][TPTREAT] == [Patient][Screening][F03 - Randomization Request][Type of Treatment][TPTREAT]",
+        "Message": "le traitement saisie n'est pas le meme que celui de la fiche F03 demande de randomisation, merci de v\u00e9rifier les donn\u00e9es",
+        "path": "[Patient][V2 - Assessment visit.*][F11 - Chemotherapy treatment.*][F11_0.*][TPTREAT]",
+        "i_SasName": "TPTREAT",
+        "F_SasName": "Treatmen"
+    },
+    {
+        "ActionExpression": "var value = [Patient][V2 - Assessment visit][F12 - Laser session][F12_1][D1LASER];\nvar borninf =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],-2)\n var bornsup =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],2);\n\n borninf < value  && value   < bornsup ;",
+        "Message": "date attendu autour du [Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT], merci de v\u00e9rifier la donn\u00e9e",
+        "path": "[Patient][V2 - Assessment visit.*][F12 - Laser session.*][F12_1.*][D1LASER]",
+        "i_SasName": "D1LASER",
+        "F_SasName": "Laser"
+    },
+    {
+        "ActionExpression": "[Patient][V2 - Assessment visit][F12 - Laser session][F12_1][D1LASER]<=[Patient][V2 - Assessment visit][F12 - Laser session][F12_1][DLASTGIVEN];",
+        "Message": "la  date de fin ne peut pas etre avant la date de d\u00e9but, merci de corriger",
+        "path": "[Patient][V2 - Assessment visit.*][F12 - Laser session.*][F12_1.*][DLASTGIVEN]",
+        "i_SasName": "DLASTGIV",
+        "F_SasName": "Laser"
+    },
+    {
+        "ActionExpression": "var value = [Patient][V2 - Assessment visit][F13 - Mucositis evaluation][F13_1][MEVAL];\nvar borninf =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],10)\n var bornsup =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],12);\n\n borninf < value  && value   < bornsup ;",
+        "Message": "date expected at D12+/-2, please verify and explain the protocole deviation.",
+        "path": "[Patient][V2 - Assessment visit.*][F13 - Mucositis evaluation.*][F13_1.*][MEVAL]",
+        "i_SasName": "MEVAL",
+        "F_SasName": "MUCOSEVA"
+    },
+    {
+        "ActionExpression": "[Patient][V2 - Assessment visit][F13 - Mucositis evaluation][F13_1][MEVAL]==[Patient][V2 - Assessment visit][VISIT][Visit][Visit Date];",
+        "Message": "date different from system visit date",
+        "path": "[Patient][V2 - Assessment visit.*][F13 - Mucositis evaluation.*][F13_1.*][MEVAL]",
+        "i_SasName": "MEVAL",
+        "F_SasName": "MUCOSEVA"
+    },
+    {
+        "ActionExpression": "[Patient][V2 - Assessment visit][F13 - Mucositis evaluation][F13_1][PHYSN] != [Patient][Screening][F03 - Randomization Request][SITE][INVNAM]",
+        "Message": "please verify, this is the physician who had randomize the patient",
+        "path": "[Patient][V2 - Assessment visit.*][F13 - Mucositis evaluation.*][F13_1.*][PHYSN]",
+        "i_SasName": "PHYSN",
+        "F_SasName": "MUCOSEVA"
+    },
+    {
+        "ActionExpression": "Number([MOMS])>=0 && Number([MOMS])<5",
+        "Message": "OMS grade has to be between 0 and 4",
+        "path": "[MOMS]",
+        "i_SasName": "MOMS",
+        "F_SasName": "MUCOSEVA"
+    },
+    {
+        "ActionExpression": "Number([MVAS])>=0 && Number([MVAS])<11",
+        "Message": "VAS has to be between 0 and 10",
+        "path": "[MVAS]",
+        "i_SasName": "MVAS",
+        "F_SasName": "MUCOSEVA"
+    },
+    {
+        "ActionExpression": "Number([MFPS])>=0 && Number([MFPS])<11",
+        "Message": "FPS has to be between 0 and 10",
+        "path": "[MFPS]",
+        "i_SasName": "MFPS",
+        "F_SasName": "MUCOSEVA"
+    },
+    {
+        "ActionExpression": "Number([MHEDEN])>=0 && Number([MHEDEN])<11",
+        "Message": "heden has to be between 0 and 10",
+        "path": "[MHEDEN]",
+        "i_SasName": "MHEDEN",
+        "F_SasName": "MUCOSEVA"
+    },
+    {
+        "ActionExpression": "Number([BJ])<40",
+        "Message": "Number of days is over 40, please verify",
+        "path": "[BJ]",
+        "i_SasName": "BJ",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "Number([BJ])>0",
+        "Message": "Please enter No if no bath mouth has been done",
+        "path": "[BJ]",
+        "i_SasName": "BJ",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "Number([F14 - Patient diary completion][F14_1][BJ])>=Number([F14 - Patient diary completion][F14_1][BXYD])",
+        "Message": "Number of bath mouth upper than the sum",
+        "path": "[F14 - Patient diary completion.*][F14_1.*][BXYD]",
+        "i_SasName": "BXYD",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "Number([F14 - Patient diary completion][F14_1][BXYD])>0",
+        "Message": "please enter no if no bath mouth with Xylocain has been done",
+        "path": "[F14 - Patient diary completion.*][F14_1.*][BXYD]",
+        "i_SasName": "BXYD",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "[Patient][V3 - Final visit][F14 - Patient diary completion][F14_2][FC_DB]>=[Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT]",
+        "Message": "start date has to be after randomization",
+        "path": "[Patient][V3 - Final visit.*][F14 - Patient diary completion.*][F14_2.*][FC_DB]",
+        "i_SasName": "FC_DB",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "[Patient][V3 - Final visit][F14 - Patient diary completion][F14_2][FC_DB]<=[Patient][V3 - Final visit][VISIT][Visit][Visit Date];",
+        "Message": "start can't be after final visit",
+        "path": "[Patient][V3 - Final visit.*][F14 - Patient diary completion.*][F14_2.*][FC_DB]",
+        "i_SasName": "FC_DB",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "[Patient][V3 - Final visit][F14 - Patient diary completion][F14_2][FC_DB]<=[Patient][V3 - Final visit][F14 - Patient diary completion][F14_2][FC_FN]",
+        "Message": "end date can't be before start date",
+        "path": "[Patient][V3 - Final visit.*][F14 - Patient diary completion.*][F14_2.*][FC_FN]",
+        "i_SasName": "FC_FN",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "[Patient][V3 - Final visit][F14 - Patient diary completion][F14_2][FC_FN]<=[Patient][V3 - Final visit][VISIT][Visit][Visit Date]",
+        "Message": "end date can't be after final visit date",
+        "path": "[Patient][V3 - Final visit.*][F14 - Patient diary completion.*][F14_2.*][FC_FN]",
+        "i_SasName": "FC_FN",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "GroupInstanceNo != 1 || [Patient][V3 - Final visit][F14 - Patient diary completion][F14_3][CDAT]>=[Patient][Screening][F03 - Randomization Request][CONS][CONSDT];",
+        "Message": "date has to be after consentment date",
+        "path": "[Patient][V3 - Final visit.*][F14 - Patient diary completion.*][F14_3.*][CDAT]",
+        "i_SasName": "CDAT",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "GroupInstanceNo != 2 || [Patient][V3 - Final visit][F14 - Patient diary completion][F14_3][CDAT]==[Patient][V3 - Final visit][VISIT][Visit][Visit Date]",
+        "Message": "date has to be equal to final visit date",
+        "path": "[Patient][V3 - Final visit.*][F14 - Patient diary completion.*][F14_3.*][CDAT]",
+        "i_SasName": "CDAT",
+        "F_SasName": "diary"
+    },
+    {
+        "ActionExpression": "var value =[Patient][V3 - Final visit][F15 - Analgesia consumption][F15_1][F15_DB];\nvar ref=[Patient][V2 - Assessment visit][F11 - Chemotherapy treatment][F11_0][Date D1 cycle];\nvar borninf =AddDaysToDate(ref,0)\n var bornsup =AddDaysToDate(ref,10);\n\n (borninf <= value  && value   <= bornsup )\n\n || isEmpty([Patient][V2 - Assessment visit][F11 - Chemotherapy treatment][F11_0][Date D1 cycle]);",
+        "Message": "D1 de chimio est le [Patient][V2 - Assessment visit][F11 - Chemotherapy treatment][F11_0][Date D1 cycle] (d\u00e9clar\u00e9 en F11, merci de bien v\u00e9rifier)",
+        "path": "[Patient][V3 - Final visit.*][F15 - Analgesia consumption.*][F15_1.*][F15_DB]",
+        "i_SasName": "F15_DB",
+        "F_SasName": "consump"
+    },
+    {
+        "ActionExpression": "var var1=[Patient][V3 - Final visit][F15 - Analgesia consumption][F15_1][F15_DB];\nvar dincl=[Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT];\nDaysBetween(dincl,var1)>=0;",
+        "Message": "la date ne peut pas etre avant l'inclusion",
+        "path": "[Patient][V3 - Final visit.*][F15 - Analgesia consumption.*][F15_1.*][F15_DB]",
+        "i_SasName": "F15_DB",
+        "F_SasName": "consump"
+    },
+    {
+        "ActionExpression": "var var1=[Patient][V3 - Final visit][F15 - Analgesia consumption][F15_1][F15_DB];\nvar fin_dt=[Patient][V3 - Final visit][F16 - End of study][F16_1][DLAST];\nDaysBetween(var1,fin_dt)>=0 || isNaN(DaysBetween(var1,fin_dt));",
+        "Message": "la date saisie est apr\u00e8s la date de fin d'\u00e9tude, il s'agit d'une erreur \u00e0 corriger. ([Patient][V3 - Final visit][F16 - End of study][F16_1][DLAST])",
+        "path": "[Patient][V3 - Final visit.*][F15 - Analgesia consumption.*][F15_1.*][F15_DB]",
+        "i_SasName": "F15_DB",
+        "F_SasName": "consump"
+    },
+    {
+        "ActionExpression": "[Patient][V3 - Final visit][F15 - Analgesia consumption][F15_1][F15_DB]<=[Patient][V3 - Final visit][F15 - Analgesia consumption][F15_1][F15_END]",
+        "Message": "la date de fin doit etre avant la date de d\u00e9but.",
+        "path": "[Patient][V3 - Final visit.*][F15 - Analgesia consumption.*][F15_1.*][F15_END]",
+        "i_SasName": "F15_END",
+        "F_SasName": "consump"
+    },
+    {
+        "ActionExpression": "var var1=[Patient][V3 - Final visit][F15 - Analgesia consumption][F15_1][F15_END]\nvar dincl=[Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT];\nDaysBetween(dincl,var1)>0;",
+        "Message": "la date ne peut pas etre avant l'inclusion.",
+        "path": "[Patient][V3 - Final visit.*][F15 - Analgesia consumption.*][F15_1.*][F15_END]",
+        "i_SasName": "F15_END",
+        "F_SasName": "consump"
+    },
+    {
+        "ActionExpression": "var carnet=[F15 - Analgesia consumption][F15_2.@][CARNDAT];\nvar db=[F15 - Analgesia consumption][F15_1][F15_DB];\nvar fn=[F15 - Analgesia consumption][F15_1][F15_END];\n(carnet>=db || isEmpty(db)) && (carnet<=fn|| isEmpty(fn) )",
+        "Message": "les dates sont hors sur scope d\u00e9blar\u00e9 plus haut, erreur de saisie ?",
+        "path": "[F15 - Analgesia consumption.*][F15_2.*][CARNDAT]",
+        "i_SasName": "CARNDAT",
+        "F_SasName": "consump"
+    },
+    {
+        "ActionExpression": "var value = [Patient][V3 - Final visit][F15 - Analgesia consumption][F15_2.@][CARNDAT]\nvar borninf =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],-5)\n var bornsup =AddDaysToDate([Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT],40);\n\n borninf <= value  && value   <= bornsup ;",
+        "Message": "la date de traitement est le [Patient][Screening][F03 - Randomization Request][Type of Treatment][PLSTDT], merci de v\u00e9rifier la donn\u00e9e saisie.  (la visite final \u00e9tant dans un d\u00e9lai maximal etant D40)",
+        "path": "[Patient][V3 - Final visit.*][F15 - Analgesia consumption.*][F15_2.*][CARNDAT]",
+        "i_SasName": "CARNDAT",
+        "F_SasName": "consump"
+    },
+    {
+        "ActionExpression": "[Patient][V3 - Final visit][F16 - End of study][F16_1][DLAST]>=[Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT];",
+        "Message": "date has to be after date of randomization, please verify",
+        "path": "[Patient][V3 - Final visit.*][F16 - End of study.*][F16_1.*][DLAST]",
+        "i_SasName": "DLAST",
+        "F_SasName": "EOS"
+    },
+    {
+        "ActionExpression": "var var1=[Patient][V3 - Final visit][F16 - End of study][F16_1][DLAST];\nvar dincl=[Patient][Screening][F05 - Enrollment Result][ENROLL_RES][ENROLLDT];\nDaysBetween(dincl,var1)<41;",
+        "Message": "d'apr\u00e8s le protocole, un  delai maximum de 40 jours pour la fin d'\u00e9tude est autoris\u00e9, merci de v\u00e9rifier les donn\u00e9es, ou de justifier l'\u00e9ccard au protocole.",
+        "path": "[Patient][V3 - Final visit.*][F16 - End of study.*][F16_1.*][DLAST]",
+        "i_SasName": "DLAST",
+        "F_SasName": "EOS"
+    },
+    {
+        "ActionExpression": "Number([ROMS])>=0 && Number([ROMS])<5",
+        "Message": "OMS grade has to be between 0 and 4",
+        "path": "[ROMS]",
+        "i_SasName": "ROMS",
+        "F_SasName": "F18___re"
+    }
+]
