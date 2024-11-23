@@ -5,3 +5,5 @@ sys
 markdown
 python-docx
 os
+beautifulsoup4 
+python-docx
