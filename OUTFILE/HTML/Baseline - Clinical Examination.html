@@ -1,112 +1,149 @@
-    <head>   
-    <meta charset='UTF-8'>    
-   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
- <title>test fiche</title> 
-   <link rel='stylesheet' href='style.css'> 
- </head> 
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRF - Vital Signs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .editable {
+            background-color: #fff3cd;
+            cursor: text;
+            outline: none;
+        }
+        button {
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 <body>
 
+<h2>Vital Sign and Clinical Examination</h2>
+<p>Liste des visites avec cette fiche : Baseline</p>
 
-<h2> Vital sign and Clinical Examination  </h2>
-Liste des visites avec cette fiches :Baseline 
-
-<h3> VS1 </h3> 
-
-<table >
-<tr>
-<th ><strong>Label de la question </strong></th>
-<th><strong>Réponses possibles</strong></th>
-<th><strong>Sas</strong></th>
-</tr>
-<tr>
- <tr> 
- <td> Clinical Examination done ?</td>
- 
-
- <td> 🔘 0 - <b>Not done</b><br>🔘 1 - <b>Done</b> </td> 
-<td > <b> VSYN </b></td> 
- </tr> 
- <tr> 
- <td> Date of clinical assessment</td>
- 
-
- <td> 📅 DD/MM/YYYY </td> 
-<td > <b> VSDT </b></td> 
- </tr> 
+<h3>VS1</h3>
+<table>
+    <tr>
+        <th><strong>Label de la question</strong></th>
+        <th><strong>Réponses possibles</strong></th>
+        <th><strong>Sas</strong></th>
+    </tr>
+    <tr>
+        <td contenteditable="true" class="editable" data-original="Clinical Examination done?">Clinical Examination done?</td>
+        <td>🔘 0 - <b>Not done</b><br>🔘 1 - <b>Done</b></td>
+        <td><b>VSYN</b></td>
+    </tr>
+    <tr>
+        <td contenteditable="true" class="editable" data-original="Date of clinical assessment">Date of clinical assessment</td>
+        <td>📅 DD/MM/YYYY</td>
+        <td><b>VSDT</b></td>
+    </tr>
 </table>
 
-<h3> VS2 </h3> 
+<button onclick="saveToLocalFile()">Sauvegarder les modifications</button>
 
-<table >
-<tr>
-<th ><strong>Label de la question </strong></th>
-<th><strong>Réponses possibles</strong></th>
-<th><strong>Sas</strong></th>
-</tr>
-<tr>
- <tr> 
- <td> Height (cm)</td>
- 
+<script>
+async function saveToLocalFile() {
+    const editableElements = document.querySelectorAll('.editable');
+    const changes = {};
 
- <td> Num - 50 </td> 
-<td > <b> HEIGHT </b></td> 
- </tr> 
- <tr> 
- <td> WEIGHT (kg)</td>
- 
+    editableElements.forEach(el => {
+        const originalText = el.getAttribute('data-original');
+        const currentText = el.innerText.trim();
+        if (currentText !== originalText) {
+            changes[originalText] = currentText;
+        }
+    });
 
- <td> Num - 50 </td> 
-<td > <b> WEIGHT </b></td> 
- </tr> 
-</table>
+    if (Object.keys(changes).length === 0) {
+        alert("Aucune modification détectée.");
+        return;
+    }
 
-<h3> VS3 </h3> 
+    // Générer le contenu HTML modifié
+    let modifiedHTML = `
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CRF - Vital Signs</title>
+    </head>
+    <body>
+        <h2>Vital Sign and Clinical Examination</h2>
+        <p>Liste des visites avec cette fiche : Baseline</p>
+        <h3>VS1</h3>
+        <table>
+            <tr>
+                <th><strong>Label de la question</strong></th>
+                <th><strong>Réponses possibles</strong></th>
+                <th><strong>Sas</strong></th>
+            </tr>`;
 
-<table >
-<tr>
-<th ><strong>Label de la question </strong></th>
-<th><strong>Réponses possibles</strong></th>
-<th><strong>Sas</strong></th>
-</tr>
-<tr>
- <tr> 
- <td> PS (performance status measured using the ECOG Scale )</td>
- 
+    Object.keys(changes).forEach(originalText => {
+        modifiedHTML += `
+            <tr>
+                <td contenteditable="true" class="editable" data-original="${originalText}">${changes[originalText]}</td>
+                <td>📅 DD/MM/YYYY</td>
+                <td><b>VSYN</b></td>
+            </tr>`;
+    });
 
- <td> Num - 50 </td> 
-<td > <b> VSPS </b></td> 
- </tr> 
- <tr> 
- <td> Systolic blood pressure (mmHG)</td>
- 
+    modifiedHTML += `</table></body></html>`;
 
- <td> Num - 50 </td> 
-<td > <b> VSSYS </b></td> 
- </tr> 
- <tr> 
- <td> Diastolic blood pressure (mmHG)</td>
- 
+    // Générer un nom de fichier basé sur la date et l'heure
+    const timestamp = new Date();
+    const formattedDate = timestamp.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
+    const fileName = `Updated_${formattedDate}.html`;
 
- <td> Num - 50 </td> 
-<td > <b> VSDIAG </b></td> 
- </tr> 
- <tr> 
- <td> ECG</td>
- 
+    try {
+        // Utiliser showSaveFilePicker pour proposer un dossier générique comme "Documents"
+        const handle = await window.showSaveFilePicker({
+            suggestedName: fileName,
+            types: [
+                {
+                    description: "HTML File",
+                    accept: { "text/html": [".html"] },
+                },
+            ],
+            startIn: "documents", // Répertoire générique "Documents"
+        });
 
- <td> 🔘 0 - <b>Not done</b><br>🔘 1 - <b>Done</b> </td> 
-<td > <b> ECG </b></td> 
- </tr> 
- <tr> 
- <td> Date of ECG</td>
- 
-
- <td> 📅 DD/MM/YYYY </td> 
-<td > <b> ECGDAT </b></td> 
- </tr> 
-</table>
+        const writable = await handle.createWritable();
+        await writable.write(modifiedHTML);
+        await writable.close();
+        alert("Fichier sauvegardé avec succès.");
+        location.reload(); // Recharger la page pour appliquer les changements
+    } catch (error) {
+        console.error("Erreur lors de la sauvegarde :", error);
+        alert("La sauvegarde a été annulée ou une erreur est survenue.");
+    }
+}
+</script>
 
 </body>
-
-
+</html>

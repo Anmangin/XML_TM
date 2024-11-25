@@ -1,4 +1,3 @@
-
 import xml.etree.ElementTree as ET
 import re
 import sys     
@@ -176,7 +175,7 @@ def get_message(data,ProItemGuid,ProGroupGuid,ProFormGuid):
 
 
 def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
-
+        JSON_EXPORT = {}
         
         doc = Document()
         content=f"<body>\n\n\n"
@@ -329,9 +328,9 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
                         if display_Edit:content+=             f" <td class='check' style='width:600px; text-align:left;'>  {Message} </td>\n" 
                         content+=             f" <td style='width:300px; text-align:center;'> {rep} </td> \n"
                         content+=            f"<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> {I_Status}{i_SasName} </b></td> \n" 
-                        content+=" </tr>\n"            
+                        content+=" </tr>\n"
+                        JSON_EXPORT = get_JSONLIGNE(JSON_EXPORT,V_description,F_description,G_description,GI_key,I_description,Message,rep,I_Status,i_SasName)            
                         # print("écriture de ",I_description)
-
                         para = doc.add_paragraph()
                         run = para.add_run("")
 
@@ -366,14 +365,48 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
             js = file.read()    
         content+=f"  </div><script>{js}</script> </body>\n\n\n"
         
-        return content,doc
+        return content,doc,JSON_EXPORT
         
+def get_JSONLIGNE(JSON_EXPORT, V_description, F_description, G_description, GI_key,
+                  I_description, Message, rep, I_Status, i_SasName):
+    # Assure-toi que la clé 'Patient' existe dans JSON_EXPORT
+    if 'visites' not in JSON_EXPORT:
+        JSON_EXPORT['visites'] = []
 
+    # Cherche si le patient existe déjà dans la liste des patients, sinon crée-le
+    visites = next((p for p in JSON_EXPORT['visites'] if p['V_description'] == V_description), None)
+    
+    if not visites:
+        # Crée un nouveau patient avec V_description comme nom
+        visites = {"V_description": V_description, "fiches": []}
+        JSON_EXPORT['visites'].append(visites)
 
+    # Cherche la fiche dans le patient, sinon crée-la
+    fiche = next((f for f in visites['fiches'] if f['F_description'] == F_description), None)
+    
+    if not fiche:
+        fiche = {"F_description": F_description, "groupes": []}
+        visites['fiches'].append(fiche)
 
+    # Cherche le groupe dans la fiche, sinon crée-le
+    groupe = next((g for g in fiche['groupes'] if g['G_description'] == G_description), None)
+    
+    if not groupe:
+        groupe = {"G_description": G_description, "questions": []}
+        fiche['groupes'].append(groupe)
 
-        if logprint:print(f"fin d'écriture dans {pathout}")
-
+    # Ajout de la question dans le groupe
+    question = {
+         "GI_key": GI_key,
+        "I_description": I_description,
+        "Message": Message if Message else None,
+        "rep": rep if rep else None,
+        "I_Status": I_Status,
+        "i_SasName": i_SasName
+    }
+    groupe['questions'].append(question)
+    
+    return JSON_EXPORT
 
 
 def get_path_input():
@@ -398,6 +431,10 @@ def confirm_execution(path):
     """Demande confirmation à l'utilisateur pour continuer l'exécution."""
     return messagebox.askyesno("Confirmation", f"Path : {path}\nVoulez-vous continuer ?")
 
+def save_json(data, path, filename):
+    """Enregistre les données en JSON dans le chemin spécifié."""
+    with open(os.path.join(path, filename), 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4)
 
 
 def main():
@@ -421,8 +458,9 @@ def main():
    
     # Export des données
     doc = Document()
-    content ,doc= exporter_donnees_markdown_eCRF(data,"5.0.3.27.Update 3b",True)
-
+    JSON_EXPORT = {}
+    content ,doc,JSON_EXPORT= exporter_donnees_markdown_eCRF(data,"5.0.3.27.Update 3b",True)
+    
 
     ensure_directories(f"{output_path}/DOCX")
     ensure_directories(f"{output_path}/HTML")
@@ -443,7 +481,8 @@ def main():
     f"</head>\n\n"
     + content
 ) #remove_details_tags(content)
-
+    if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
+    else: print("Liste des checks vide!")
     with open( f"{output_path}/HTML/{file_name}.html" , 'w', encoding='utf-8') as f:
         f.write(htmlcontent)
 
