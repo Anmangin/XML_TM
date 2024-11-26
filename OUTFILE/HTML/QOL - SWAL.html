@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+     <style>
+        /* Global Styles */
+body {
+    max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
+    margin: 0 auto; /* Centre le contenu horizontalement */
+    padding: 0; /* Pas de marge interne supplémentaire */
+    font-family: 'Arial', sans-serif; /* Police standard Word */
+    line-height: 1.5; /* Espacement de ligne standard dans Word */
+    box-sizing: border-box; /* Garantit que le padding n'ajoute pas à la largeur */
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding-top: 20px;
+    padding-left: 10px;
+    overflow-y: auto;
+    border-right: 2px solid #ccc;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Sidebar Links */
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+}
+
+
+/* Styles généraux de la sidebar */
+.sidebar {
+    width: 300px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-right: 2px solid #ccc;
+}
+
+.sidebar a {
+    display: block;
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+}
+
+/* Ajouter une indentation pour les titres H2 dans la sidebar */
+.sidebar a {
+    padding-left: 0;
+}
+
+.sidebar a[data-target^="h2"] {
+    padding-left: 20px;  /* Indentation pour les titres H2 */
+}
+
+
+
+/* Contenu Principal */
+.content {
+    margin-left: 50px; /* Décalage pour laisser de la place à la sidebar */
+    padding: 20px;
+    background-color: #fff;
+    min-height: 100vh;
+    width:100%;
+}
+
+section {
+
+    display: none;  
+}
+h1 {
+display: none;
+}
+/* Titre */
+h2, h3 {
+    color: #3b7bc0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 14px;
+    text-align: left; /* Aligne le texte à gauche */
+    background-color: #3b7bc0; /* Couleur de fond bleue */
+    color: white; /* Couleur du texte */
+    padding: 10px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    margin: 10px 0; /* Espacement externe (haut et bas) */
+    display: block; /* Assure que l'élément prend toute la largeur disponible */
+    width: 100%; /* Assure que l'élément couvre toute la largeur */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+th, td {
+     padding: 3px 5px; 
+    text-align: left;
+     border: 1px solid #dee2e6; 
+}
+
+th {
+    background-color: #3b7bc0;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+td {
+    vertical-align: center;
+    font-size: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+/* Highlight Specific Content */
+td b {
+    color: #dc3545; /* Red for emphasis */
+}
+
+/* Details/Notes */
+details {
+    font-size: 0.9rem;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+    color: #495057;
+}
+
+/* List and Possible Responses */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+/* Icon Styling */
+td.center {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+td .red {
+    color: rgba(255, 0, 0, 0.322);
+}
+
+/* Footnotes and Notes */
+p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #6c757d;
+    text-align: center;
+}
+
+code {
+    background-color: #f8f9fa;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+
+
+/* Cacher les sections avec la classe "hidden" */
+.hidden {
+    display: none !important;; /* Cache complètement l'élément */
+}
+
+/* Montrer les sections avec la classe "show" */
+.show {
+    display: block !important;; /* Affiche l'élément en tant que bloc */
+}
+
+     </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button id="export">Enregistrer les modifications</button>
+        <h3>Table des matières</h3>
+        <div id="sidebar-links"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="main-content">
+    </div>
+
+    <script>
+        function loadJSON(filePath) {
+    return fetch(filePath) // Charge le fichier JSON à partir du chemin spécifié
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement du fichier JSON');
+            }
+            return response.json(); // Parse le contenu du fichier JSON
+        })
+        .then(data => {
+            return data; // Renvoie les données JSON une fois qu'elles sont chargées
+        })
+        .catch(error => {
+            console.error('Erreur:', error); // Gère les erreurs
+            return null; // Retourne null en cas d'erreur
+        });
+}
+</script>
+
+
+
+<script>
+
+const jsonData = {"visites": [{"V_description": "Quality of Life", "fiches": [{"F_description": "SWAL-QOL", "groupes": [{"G_description": "QLQHEAD", "questions": [{"GI_key": "a33e2b20-e08f-4385-8aa7-c3e78d9a46d8", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQYN"}, {"GI_key": "cfb1b069-fd56-4257-a634-7a8c1ed22403", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQDT"}, {"GI_key": "28a020b0-7f39-4a89-a884-1fff396cc9db", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQNO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQNO_R"}, {"GI_key": "6af31c06-cdda-499a-9c33-4fd57c0cccd5", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQEXPDT"}]}, {"G_description": "SWALG1", "questions": [{"GI_key": "cbe17f7f-0908-4238-8a8a-17b7808bef52", "I_description": "Vivre avec mes troubles de d\u00e9glutition est difficile ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL01"}, {"GI_key": "6246ce21-e313-4ef3-898e-6c0099d777ac", "I_description": "Mes probl\u00e8mes de d\u00e9glutition sont une g\u00eane majeure dans ma vie ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL02"}]}, {"G_description": "SWALG2", "questions": [{"GI_key": "b81381a5-ddf1-46e8-9a14-d36bbda6ca5f", "I_description": "Presque tous les jours, je ne fais pas attention si je mange ou pas", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL03"}, {"GI_key": "e30516ed-12ea-4640-b1dc-07442f4cdbf2", "I_description": "Je prends plus de temps que les autres pour manger", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL04"}, {"GI_key": "fa3f9e4c-4c7e-4c02-8133-42be3fb7693f", "I_description": "J'ai rarement faim", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL05"}, {"GI_key": "47e06b8f-499c-4ddb-abac-363f7e12a713", "I_description": "Mon repas me prend beaucoup de temps", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL06"}, {"GI_key": "72116964-0f99-48bb-8f02-3cec610e9368", "I_description": "Je ne prends plus de plaisir \u00e0 manger", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL07"}]}, {"G_description": "SWALG3", "questions": [{"GI_key": "d8ef3d6f-db08-4092-a7ab-d3d1f6769c1a", "I_description": "Je tousse", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL08"}, {"GI_key": "c2a36594-b9a3-4a8d-8c83-dde521be687d", "I_description": "Je m'\u00e9touffe en mangeant des aliments", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL09"}, {"GI_key": "5c432ad1-efdd-4e07-bdb1-c1b5cd02dda1", "I_description": "Je m'\u00e9touffe en buvant", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL10"}, {"GI_key": "33a20981-c8b6-4ab9-8f02-2ba4b68c5583", "I_description": "J'ai une salive \u00e9paisse et/ou des glaires", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL11"}, {"GI_key": "ec385556-a8fa-454d-8fcb-d2802ac231b0", "I_description": "J'ai envie de vomir", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL12"}, {"GI_key": "ec116af8-256d-456c-95db-54df09522a7b", "I_description": "Je me racle la gorge", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL13"}, {"GI_key": "64ef44fa-9b6c-4661-8034-4f0ef5f312f6", "I_description": "J'ai des probl\u00e8mes pour m\u00e2cher", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL14"}, {"GI_key": "cc33204f-1c8f-498f-a7fe-4dd152139bd5", "I_description": "J'ai trop de salive ou de crachats", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL15"}, {"GI_key": "db917bfe-3d4b-4eb6-9a8d-6d1607137623", "I_description": "Je n'arrive pas \u00e0 me d\u00e9gager la gorge", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL16"}, {"GI_key": "ac6d0b1a-95c2-40a2-b480-cd6d62115fc4", "I_description": "Les aliments restent coinc\u00e9s dans ma gorge", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL17"}, {"GI_key": "243fa1ec-30fb-40af-b712-519fc4d33588", "I_description": "Les aliments restent coll\u00e9s dans ma bouche", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL18"}, {"GI_key": "e32ab37f-0477-4a67-9b50-0b42ac8fe7fb", "I_description": "Les aliments ou les liquides ressortent par ma bouche", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL19"}, {"GI_key": "b301385f-e0e2-4d38-88d6-69c812f8f910", "I_description": "Les aliments ou les liquides ressortent par mon nez", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL20"}, {"GI_key": "b632042d-0623-449b-bbf6-e0482e376c7c", "I_description": "Je n'arrive pas \u00e0 tousser quand les aliments sont coinc\u00e9s", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL21"}]}, {"G_description": "SWALG4", "questions": [{"GI_key": "9d4b6a8f-6230-4574-bf85-38f9a4873494", "I_description": "Le choix de mes aliments est difficile", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout \u00e0 fait d'accord</b><br>\ud83d\udd18 2 - <b>D'accord</b><br>\ud83d\udd18 3 - <b>Incertain</b><br>\ud83d\udd18 4 - <b>Pas d'accord</b><br>\ud83d\udd18 5 - <b>Pas du tout d'accord</b>", "I_Status": "", "i_SasName": "SWAL22"}, {"GI_key": "e7f09a41-ec9a-4a10-bde5-481f42a085e2", "I_description": "Il est difficile de trouver une alimentation adapt\u00e9e que j'aime", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout \u00e0 fait d'accord</b><br>\ud83d\udd18 2 - <b>D'accord</b><br>\ud83d\udd18 3 - <b>Incertain</b><br>\ud83d\udd18 4 - <b>Pas d'accord</b><br>\ud83d\udd18 5 - <b>Pas du tout d'accord</b>", "I_Status": "", "i_SasName": "SWAL23"}]}, {"G_description": "SWALG5", "questions": [{"GI_key": "e3d7703e-606e-43cd-a235-f619554aae28", "I_description": "Les gens ont du mal \u00e0 comprendre ce que je dis", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout le temps</b><br>\ud83d\udd18 2 - <b>La plupart du temps</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL24"}, {"GI_key": "0f473771-af61-4e64-919b-733e146d16b9", "I_description": "C'est difficile pour moi de parler clairement", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout le temps</b><br>\ud83d\udd18 2 - <b>La plupart du temps</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL25"}]}, {"G_description": "SWALG6", "questions": [{"GI_key": "d4f872d6-1183-4bb3-99f6-8075b6725f5b", "I_description": "J'ai peur d'\u00e9touffer en mangeant", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL26"}, {"GI_key": "479ceb5e-520e-48c2-a433-50a9e0305903", "I_description": "J'ai peur d'avoir une pneumonie", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL27"}, {"GI_key": "5882e224-945c-471c-ba2f-fcddf44ad584", "I_description": "J'ai peur de m'\u00e9touffer quand je bois", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL28"}, {"GI_key": "4e41af58-b7df-44b1-b9aa-d778406fabbf", "I_description": "Je ne sais jamais si je vais \u00e9touffer", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours</b><br>\ud83d\udd18 2 - <b>Souvent</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL29"}]}, {"G_description": "SWALG7", "questions": [{"GI_key": "4722d716-238d-4f3a-b7c4-afc92714ab63", "I_description": "Ma d\u00e9glutition me d\u00e9prime", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL30"}, {"GI_key": "4d8a8b8f-e8e8-41ce-9437-91b778357d19", "I_description": "Je suis g\u00ean\u00e9(e) par ma d\u00e9glutition", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL31"}, {"GI_key": "04bfbd78-cddc-4737-b5b9-9ea2778711f0", "I_description": "Je suis contrari\u00e9(e) par ma d\u00e9glutition", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL32"}, {"GI_key": "3e7f46bd-799d-4290-9ef0-7ac2c92ed582", "I_description": "Mes probl\u00e8mes de d\u00e9glutition sont frustrants", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL33"}, {"GI_key": "a01b8eba-50e4-4b35-8ebe-c1f85a6e6d4d", "I_description": "Je suis impatient(e) de r\u00e9gler ce probl\u00e8me", "Message": null, "rep": "\ud83d\udd18 1 - <b>Toujours vrai</b><br>\ud83d\udd18 2 - <b>Souvent vrai</b><br>\ud83d\udd18 3 - <b>Parfois vrai</b><br>\ud83d\udd18 4 - <b>Rarement vrai</b><br>\ud83d\udd18 5 - <b>Pas vrai du tout</b>", "I_Status": "", "i_SasName": "SWAL34"}]}, {"G_description": "SWALG8", "questions": [{"GI_key": "ab9f03d4-2e39-46dc-a43c-e6e130df59f1", "I_description": "Je ne mange plus \u00e0 l'ext\u00e9rieur", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout \u00e0 fait d'accord</b><br>\ud83d\udd18 2 - <b>D'accord</b><br>\ud83d\udd18 3 - <b>Incertain</b><br>\ud83d\udd18 4 - <b>Pas d'accord</b><br>\ud83d\udd18 5 - <b>Pas du tout d'accord</b>", "I_Status": "", "i_SasName": "SWAL35"}, {"GI_key": "8ed18f2b-da10-4fab-99a5-a7a1b21dac8f", "I_description": "C'est difficile d'avoir une vie sociale", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout \u00e0 fait d'accord</b><br>\ud83d\udd18 2 - <b>D'accord</b><br>\ud83d\udd18 3 - <b>Incertain</b><br>\ud83d\udd18 4 - <b>Pas d'accord</b><br>\ud83d\udd18 5 - <b>Pas du tout d'accord</b>", "I_Status": "", "i_SasName": "SWAL36"}, {"GI_key": "42ec37bc-52ff-4913-aa9b-8436a30768c8", "I_description": "J'ai chang\u00e9 de travail et/ou de loisirs \u00e0 cause de ces probl\u00e8mes", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout \u00e0 fait d'accord</b><br>\ud83d\udd18 2 - <b>D'accord</b><br>\ud83d\udd18 3 - <b>Incertain</b><br>\ud83d\udd18 4 - <b>Pas d'accord</b><br>\ud83d\udd18 5 - <b>Pas du tout d'accord</b>", "I_Status": "", "i_SasName": "SWAL37"}, {"GI_key": "8f2fe2a3-573d-4440-a928-762435e09f1c", "I_description": "Je ne profite plus des f\u00eates ou des vacances", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout \u00e0 fait d'accord</b><br>\ud83d\udd18 2 - <b>D'accord</b><br>\ud83d\udd18 3 - <b>Incertain</b><br>\ud83d\udd18 4 - <b>Pas d'accord</b><br>\ud83d\udd18 5 - <b>Pas du tout d'accord</b>", "I_Status": "", "i_SasName": "SWAL38"}, {"GI_key": "b4d168d6-2dd8-4e85-b2ab-913c574822d3", "I_description": "Ma position vis \u00e0 vis de ma famille ou de mes amis a chang\u00e9", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout \u00e0 fait d'accord</b><br>\ud83d\udd18 2 - <b>D'accord</b><br>\ud83d\udd18 3 - <b>Incertain</b><br>\ud83d\udd18 4 - <b>Pas d'accord</b><br>\ud83d\udd18 5 - <b>Pas du tout d'accord</b>", "I_Status": "", "i_SasName": "SWAL39"}]}, {"G_description": "SWALG9", "questions": [{"GI_key": "880070f4-ca97-4d6b-a6a2-e150fc2c199d", "I_description": "Je me sens faible", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout le temps</b><br>\ud83d\udd18 2 - <b>La plupart du temps</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL40"}, {"GI_key": "3b73e488-a138-4a27-9971-1c6320a4b566", "I_description": "J'ai des probl\u00e8mes pour dormir", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout le temps</b><br>\ud83d\udd18 2 - <b>La plupart du temps</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL41"}, {"GI_key": "55b9a567-faa5-42a8-9a50-f3f2cebbeca2", "I_description": "Je suis fatigu\u00e9(e)", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout le temps</b><br>\ud83d\udd18 2 - <b>La plupart du temps</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL42"}, {"GI_key": "23c13d9a-6934-49fc-b127-7491d7786c4f", "I_description": "Je me r\u00e9veille la nuit", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout le temps</b><br>\ud83d\udd18 2 - <b>La plupart du temps</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL43"}, {"GI_key": "41f55fea-3a68-4c4c-993b-b9164de2bc24", "I_description": "Je me sens \u00e9puis\u00e9(e)", "Message": null, "rep": "\ud83d\udd18 1 - <b>Tout le temps</b><br>\ud83d\udd18 2 - <b>La plupart du temps</b><br>\ud83d\udd18 3 - <b>Parfois</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "SWAL44"}]}, {"G_description": "SWALG10", "questions": [{"GI_key": "ddb9ebff-911d-4450-9a43-ac4abc01cc4a", "I_description": "Quelqu'un vous a t'il aid\u00e9 \u00e0 remplir ce questionnaire ?", "Message": null, "rep": "\ud83d\udd18 0 - <b>Non, je l'ai fait seul</b><br>\ud83d\udd18 1 - <b>Oui quelqu'un m'a aid\u00e9</b>", "I_Status": "", "i_SasName": "SWAL45"}, {"GI_key": "a5a310b8-09be-4830-9b19-c0d6656c71fc", "I_description": "Si quelqu'un vous a aid\u00e9, comment l'a t'il fait ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Il a lu les questions et \u00e9crit vos r\u00e9ponses</b><br>\ud83d\udd18 2 - <b>A r\u00e9pondu aux questions pour vous ?</b><br>\ud83d\udd18 3 - <b>A fait autre chose</b>", "I_Status": "", "i_SasName": "SWAL46"}]}]}]}]};
+
+function setupExportButton() {
+    const exportButton = document.getElementById("export");
+    if (!exportButton) {
+        console.error("Bouton avec l'ID 'export' introuvable !");
+        return;
+    }
+
+    exportButton.addEventListener("click", () => {
+        const dataStr = `const jsonData = ${JSON.stringify(jsonData, null, 2)};`; // Conversion en JavaScript formaté
+        const blob = new Blob([dataStr], { type: "application/javascript" }); // Création d'un blob de type JS
+        const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "modifications.js"; // Nom du fichier à télécharger
+        document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
+        a.click(); // Téléchargement
+        document.body.removeChild(a); // Suppression de l'élément
+        URL.revokeObjectURL(url); // Libération de l'URL temporaire
+    });
+}
+
+// Appeler la fonction pour lier l'événement au bouton après le chargement du DOM
+setupExportButton();
+
+
+function addOldValueToGIKey(jsonData, targetGIKey, varname, oldValue) {
+    jsonData.visites.forEach(visit => {
+        visit.fiches.forEach(fiche => {
+            fiche.groupes.forEach(groupe => {
+                groupe.questions.forEach(question => {
+                    if (question.GI_key === targetGIKey) {
+                        if (question.hasOwnProperty(varname)) {
+                            question[`${varname}_new`] = oldValue; // Ajoute un champ oldValue à la variable spécifiée
+                        }
+                    }
+                });
+            });
+        });
+    });
+}
+
+const exportData  = {};
+const sidebarLinks = document.getElementById('sidebar-links');
+const mainContent = document.getElementById('main-content');
+
+// Générer les liens dynamiquement à partir des visites et fiches
+jsonData.visites.forEach((visite, visitIndex) => {
+    const vindex= `v${visitIndex}`
+    visite.visitIndex = visitIndex;
+
+    // Créer un lien pour la visite
+    const visitLink = document.createElement('a');
+    visitLink.href =`#${vindex}`;
+    visitLink.style = "background-color: #ADD8E6; color: black; padding: 5px; border-radius: 5px; text-decoration: none;";
+    visitLink.className = `visit`;
+    visitLink.innerText = `${visitIndex + 1}: ${visite.V_description}`;
+	generateFiches(visite,vindex);  
+    visitLink.addEventListener('click', () => {
+        console.log(visitLink.href)
+        visibleonly(jsonData, 'visite', vindex);
+    });
+    sidebarLinks.appendChild(visitLink);
+
+    // Parcourir les fiches de la visite
+    visite.fiches.forEach((fiche, ficheIndex) => {
+        const findex=`v${visitIndex}f${ficheIndex}`;
+        fiche.ficheIndex = findex;
+
+        // Créer un lien pour la fiche
+        const ficheLink = document.createElement('a');
+        ficheLink.href = `#${findex}`;
+        ficheLink.className = `form`; // Utilisez `className` ici
+        ficheLink.style="margin-left: 20px;"
+        ficheLink.innerText = `${ficheIndex + 1}: ${fiche.F_description}`;
+        ficheLink.addEventListener('click', () => {
+            visibleonly(visite, 'fiche', findex);
+        });
+        sidebarLinks.appendChild(ficheLink);
+    });
+});
+
+// Fonction visibleonly
+function visibleonly(data, type, index) {
+
+
+    if (type === 'visite') {
+
+        let h1list = document.getElementsByTagName('h1');
+
+        for (let visit of h1list) {
+        // Gérer la visibilité des visites
+       
+       if (visit.id==index){
+        console.log("analyse de",visit,'trouvé',index);
+        visit.classList.remove('hidden');
+        visit.classList.add('show');
+        } else {
+            console.log("analyse de",visit,'caché' , index);
+            visit.classList.remove('show');
+            visit.classList.add('hidden');
+        }
+
+
+
+        };
+
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+            sectionid=section.id.split('f')[0];;
+            if (sectionid==index) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+            }
+        else {
+                section.classList.remove('show');
+                section.classList.add('hidden');
+            }
+        }
+
+
+
+    } else if (type === 'fiche') {
+
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+            sectionid=section.id;
+            if (sectionid==index) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+            }
+        else {
+                section.classList.remove('show');
+                section.classList.add('hidden');
+            }
+        }
+
+    }
+}
+
+
+
+        // Fonction pour ajouter l'écouteur d'événements de manière globale
+function addGlobalClickListener() {
+    document.addEventListener('click', (event) => {
+        
+        if (event.target && (event.target.innerHTML === '✏️' || event.target.innerHTML === '💾')) {
+            
+        originID=event.target.getAttribute("id").substr(3); 
+
+        td0 = document.getElementById('td0' + originID); 
+        td1 =  document.getElementById('td1' + originID); 
+        But =  document.getElementById("But" + originID); 
+    
+        aeraID ='ARE' + originID;
+        
+
+
+        if (event.target && event.target.innerHTML === '✏️') {
+           
+            //    console.log(event.target)
+            previousTXT=td1.innerText;
+            // addOldValueToGIKey(jsonData, originID, "Old_data", previousTXT);
+     
+        //     // Remplacer le texte statique par un champ texte (textarea)
+            td1.innerHTML = '';  // Supprimer l'ancien texte
+            const inputField = document.createElement('textarea');
+            inputField.id =  aeraID;
+            inputField.innerText = previousTXT || '';  // Valeur actuelle
+            td1.appendChild(inputField);
+
+        //     // Créer un bouton "Save"
+        console.log(td0)
+            td0.innerHTML = '';
+            const savebutton= document.createElement('button');
+            savebutton.id="But" + originID;          
+            savebutton.innerHTML = '💾';
+
+            td0.appendChild(savebutton);
+        }
+            // Quand on clique sur "Save", sauvegarder la modification
+            if (event.target && event.target.innerHTML === '💾') {
+                modifyTXT = document.getElementById(aeraID).value; 
+                addOldValueToGIKey(jsonData, originID, "I_description", modifyTXT);
+                console.log(jsonData)
+                if (!exportData[originID]) {
+                    exportData[originID] = [modifyTXT];
+    }
+
+                td1.innerHTML = '';
+                const tdsimple= document.createElement('td');
+                tdsimple.id='td1' + originID;
+                tdsimple.innerHTML=modifyTXT;
+                console.log(tdsimple)
+                td1.appendChild(tdsimple);  // Ajouter tdsimple comme enfant de td1
+
+
+               
+              
+                
+                // td1.appendChild(modifyTXT);
+
+                // QuestionID.innerText = modifyTXT;  // Mettre à jour la valeur de la question
+                td0.innerHTML = '';
+
+                const modbutton= document.createElement('button');
+                modbutton.id="But" + originID;          
+                modbutton.innerHTML = '✏️';
+                td0.appendChild(modbutton);
+  // Ajouter le bouton "Modifier"
+            }
+}});
+         }
+         addGlobalClickListener()        
+// Fonction pour générer les fiches
+function generateFiche(fiche, activate, fid) {
+    // Créer la section
+    const section = document.createElement('section');
+    section.id = `${fid}`;
+
+    const h2 = document.createElement('h2');
+        h2.innerText = fiche.F_description;
+        section.appendChild(h2);
+    // Parcourir les groupes
+    fiche.groupes.forEach(groupe => {
+        // Ajouter un titre pour le groupe
+        const h3 = document.createElement('h3');
+        h3.innerText = groupe.G_description;
+        section.appendChild(h3);
+
+        // Créer une table pour les questions
+        const table = document.createElement('table');
+
+        // Ajouter l'en-tête de la table
+        const headerRow = document.createElement('tr');
+        const th0 = document.createElement('th');
+        th0.innerText = '🛠️';
+        th0.style.width = '1px';
+        th0.style.whiteSpace = 'nowrap';
+
+        const th1 = document.createElement('th');
+        th1.innerText = 'Question Description';
+
+        const th2 = document.createElement('th');
+        th2.innerText = 'Response';
+
+        headerRow.appendChild(th0);
+        headerRow.appendChild(th1);
+        headerRow.appendChild(th2);
+        table.appendChild(headerRow);
+
+        // Ajouter les lignes pour chaque question
+        groupe.questions.forEach(question => {
+            const row = document.createElement('tr');
+
+            // Colonne pour l'outil
+            const td0 = document.createElement('td');
+            td0.id = `td0${question.GI_key}`;
+            const editButton = document.createElement('button');
+            editButton.innerHTML = '✏️';
+            editButton.id = `But${question.GI_key}`;
+            td0.appendChild(editButton);
+
+            // Colonne pour la description
+            const td1 = document.createElement('td');
+            td1.innerHTML = question.I_description || 'N/A';
+            td1.id = `td1${question.GI_key}`;
+
+            // Colonne pour la réponse
+            const td2 = document.createElement('td');
+            td2.innerHTML = question.rep || 'N/A';
+
+            // Ajouter les colonnes à la ligne
+            row.appendChild(td0);
+            row.appendChild(td1);
+            row.appendChild(td2);
+
+            // Ajouter la ligne au tableau
+            table.appendChild(row);
+        });
+
+        // Ajouter la table à la section
+        section.appendChild(table);
+    });
+
+    // Ajouter la section au contenu principal
+    mainContent.appendChild(section);
+}
+
+
+window.addEventListener('beforeunload', (event) => {
+    // Vous pouvez définir un message personnalisé (en fonction du navigateur, il peut ne pas s'afficher)
+    const message = "Êtes-vous sûr de vouloir quitter cette page ? Toutes les modifications non enregistrées seront perdues.";
+
+    // Certains navigateurs ne tiennent pas compte du message personnalisé,
+    // mais l'événement doit être annulé pour afficher l'avertissement.
+    event.returnValue = message;  // Standard
+    return message;  // Pour certains navigateurs (comme Chrome)
+});
+        // Function to generate all fiches for a visit
+        function generateFiches(visite,vid) {
+
+            const h1 = document.createElement('h1');
+            h1.innerText = visite.V_description;
+            h1.id = `${vid}`
+            mainContent.appendChild(h1);
+     
+            n=0
+            activate=true;
+            Fidex=0
+
+            visite.fiches.forEach(fiche => {               
+                generateFiche(fiche,activate,`${vid}f${Fidex}`); // Use the same function to generate each fiche in the visit
+                Fidex += 1;
+                activate=false;
+
+
+                
+            });
+      
+        }
+
+    
+
+    </script>
+</body>
+
+</html>
