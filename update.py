@@ -3,14 +3,14 @@ import re
 import sys     
 import os
 import json
-from bs4 import BeautifulSoup
-from docx import Document
-from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH  # Assurez-vous d'ajouter cette importation
-from docx.enum.text import WD_BREAK  # Importation pour les sauts de page
+# from bs4 import BeautifulSoup
+# from docx import Document
+# from docx.shared import Pt
+# from docx.enum.text import WD_ALIGN_PARAGRAPH  # Assurez-vous d'ajouter cette importation
+# from docx.enum.text import WD_BREAK  # Importation pour les sauts de page
 
-from docx.oxml import OxmlElement
-from docx.oxml.ns import qn
+# from docx.oxml import OxmlElement
+# from docx.oxml.ns import qn
 
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
