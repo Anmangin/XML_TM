@@ -28,6 +28,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install openpyxl
+        pip install -r Python/requirements.txt
 
     # 4. Exécuter le script Python sur chaque fichier XML du répertoire data/
     - name: Run XML to Markdown script
