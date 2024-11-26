@@ -501,7 +501,7 @@ def main():
     
     final_export_0=contenu_html.replace("// <JSONDATA>",customjs)
     final_export=final_export_0.replace("/* <css></css> */",css)
-    with open( f"{output_path}/HTML/{file_name}.html" , 'w', encoding='utf-8') as f:
+    with open( f"{output_path}/docs/Templates/{file_name}.html" , 'w', encoding='utf-8') as f:
         f.write(final_export)
 
     

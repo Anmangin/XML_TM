@@ -35,6 +35,7 @@ jobs:
         for file in INFILE/XML/*.xml; do
           python update.py "$file"
         done
+        python generate_index.py
 
     # 5. Ajouter et commettre le fichier Markdown généré
     - name: Commit and push changes

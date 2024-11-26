@@ -1,0 +1,6 @@
+openpyxl
+markdown
+python-docx
+beautifulsoup4
+docx
+bs4

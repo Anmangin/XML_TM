@@ -213,3 +213,8 @@ code {
 .show {
     display: block !important;; /* Affiche l'élément en tant que bloc */
 }
+@media print {
+    .sidebar {
+      display: none;
+    }
+  }
