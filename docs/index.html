@@ -113,6 +113,22 @@
     <li><a href="Templates/Eponimous - Protocol deviation.html">Eponimous - Protocol deviation.html</a></li>
     <li><a href="Templates/Eponimous - RECIST.html">Eponimous - RECIST.html</a></li>
   </ul>
+<button id="report-issue">Report an Issue</button>
 
+<script>
+  document.getElementById("report-issue").onclick = function () {
+    // Exemple de données collectées
+    const question = "Question Example"; // Remplacer par vos valeurs dynamiques
+    const fiche = "Fiche Example";
+
+    // Générer une URL préremplie pour GitHub Issues
+    const githubUrl = `https://github.com/<votre-repo>/issues/new?title=Problème:%20${encodeURIComponent(
+      question
+    )}&body=Fiche:%20${encodeURIComponent(fiche)}`;
+
+    // Redirige l'utilisateur vers la page
+    window.open(githubUrl, "_blank");
+  };
+</script>
 </body>
 </html>
