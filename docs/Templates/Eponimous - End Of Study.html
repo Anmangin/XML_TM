@@ -262,7 +262,7 @@ code {
 
 <script>
 
-const jsonData = {};
+const jsonData = {"visites": [{"V_description": "End of Study", "fiches": [{"F_description": "End of Study", "groupes": [{"G_description": "EOS", "questions": [{"GI_key": "9066763a-fba3-454c-96ab-18810dd619d7", "I_description": "Date of end of study", "Message": null, "rep": null, "I_Status": "", "i_SasName": "EOSDT"}, {"GI_key": "98edd2b9-8a17-4cb5-adea-00b1b52b462f", "I_description": "Reason for end of study", "Message": null, "rep": "\ud83d\udd18 1 - <b>End of study as defined by the protocol</b><br>\ud83d\udd18 2 - <b>Death</b><br>\ud83d\udd18 3 - <b>Consent withdrawal</b><br>\ud83d\udd18 4 - <b>Lost to Follow-Up</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "EOS_R"}, {"GI_key": "a9c78c8b-ce82-4011-8d03-4f976acb62dd", "I_description": "If other, specify", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[EOS.*][EOS_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[EOS][EOS_R] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "EOS_S"}]}]}]}]};
 
 function setupExportButton() {
     const exportButton = document.getElementById("export");

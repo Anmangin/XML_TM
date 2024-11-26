@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+     <style>
+        /* Global Styles */
+body {
+    max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
+    margin: 0 auto; /* Centre le contenu horizontalement */
+    padding: 0; /* Pas de marge interne supplémentaire */
+    font-family: 'Arial', sans-serif; /* Police standard Word */
+    line-height: 1.5; /* Espacement de ligne standard dans Word */
+    box-sizing: border-box; /* Garantit que le padding n'ajoute pas à la largeur */
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding-top: 20px;
+    padding-left: 10px;
+    overflow-y: auto;
+    border-right: 2px solid #ccc;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Sidebar Links */
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+}
+
+
+/* Styles généraux de la sidebar */
+.sidebar {
+    width: 300px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-right: 2px solid #ccc;
+}
+
+.sidebar a {
+    display: block;
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+}
+
+/* Ajouter une indentation pour les titres H2 dans la sidebar */
+.sidebar a {
+    padding-left: 0;
+}
+
+.sidebar a[data-target^="h2"] {
+    padding-left: 20px;  /* Indentation pour les titres H2 */
+}
+
+
+
+/* Contenu Principal */
+.content {
+    margin-left: 50px; /* Décalage pour laisser de la place à la sidebar */
+    padding: 20px;
+    background-color: #fff;
+    min-height: 100vh;
+    width:100%;
+}
+
+section {
+
+    display: none;  
+}
+h1 {
+display: none;
+}
+/* Titre */
+h2, h3 {
+    color: #3b7bc0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 14px;
+    text-align: left; /* Aligne le texte à gauche */
+    background-color: #3b7bc0; /* Couleur de fond bleue */
+    color: white; /* Couleur du texte */
+    padding: 10px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    margin: 10px 0; /* Espacement externe (haut et bas) */
+    display: block; /* Assure que l'élément prend toute la largeur disponible */
+    width: 100%; /* Assure que l'élément couvre toute la largeur */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+th, td {
+     padding: 3px 5px; 
+    text-align: left;
+     border: 1px solid #dee2e6; 
+}
+
+th {
+    background-color: #3b7bc0;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+td {
+    vertical-align: center;
+    font-size: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+/* Highlight Specific Content */
+td b {
+    color: #dc3545; /* Red for emphasis */
+}
+
+/* Details/Notes */
+details {
+    font-size: 0.9rem;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+    color: #495057;
+}
+
+/* List and Possible Responses */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+/* Icon Styling */
+td.center {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+td .red {
+    color: rgba(255, 0, 0, 0.322);
+}
+
+/* Footnotes and Notes */
+p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #6c757d;
+    text-align: center;
+}
+
+code {
+    background-color: #f8f9fa;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+
+
+/* Cacher les sections avec la classe "hidden" */
+.hidden {
+    display: none !important;; /* Cache complètement l'élément */
+}
+
+/* Montrer les sections avec la classe "show" */
+.show {
+    display: block !important;; /* Affiche l'élément en tant que bloc */
+}
+@media print {
+    .sidebar {
+      display: none;
+    }
+  }
+     </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button id="export">Enregistrer les modifications</button>
+        <h3>Table des matières</h3>
+        <div id="sidebar-links"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="main-content">
+    </div>
+
+    <script>
+        function loadJSON(filePath) {
+    return fetch(filePath) // Charge le fichier JSON à partir du chemin spécifié
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement du fichier JSON');
+            }
+            return response.json(); // Parse le contenu du fichier JSON
+        })
+        .then(data => {
+            return data; // Renvoie les données JSON une fois qu'elles sont chargées
+        })
+        .catch(error => {
+            console.error('Erreur:', error); // Gère les erreurs
+            return null; // Retourne null en cas d'erreur
+        });
+}
+</script>
+
+
+
+<script>
+
+const jsonData = {"visites": [{"V_description": "Registration", "fiches": [{"F_description": "Inclusion Criteria", "groupes": [{"G_description": "REGIC", "questions": [{"GI_key": "99750b6b-f904-4772-ad46-eaefa7d89cc9", "I_description": "IC01", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC01]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC01]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC01"}, {"GI_key": "d9ebd52a-ec50-4c12-a110-22e8d3fc6595", "I_description": "REGIC02", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC02]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC02]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC02"}, {"GI_key": "e1f837d6-345f-4696-ba50-50a9a3a7623a", "I_description": "REGIC03", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC03]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC03]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC03"}, {"GI_key": "e1fff255-f31d-48f4-9761-a6891c5e2595", "I_description": "REGIC04", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC04]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC04]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC04"}, {"GI_key": "ec9eca22-de95-4873-9ebc-55a123bea942", "I_description": "REGIC05", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC05]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC05]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC05"}, {"GI_key": "5a1c63d5-b676-4eeb-b1fb-f72297c7f369", "I_description": "REGIC06", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC06]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC06]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC06"}, {"GI_key": "3abbc906-bc77-4819-b1a7-9ed2442cb35c", "I_description": "REGIC07", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC07]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC07]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC07"}, {"GI_key": "1b75d1a9-afeb-4427-acd5-50e9ce60a480", "I_description": "REGIC08", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC08]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC08]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC08"}, {"GI_key": "4e8632dc-e8f0-46b1-9f48-f2f838b47de3", "I_description": "REGIC09", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC09]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC09]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC09"}, {"GI_key": "781330f1-4a7e-405e-aa24-f605f8415bfb", "I_description": "REGIC10", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC10]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC10]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC10"}, {"GI_key": "e83947c0-d9f9-435f-a462-f0cc74489a0b", "I_description": "REGIC11", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC11]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC11]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC11"}, {"GI_key": "74e7898d-7504-4936-bfdd-b0456a404c1a", "I_description": "REGIC12", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC12]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC12]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC12"}, {"GI_key": "6f838991-387d-40ff-8292-96fe0262632d", "I_description": "REGIC13", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC13]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC13]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC13"}, {"GI_key": "54f8f37c-2926-4c2f-a5f7-6f67e8ed7d0b", "I_description": "REGIC14", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC14]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC14]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC14"}, {"GI_key": "957c0d7d-babe-4062-b7a4-b43ef104bfac", "I_description": "REGIC15", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGIC15]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGIC15]!='0'; \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGIC15"}]}]}, {"F_description": "Non inclusion Criteria", "groupes": [{"G_description": "REGEC", "questions": [{"GI_key": "f49cc13d-3f10-4871-915d-c296ef6031d7", "I_description": "REGEC01", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC01]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC01]!='1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC01"}, {"GI_key": "1e190d7f-5e4e-4357-84a9-06b8b169d40e", "I_description": "REGEC02", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC02]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC02] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC02"}, {"GI_key": "d67212e2-d696-43bd-8149-1d3fae214464", "I_description": "REGEC03", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC03]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC03] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC03"}, {"GI_key": "1f451f12-471f-4b95-a11a-a067078200d4", "I_description": "REGEC04", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC04]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC04] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC04"}, {"GI_key": "ccce241e-2273-4b92-8de8-37467ad35dfa", "I_description": "REGEC05", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC05]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC05] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC05"}, {"GI_key": "761b78c7-b3e4-42ef-8029-59e4984b9160", "I_description": "REGEC06", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC06]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC06] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC06"}, {"GI_key": "20ed7cd4-9b4b-4c53-a18d-5a5e4b2eb964", "I_description": "REGEC07", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC07]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC07] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC07"}, {"GI_key": "95d51006-ff19-425a-8e1b-1317daad3488", "I_description": "REGEC08", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC08]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC08] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC08"}, {"GI_key": "9d50b91f-4df0-4558-a133-cf81d2df855d", "I_description": "REGEC09", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC09]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC09] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC09"}, {"GI_key": "e8c12021-336a-441c-b96b-cd03bf0a3d11", "I_description": "REGEC10", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC10]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC10] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC10"}, {"GI_key": "db85c650-cb83-4bfc-b702-55494fd81a10", "I_description": "REGEC11", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC11]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC11] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC11"}, {"GI_key": "7b048527-767b-4c3a-8f88-096821cae310", "I_description": "REGEC12", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC12]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC12] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC12"}, {"GI_key": "9198c295-9235-446d-b1cd-d8683d69b8c3", "I_description": "REGEC13", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC13]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC13] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC13"}, {"GI_key": "3e2d1eeb-fbaf-496e-89f6-5b65ca64071f", "I_description": "REGEC14", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC14]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC14] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC14"}, {"GI_key": "bfd93ac1-51ac-45bf-bbfb-10a491c0a1e6", "I_description": "REGEC15", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[REGEC15]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[REGEC15] != '1' \n#data Expression \n \n</code></pre> </td><td> Protocol deviation detected, please verify.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEC15"}]}]}, {"F_description": "Registration request", "groupes": [{"G_description": "REGCT", "questions": [{"GI_key": "2c404953-987d-4924-a774-eaa9dd92258a", "I_description": "Center", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGCENTE"}, {"GI_key": "4ef3a926-29fe-498c-86a7-9f0d1adf7a19", "I_description": "CRA's name", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGCRA"}, {"GI_key": "f42afd17-cab6-4431-9ab1-9433e9974e50", "I_description": "Investigator's  name", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 22:[Trial Template][Site template][Patient Template][Registration.*][3-Registration request.*][REGCT.*][REGINV]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar incl = [Trial Template][Site template][SITE][LISTINV][INVSYS].ALL;\n\nvar invList = DeleteNullInArray(incl );\n\n//pour afficher les noms des investigateurs dans l'ordre alphab\u00e9tique :\ninvList.sort();\ninvList; \n</code></pre> </td><td> </td> </tr><tr><td> Valid:[Trial Template][Site template][Patient Template][Registration.*][3-Registration request.*][REGCT.*][REGINV]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar selected=[Trial Template][Site template][Patient Template][Registration][3-Registration request][REGCT][REGINV];\nvar madate=TodayDate();\nvar enreg=[Trial Template][Site template][Patient Template][Registration][4-Registration result][REGRRESG][REGENROLLDT];\n\nif (!isEmpty(enreg)) madate=enreg;\nvar AR_listINv=[Trial Template][Site template][SITE][LISTINV][INVSYS].ALL;\nvar AR_desacdate=[Trial Template][Site template][SITE][LISTINV][INVDAT].ALL;\n\nvar lignepat;\nvar desac_dt;\nvar i;\nvar valid=true;\nfor (i = 0; i < AR_listINv.length; i++) {\n    lignepat=ReturnEntryAtPosition(AR_listINv,i);\n    desac_dt=ReturnEntryAtPosition(AR_desacdate,i);\nif (lignepat==selected && !isEmpty(desac_dt) &&  madate>desac_dt )  valid=false;\n}\n\nvalid; \n#data Expression \n \n</code></pre> </td><td> This Investigator is desactivated</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "REGINV"}]}, {"G_description": "REGOTHERQ", "questions": [{"GI_key": "9750469c-6dcf-4b36-9be6-f8e102741e12", "I_description": "Additional question 1", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEOPTN"}, {"GI_key": "8f60c4f4-8cea-477d-96b2-df5b8ff292c1", "I_description": "Additional question 2", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGEOPT2"}]}, {"G_description": "REGTAS", "questions": [{"GI_key": "6e7c9999-75f6-4126-aa5a-f65e3d3a9447", "I_description": "Planned start date of treatment", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGPLSDT"}]}, {"G_description": "REGREQCC", "questions": [{"GI_key": "c485f10a-bf37-4d11-9a03-be9c9b2d007e", "I_description": "<font color=\"#808080\">Inclusion request date</font>", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "REGENRRE"}, {"GI_key": "b7729fb9-4a68-4f6f-90ab-073184bf7842", "I_description": "<i><font color=\"#808080\">Checks are ok for the form 1: inclusion criteria</font></i>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Patient Template][Registration.*][3-Registration request.*][REGREQCC.*][REGCHECKIC]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar res=0;\n var ar = new Array(\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC01],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC02],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC03],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC04],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC05],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC06],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC07],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC08],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC09],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC10],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC11],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC12],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC13],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC14],\n[Patient Template][Registration][1-Inclusion Criteria][REGIC][REGIC15]);\n\nif (!arrayAnyEmpty(ar) && !arrayAnyRep(ar,0) ) res=1;\n\nres; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "\ud83d\udd12", "i_SasName": "REGCKIC"}, {"GI_key": "0f655421-17f4-485e-bda7-395ecd04ec3f", "I_description": "<i><font color=\"#808080\">Checks are ok for the form 2: non inclusion criteria</font></i>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Patient Template][Registration.*][3-Registration request.*][REGREQCC.*][REGCHECKEC]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar res=1;\n var ar = new Array(\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC01],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC02],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC03],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC04],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC05],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC06],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC07],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC08],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC09],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC10],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC11],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC12],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC13],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC14],\n[Patient Template][Registration][2-Non inclusion Criteria][REGEC][REGEC15]\n\n);\n\nif (!arrayAnyEmpty(ar) && !arrayAnyRep(ar,1) ) res=1;\n\nres; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "\ud83d\udd12", "i_SasName": "REGCHECK"}, {"GI_key": "62b117ff-8097-4cfd-bda8-47ee0127640b", "I_description": "<i><font color=\"#808080\">Checks are ok for the form 3: inclusion request</font></i>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Patient Template][Registration.*][3-Registration request.*][REGREQCC.*][REGCHECKREQ]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar rep = 0;\n\nif (\n!isEmpty([Patient Template][Registration][3-Registration request][REGCT][REGCRA]) &&\n!isEmpty([Patient Template][Registration][3-Registration request][REGCT][REGINV]) && \n!isEmpty([Patient Template][Registration][3-Registration request][REGTAS][REGPLSDT])\n ) rep=1;\nrep; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "\ud83d\udd12", "i_SasName": "CHECKRE1"}, {"GI_key": "ba136038-a674-439c-9d77-ec835ea1cd0b", "I_description": "<i><font color=\"#808080\">Hard Checks are ok for the inclusion</font></i>", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "DM_BYPAS"}, {"GI_key": "93dc8b7f-6a34-4d3c-ae4c-3eba2699207d", "I_description": "<i><font color=\"#808080\">Final check: authorisation to include the patient (without procotol deviation)</font></i><font color=\"#808080\">", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[3-Registration request.*][REGREQCC.*][REGFCHECK]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar rep=0;\nif (\n(\n[3-Registration request][REGREQCC][REGCHECKIC]==\"1\" &&\n[3-Registration request][REGREQCC][REGCHECKEC]==\"1\" && \n[3-Registration request][REGREQCC][REGCHECKREQ] == \"1\" ) ||\n[3-Registration request][REGREQCC][DM BYPASS Check] == \"1\"\n\n)rep=1;\nrep; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "\ud83d\udd12", "i_SasName": "REGFCHEC"}]}, {"G_description": "REGCRACONF", "questions": [{"GI_key": "801d6c09-cc11-451f-9d25-42793dcfb608", "I_description": "Status of the request", "Message": null, "rep": "\ud83d\udd18 1 - <b>Proceed with the inclusion (no protocol deviation)</b><br>\ud83d\udd18 2 - <b>Proceed with the inclusion in spite of protocol deviation(s)</b><br>\ud83d\udd18 0 - <b>Do not proceed with the inclusion (screen failure)</b>", "I_Status": "", "i_SasName": "REGREQST"}, {"GI_key": "41a59956-7da8-4273-9529-7bce2b0527b1", "I_description": "Please verify:", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGDISCO"}, {"GI_key": "1757e1e5-f957-473c-82e2-6954061a88e1", "I_description": "I confirm that all information are exact", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 21:[Patient Template][Registration.*][3-Registration request.*][REGCRACONF.*][REGREQCONF]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Patient Template][Registration][3-Registration request][REGREQCC][REGFCHECK]!=\"1\" && [Patient Template][Registration][3-Registration request][REGCRACONF][REGREQSTATUS] =='0'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "REGREQCO"}]}, {"G_description": "REGWAIV", "questions": [{"GI_key": "1d483528-cc15-4508-9aca-834adf8dc7d1", "I_description": "<i>The criteria entered are not consistent with the criteria required.</i>", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGWAIVC"}, {"GI_key": "6a2cbbbe-b009-474e-914e-b3c68a3d5c24", "I_description": "Name of the investigator", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGWAIVI"}, {"GI_key": "1cb68160-0d5e-4769-a058-c66dc806eac3", "I_description": "Description of the deviation", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGWAIV_"}]}, {"G_description": "REGSF", "questions": [{"GI_key": "b5e3ff9e-a209-4241-80e9-885976577106", "I_description": "Reason for screen failure", "Message": null, "rep": "\ud83d\udd18 1 - <b>Reason 1</b><br>\ud83d\udd18 2 - <b>Reason 2</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "REGSF_R"}, {"GI_key": "8bba8e47-f84d-439c-af7c-0e607dff16b0", "I_description": "If other, specify", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGSF_S"}]}]}, {"F_description": "Registration result", "groupes": [{"G_description": "REGRRESG", "questions": [{"GI_key": "cb3a337f-fbc2-445a-83cd-e64149a11925", "I_description": "Arm", "Message": null, "rep": "\ud83d\udd18 1 - <b>TRT 1</b><br>\ud83d\udd18 2 - <b>TRT2</b>", "I_Status": "\ud83d\udd12", "i_SasName": "REGARM"}, {"GI_key": "41390e1b-ade5-47da-b554-e808f2080cae", "I_description": "Date of inclusion", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Patient Template][Registration.*][4-Registration result.*][REGRRESG.*][REGENROLLDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar dt = [Patient Template][Registration][4-Registration result][REGRRESG][REGENROLLDT];\nisEmpty(dt); \n#data Expression \nTodayDate(); \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "REGENROL"}, {"GI_key": "203e8d4c-56c3-4df5-96b6-725f0911065f", "I_description": "Number", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Trial Template][Site template][Patient Template][Registration.*][4-Registration result.*][REGRRESG.*][REGENROLLID]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Trial Template][Site template][Patient Template][Registration][4-Registration result][REGRRESG][REGCORYN] == '1'; \n#data Expression \n[Trial Template][Site template][Patient Template][PAT][Patient Information][Patient Number]; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "ENROLLI1"}, {"GI_key": "0e4b2abd-6827-4e0b-909e-5b5c245c1ea3", "I_description": "REGFLAGNOTIF", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Trial Template][Site template][Patient Template][Registration.*][4-Registration result.*][REGRRESG.*][REGFLAGNOTIF]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \n\"1\"; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "\ud83d\udc7b\ud83d\udd12", "i_SasName": "REGFLAGN"}, {"GI_key": "ac241857-1a84-4cf6-84c9-424e145556f4", "I_description": "Correction of inclusion criteria", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGCORYN"}, {"GI_key": "c6321f1a-8fdb-464a-a1d2-0aae1c6e1ce7", "I_description": "Resend notification ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGRESEN"}, {"GI_key": "7868b264-2d11-4118-a8e8-7369f6fb8a17", "I_description": "Remove read only", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Email:[Trial Template][Site template][Patient Template][Registration.*][4-Registration result.*][REGRRESG.*][REGRREAD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nisEmpty([Trial Template][Site template][Patient Template][Registration][4-Registration result][REGRRESG][REGFLAGNOTIF]) || [Trial Template][Site template][Patient Template][Registration][4-Registration result][REGRRESG][REGRESEND] == \"1\"; \n#data Expression \n<m><s>[Trial Template][TRIAL][Trial][Trial Name] +  ' : New patient '  + [Trial Template][Site template][Patient Template][PAT][Patient Information][Patient Number] + ' has been registred'</s><b>'<h1>Patient Registration Notification</h1><p>Dear Team,</p><p>We are pleased to inform you that a new patient has been successfully registered in the clinical trial <strong>' + [Trial Template][TRIAL][Trial][Trial Name] + '</strong>.</p><p><strong>Patient Details:</strong></p><ul><li><strong>Patient ID:</strong> ' + [Trial Template][Site template][Patient Template][PAT][Patient Information][Patient Number] + '</li><li><strong>Registration Date:</strong> ' + [Trial Template][Site template][Patient Template][Registration][4-Registration result][REGRRESG][REGENROLLDT] + '</li><li><strong>Site:</strong> ' + [Trial Template][Site template][SITE][Site Information][Site Caption] + '</li></ul><p>Please ensure that all subsequent procedures are performed in accordance with the trial protocol.</p><p>If you have any questions, feel free to contact the study coordinator.</p><p>Best regards,</p><p>the ' + [Trial Template][TRIAL][Trial][Trial Name] + ' team</p><p>This is an automated message. Please do not reply directly to this email.</p><p>For assistance, contact us the study data manager.</p>'</b><pt>f5421ebb-05ef-4cac-8b08-e3d9d0a6002d</pt><pl>2</pl></m> \n</code></pre> </td><td> Registration Notification</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "REGRREAD"}]}]}, {"F_description": "Correction of registration criteria", "groupes": [{"G_description": "REGCOR_G", "questions": [{"GI_key": "78771dac-e069-4b81-aeee-0f294a7aad90", "I_description": "What is the correction related to?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Reason N\u00b01</b><br>\ud83d\udd18 98 - <b>Stratification criteria AND Other</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "REGCOR_R"}, {"GI_key": "c128110a-b25f-4002-9101-855bd1b4f231", "I_description": "If other, specify", "Message": null, "rep": null, "I_Status": "", "i_SasName": "REGCOR_S"}]}]}]}]};
+
+function setupExportButton() {
+    const exportButton = document.getElementById("export");
+    if (!exportButton) {
+        console.error("Bouton avec l'ID 'export' introuvable !");
+        return;
+    }
+
+    exportButton.addEventListener("click", () => {
+        const dataStr = `const jsonData = ${JSON.stringify(jsonData, null, 2)};`; // Conversion en JavaScript formaté
+        const blob = new Blob([dataStr], { type: "application/javascript" }); // Création d'un blob de type JS
+        const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "modifications.js"; // Nom du fichier à télécharger
+        document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
+        a.click(); // Téléchargement
+        document.body.removeChild(a); // Suppression de l'élément
+        URL.revokeObjectURL(url); // Libération de l'URL temporaire
+    });
+}
+
+// Appeler la fonction pour lier l'événement au bouton après le chargement du DOM
+setupExportButton();
+
+
+function addOldValueToGIKey(jsonData, targetGIKey, varname, oldValue) {
+    jsonData.visites.forEach(visit => {
+        visit.fiches.forEach(fiche => {
+            fiche.groupes.forEach(groupe => {
+                groupe.questions.forEach(question => {
+                    if (question.GI_key === targetGIKey) {
+                        if (question.hasOwnProperty(varname)) {
+                            question[`${varname}_new`] = oldValue; // Ajoute un champ oldValue à la variable spécifiée
+                        }
+                    }
+                });
+            });
+        });
+    });
+}
+
+const exportData  = {};
+const sidebarLinks = document.getElementById('sidebar-links');
+const mainContent = document.getElementById('main-content');
+
+// Générer les liens dynamiquement à partir des visites et fiches
+jsonData.visites.forEach((visite, visitIndex) => {
+    const vindex= `v${visitIndex}`
+    visite.visitIndex = visitIndex;
+
+    // Créer un lien pour la visite
+    const visitLink = document.createElement('a');
+    visitLink.href =`#${vindex}`;
+    visitLink.style = "background-color: #ADD8E6; color: black; padding: 5px; border-radius: 5px; text-decoration: none;";
+    visitLink.className = `visit`;
+    visitLink.innerText = `${visitIndex + 1}: ${visite.V_description}`;
+	generateFiches(visite,vindex);  
+    visitLink.addEventListener('click', () => {
+        console.log(visitLink.href)
+        visibleonly(jsonData, 'visite', vindex);
+    });
+    sidebarLinks.appendChild(visitLink);
+
+    // Parcourir les fiches de la visite
+    visite.fiches.forEach((fiche, ficheIndex) => {
+        const findex=`v${visitIndex}f${ficheIndex}`;
+        fiche.ficheIndex = findex;
+
+        // Créer un lien pour la fiche
+        const ficheLink = document.createElement('a');
+        ficheLink.href = `#${findex}`;
+        ficheLink.className = `form`; // Utilisez `className` ici
+        ficheLink.style="margin-left: 20px;"
+        ficheLink.innerText = `${ficheIndex + 1}: ${fiche.F_description}`;
+        ficheLink.addEventListener('click', () => {
+            visibleonly(visite, 'fiche', findex);
+        });
+        sidebarLinks.appendChild(ficheLink);
+    });
+});
+
+// Fonction visibleonly
+function visibleonly(data, type, index) {
+
+
+    if (type === 'visite') {
+
+        let h1list = document.getElementsByTagName('h1');
+
+        for (let visit of h1list) {
+        // Gérer la visibilité des visites
+       
+       if (visit.id==index){
+        console.log("analyse de",visit,'trouvé',index);
+        visit.classList.remove('hidden');
+        visit.classList.add('show');
+        } else {
+            console.log("analyse de",visit,'caché' , index);
+            visit.classList.remove('show');
+            visit.classList.add('hidden');
+        }
+
+
+
+        };
+
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+            sectionid=section.id.split('f')[0];;
+            if (sectionid==index) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+            }
+        else {
+                section.classList.remove('show');
+                section.classList.add('hidden');
+            }
+        }
+
+
+
+    } else if (type === 'fiche') {
+
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+            sectionid=section.id;
+            if (sectionid==index) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+            }
+        else {
+                section.classList.remove('show');
+                section.classList.add('hidden');
+            }
+        }
+
+    }
+}
+
+
+
+        // Fonction pour ajouter l'écouteur d'événements de manière globale
+function addGlobalClickListener() {
+    document.addEventListener('click', (event) => {
+        
+        if (event.target && (event.target.innerHTML === '✏️' || event.target.innerHTML === '💾')) {
+            
+        originID=event.target.getAttribute("id").substr(3); 
+
+        td0 = document.getElementById('td0' + originID); 
+        td1 =  document.getElementById('td1' + originID); 
+        But =  document.getElementById("But" + originID); 
+    
+        aeraID ='ARE' + originID;
+        
+
+
+        if (event.target && event.target.innerHTML === '✏️') {
+           
+            //    console.log(event.target)
+            previousTXT=td1.innerText;
+            // addOldValueToGIKey(jsonData, originID, "Old_data", previousTXT);
+     
+        //     // Remplacer le texte statique par un champ texte (textarea)
+            td1.innerHTML = '';  // Supprimer l'ancien texte
+            const inputField = document.createElement('textarea');
+            inputField.id =  aeraID;
+            inputField.innerText = previousTXT || '';  // Valeur actuelle
+            td1.appendChild(inputField);
+
+        //     // Créer un bouton "Save"
+        console.log(td0)
+            td0.innerHTML = '';
+            const savebutton= document.createElement('button');
+            savebutton.id="But" + originID;          
+            savebutton.innerHTML = '💾';
+
+            td0.appendChild(savebutton);
+        }
+            // Quand on clique sur "Save", sauvegarder la modification
+            if (event.target && event.target.innerHTML === '💾') {
+                modifyTXT = document.getElementById(aeraID).value; 
+                addOldValueToGIKey(jsonData, originID, "I_description", modifyTXT);
+                console.log(jsonData)
+                if (!exportData[originID]) {
+                    exportData[originID] = [modifyTXT];
+    }
+
+                td1.innerHTML = '';
+                const tdsimple= document.createElement('td');
+                tdsimple.id='td1' + originID;
+                tdsimple.innerHTML=modifyTXT;
+                console.log(tdsimple)
+                td1.appendChild(tdsimple);  // Ajouter tdsimple comme enfant de td1
+
+
+               
+              
+                
+                // td1.appendChild(modifyTXT);
+
+                // QuestionID.innerText = modifyTXT;  // Mettre à jour la valeur de la question
+                td0.innerHTML = '';
+
+                const modbutton= document.createElement('button');
+                modbutton.id="But" + originID;          
+                modbutton.innerHTML = '✏️';
+                td0.appendChild(modbutton);
+  // Ajouter le bouton "Modifier"
+            }
+}});
+         }
+         addGlobalClickListener()        
+// Fonction pour générer les fiches
+function generateFiche(fiche, activate, fid) {
+    // Créer la section
+    const section = document.createElement('section');
+    section.id = `${fid}`;
+
+    const h2 = document.createElement('h2');
+        h2.innerText = fiche.F_description;
+        section.appendChild(h2);
+    // Parcourir les groupes
+    fiche.groupes.forEach(groupe => {
+        // Ajouter un titre pour le groupe
+        const h3 = document.createElement('h3');
+        h3.innerText = groupe.G_description;
+        section.appendChild(h3);
+
+        // Créer une table pour les questions
+        const table = document.createElement('table');
+
+        // Ajouter l'en-tête de la table
+        const headerRow = document.createElement('tr');
+        const th0 = document.createElement('th');
+        th0.innerText = '🛠️';
+        th0.style.width = '1px';
+        th0.style.whiteSpace = 'nowrap';
+
+        const th1 = document.createElement('th');
+        th1.innerText = 'Question Description';
+
+        const th2 = document.createElement('th');
+        th2.innerText = 'Response';
+
+        headerRow.appendChild(th0);
+        headerRow.appendChild(th1);
+        headerRow.appendChild(th2);
+        table.appendChild(headerRow);
+
+        // Ajouter les lignes pour chaque question
+        groupe.questions.forEach(question => {
+            const row = document.createElement('tr');
+
+            // Colonne pour l'outil
+            const td0 = document.createElement('td');
+            td0.id = `td0${question.GI_key}`;
+            const editButton = document.createElement('button');
+            editButton.innerHTML = '✏️';
+            editButton.id = `But${question.GI_key}`;
+            td0.appendChild(editButton);
+
+            // Colonne pour la description
+            const td1 = document.createElement('td');
+            td1.innerHTML = question.I_description || 'N/A';
+            td1.id = `td1${question.GI_key}`;
+
+            // Colonne pour la réponse
+            const td2 = document.createElement('td');
+            td2.innerHTML = question.rep || 'N/A';
+
+            // Ajouter les colonnes à la ligne
+            row.appendChild(td0);
+            row.appendChild(td1);
+            row.appendChild(td2);
+
+            // Ajouter la ligne au tableau
+            table.appendChild(row);
+        });
+
+        // Ajouter la table à la section
+        section.appendChild(table);
+    });
+
+    // Ajouter la section au contenu principal
+    mainContent.appendChild(section);
+}
+
+
+window.addEventListener('beforeunload', (event) => {
+    // Vous pouvez définir un message personnalisé (en fonction du navigateur, il peut ne pas s'afficher)
+    const message = "Êtes-vous sûr de vouloir quitter cette page ? Toutes les modifications non enregistrées seront perdues.";
+
+    // Certains navigateurs ne tiennent pas compte du message personnalisé,
+    // mais l'événement doit être annulé pour afficher l'avertissement.
+    event.returnValue = message;  // Standard
+    return message;  // Pour certains navigateurs (comme Chrome)
+});
+        // Function to generate all fiches for a visit
+        function generateFiches(visite,vid) {
+
+            const h1 = document.createElement('h1');
+            h1.innerText = visite.V_description;
+            h1.id = `${vid}`
+            mainContent.appendChild(h1);
+     
+            n=0
+            activate=true;
+            Fidex=0
+
+            visite.fiches.forEach(fiche => {               
+                generateFiche(fiche,activate,`${vid}f${Fidex}`); // Use the same function to generate each fiche in the visit
+                Fidex += 1;
+                activate=false;
+
+
+                
+            });
+      
+        }
+
+    
+
+    </script>
+</body>
+
+</html>

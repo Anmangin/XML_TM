@@ -262,7 +262,7 @@ code {
 
 <script>
 
-const jsonData = {};
+const jsonData = {"visites": [{"V_description": "Events", "fiches": [{"F_description": "Death", "groupes": [{"G_description": "DTH", "questions": [{"GI_key": "201f766a-f609-419c-adf4-86a1d2d1c7c6", "I_description": "Date of death", "Message": null, "rep": null, "I_Status": "", "i_SasName": "DTHDT"}, {"GI_key": "1e251cd9-3c22-412e-948b-0e8bb785007c", "I_description": "Primary cause of death", "Message": null, "rep": "\ud83d\udd18 1 - <b>Cancer</b><br>\ud83d\udd18 2 - <b>Toxicity due to study treatment</b><br>\ud83d\udd18 3 - <b>Second cancer</b><br>\ud83d\udd18 4 - <b>Intercurrent illness</b><br>\ud83d\udd18 5 - <b>Unknown</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "DTH_R"}, {"GI_key": "7d713619-d9a7-4979-bbb3-f842a5e706ed", "I_description": "Specify", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[DTH.*][DTH_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[DTH][DTH_R] == '2' || [DTH][DTH_R] == '4' || [DTH][DTH_R] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "DTH_S"}, {"GI_key": "9955333e-d279-49b4-893a-218e88611966", "I_description": "MISSING_VAR", "Message": null, "rep": null, "I_Status": "", "i_SasName": "MISSING_"}]}]}]}]};
 
 function setupExportButton() {
     const exportButton = document.getElementById("export");
