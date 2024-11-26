@@ -130,5 +130,5 @@ def generate_index_html(directory):
     print("Le fichier index.html a été généré avec succès.")
 
 # Exemple d'utilisation : générer le fichier index.html pour un dossier spécifique
-execution_path = rf'{os.getcwd()}/docs'
+execution_path = rf'{os.getcwd()}/docs/Templates'
 generate_index_html(execution_path)
