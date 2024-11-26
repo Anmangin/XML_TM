@@ -213,7 +213,11 @@ code {
 .show {
     display: block !important;; /* Affiche l'élément en tant que bloc */
 }
-@media print {
+
+  @media print {
+    .sidebar {
+        display: none;
+      }
     /* Empêcher la coupure de l'élément */
     body {
         margin-left: -20mm; /* Décale la page de 20mm vers la gauche */
