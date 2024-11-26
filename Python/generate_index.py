@@ -124,7 +124,7 @@ def generate_index_html(directory):
 '''
 
     # Écrit le contenu dans le fichier index.html
-    with open(os.path.join(directory, 'index.html'), 'w', encoding='utf-8') as index_file:
+    with open(os.path.join(os.path.dirname(directory), 'index.html'), 'w', encoding='utf-8') as index_file:
         index_file.write(index_content)
 
     print("Le fichier index.html a été généré avec succès.")
