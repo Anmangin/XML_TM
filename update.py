@@ -479,7 +479,7 @@ def main():
     # doc.save(f"{output_path}/DOCX/{file_name}.docx")
 
 
-    with open(f"{os.getcwd()}\style.css", 'r', encoding='utf-8') as file:
+    with open(f"{os.getcwd()}/style.css", 'r', encoding='utf-8') as file:
             css = file.read()    
 
 
