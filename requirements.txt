@@ -1,12 +1,6 @@
-xml.etree.ElementTree
-re
 openpyxl
-sys
 markdown
 python-docx
-os
-json
 beautifulsoup4
 docx
-tkinter
 bs4
