@@ -8,4 +8,5 @@ os
 json
 BeautifulSoup
 docx
+bs4
 tkinter
