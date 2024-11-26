@@ -1,20 +1,57 @@
 /* Global Styles */
-/* body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f8f9fa;
-    color: #212529;
-    line-height: 1.6;
-} */
-
 body {
-    max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
-    margin: 0 auto; /* Centre le contenu horizontalement */
-    padding: 0; /* Pas de marge interne supplémentaire */
-    font-family: 'Arial', sans-serif; /* Police standard Word */
-    line-height: 1.5; /* Espacement de ligne standard dans Word */
-    box-sizing: border-box; /* Garantit que le padding n'ajoute pas à la largeur */
+    max-width: 602px; 
+    margin: 0 auto; 
+    padding: 0; 
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5; 
+    box-sizing: border-box; 
 }
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding-top: 20px;
+    padding-left: 10px;
+    overflow-y: auto;
+    border-right: 2px solid #ccc;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+}
+
+/* Contenu Principal */
+.content {
+    margin-left: 270px; 
+    padding: 20px;
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+/* Titre */
 h2, h3 {
     color: #3b7bc0;
     text-align: center;
@@ -22,105 +59,27 @@ h2, h3 {
 }
 
 h2 {
-    font-size:16px;
+    font-size: 16px;
 }
 
 h3 {
     font-size: 14px;
-    text-align: left; /* Aligne le texte à gauche */
-    background-color: #3b7bc0; /* Couleur de fond bleue */
-    color: white; /* Couleur du texte */
-    padding: 10px; /* Espacement interne */
-    border-radius: 8px; /* Coins arrondis */
-    margin: 10px 0; /* Espacement externe (haut et bas) */
-    display: block; /* Assure que l'élément prend toute la largeur disponible */
-    width: 100%; /* Assure que l'élément couvre toute la largeur */
-    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-}
-
-/* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
-
-th, td {
-     padding: 3px 5px; 
     text-align: left;
-     border: 1px solid #dee2e6; 
-}
-
-th {
     background-color: #3b7bc0;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-}
-
-td {
-    vertical-align: center;
-    font-size: 10px;
-}
-
-tr:nth-child(even) {
-    background-color: #f1f1f1;
-}
-
-/* Highlight Specific Content */
-td b {
-    color: #dc3545; /* Red for emphasis */
-}
-
-details {
-    font-size: 0.9rem;
-    background-color: #e9ecef;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-top: 10px;
-}
-
-details summary {
-    font-weight: bold;
-    cursor: pointer;
-    color: #495057;
-}
-
-/* List and Possible Responses */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin: 5px 0;
-}
-
-/* Icon Styling */
-td.center {
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-td .red {
-    color: rgba(255, 0, 0, 0.322);
-}
-
-/* Footnotes and Notes */
-p {
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
     margin: 10px 0;
-    font-size: 1rem;
-    color: #6c757d;
-    text-align: center;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-code {
-    background-color: #f8f9fa;
-    padding: 3px 5px;
-    border-radius: 3px;
-    font-family: monospace;
-    font-size: 0.9rem;
+/* Sections cachées */
+section {
+    display: block; /* Les sections sont visibles par défaut */
+}
+
+section.hidden {
+    display: none; /* Sections cachées */
 }

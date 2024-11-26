@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+     <style>
+        /* <css></css> */
+     </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button id="export">Enregistrer les modifications</button>
+        <h3>Table des matières</h3>
+        <div id="sidebar-links"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="main-content">
+    </div>
+
+    <script>
+        function loadJSON(filePath) {
+    return fetch(filePath) // Charge le fichier JSON à partir du chemin spécifié
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement du fichier JSON');
+            }
+            return response.json(); // Parse le contenu du fichier JSON
+        })
+        .then(data => {
+            return data; // Renvoie les données JSON une fois qu'elles sont chargées
+        })
+        .catch(error => {
+            console.error('Erreur:', error); // Gère les erreurs
+            return null; // Retourne null en cas d'erreur
+        });
+}
+</script>
+
+
+
+<script>
+
+// <JSONDATA>
+
+function setupExportButton() {
+    const exportButton = document.getElementById("export");
+    if (!exportButton) {
+        console.error("Bouton avec l'ID 'export' introuvable !");
+        return;
+    }
+
+    exportButton.addEventListener("click", () => {
+        const dataStr = `const jsonData = ${JSON.stringify(jsonData, null, 2)};`; // Conversion en JavaScript formaté
+        const blob = new Blob([dataStr], { type: "application/javascript" }); // Création d'un blob de type JS
+        const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "modifications.js"; // Nom du fichier à télécharger
+        document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
+        a.click(); // Téléchargement
+        document.body.removeChild(a); // Suppression de l'élément
+        URL.revokeObjectURL(url); // Libération de l'URL temporaire
+    });
+}
+
+// Appeler la fonction pour lier l'événement au bouton après le chargement du DOM
+setupExportButton();
+
+
+function addOldValueToGIKey(jsonData, targetGIKey, varname, oldValue) {
+    jsonData.visites.forEach(visit => {
+        visit.fiches.forEach(fiche => {
+            fiche.groupes.forEach(groupe => {
+                groupe.questions.forEach(question => {
+                    if (question.GI_key === targetGIKey) {
+                        if (question.hasOwnProperty(varname)) {
+                            question[`${varname}_new`] = oldValue; // Ajoute un champ oldValue à la variable spécifiée
+                        }
+                    }
+                });
+            });
+        });
+    });
+}
+
+const exportData  = {};
+const sidebarLinks = document.getElementById('sidebar-links');
+const mainContent = document.getElementById('main-content');
+
+// Générer les liens dynamiquement à partir des visites et fiches
+jsonData.visites.forEach((visite, visitIndex) => {
+    const vindex= `v${visitIndex}`
+    visite.visitIndex = visitIndex;
+
+    // Créer un lien pour la visite
+    const visitLink = document.createElement('a');
+    visitLink.href =`#${vindex}`;
+    visitLink.style = "background-color: #ADD8E6; color: black; padding: 5px; border-radius: 5px; text-decoration: none;";
+    visitLink.className = `visit`;
+    visitLink.innerText = `${visitIndex + 1}: ${visite.V_description}`;
+	generateFiches(visite,vindex);  
+    visitLink.addEventListener('click', () => {
+        console.log(visitLink.href)
+        visibleonly(jsonData, 'visite', vindex);
+    });
+    sidebarLinks.appendChild(visitLink);
+
+    // Parcourir les fiches de la visite
+    visite.fiches.forEach((fiche, ficheIndex) => {
+        const findex=`v${visitIndex}f${ficheIndex}`;
+        fiche.ficheIndex = findex;
+
+        // Créer un lien pour la fiche
+        const ficheLink = document.createElement('a');
+        ficheLink.href = `#${findex}`;
+        ficheLink.className = `form`; // Utilisez `className` ici
+        ficheLink.style="margin-left: 20px;"
+        ficheLink.innerText = `${ficheIndex + 1}: ${fiche.F_description}`;
+        ficheLink.addEventListener('click', () => {
+            visibleonly(visite, 'fiche', findex);
+        });
+        sidebarLinks.appendChild(ficheLink);
+    });
+});
+
+// Fonction visibleonly
+function visibleonly(data, type, index) {
+
+
+    if (type === 'visite') {
+
+        let h1list = document.getElementsByTagName('h1');
+
+        for (let visit of h1list) {
+        // Gérer la visibilité des visites
+       
+       if (visit.id==index){
+        console.log("analyse de",visit,'trouvé',index);
+        visit.classList.remove('hidden');
+        visit.classList.add('show');
+        } else {
+            console.log("analyse de",visit,'caché' , index);
+            visit.classList.remove('show');
+            visit.classList.add('hidden');
+        }
+
+
+
+        };
+
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+            sectionid=section.id.split('f')[0];;
+            if (sectionid==index) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+            }
+        else {
+                section.classList.remove('show');
+                section.classList.add('hidden');
+            }
+        }
+
+
+
+    } else if (type === 'fiche') {
+
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+            sectionid=section.id;
+            if (sectionid==index) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+            }
+        else {
+                section.classList.remove('show');
+                section.classList.add('hidden');
+            }
+        }
+
+    }
+}
+
+
+
+        // Fonction pour ajouter l'écouteur d'événements de manière globale
+function addGlobalClickListener() {
+    document.addEventListener('click', (event) => {
+        
+        if (event.target && (event.target.innerHTML === '✏️' || event.target.innerHTML === '💾')) {
+            
+        originID=event.target.getAttribute("id").substr(3); 
+
+        td0 = document.getElementById('td0' + originID); 
+        td1 =  document.getElementById('td1' + originID); 
+        But =  document.getElementById("But" + originID); 
+    
+        aeraID ='ARE' + originID;
+        
+
+
+        if (event.target && event.target.innerHTML === '✏️') {
+           
+            //    console.log(event.target)
+            previousTXT=td1.innerText;
+            // addOldValueToGIKey(jsonData, originID, "Old_data", previousTXT);
+     
+        //     // Remplacer le texte statique par un champ texte (textarea)
+            td1.innerHTML = '';  // Supprimer l'ancien texte
+            const inputField = document.createElement('textarea');
+            inputField.id =  aeraID;
+            inputField.innerText = previousTXT || '';  // Valeur actuelle
+            td1.appendChild(inputField);
+
+        //     // Créer un bouton "Save"
+        console.log(td0)
+            td0.innerHTML = '';
+            const savebutton= document.createElement('button');
+            savebutton.id="But" + originID;          
+            savebutton.innerHTML = '💾';
+
+            td0.appendChild(savebutton);
+        }
+            // Quand on clique sur "Save", sauvegarder la modification
+            if (event.target && event.target.innerHTML === '💾') {
+                modifyTXT = document.getElementById(aeraID).value; 
+                addOldValueToGIKey(jsonData, originID, "I_description", modifyTXT);
+                console.log(jsonData)
+                if (!exportData[originID]) {
+                    exportData[originID] = [modifyTXT];
+    }
+
+                td1.innerHTML = '';
+                const tdsimple= document.createElement('td');
+                tdsimple.id='td1' + originID;
+                tdsimple.innerHTML=modifyTXT;
+                console.log(tdsimple)
+                td1.appendChild(tdsimple);  // Ajouter tdsimple comme enfant de td1
+
+
+               
+              
+                
+                // td1.appendChild(modifyTXT);
+
+                // QuestionID.innerText = modifyTXT;  // Mettre à jour la valeur de la question
+                td0.innerHTML = '';
+
+                const modbutton= document.createElement('button');
+                modbutton.id="But" + originID;          
+                modbutton.innerHTML = '✏️';
+                td0.appendChild(modbutton);
+  // Ajouter le bouton "Modifier"
+            }
+}});
+         }
+         addGlobalClickListener()        
+// Fonction pour générer les fiches
+function generateFiche(fiche, activate, fid) {
+    // Créer la section
+    const section = document.createElement('section');
+    section.id = `${fid}`;
+
+    const h2 = document.createElement('h2');
+        h2.innerText = fiche.F_description;
+        section.appendChild(h2);
+    // Parcourir les groupes
+    fiche.groupes.forEach(groupe => {
+        // Ajouter un titre pour le groupe
+        const h3 = document.createElement('h3');
+        h3.innerText = groupe.G_description;
+        section.appendChild(h3);
+
+        // Créer une table pour les questions
+        const table = document.createElement('table');
+
+        // Ajouter l'en-tête de la table
+        const headerRow = document.createElement('tr');
+        const th0 = document.createElement('th');
+        th0.innerText = '🛠️';
+        th0.style.width = '1px';
+        th0.style.whiteSpace = 'nowrap';
+
+        const th1 = document.createElement('th');
+        th1.innerText = 'Question Description';
+
+        const th2 = document.createElement('th');
+        th2.innerText = 'Response';
+
+        headerRow.appendChild(th0);
+        headerRow.appendChild(th1);
+        headerRow.appendChild(th2);
+        table.appendChild(headerRow);
+
+        // Ajouter les lignes pour chaque question
+        groupe.questions.forEach(question => {
+            const row = document.createElement('tr');
+
+            // Colonne pour l'outil
+            const td0 = document.createElement('td');
+            td0.id = `td0${question.GI_key}`;
+            const editButton = document.createElement('button');
+            editButton.innerHTML = '✏️';
+            editButton.id = `But${question.GI_key}`;
+            td0.appendChild(editButton);
+
+            // Colonne pour la description
+            const td1 = document.createElement('td');
+            td1.innerHTML = question.I_description || 'N/A';
+            td1.id = `td1${question.GI_key}`;
+
+            // Colonne pour la réponse
+            const td2 = document.createElement('td');
+            td2.innerHTML = question.rep || 'N/A';
+
+            // Ajouter les colonnes à la ligne
+            row.appendChild(td0);
+            row.appendChild(td1);
+            row.appendChild(td2);
+
+            // Ajouter la ligne au tableau
+            table.appendChild(row);
+        });
+
+        // Ajouter la table à la section
+        section.appendChild(table);
+    });
+
+    // Ajouter la section au contenu principal
+    mainContent.appendChild(section);
+}
+
+
+window.addEventListener('beforeunload', (event) => {
+    // Vous pouvez définir un message personnalisé (en fonction du navigateur, il peut ne pas s'afficher)
+    const message = "Êtes-vous sûr de vouloir quitter cette page ? Toutes les modifications non enregistrées seront perdues.";
+
+    // Certains navigateurs ne tiennent pas compte du message personnalisé,
+    // mais l'événement doit être annulé pour afficher l'avertissement.
+    event.returnValue = message;  // Standard
+    return message;  // Pour certains navigateurs (comme Chrome)
+});
+        // Function to generate all fiches for a visit
+        function generateFiches(visite,vid) {
+
+            const h1 = document.createElement('h1');
+            h1.innerText = visite.V_description;
+            h1.id = `${vid}`
+            mainContent.appendChild(h1);
+     
+            n=0
+            activate=true;
+            Fidex=0
+
+            visite.fiches.forEach(fiche => {               
+                generateFiche(fiche,activate,`${vid}f${Fidex}`); // Use the same function to generate each fiche in the visit
+                Fidex += 1;
+                activate=false;
+
+
+                
+            });
+      
+        }
+
+    
+
+    </script>
+</body>
+
+</html>
