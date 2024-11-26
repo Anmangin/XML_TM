@@ -371,7 +371,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
 
 
 
-        with open(rf"{os.getcwd()}\sidebar.js", 'r', encoding='utf-8') as file:
+        with open(rf"{os.getcwd()}/sidebar.js", 'r', encoding='utf-8') as file:
             js = file.read()    
         content+=f"  </div><script>{js}</script> </body>\n\n\n"
         
