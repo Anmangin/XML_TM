@@ -33,9 +33,9 @@ jobs:
     - name: Run XML to Markdown script
       run: |
         for file in INFILE/XML/*.xml; do
-          python update.py "$file"
+          python Python/update.py "$file"
         done
-        python generate_index.py
+        python Python/generate_index.py
 
     # 5. Ajouter et commettre le fichier Markdown généré
     - name: Commit and push changes
