@@ -494,8 +494,8 @@ def main():
     # if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
     # else: print("Liste des checks vide!")
 
-    # with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
-    #         f.write(content)
+    with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
+            f.write(content)
     customjs = f"const jsonData = {json.dumps(JSON_EXPORT)};"
     
     final_export_0=contenu_html.replace("// <JSONDATA>",customjs)
