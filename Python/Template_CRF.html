@@ -265,6 +265,7 @@ function generateFiche(fiche, activate, fid) {
     // Créer la section
     const section = document.createElement('section');
     section.id = `${fid}`;
+    section.className="no-break"
 
     const h2 = document.createElement('h2');
         h2.innerText = fiche.F_description;
