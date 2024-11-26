@@ -9,3 +9,4 @@ json
 beautifulsoup4
 docx
 tkinter
+bs4
