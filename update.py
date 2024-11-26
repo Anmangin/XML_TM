@@ -4,13 +4,13 @@ import sys
 import os
 import json
 # from bs4 import BeautifulSoup
-from docx import Document
-from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH  # Assurez-vous d'ajouter cette importation
-from docx.enum.text import WD_BREAK  # Importation pour les sauts de page
+# from docx import Document
+# from docx.shared import Pt
+# from docx.enum.text import WD_ALIGN_PARAGRAPH  # Assurez-vous d'ajouter cette importation
+# from docx.enum.text import WD_BREAK  # Importation pour les sauts de page
 
-from docx.oxml import OxmlElement
-from docx.oxml.ns import qn
+# from docx.oxml import OxmlElement
+# from docx.oxml.ns import qn
 
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
@@ -186,8 +186,8 @@ def get_message(data,ProItemGuid,ProGroupGuid,ProFormGuid):
 
 def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
         JSON_EXPORT = {}
-        
-        doc = Document()
+        doc =""
+        # doc = Document()
         content=f"<body>\n\n\n"
 
 
@@ -209,8 +209,8 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
         if len(data["ProPatientVisit"])==0 : 
             content+=f"# ERREUR DANS LES DOSSIERS DU FICHIER  \n"
             content+=f"Pas d'arborescence patient ! \n"
-            doc.add_heading("ERREUR DANS LES DOSSIERS DU FICHIER", level=1)
-            doc.add_paragraph("Pas d'arborescence patient !")
+            # doc.add_heading("ERREUR DANS LES DOSSIERS DU FICHIER", level=1)
+            # doc.add_paragraph("Pas d'arborescence patient !")
 
         for  PVkey,PatientVisit in data["ProPatientVisit"].items():
 
@@ -227,7 +227,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
             if not unic_form: # si on fait un CRF complet, pas la peine de rajouter la liste des visites pour chaque fiche.
                 content+=f"<section id='{PVkey}' data-type='visit'  data-parent='{PVkey}' data-label='{V_description}'>\n"
                 content+=f"<h1> {V_description} </h1> \n"
-                doc.add_heading(f"{V_description}", level=2)
+                # doc.add_heading(f"{V_description}", level=2)
                 if logprint:("écriture de #",V_description)
 
 
@@ -251,7 +251,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
 
                 content+=f"<section id='{VFkey}' data-parent='{PVkey}' data-type='form' data-label='{F_description}'>\n"
                 content+=f"<h2> {F_description} </h2>\n"
-                doc.add_heading(f"{F_description}", level=3)
+                # doc.add_heading(f"{F_description}", level=3)
                 if logprint:print("écriture de ##",F_description)
 
                 if unic_form:# cas ou on imprime qu'une version de la fiche, alors on liste les visites ou elle apparait.
@@ -264,7 +264,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
                         V_description_temp = data["ProVisit"][Vgui_temp]["Description"]
                         Li+= f"{V_description_temp}"
                     content+=f"<p>{Li}</p> \n"
-                    doc.add_paragraph(Li)
+                    # doc.add_paragraph(Li)
 
                     
 
@@ -280,7 +280,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
 
                     # Titre du groupe, ainsi que l'entete pour les  variables
                     content+=f"<h3> {G_description} </h3>\n"
-                    doc.add_heading(f"{G_description}", level=4)
+                    # doc.add_heading(f"{G_description}", level=4)
                                     
                     content+="<table style='width:100%;'>\n"
                     content+="<tr>\n"
@@ -291,17 +291,17 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
                     content+="</tr>\n"
 
 
-                    table = doc.add_table(rows=1, cols=4)
-                    table.autofit = True
-                    table.style = 'Table Grid'
+                    # # table = doc.add_table(rows=1, cols=4)
+                    # table.autofit = True
+                    # table.style = 'Table Grid'
 
-                    # Table header
-                    hdr_cells = table.rows[0].cells
-                    hdr_cells[0].text = 'Label de la question'
-                    if display_Edit:
-                        hdr_cells[1].text = 'Check'
-                    hdr_cells[2].text = 'Réponses possibles'
-                    hdr_cells[3].text = 'Sas'
+                    # # Table header
+                    # hdr_cells = table.rows[0].cells
+                    # hdr_cells[0].text = 'Label de la question'
+                    # if display_Edit:
+                    #     hdr_cells[1].text = 'Check'
+                    # hdr_cells[2].text = 'Réponses possibles'
+                    # hdr_cells[3].text = 'Sas'
 
 
 
@@ -341,32 +341,32 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
                         content+=" </tr>\n"
                         JSON_EXPORT = get_JSONLIGNE(JSON_EXPORT,V_description,F_description,G_description,GI_key,I_description,Message,rep,I_Status,i_SasName)            
                         # print("écriture de ",I_description)
-                        para = doc.add_paragraph()
-                        run = para.add_run("")
+                        # para = doc.add_paragraph()
+                        # run = para.add_run("")
 
-                        # Add row for each group item
-                        row_cells = table.add_row().cells
-                        row_cells[0].text = I_description
-                        row_cells[2].text = rep
-                        p = row_cells[2].paragraphs[0]  # Premier paragraphe de la cellule
-                        run = p.add_run(rep)
+                        # # Add row for each group item
+                        # row_cells = table.add_row().cells
+                        # row_cells[0].text = I_description
+                        # row_cells[2].text = rep
+                        # p = row_cells[2].paragraphs[0]  # Premier paragraphe de la cellule
+                        # run = p.add_run(rep)
 
-                        # Appliquer la police compatible avec les émojis
-                        run.font.name = 'Segoe UI Emoji'
+                        # # Appliquer la police compatible avec les émojis
+                        # run.font.name = 'Segoe UI Emoji'
 
-                        # Modifier également au niveau XML pour garantir la compatibilité dans Word
-                        r = run._element
-                        rPr = r.get_or_add_rPr()
-                        rFonts = OxmlElement('w:rFonts')
-                        rFonts.set(qn('w:ascii'), 'Segoe UI Emoji')
-                        rFonts.set(qn('w:hAnsi'), 'Segoe UI Emoji')
-                        rPr.append(rFonts)
-                        row_cells[3].text = f"{I_Status} {i_SasName}"
+                        # # Modifier également au niveau XML pour garantir la compatibilité dans Word
+                        # r = run._element
+                        # rPr = r.get_or_add_rPr()
+                        # rFonts = OxmlElement('w:rFonts')
+                        # rFonts.set(qn('w:ascii'), 'Segoe UI Emoji')
+                        # rFonts.set(qn('w:hAnsi'), 'Segoe UI Emoji')
+                        # rPr.append(rFonts)
+                        # row_cells[3].text = f"{I_Status} {i_SasName}"
                         
 
                     content+="</table>\n\n"
                 content+=f"</section>"
-                doc.add_page_break()
+                # doc.add_page_break()
             content+=f"</section> \n"
 
 
@@ -467,7 +467,8 @@ def main():
     data = lire_et_trier_donnees(Pathin, config_path)
    
     # Export des données
-    doc = Document()
+   
+    # doc = Document()
     JSON_EXPORT = {}
     content ,doc,JSON_EXPORT= exporter_donnees_markdown_eCRF(data,"5.0.3.27.Update 3b",True)
     
@@ -475,7 +476,7 @@ def main():
     ensure_directories(f"{output_path}/DOCX")
     ensure_directories(f"{output_path}/HTML")
     ensure_directories(f"{output_path}/MD")
-    doc.save(f"{output_path}/DOCX/{file_name}.docx")
+    # doc.save(f"{output_path}/DOCX/{file_name}.docx")
 
 
     with open(f"{os.getcwd()}\style.css", 'r', encoding='utf-8') as file:
