@@ -19,7 +19,7 @@ from pathlib import Path
 
 
 # Chemin vers le fichier HTML
-chemin_html = f"{os.getcwd()}/templage.html"
+chemin_html = f"{os.getcwd()}/Python/Template_CRF.html"
 
 # Lire le contenu du fichier HTML
 
@@ -55,7 +55,7 @@ def filtrer_par_cle(dictionnaire, champ, valeur):
 
 
 
-def lire_et_trier_donnees(pathfileXML, config_path='config.json'):
+def lire_et_trier_donnees(pathfileXML, config_path='Python/config.json'):
     # Charger la configuration
     with open(config_path, 'r') as f:
         config = json.load(f)
@@ -371,7 +371,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
 
 
 
-        with open(rf"{os.getcwd()}/sidebar.js", 'r', encoding='utf-8') as file:
+        with open(rf"{os.getcwd()}/Python/sidebar.js", 'r', encoding='utf-8') as file:
             js = file.read()    
         content+=f"  </div><script>{js}</script> </body>\n\n\n"
         
@@ -453,17 +453,18 @@ def main():
     Pathin = get_path_input()
     file_name = os.path.basename(Pathin).replace('.xml', '')
     directory = os.path.dirname(Pathin)
-    output_path = os.path.join(execution_path, "OUTFILE")
+    # output_path = os.path.join(execution_path, "OUTFILE")
+    output_path =execution_path
 
     # Gestion des chemins locaux
     if len(sys.argv) <= 1:
-        output_path += "_LOCAL"
+        # output_path += "_LOCAL"
         ensure_directories(output_path, sub_dirs=["JSON"])
         if not confirm_execution(output_path):
             return
     ensure_directories(output_path)
     # Lecture des données et configuration
-    config_path = os.path.join(execution_path, "config.json")
+    config_path = os.path.join(execution_path, "Python/config.json")
     data = lire_et_trier_donnees(Pathin, config_path)
    
     # Export des données
@@ -479,7 +480,7 @@ def main():
     # doc.save(f"{output_path}/DOCX/{file_name}.docx")
 
 
-    with open(f"{os.getcwd()}/style.css", 'r', encoding='utf-8') as file:
+    with open(f"{os.getcwd()}/Python/style.css", 'r', encoding='utf-8') as file:
             css = file.read()    
 
 
@@ -495,8 +496,8 @@ def main():
     # if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
     # else: print("Liste des checks vide!")
 
-    with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
-            f.write(content)
+    # with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
+    #         f.write(content)
     customjs = f"const jsonData = {json.dumps(JSON_EXPORT)};"
     
     final_export_0=contenu_html.replace("// <JSONDATA>",customjs)
