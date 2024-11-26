@@ -5,3 +5,7 @@ sys
 markdown
 python-docx
 os
+json
+BeautifulSoup
+docx
+tkinter
