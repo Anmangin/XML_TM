@@ -110,10 +110,10 @@ def generate_index_html(directory):
             for file in categories[category]:
                 if 'visite only' in file.lower():
                     # Fichier "visite only", affiché plus petit
-                    index_content += f'    <li class="visit-only"><a href="{file}">{file}</a></li>\n'
+                    index_content += f'    <li class="visit-only"><a href="Templates/{file}">{file}</a></li>\n'
                 else:
                     # Fichier normal
-                    index_content += f'    <li><a href="{file}">{file}</a></li>\n'
+                    index_content += f'    <li><a href="Templates/{file}">{file}</a></li>\n'
             
             index_content += '  </ul>\n'
 
