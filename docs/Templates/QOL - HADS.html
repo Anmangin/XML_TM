@@ -221,10 +221,24 @@ code {
     display: block !important;; /* Affiche l'élément en tant que bloc */
 }
 @media print {
-    .sidebar {
-      display: none;
+    /* Empêcher la coupure de l'élément */
+    body {
+        margin-left: -20mm; /* Décale la page de 20mm vers la gauche */
     }
-  }
+    .no-break {
+        page-break-inside: avoid;
+        break-inside: avoid; /* Pour les navigateurs modernes */
+    }
+    
+    /* Autres styles pour l'impression (par exemple, masquer les éléments inutiles) */
+    body {
+        font-size: 12pt; /* Ajuste la taille de la police pour l'impression */
+    }
+
+    .no-print {
+        display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
+    }
+}
      </style>
 </head>
 <body>
@@ -484,6 +498,7 @@ function generateFiche(fiche, activate, fid) {
     // Créer la section
     const section = document.createElement('section');
     section.id = `${fid}`;
+    section.className="no-break"
 
     const h2 = document.createElement('h2');
         h2.innerText = fiche.F_description;
