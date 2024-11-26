@@ -6,6 +6,6 @@ markdown
 python-docx
 os
 json
-BeautifulSoup
+beautifulsoup4
 docx
 tkinter
