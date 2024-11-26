@@ -7,8 +7,6 @@ body {
     line-height: 1.5; /* Espacement de ligne standard dans Word */
     box-sizing: border-box; /* Garantit que le padding n'ajoute pas à la largeur */
 }
-
-/* Sidebar Styles */
 .sidebar {
     position: fixed;
     top: 0;
@@ -75,6 +73,7 @@ body {
 }
 
 
+
 /* Contenu Principal */
 .content {
     margin-left: 50px; /* Décalage pour laisser de la place à la sidebar */
@@ -84,6 +83,13 @@ body {
     width:100%;
 }
 
+section {
+
+    display: none;  
+}
+h1 {
+display: none;
+}
 /* Titre */
 h2, h3 {
     color: #3b7bc0;
@@ -200,10 +206,10 @@ code {
 
 /* Cacher les sections avec la classe "hidden" */
 .hidden {
-    display: none; /* Cache complètement l'élément */
+    display: none !important;; /* Cache complètement l'élément */
 }
 
 /* Montrer les sections avec la classe "show" */
 .show {
-    display: block; /* Affiche l'élément en tant que bloc */
+    display: block !important;; /* Affiche l'élément en tant que bloc */
 }

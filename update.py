@@ -15,6 +15,16 @@ from docx.oxml.ns import qn
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox
+from pathlib import Path
+
+
+# Chemin vers le fichier HTML
+chemin_html = f"{os.getcwd()}/templage.html"
+
+# Lire le contenu du fichier HTML
+
+contenu_html = Path(chemin_html).read_text(encoding='utf-8')
+
 
 # Paramètres globaux
 logprint = False
@@ -481,15 +491,20 @@ def main():
     f"</head>\n\n"
     + content
 ) #remove_details_tags(content)
-    if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
-    else: print("Liste des checks vide!")
-    with open( f"{output_path}/HTML/{file_name}.html" , 'w', encoding='utf-8') as f:
-        f.write(htmlcontent)
+    # if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
+    # else: print("Liste des checks vide!")
 
-    with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
-            f.write(content)
+    # with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
+    #         f.write(content)
+    customjs = f"const jsonData = {json.dumps(JSON_EXPORT)};"
     
-   
+    final_export_0=contenu_html.replace("// <JSONDATA>",customjs)
+    final_export=final_export_0.replace("/* <css></css> */",css)
+    with open( f"{output_path}/HTML/{file_name}.html" , 'w', encoding='utf-8') as f:
+        f.write(final_export)
+
+    
+
 
 if __name__ == "__main__":
     main()
