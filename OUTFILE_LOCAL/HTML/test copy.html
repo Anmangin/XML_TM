@@ -1,0 +1,384 @@
+visitIndex<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Global Styles */
+        body {
+            max-width: 902px; 
+            margin: 0 auto; 
+            padding: 0; 
+            font-family: 'Arial', sans-serif; 
+            line-height: 1.5; 
+            box-sizing: border-box; 
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #f4f4f4;
+            padding-top: 20px;
+            padding-left: 10px;
+            overflow-y: auto;
+            border-right: 2px solid #ccc;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 12px;
+            margin-bottom: 0px;
+            border-radius: 0px;
+        }
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            background-color: #fff;
+            min-height: 100vh;
+            width: 100%;
+        }
+        h2, h3 {
+            color: #3b7bc0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 16px;
+        }
+        h3 {
+            font-size: 14px;
+            text-align: left; 
+            background-color: #3b7bc0; 
+            color: white; 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin: 10px 0; 
+            display: block; 
+            width: 100%; 
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 3px 5px;
+            text-align: left;
+            border: 1px solid #dee2e6; 
+        }
+        th {
+            background-color: #3b7bc0;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+        }
+        td {
+            vertical-align: center;
+            font-size: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+        /* Style pour rendre le textarea plus discret */
+textarea {
+    border: 1px solid #ddd;               /* Bordure subtile */
+    border-radius: 4px;                   /* Coins arrondis */
+    padding: 5px;                         /* Espacement interne */
+    background-color: transparent;        /* Fond transparent */           /* Fond clair */
+    resize: none;                         /* Empêcher le redimensionnement */
+    width: 95%;                           /* Largeur complète */
+    font-size: 14px;                       /* Taille de police plus petite */
+    outline: none;                        /* Retirer l'outline au focus */
+}
+
+/* Optionnel : style pour le focus */
+textarea:focus {
+    border-color: #aaa;                   /* Bordure légèrement plus foncée quand focus */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Ajout d'une légère ombre lors du focus */
+}
+
+/* Ajoutez ces classes pour gérer l'affichage */
+.hidden {
+    display: none;
+}
+.show {
+    display: block;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h3>Table des matières</h3>
+        <div id="sidebar-links"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="main-content">
+    </div>
+
+    <script>
+        // Example JSON data
+        const jsonData = {
+    "visites": [
+        {
+            "V_description": "Baseline",
+            "fiches": [
+                {
+                    "F_description": "Vital sign and Clinical Examination",
+                    "groupes": [
+                        {
+                            "G_description": "VS1",
+                            "questions": [
+                                {
+                                    "I_description": "Clinical Examination done ?",
+                                    "Message": null,
+                                    "rep": "\ud83d\udd18 0 - <b>Not done</b><br>\ud83d\udd18 1 - <b>Done</b>",
+                                    "I_Status": "",
+                                    "i_SasName": "VSYN"
+                                },
+                                {
+                                    "I_description": "Date of clinical assessment",
+                                    "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[VS.*][VS1.*][VSDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[VS][VS1][VSYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>",
+                                    "rep": null,
+                                    "I_Status": "",
+                                    "i_SasName": "VSDT"
+                                }
+                            ]
+                        },
+                        {
+                            "G_description": "VS2",
+                            "questions": [
+                                {
+                                    "I_description": "Height (cm)",
+                                    "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[HEIGHT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n([HEIGHT] == '') ||\n((140 <= [HEIGHT]) && ([HEIGHT] <= 200)) \n#data Expression \n \n</code></pre> </td><td> The height of the patient should be between 140 and 200cm. Please confirm the data.</td> </tr></table></details>",
+                                    "rep": null,
+                                    "I_Status": "",
+                                    "i_SasName": "HEIGHT"
+                                },
+                                {
+                                    "I_description": "WEIGHT (kg)",
+                                    "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[WEIGHT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n([WEIGHT] == '') ||\n((40 <= [WEIGHT]) && ([WEIGHT] <= 180)) \n#data Expression \n \n</code></pre> </td><td> The weight of the patient should be between 40 and 180kg. Please confirm the data.</td> </tr></table></details>",
+                                    "rep": null,
+                                    "I_Status": "",
+                                    "i_SasName": "WEIGHT"
+                                }
+                            ]
+                        },
+                        {
+                            "G_description": "VS3",
+                            "questions": [
+                                {
+                                    "I_description": "PS (performance status measured using the ECOG Scale )",
+                                    "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[VSPS]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n([VSPS] == '') ||\n((0 <= [VSPS]) && ([VSPS] <= 4)) \n#data Expression \n \n</code></pre> </td><td> The ECOG performance status must be between 0 and 4. Please correct the data.</td> </tr></table></details>",
+                                    "rep": null,
+                                    "I_Status": "",
+                                    "i_SasName": "VSPS"
+                                },
+                                {
+                                    "I_description": "Systolic blood pressure (mmHG)",
+                                    "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[VSSYS]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n([VSSYS] == '') ||\n((90 <= [VSSYS]) && ([VSSYS] <= 160)) \n#data Expression \n \n</code></pre> </td><td> The systolic blood pressure (SBP) of the patient should be between 90 and 160 mmHg. Please confirm the data.</td> </tr></table></details>",
+                                    "rep": null,
+                                    "I_Status": "",
+                                    "i_SasName": "VSSYS"
+                                },
+                                {
+                                    "I_description": "Diastolic blood pressure (mmHG)",
+                                    "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[VSDIAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n([VSDIAG] == '') ||\n((60 <= [VSDIAG]) && ([VSDIAG] <= 100)) \n#data Expression \n \n</code></pre> </td><td> The diastolic blood pressure (DBP) of the patient should be between 60 and 100 mmHg. Please confirm the data.</td> </tr></table></details>",
+                                    "rep": null,
+                                    "I_Status": "",
+                                    "i_SasName": "VSDIAG"
+                                },
+                                {
+                                    "I_description": "ECG",
+                                    "Message": null,
+                                    "rep": "\ud83d\udd18 0 - <b>Not done</b><br>\ud83d\udd18 1 - <b>Done</b>",
+                                    "I_Status": "",
+                                    "i_SasName": "ECG"
+                                },
+                                {
+                                    "I_description": "Date of ECG",
+                                    "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[VS.*][VS3.*][ECGDAT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[VS][VS1][VSYN] == '1' && [VS][VS3][ECG]==\"1\"; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>",
+                                    "rep": null,
+                                    "I_Status": "",
+                                    "i_SasName": "ECGDAT"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+        const sidebarLinks = document.getElementById('sidebar-links');
+        const mainContent = document.getElementById('main-content');
+
+        // Generate sidebar links dynamically based on visits and fiches
+        first=true
+        jsonData.visites.forEach((visite, visitIndex) => {
+            const visitLink = document.createElement('a');
+            visitLink.href = '#';
+            visitLink.innerText = `Visit ${visitIndex + 1}: ${visite.V_description}`;
+            visitLink.addEventListener('click', () => 
+            
+            {
+    mainContent.innerHTML = ""; // Efface le contenu actuel
+    generateFiches(visite);      // Génère la fiche
+});
+            sidebarLinks.appendChild(visitLink);
+
+            visite.fiches.forEach((fiche, ficheIndex) => {
+                const ficheLink = document.createElement('a');
+                ficheLink.href = '#';
+                ficheLink.innerText = ` Fiche ${ficheIndex + 1}: ${fiche.F_description}`;
+                if (first)addGlobalClickListener(fiche)  ;
+                first=false
+                ficheLink.addEventListener('click', () => {
+    mainContent.innerHTML = ""; // Efface le contenu actuel
+    generateFiche(fiche,true);
+        // Génère la fiche
+});
+                sidebarLinks.appendChild(ficheLink);
+            });
+        });
+
+ 
+
+
+        // Fonction pour ajouter l'écouteur d'événements de manière globale
+function addGlobalClickListener(fiche) {
+    document.addEventListener('click', (event) => {
+
+        if (event.target && event.target.innerHTML === '✏️') {
+            const eventID=event.target.getAttribute("id")
+            const QuestionID = 'D' + event.target.getAttribute("id").substring(1);
+            const td0id= 'td0' + event.target.getAttribute("id").substring(1);
+            td0 = document.getElementById(td0id); 
+            td1 =  document.getElementById(QuestionID); 
+            previousTXT=td1.innerText
+      
+        //     // Remplacer le texte statique par un champ texte (textarea)
+            td1.innerHTML = '';  // Supprimer l'ancien texte
+            const inputField = document.createElement('textarea');
+            inputField.id =  'IF' + event.target.getAttribute("id").substring(1);
+            inputField.value = previousTXT || '';  // Valeur actuelle
+            td1.appendChild(inputField);
+
+        //     // Créer un bouton "Save"
+            const saveButton = document.createElement('button');
+            saveButton.innerHTML = '💾';
+            saveButton.id = "S" + event.target.getAttribute("id").substring(1);;
+            td0.innerHTML = '';  // Réinitialiser la cellule de l'édition
+            td0.appendChild(saveButton);
+        }
+            // Quand on clique sur "Save", sauvegarder la modification
+            if (event.target && event.target.innerHTML === '💾') {
+                const aeraID ='IF' + event.target.getAttribute("id").substring(1);
+                const QuestionID = 'D' + event.target.getAttribute("id").substring(1);
+                const td0id= 'td0' + event.target.getAttribute("id").substring(1);
+
+                td0 = document.getElementById(td0id); 
+                td1 =  document.getElementById(QuestionID); 
+                modifyTXT = document.getElementById(aeraID).value; 
+                // QuestionID.innerText = modifyTXT;  // Mettre à jour la valeur de la question
+                td1.innerHTML = modifyTXT;  // Afficher le nouveau texte
+                td0.innerHTML = '';  // Réinitialiser la cellule de l'édition+
+                const editButton = document.createElement('button');
+                editButton.innerHTML = '✏️';
+                editButton.id = "E" + event.target.getAttribute("id").substring(1);
+                td0.appendChild(editButton);
+                td0.appendChild(editButton);  // Ajouter le bouton "Modifier"
+            }
+            });
+         }
+        
+// Fonction pour générer les fiches
+function generateFiche(fiche,activate) {
+  
+    // if (activate)addGlobalClickListener(fiche)
+
+    fiche.groupes.forEach(groupe => {
+        mainContent.innerHTML += `<h2>${groupe.G_description}</h2>`;
+        const table = document.createElement('table');
+        const headerRow = document.createElement('tr');
+        const th1 = document.createElement('th');
+        const th0 = document.createElement('th');
+        th0.innerText = '🛠️';
+        th0.style.width = '1px';  // La plus petite largeur possible
+        th0.style.whiteSpace = 'nowrap';  // Empêche l'emoji de s'étendre sur plusieurs lignes
+
+        th1.innerText = 'Question Description';
+        const th2 = document.createElement('th');
+        th2.innerText = 'Response';
+        headerRow.appendChild(th0);
+        headerRow.appendChild(th1);
+        headerRow.appendChild(th2);
+        table.appendChild(headerRow);
+
+        groupe.questions.forEach(question => {
+            const row = document.createElement('tr');
+
+            const td0 = document.createElement('td');
+            td0.id = "td0" + question.GI_key;
+            
+            // Colonne pour la description de la question
+            const td1 = document.createElement('td');
+            td1.innerHTML = question.I_description; // Texte statique par défaut
+            td1.id = "D" + question.GI_key;
+            // Ajouter un bouton "Modifier" à côté du texte
+            const editButton = document.createElement('button');
+            editButton.innerHTML = '✏️';
+            editButton.id = "E" + question.GI_key;
+            td0.appendChild(editButton);
+            
+            // Colonne pour la réponse
+            const td2 = document.createElement('td');
+            td2.innerHTML = question.rep || 'N/A';
+
+            // Ajout de la ligne au tableau
+            row.appendChild(td0);
+            row.appendChild(td1);
+            row.appendChild(td2);
+            table.appendChild(row);
+        });
+
+        mainContent.appendChild(table);
+    });
+}
+
+
+        // Function to generate all fiches for a visit
+        function generateFiches(visite) {
+            mainContent.innerHTML = `<h1>Visit: ${visite.V_description}</h1>`;
+            n=0
+            activate=true;
+            visite.fiches.forEach(fiche => {
+                generateFiche(fiche,activate); // Use the same function to generate each fiche in the visit
+                activate=false;
+
+                
+            });
+        }
+    </script>
+</body>
+
+</html>

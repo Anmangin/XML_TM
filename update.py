@@ -19,7 +19,7 @@ from pathlib import Path
 
 
 # Chemin vers le fichier HTML
-chemin_html = f"{os.getcwd()}/templage.html"
+chemin_html = rf"{os.getcwd()}\templage.html"
 
 # Lire le contenu du fichier HTML
 
@@ -371,7 +371,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
 
 
 
-        with open(f"{os.getcwd()}\sidebar.js", 'r', encoding='utf-8') as file:
+        with open(rf"{os.getcwd()}\sidebar.js", 'r', encoding='utf-8') as file:
             js = file.read()    
         content+=f"  </div><script>{js}</script> </body>\n\n\n"
         
@@ -478,7 +478,7 @@ def main():
     doc.save(f"{output_path}/DOCX/{file_name}.docx")
 
 
-    with open(f"{os.getcwd()}\style.css", 'r', encoding='utf-8') as file:
+    with open(rf"{os.getcwd()}\style.css", 'r', encoding='utf-8') as file:
             css = file.read()    
 
 
@@ -494,13 +494,13 @@ def main():
     # if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
     # else: print("Liste des checks vide!")
 
-    with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
+    with open( rf"{output_path}\MD\{file_name}.md" , 'w', encoding='utf-8') as f:
             f.write(content)
     customjs = f"const jsonData = {json.dumps(JSON_EXPORT)};"
     
     final_export_0=contenu_html.replace("// <JSONDATA>",customjs)
     final_export=final_export_0.replace("/* <css></css> */",css)
-    with open( f"{output_path}/HTML/{file_name}.html" , 'w', encoding='utf-8') as f:
+    with open( rf"{output_path}\HTML\{file_name}.html" , 'w', encoding='utf-8') as f:
         f.write(final_export)
 
     
