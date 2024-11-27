@@ -220,10 +220,72 @@ code {
 .show {
     display: block !important;; /* Affiche l'élément en tant que bloc */
 }
-@media print {
+
+  @media print {
+    h1 {
+        page-break-before: always; /* Force un saut de page avant chaque h1 */
+        text-align: center; /* Centre le texte */
+        margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
+        margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+    }
+    h2 {
+        page-break-before: always;
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    h3 {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    section {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+
+    .sidebar {
+        position: fixed; /* La sidebar reste fixe à gauche */
+        top: 0;
+        left: 0;
+        width: 250px;  /* Largeur normale de la sidebar */
+        padding: 0px; /* Espaces internes */
+        background-color: #f4f4f4;
+        margin-left: 0mm;
+        box-shadow: none; /* Enlève l'ombre pendant l'impression */
+        border:none;
+        height: 100%;  /* Prend toute la hauteur de la page */
+        padding: 5px;
+        font-size: 10px; /* Réduit la taille de la police pour s'ajuster */
+        line-height: 1.05; /* Réduit l'espacement entre les lignes pour plus de texte */
+        display: block;
+        page-break-inside: avoid; /* Évite que la sidebar soit coupée entre les pages */
+        page-break-before: always; /* Force la sidebar à commencer sur chaque nouvelle page */
+    }
+
+
+    .sidebar a{
+        padding: 0px; /* Espaces internes */
+        margin: -0mm;
+        font-size: 9pt; /* Ajuste la taille de la police pour l'impression */
+    }
+    .sidebar button{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .sidebar h3{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .content {
+            width: 70%;  /* Largeur normale de la sidebar */
+            padding: 0px; /* Espaces internes */
+            background-color: #f4f4f4;
+            margin-left: 270px;
+            
+    
+        }
+
+    
     /* Empêcher la coupure de l'élément */
     body {
-        margin-left: -20mm; /* Décale la page de 20mm vers la gauche */
+         margin-left: 0mm; 
     }
     .no-break {
         page-break-inside: avoid;
@@ -239,11 +301,45 @@ code {
         display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
     }
 }
+
+#toggle-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#toggle-button.released {
+    background-color: #6C757D;
+}
+
+/* Par défaut, les éléments sont cachés */
+[data-visual="DM"] {
+    display: table-cell;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de se déplacer sur plusieurs lignes si nécessaire */
+}
+
+.column {
+    flex: 1 1 200px; /* Permet à chaque colonne de croître, de rétrécir, et d'avoir une largeur de base de 200px */
+    margin: 10px;
+}
+
+.priority-column {
+    flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
+    
+}
      </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
+        <button id="toggle-button" class="pressed" data-state="DM">DM</button>
         <button id="export">Enregistrer les modifications</button>
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
@@ -276,7 +372,7 @@ code {
 
 <script>
 
-const jsonData = {"visites": [{"V_description": "Quality of Life", "fiches": [{"F_description": "5D3L", "groupes": [{"G_description": "QLQHEAD", "questions": [{"GI_key": "a33e2b20-e08f-4385-8aa7-c3e78d9a46d8", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQYN"}, {"GI_key": "cfb1b069-fd56-4257-a634-7a8c1ed22403", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQDT"}, {"GI_key": "28a020b0-7f39-4a89-a884-1fff396cc9db", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQNO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQNO_R"}, {"GI_key": "6af31c06-cdda-499a-9c33-4fd57c0cccd5", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQEXPDT"}]}, {"G_description": "5D3L", "questions": [{"GI_key": "d0b95332-7fc0-41dc-99cb-35c73fed4ad6", "I_description": "Mobilit\u00e9", "Message": null, "rep": "\ud83d\udd18 1 - <b>Je n\u2019ai aucun probl\u00e8me pour me d\u00e9placer \u00e0 pied.</b><br>\ud83d\udd18 2 - <b>J\u2019ai des probl\u00e8mes pour me d\u00e9placer \u00e0 pied.</b><br>\ud83d\udd18 3 - <b>Je suis oblig\u00e9(e) de rester alit\u00e9(e).</b>", "I_Status": "", "i_SasName": "CDTL1"}, {"GI_key": "6f7e5082-6d07-47b8-bc38-b9388faea68e", "I_description": "Autonomie de la personne", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je n\u2019ai aucun probl\u00e8me pour prendre soin de moi.</b><br>\ud83d\udd18 2 - <b>2- J\u2019ai des probl\u00e8mes pour me laver ou m\u2019habiller tout(e) seul(e).</b><br>\ud83d\udd18 3 - <b>3-Je suis incapable de me laver ou de m\u2019habiller tout(e) seul(e).</b>", "I_Status": "", "i_SasName": "CDTL2"}, {"GI_key": "0f29f940-ef59-4199-aca2-da99df6262f5", "I_description": "Activit\u00e9s courantes", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je n\u2019ai aucun probl\u00e8me pour accomplir mes activit\u00e9s courantes</b><br>\ud83d\udd18 2 - <b>2-J\u2019ai des probl\u00e8mes pour accomplir mes activit\u00e9s courantes.</b><br>\ud83d\udd18 3 - <b>3-Je suis incapable d\u2019accomplir mes activit\u00e9s courantes.</b>", "I_Status": "", "i_SasName": "CDTL3"}, {"GI_key": "7bf12ac2-ac2d-4e2d-9da3-d0abb2ccd7a3", "I_description": "Douleurs/g\u00eane", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je n\u2019ai ni douleurs ni g\u00eane.</b><br>\ud83d\udd18 2 - <b>2-J\u2019ai des douleurs ou une g\u00eane mod\u00e9r\u00e9e(s).</b><br>\ud83d\udd18 3 - <b>3-J\u2019ai des douleurs ou une g\u00eane extr\u00eame(s).</b>", "I_Status": "", "i_SasName": "CDTL4"}, {"GI_key": "ac775ba3-4f65-4158-b5f6-6fe840cade29", "I_description": "Anxi\u00e9t\u00e9/D\u00e9pression", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je ne suis ni anxieux(se) ni d\u00e9prim\u00e9(e).</b><br>\ud83d\udd18 2 - <b>2-Je suis mod\u00e9r\u00e9ment anxieux(se) ou d\u00e9prim\u00e9(e).</b><br>\ud83d\udd18 3 - <b>3-Je suis extr\u00eamement anxieux(se) ou d\u00e9prim\u00e9(e).</b>", "I_Status": "", "i_SasName": "CDTL5"}]}]}]}]};
+const jsonData = {"visites": [{"V_description": "Quality of Life", "fiches": [{"F_description": "5D3L", "groupes": [{"G_description": "QLQHEAD", "questions": [{"GI_key": "a33e2b20-e08f-4385-8aa7-c3e78d9a46d8", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQYN"}, {"GI_key": "cfb1b069-fd56-4257-a634-7a8c1ed22403", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQDT"}, {"GI_key": "28a020b0-7f39-4a89-a884-1fff396cc9db", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQNO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "QLQNO_R"}, {"GI_key": "6af31c06-cdda-499a-9c33-4fd57c0cccd5", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQEXPDT"}]}, {"G_description": "5D3L", "questions": [{"GI_key": "d0b95332-7fc0-41dc-99cb-35c73fed4ad6", "I_description": "Mobilit\u00e9", "Message": null, "rep": "\ud83d\udd18 1 - <b>Je n\u2019ai aucun probl\u00e8me pour me d\u00e9placer \u00e0 pied.</b><br>\ud83d\udd18 2 - <b>J\u2019ai des probl\u00e8mes pour me d\u00e9placer \u00e0 pied.</b><br>\ud83d\udd18 3 - <b>Je suis oblig\u00e9(e) de rester alit\u00e9(e).</b>", "I_Status": "", "i_SasName": "CDTL1"}, {"GI_key": "6f7e5082-6d07-47b8-bc38-b9388faea68e", "I_description": "Autonomie de la personne", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je n\u2019ai aucun probl\u00e8me pour prendre soin de moi.</b><br>\ud83d\udd18 2 - <b>2- J\u2019ai des probl\u00e8mes pour me laver ou m\u2019habiller tout(e) seul(e).</b><br>\ud83d\udd18 3 - <b>3-Je suis incapable de me laver ou de m\u2019habiller tout(e) seul(e).</b>", "I_Status": "", "i_SasName": "CDTL2"}, {"GI_key": "0f29f940-ef59-4199-aca2-da99df6262f5", "I_description": "Activit\u00e9s courantes", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je n\u2019ai aucun probl\u00e8me pour accomplir mes activit\u00e9s courantes</b><br>\ud83d\udd18 2 - <b>2-J\u2019ai des probl\u00e8mes pour accomplir mes activit\u00e9s courantes.</b><br>\ud83d\udd18 3 - <b>3-Je suis incapable d\u2019accomplir mes activit\u00e9s courantes.</b>", "I_Status": "", "i_SasName": "CDTL3"}, {"GI_key": "7bf12ac2-ac2d-4e2d-9da3-d0abb2ccd7a3", "I_description": "Douleurs/g\u00eane", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je n\u2019ai ni douleurs ni g\u00eane.</b><br>\ud83d\udd18 2 - <b>2-J\u2019ai des douleurs ou une g\u00eane mod\u00e9r\u00e9e(s).</b><br>\ud83d\udd18 3 - <b>3-J\u2019ai des douleurs ou une g\u00eane extr\u00eame(s).</b>", "I_Status": "", "i_SasName": "CDTL4"}, {"GI_key": "ac775ba3-4f65-4158-b5f6-6fe840cade29", "I_description": "Anxi\u00e9t\u00e9/D\u00e9pression", "Message": null, "rep": "\ud83d\udd18 1 - <b>1-Je ne suis ni anxieux(se) ni d\u00e9prim\u00e9(e).</b><br>\ud83d\udd18 2 - <b>2-Je suis mod\u00e9r\u00e9ment anxieux(se) ou d\u00e9prim\u00e9(e).</b><br>\ud83d\udd18 3 - <b>3-Je suis extr\u00eamement anxieux(se) ou d\u00e9prim\u00e9(e).</b>", "I_Status": "", "i_SasName": "CDTL5"}]}]}]}]};
 
 function setupExportButton() {
     const exportButton = document.getElementById("export");
@@ -291,7 +387,7 @@ function setupExportButton() {
         const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
         const a = document.createElement("a");
         a.href = url;
-        a.download = "modifications.js"; // Nom du fichier à télécharger
+        a.download = "modifications.hmt"; // Nom du fichier à télécharger
         document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
         a.click(); // Téléchargement
         document.body.removeChild(a); // Suppression de l'élément
@@ -361,7 +457,6 @@ jsonData.visites.forEach((visite, visitIndex) => {
 
 // Fonction visibleonly
 function visibleonly(data, type, index) {
-
 
     if (type === 'visite') {
 
@@ -512,6 +607,7 @@ function generateFiche(fiche, activate, fid) {
 
         // Créer une table pour les questions
         const table = document.createElement('table');
+        table.className="no-break"
 
         // Ajouter l'en-tête de la table
         const headerRow = document.createElement('tr');
@@ -519,16 +615,25 @@ function generateFiche(fiche, activate, fid) {
         th0.innerText = '🛠️';
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
+        th0.setAttribute('data-visual', "DM");
 
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
         const th2 = document.createElement('th');
         th2.innerText = 'Response';
+        const th3 = document.createElement('th');
+        th3.innerText = 'Sas';
+        th3.setAttribute('data-visual', "DM");
+        const th4 = document.createElement('th');
+        th4.innerText = 'Report';
+        th4.setAttribute('data-visual', "DM");
 
-        headerRow.appendChild(th0);
+        // headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
+        headerRow.appendChild(th3);
+        headerRow.appendChild(th4);
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
@@ -537,6 +642,7 @@ function generateFiche(fiche, activate, fid) {
 
             // Colonne pour l'outil
             const td0 = document.createElement('td');
+            td0.setAttribute('data-visual', "DM");
             td0.id = `td0${question.GI_key}`;
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
@@ -552,10 +658,40 @@ function generateFiche(fiche, activate, fid) {
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
 
+            const td3 = document.createElement('td');
+            td3.innerHTML = question.i_SasName || 'N/A';
+            td3.setAttribute('data-visual', "DM");
+            
+            const td4 = document.createElement('td'); // Crée une cellule de tableau
+            td4.setAttribute('data-visual', "DM");
+            const issue = document.createElement('button'); // Crée un bouton
+            issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
+            issue.id = "report-issue"; // Donne un ID au bouton
+            issue.setAttribute('data-fiche', fiche.F_description);
+            issue.setAttribute('data-question', question.I_description);
+            issue.setAttribute('data-SasName', question.i_SasName);
+            issue.addEventListener('click', () => {
+                const ficheDescription = event.target.getAttribute('data-fiche');
+                const questionDescription = event.target.getAttribute('data-question');
+                const SasName = event.target.getAttribute('data-SasName');
+
+                // Remplacez l'URL avec votre propre logique
+                title= ` Problème avec ${ficheDescription} SasName:${SasName}`;
+                description = `# Problème identifié sur : \n## fiche:${ficheDescription} \n### SasName:${SasName} \n\n question= ${questionDescription} \n\n détail :`;
+
+                const url = `https://github.com/Anmangin/XML_TM/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(description)}&labels=bug`;
+                window.open(url, '_blank');
+            });
+
+            td4.appendChild(issue); // Ajoute le bouton à la cellule
+
+            
             // Ajouter les colonnes à la ligne
-            row.appendChild(td0);
+            // row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
@@ -568,6 +704,7 @@ function generateFiche(fiche, activate, fid) {
     // Ajouter la section au contenu principal
     mainContent.appendChild(section);
 }
+
 
 
 window.addEventListener('beforeunload', (event) => {
@@ -583,7 +720,7 @@ window.addEventListener('beforeunload', (event) => {
         function generateFiches(visite,vid) {
 
             const h1 = document.createElement('h1');
-            h1.innerText = visite.V_description;
+            h1.innerText = "Visite " + visite.V_description;
             h1.id = `${vid}`
             mainContent.appendChild(h1);
      
@@ -605,6 +742,65 @@ window.addEventListener('beforeunload', (event) => {
     
 
     </script>
+
+<script>
+   
+    // Récupère le bouton et ajoute un événement de clic
+    const toggleButton = document.getElementById('toggle-button');
+
+    toggleButton.addEventListener('click', () => {
+        const currentState = toggleButton.getAttribute('data-state');
+        let newState, buttonText;
+
+        // Basculer entre les deux états
+        if (currentState === "DM") {
+            newState = "Investigateur";
+            buttonText = "Investigateur";
+            toggleButton.classList.remove('pressed');
+            toggleButton.classList.add('released');
+        } else {
+            newState = "DM";
+            buttonText = "DM";
+            toggleButton.classList.remove('released');
+            toggleButton.classList.add('pressed');
+        }
+
+        // Met à jour l'état du bouton
+        toggleButton.setAttribute('data-state', newState);
+        toggleButton.innerText = buttonText;
+
+        // Afficher/Masquer les éléments en fonction de l'état
+        document.querySelectorAll('[data-visual]').forEach(el => {
+            if (el.getAttribute('data-visual') === newState) {
+                el.style.display = "table-cell";
+            } else {
+                el.style.display = "none";
+            }
+        });
+    });
+
+    // Afficher initialement les éléments de l'état par défaut (DM)
+    document.querySelectorAll('[data-visual="DM"]').forEach(el => {
+        el.style.display = "table-cell";
+    });
+
+
+
+
+        let h1list = document.getElementsByTagName('h1');
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+        }
+
+        for (let title of h1list) {
+            title.classList.remove('hidden');
+            title.classList.add('show');
+        }
+
+</script>
 </body>
 
 </html>

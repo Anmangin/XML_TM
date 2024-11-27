@@ -220,10 +220,72 @@ code {
 .show {
     display: block !important;; /* Affiche l'élément en tant que bloc */
 }
-@media print {
+
+  @media print {
+    h1 {
+        page-break-before: always; /* Force un saut de page avant chaque h1 */
+        text-align: center; /* Centre le texte */
+        margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
+        margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+    }
+    h2 {
+        page-break-before: always;
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    h3 {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    section {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+
+    .sidebar {
+        position: fixed; /* La sidebar reste fixe à gauche */
+        top: 0;
+        left: 0;
+        width: 250px;  /* Largeur normale de la sidebar */
+        padding: 0px; /* Espaces internes */
+        background-color: #f4f4f4;
+        margin-left: 0mm;
+        box-shadow: none; /* Enlève l'ombre pendant l'impression */
+        border:none;
+        height: 100%;  /* Prend toute la hauteur de la page */
+        padding: 5px;
+        font-size: 10px; /* Réduit la taille de la police pour s'ajuster */
+        line-height: 1.05; /* Réduit l'espacement entre les lignes pour plus de texte */
+        display: block;
+        page-break-inside: avoid; /* Évite que la sidebar soit coupée entre les pages */
+        page-break-before: always; /* Force la sidebar à commencer sur chaque nouvelle page */
+    }
+
+
+    .sidebar a{
+        padding: 0px; /* Espaces internes */
+        margin: -0mm;
+        font-size: 9pt; /* Ajuste la taille de la police pour l'impression */
+    }
+    .sidebar button{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .sidebar h3{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .content {
+            width: 70%;  /* Largeur normale de la sidebar */
+            padding: 0px; /* Espaces internes */
+            background-color: #f4f4f4;
+            margin-left: 270px;
+            
+    
+        }
+
+    
     /* Empêcher la coupure de l'élément */
     body {
-        margin-left: -20mm; /* Décale la page de 20mm vers la gauche */
+         margin-left: 0mm; 
     }
     .no-break {
         page-break-inside: avoid;
@@ -239,11 +301,45 @@ code {
         display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
     }
 }
+
+#toggle-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#toggle-button.released {
+    background-color: #6C757D;
+}
+
+/* Par défaut, les éléments sont cachés */
+[data-visual="DM"] {
+    display: table-cell;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de se déplacer sur plusieurs lignes si nécessaire */
+}
+
+.column {
+    flex: 1 1 200px; /* Permet à chaque colonne de croître, de rétrécir, et d'avoir une largeur de base de 200px */
+    margin: 10px;
+}
+
+.priority-column {
+    flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
+    
+}
      </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
+        <button id="toggle-button" class="pressed" data-state="DM">DM</button>
         <button id="export">Enregistrer les modifications</button>
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
@@ -276,7 +372,7 @@ code {
 
 <script>
 
-const jsonData = {"visites": [{"V_description": "Quality of Life", "fiches": [{"F_description": "QLQC30_FR", "groupes": [{"G_description": "QLQHEAD", "questions": [{"GI_key": "a33e2b20-e08f-4385-8aa7-c3e78d9a46d8", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQYN"}, {"GI_key": "c908c581-0934-45b0-8179-873d4ef121d0", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQEYN"}, {"GI_key": "cfb1b069-fd56-4257-a634-7a8c1ed22403", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQDT"}, {"GI_key": "76c8a75b-0d46-4805-9b59-9fb7f2427923", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQEHEAD.*][QLQEDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQEDT"}, {"GI_key": "28a020b0-7f39-4a89-a884-1fff396cc9db", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQNO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQNO_R"}, {"GI_key": "4e72f364-cf50-4838-a619-91146e1cab18", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQEHEAD.*][QLQENO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQEHEAD][QLQEYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQENO_R"}, {"GI_key": "6af31c06-cdda-499a-9c33-4fd57c0cccd5", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQEXPDT"}, {"GI_key": "486fbd31-6a04-44ad-9334-6820174217dc", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQEHEAD.*][QLQEEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQEHEAD][QLQEYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQEEXPD"}, {"GI_key": "e95fd643-f45f-4bfa-bb60-7ef0debd5945", "I_description": "MISSING_VAR", "Message": null, "rep": null, "I_Status": "", "i_SasName": "MISSING_"}]}, {"G_description": "QLQC30G1", "questions": [{"GI_key": "0f8cf078-224f-4121-be44-c2132afc5a8a", "I_description": "1. Avez-vous des difficult\u00e9s \u00e0 faire certains efforts physiques pr\u00e9nibles comme porter un sac \u00e0 provision charg\u00e9 ou une valise ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q01]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q01"}, {"GI_key": "03716a63-d3c2-4457-80aa-ecab0abfcff9", "I_description": "2. Avez-vous des difficult\u00e9s \u00e0 faire une LONGUE promenade ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q02]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q02"}, {"GI_key": "719ab85e-6a1a-4805-a85e-a34dbe7d9de4", "I_description": "3. Avez-vous des difficult\u00e9s \u00e0 faire un PETIT tour dehors ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q03]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q03"}, {"GI_key": "0df9ac91-7752-4059-84a6-19648c79fbd6", "I_description": "4. Etes-vous oblig\u00e9(e) de rester au lit ou dans un fauteuil pendant la journ\u00e9e ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q04]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q04"}, {"GI_key": "de69c5ec-9bbe-46eb-b898-a8d07b71eef4", "I_description": "5. Avez-vous besoin d'aide pour manger, vous habiller, faire votre toilette ou aller aux WC ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q05]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q05"}]}, {"G_description": "QLQC30G2", "questions": [{"GI_key": "0af4e348-2d5b-42fb-b0dc-7d5c55c8112b", "I_description": "6. Avez-vous \u00e9t\u00e9 g\u00ean\u00e9(e) pour faire votre travail ou vos activit\u00e9s de tous les jours ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q06]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q06"}, {"GI_key": "8b60c55e-6241-458b-8795-1fb9b360662e", "I_description": "7. Avez-vous \u00e9t\u00e9 g\u00ean\u00e9(e) dans vos activit\u00e9s de loisirs ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q07]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q07"}, {"GI_key": "85f045e3-588f-43e1-b6d0-5baa3baffae1", "I_description": "8. Avez-vous eu le souffle court ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q08]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q08"}, {"GI_key": "d4411e2a-c577-47b8-ac2d-2a1d83201c19", "I_description": "9. Avez-vous ressenti de la douleur ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q09]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q09"}, {"GI_key": "ed88e0a8-adc1-466c-b42b-ce92c9200c90", "I_description": "10. Avez-vous eu besoin de repos ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q10]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q10"}, {"GI_key": "ce8d4e01-97a2-4f5f-96d5-4b55f7b9ca92", "I_description": "11. Avez-vous eu des difficult\u00e9s \u00e0 dormir ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q11]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q11"}, {"GI_key": "717822bc-e0f9-4cf9-bbc1-1e1f74022417", "I_description": "12. Vous \u00eates-vous senti(e) faible ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q12]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q12"}, {"GI_key": "4e773c7b-42b4-4c63-98a7-5821b7f1f582", "I_description": "13. Avez-vous manqu\u00e9 d'app\u00e9tit ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q13]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q13"}, {"GI_key": "d9921694-b5bb-467d-b076-b4e6933d2ee0", "I_description": "14. Avez-vous eu des naus\u00e9es (mal au coeur) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q14]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q14"}, {"GI_key": "4e01e326-0177-40c9-90bd-71a19ed6e2e9", "I_description": "15. Avez-vous vomi ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q15]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q15"}, {"GI_key": "ba578c35-a244-4eca-9a10-cdd593f6d756", "I_description": "16. Avez-vous \u00e9t\u00e9 constip\u00e9(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q16]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q16"}, {"GI_key": "f85ab474-c687-4ef4-9194-d667caf5e240", "I_description": "17. Avez-vous eu de la diarrh\u00e9e ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q17]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q17"}, {"GI_key": "68e784c7-d936-4d7f-893d-b4ed93595ff9", "I_description": "18. Etiez-vous fatigu\u00e9(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q18]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q18"}, {"GI_key": "c1e66dc5-9454-466a-a8ec-5579352a3ce7", "I_description": "19. Des douleurs ont-elles perturb\u00e9 vos activit\u00e9s quotidiennes ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q19]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q19"}, {"GI_key": "ca3088c4-ec6d-4aed-be51-f1ad6ffdfd29", "I_description": "20. Avez-vous eu des difficult\u00e9s \u00e0 vous concentrer sur certaines choses, par exemple, pour lire le journal ou regarder la t\u00e9l\u00e9vision ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q20]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q20"}, {"GI_key": "8c160ae1-b9f5-40c3-889f-78b18922aa58", "I_description": "21. Vous \u00eates-vous senti(e) tendu(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q21]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q21"}, {"GI_key": "f07cad78-436e-4e7a-9ab8-3fc558ab9bed", "I_description": "22. Vous \u00eates-vous fait du souci ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q22]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q22"}, {"GI_key": "d52e6dd3-4092-4685-b80e-9970a1e1e914", "I_description": "23. Vous \u00eates-vous senti(e) irritable ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q23]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q23"}, {"GI_key": "b2da94e4-577e-4814-b77f-c5ac46ec2264", "I_description": "24. Vous \u00eates-vous senti(e) d\u00e9prim\u00e9(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q24]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q24"}, {"GI_key": "305e4492-7d74-4716-b364-29ac27d89264", "I_description": "25. Avez-vous eu des difficult\u00e9s \u00e0 vous souvenir de certaines choses ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q25]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q25"}, {"GI_key": "75b3c00a-5b24-4a96-a08e-857a8160607c", "I_description": "26. Votre \u00e9tat physique ou votre traitement m\u00e9dical vous ont-ils g\u00ean\u00e9(e) dans votre vie FAMILIALE ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q26]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q26"}, {"GI_key": "e56c4206-02c3-4f27-b939-0577392e72c8", "I_description": "27. Votre \u00e9tat physique ou votre traitement m\u00e9dical vous ont-ils g\u00ean\u00e9(e) dans vos activit\u00e9s SOCIALES (par exemple, sortir avec des amis, aller au cin\u00e9ma, ...) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q27]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q27"}, {"GI_key": "3d385032-a965-40fa-b3f7-160cdb5ee7da", "I_description": "28. Votre \u00e9tat physique ou votre traitement m\u00e9dical vous ont-ils caus\u00e9 des probl\u00e8mes financiers ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q28]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q28"}]}, {"G_description": "QLQC30G3", "questions": [{"GI_key": "a6e7aa2e-b753-4fb3-9e23-73a5b4873cee", "I_description": "29. Comment \u00e9valueriez-vous votre ETAT DE SANTE au cours de la semaine pass\u00e9e ?", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G3.*][Q29]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Valid:[Q29]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar q29 = [Q29];\n\nNumber(q29) >= 1 && Number(q29) <= 7; \n#data Expression \n \n</code></pre> </td><td> The answer to this question can only be between 1 and 7. Please verify and correct.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "Q29"}, {"GI_key": "bd9fdd6f-c48b-4dc5-8275-b85033a5cc3f", "I_description": "30. Comment \u00e9valueriez-vous l'ensemble de votre QUALITE DE VIE au cours de la semaine pass\u00e9e ?", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G3.*][Q30]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Valid:[Q30]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar q30 = [Q30];\n\nNumber(q30) >= 1 && Number(q30) <= 7; \n#data Expression \n \n</code></pre> </td><td> The answer to this question can only be between 1 and 7. Please verify and correct.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "Q30"}]}]}]}]};
+const jsonData = {"visites": [{"V_description": "Quality of Life", "fiches": [{"F_description": "QLQC30_FR", "groupes": [{"G_description": "QLQHEAD", "questions": [{"GI_key": "a33e2b20-e08f-4385-8aa7-c3e78d9a46d8", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQYN"}, {"GI_key": "c908c581-0934-45b0-8179-873d4ef121d0", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQEYN"}, {"GI_key": "cfb1b069-fd56-4257-a634-7a8c1ed22403", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQDT"}, {"GI_key": "76c8a75b-0d46-4805-9b59-9fb7f2427923", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQEHEAD.*][QLQEDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQEDT"}, {"GI_key": "28a020b0-7f39-4a89-a884-1fff396cc9db", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQNO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "QLQNO_R"}, {"GI_key": "4e72f364-cf50-4838-a619-91146e1cab18", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQEHEAD.*][QLQENO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQEHEAD][QLQEYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "QLQENO_R"}, {"GI_key": "6af31c06-cdda-499a-9c33-4fd57c0cccd5", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQEXPDT"}, {"GI_key": "486fbd31-6a04-44ad-9334-6820174217dc", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQEHEAD.*][QLQEEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQEHEAD][QLQEYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQEEXPD"}, {"GI_key": "e95fd643-f45f-4bfa-bb60-7ef0debd5945", "I_description": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}, {"G_description": "QLQC30G1", "questions": [{"GI_key": "0f8cf078-224f-4121-be44-c2132afc5a8a", "I_description": "1. Avez-vous des difficult\u00e9s \u00e0 faire certains efforts physiques pr\u00e9nibles comme porter un sac \u00e0 provision charg\u00e9 ou une valise ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q01]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q01"}, {"GI_key": "03716a63-d3c2-4457-80aa-ecab0abfcff9", "I_description": "2. Avez-vous des difficult\u00e9s \u00e0 faire une LONGUE promenade ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q02]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q02"}, {"GI_key": "719ab85e-6a1a-4805-a85e-a34dbe7d9de4", "I_description": "3. Avez-vous des difficult\u00e9s \u00e0 faire un PETIT tour dehors ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q03]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q03"}, {"GI_key": "0df9ac91-7752-4059-84a6-19648c79fbd6", "I_description": "4. Etes-vous oblig\u00e9(e) de rester au lit ou dans un fauteuil pendant la journ\u00e9e ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q04]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q04"}, {"GI_key": "de69c5ec-9bbe-46eb-b898-a8d07b71eef4", "I_description": "5. Avez-vous besoin d'aide pour manger, vous habiller, faire votre toilette ou aller aux WC ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G1.*][Q05]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q05"}]}, {"G_description": "QLQC30G2", "questions": [{"GI_key": "0af4e348-2d5b-42fb-b0dc-7d5c55c8112b", "I_description": "6. Avez-vous \u00e9t\u00e9 g\u00ean\u00e9(e) pour faire votre travail ou vos activit\u00e9s de tous les jours ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q06]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q06"}, {"GI_key": "8b60c55e-6241-458b-8795-1fb9b360662e", "I_description": "7. Avez-vous \u00e9t\u00e9 g\u00ean\u00e9(e) dans vos activit\u00e9s de loisirs ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q07]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q07"}, {"GI_key": "85f045e3-588f-43e1-b6d0-5baa3baffae1", "I_description": "8. Avez-vous eu le souffle court ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q08]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q08"}, {"GI_key": "d4411e2a-c577-47b8-ac2d-2a1d83201c19", "I_description": "9. Avez-vous ressenti de la douleur ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q09]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q09"}, {"GI_key": "ed88e0a8-adc1-466c-b42b-ce92c9200c90", "I_description": "10. Avez-vous eu besoin de repos ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q10]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q10"}, {"GI_key": "ce8d4e01-97a2-4f5f-96d5-4b55f7b9ca92", "I_description": "11. Avez-vous eu des difficult\u00e9s \u00e0 dormir ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q11]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q11"}, {"GI_key": "717822bc-e0f9-4cf9-bbc1-1e1f74022417", "I_description": "12. Vous \u00eates-vous senti(e) faible ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q12]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q12"}, {"GI_key": "4e773c7b-42b4-4c63-98a7-5821b7f1f582", "I_description": "13. Avez-vous manqu\u00e9 d'app\u00e9tit ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q13]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q13"}, {"GI_key": "d9921694-b5bb-467d-b076-b4e6933d2ee0", "I_description": "14. Avez-vous eu des naus\u00e9es (mal au coeur) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q14]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q14"}, {"GI_key": "4e01e326-0177-40c9-90bd-71a19ed6e2e9", "I_description": "15. Avez-vous vomi ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q15]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q15"}, {"GI_key": "ba578c35-a244-4eca-9a10-cdd593f6d756", "I_description": "16. Avez-vous \u00e9t\u00e9 constip\u00e9(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q16]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q16"}, {"GI_key": "f85ab474-c687-4ef4-9194-d667caf5e240", "I_description": "17. Avez-vous eu de la diarrh\u00e9e ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q17]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q17"}, {"GI_key": "68e784c7-d936-4d7f-893d-b4ed93595ff9", "I_description": "18. Etiez-vous fatigu\u00e9(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q18]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q18"}, {"GI_key": "c1e66dc5-9454-466a-a8ec-5579352a3ce7", "I_description": "19. Des douleurs ont-elles perturb\u00e9 vos activit\u00e9s quotidiennes ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q19]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q19"}, {"GI_key": "ca3088c4-ec6d-4aed-be51-f1ad6ffdfd29", "I_description": "20. Avez-vous eu des difficult\u00e9s \u00e0 vous concentrer sur certaines choses, par exemple, pour lire le journal ou regarder la t\u00e9l\u00e9vision ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q20]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q20"}, {"GI_key": "8c160ae1-b9f5-40c3-889f-78b18922aa58", "I_description": "21. Vous \u00eates-vous senti(e) tendu(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q21]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q21"}, {"GI_key": "f07cad78-436e-4e7a-9ab8-3fc558ab9bed", "I_description": "22. Vous \u00eates-vous fait du souci ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q22]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q22"}, {"GI_key": "d52e6dd3-4092-4685-b80e-9970a1e1e914", "I_description": "23. Vous \u00eates-vous senti(e) irritable ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q23]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q23"}, {"GI_key": "b2da94e4-577e-4814-b77f-c5ac46ec2264", "I_description": "24. Vous \u00eates-vous senti(e) d\u00e9prim\u00e9(e) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q24]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q24"}, {"GI_key": "305e4492-7d74-4716-b364-29ac27d89264", "I_description": "25. Avez-vous eu des difficult\u00e9s \u00e0 vous souvenir de certaines choses ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q25]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q25"}, {"GI_key": "75b3c00a-5b24-4a96-a08e-857a8160607c", "I_description": "26. Votre \u00e9tat physique ou votre traitement m\u00e9dical vous ont-ils g\u00ean\u00e9(e) dans votre vie FAMILIALE ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q26]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q26"}, {"GI_key": "e56c4206-02c3-4f27-b939-0577392e72c8", "I_description": "27. Votre \u00e9tat physique ou votre traitement m\u00e9dical vous ont-ils g\u00ean\u00e9(e) dans vos activit\u00e9s SOCIALES (par exemple, sortir avec des amis, aller au cin\u00e9ma, ...) ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q27]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q27"}, {"GI_key": "3d385032-a965-40fa-b3f7-160cdb5ee7da", "I_description": "28. Votre \u00e9tat physique ou votre traitement m\u00e9dical vous ont-ils caus\u00e9 des probl\u00e8mes financiers ?", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G2.*][Q28]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un peu</b><br>\ud83d\udd18 3 - <b>Assez</b><br>\ud83d\udd18 4 - <b>Beaucoup</b>", "I_Status": "", "i_SasName": "Q28"}]}, {"G_description": "QLQC30G3", "questions": [{"GI_key": "a6e7aa2e-b753-4fb3-9e23-73a5b4873cee", "I_description": "29. Comment \u00e9valueriez-vous votre ETAT DE SANTE au cours de la semaine pass\u00e9e ?", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G3.*][Q29]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Valid:[Q29]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar q29 = [Q29];\n\nNumber(q29) >= 1 && Number(q29) <= 7; \n#data Expression \n \n</code></pre> </td><td> The answer to this question can only be between 1 and 7. Please verify and correct.</td> </tr></table></details>", "rep": "Num - 1", "I_Status": "", "i_SasName": "Q29"}, {"GI_key": "bd9fdd6f-c48b-4dc5-8275-b85033a5cc3f", "I_description": "30. Comment \u00e9valueriez-vous l'ensemble de votre QUALITE DE VIE au cours de la semaine pass\u00e9e ?", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 5:[QLQC30_FR.*][QLQC30G3.*][Q30]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQC30_FR][QLQEHEAD][QLQEYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Valid:[Q30]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar q30 = [Q30];\n\nNumber(q30) >= 1 && Number(q30) <= 7; \n#data Expression \n \n</code></pre> </td><td> The answer to this question can only be between 1 and 7. Please verify and correct.</td> </tr></table></details>", "rep": "Num - 1", "I_Status": "", "i_SasName": "Q30"}]}]}]}]};
 
 function setupExportButton() {
     const exportButton = document.getElementById("export");
@@ -291,7 +387,7 @@ function setupExportButton() {
         const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
         const a = document.createElement("a");
         a.href = url;
-        a.download = "modifications.js"; // Nom du fichier à télécharger
+        a.download = "modifications.hmt"; // Nom du fichier à télécharger
         document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
         a.click(); // Téléchargement
         document.body.removeChild(a); // Suppression de l'élément
@@ -361,7 +457,6 @@ jsonData.visites.forEach((visite, visitIndex) => {
 
 // Fonction visibleonly
 function visibleonly(data, type, index) {
-
 
     if (type === 'visite') {
 
@@ -512,6 +607,7 @@ function generateFiche(fiche, activate, fid) {
 
         // Créer une table pour les questions
         const table = document.createElement('table');
+        table.className="no-break"
 
         // Ajouter l'en-tête de la table
         const headerRow = document.createElement('tr');
@@ -519,16 +615,25 @@ function generateFiche(fiche, activate, fid) {
         th0.innerText = '🛠️';
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
+        th0.setAttribute('data-visual', "DM");
 
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
         const th2 = document.createElement('th');
         th2.innerText = 'Response';
+        const th3 = document.createElement('th');
+        th3.innerText = 'Sas';
+        th3.setAttribute('data-visual', "DM");
+        const th4 = document.createElement('th');
+        th4.innerText = 'Report';
+        th4.setAttribute('data-visual', "DM");
 
-        headerRow.appendChild(th0);
+        // headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
+        headerRow.appendChild(th3);
+        headerRow.appendChild(th4);
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
@@ -537,6 +642,7 @@ function generateFiche(fiche, activate, fid) {
 
             // Colonne pour l'outil
             const td0 = document.createElement('td');
+            td0.setAttribute('data-visual', "DM");
             td0.id = `td0${question.GI_key}`;
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
@@ -552,10 +658,40 @@ function generateFiche(fiche, activate, fid) {
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
 
+            const td3 = document.createElement('td');
+            td3.innerHTML = question.i_SasName || 'N/A';
+            td3.setAttribute('data-visual', "DM");
+            
+            const td4 = document.createElement('td'); // Crée une cellule de tableau
+            td4.setAttribute('data-visual', "DM");
+            const issue = document.createElement('button'); // Crée un bouton
+            issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
+            issue.id = "report-issue"; // Donne un ID au bouton
+            issue.setAttribute('data-fiche', fiche.F_description);
+            issue.setAttribute('data-question', question.I_description);
+            issue.setAttribute('data-SasName', question.i_SasName);
+            issue.addEventListener('click', () => {
+                const ficheDescription = event.target.getAttribute('data-fiche');
+                const questionDescription = event.target.getAttribute('data-question');
+                const SasName = event.target.getAttribute('data-SasName');
+
+                // Remplacez l'URL avec votre propre logique
+                title= ` Problème avec ${ficheDescription} SasName:${SasName}`;
+                description = `# Problème identifié sur : \n## fiche:${ficheDescription} \n### SasName:${SasName} \n\n question= ${questionDescription} \n\n détail :`;
+
+                const url = `https://github.com/Anmangin/XML_TM/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(description)}&labels=bug`;
+                window.open(url, '_blank');
+            });
+
+            td4.appendChild(issue); // Ajoute le bouton à la cellule
+
+            
             // Ajouter les colonnes à la ligne
-            row.appendChild(td0);
+            // row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
@@ -568,6 +704,7 @@ function generateFiche(fiche, activate, fid) {
     // Ajouter la section au contenu principal
     mainContent.appendChild(section);
 }
+
 
 
 window.addEventListener('beforeunload', (event) => {
@@ -583,7 +720,7 @@ window.addEventListener('beforeunload', (event) => {
         function generateFiches(visite,vid) {
 
             const h1 = document.createElement('h1');
-            h1.innerText = visite.V_description;
+            h1.innerText = "Visite " + visite.V_description;
             h1.id = `${vid}`
             mainContent.appendChild(h1);
      
@@ -605,6 +742,65 @@ window.addEventListener('beforeunload', (event) => {
     
 
     </script>
+
+<script>
+   
+    // Récupère le bouton et ajoute un événement de clic
+    const toggleButton = document.getElementById('toggle-button');
+
+    toggleButton.addEventListener('click', () => {
+        const currentState = toggleButton.getAttribute('data-state');
+        let newState, buttonText;
+
+        // Basculer entre les deux états
+        if (currentState === "DM") {
+            newState = "Investigateur";
+            buttonText = "Investigateur";
+            toggleButton.classList.remove('pressed');
+            toggleButton.classList.add('released');
+        } else {
+            newState = "DM";
+            buttonText = "DM";
+            toggleButton.classList.remove('released');
+            toggleButton.classList.add('pressed');
+        }
+
+        // Met à jour l'état du bouton
+        toggleButton.setAttribute('data-state', newState);
+        toggleButton.innerText = buttonText;
+
+        // Afficher/Masquer les éléments en fonction de l'état
+        document.querySelectorAll('[data-visual]').forEach(el => {
+            if (el.getAttribute('data-visual') === newState) {
+                el.style.display = "table-cell";
+            } else {
+                el.style.display = "none";
+            }
+        });
+    });
+
+    // Afficher initialement les éléments de l'état par défaut (DM)
+    document.querySelectorAll('[data-visual="DM"]').forEach(el => {
+        el.style.display = "table-cell";
+    });
+
+
+
+
+        let h1list = document.getElementsByTagName('h1');
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+        }
+
+        for (let title of h1list) {
+            title.classList.remove('hidden');
+            title.classList.add('show');
+        }
+
+</script>
 </body>
 
 </html>

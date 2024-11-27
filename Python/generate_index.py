@@ -1,13 +1,14 @@
 import os
+import markdown  # Importer le module markdown
 
 def generate_index_html(directory):
     # Vérifie si le répertoire existe
-    if not os.path.isdir(directory):
-        print(f"Le répertoire {directory} n'existe pas.")
+    if not os.path.isdir(directory+"/Templates"):
+        print(f"Le répertoire {directory} Templates  n'existe pas.")
         return
 
-    # Liste tous les fichiers dans le répertoire
-    html_files = [f for f in os.listdir(directory) if f.endswith('.html')]
+    # Liste tous les fichiers HTML dans le répertoire
+    html_files = [f for f in os.listdir(directory +"/Templates") if f.endswith('.html')]
 
     # Crée le contenu du fichier index.html
     index_content = '''
@@ -27,6 +28,12 @@ def generate_index_html(directory):
     h1, h2 {
       color: #1a73e8;
     }
+
+    td h1 {
+  /* Les règles CSS que tu veux appliquer aux <h1> à l'intérieur des <td> */
+  font-size: 16px;
+  color: blue;
+}
     .intro {
       background-color: #e7f3ff;
       padding: 15px;
@@ -62,6 +69,61 @@ def generate_index_html(directory):
     .hidden {
       display: none;
     }
+    .md-content {
+      background-color: #f0f8ff;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-size: 0.95em;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto; /* Permet aux colonnes de s'ajuster en fonction du contenu */
+  
+}
+
+thead {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto; /* Permet aux colonnes de s'ajuster en fonction du contenu */
+}
+
+th, td {
+  padding: 2px;
+  text-align: left;
+  border: 1px solid #ddd;
+  height: 30px; /* Hauteur fixe pour toutes les cellules */
+  word-wrap: break-word; /* Empêche le texte de déborder des cellules */
+}
+
+th.crf {
+  width: 30%; /* Utilisation d'un pourcentage pour la largeur */
+  background-color: #e7f3ff;
+}
+
+th.doc {
+  width: 70%; /* Utilisation d'un pourcentage pour la largeur */
+  background-color: #e7f3ff;
+}
+
+td.crf {
+  width: 30%;
+   background-color: #e7f3ff;
+}
+
+td.doc {
+  width: 70%;
+}
+
+.category-title {
+  font-size: 1.6em;
+  color: #1a73e8;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -71,6 +133,7 @@ def generate_index_html(directory):
     <p>Les fichiers qui commencent par un chiffre sont cachés pour des raisons spécifiques.</p>
   </div>
 '''
+
 
     # Dictionnaire pour organiser les fichiers par catégorie
     categories = {
@@ -105,17 +168,43 @@ def generate_index_html(directory):
     for category in category_order:
         if categories[category]:  # Si la catégorie contient des fichiers
             index_content += f'  <div class="category-title">{category}</div>\n'
-            index_content += '  <ul>\n'
+            index_content += '''
+<table  width="100%">
+  <thead  width="100%">
+    <tr>
+     <th class="crf" width="30%">Lien CRF</th>
+      <th class="doc" width="70%">Doc disponible</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+'''
             
             for file in categories[category]:
-                if 'visite only' in file.lower():
-                    # Fichier "visite only", affiché plus petit
-                    index_content += f'    <li class="visit-only"><a href="Templates/{file}">{file}</a></li>\n'
-                else:
-                    # Fichier normal
-                    index_content += f'    <li><a href="Templates/{file}">{file}</a></li>\n'
-            
-            index_content += '  </ul>\n'
+                # Charge le fichier markdown correspondant si il existe
+                md_file = file.replace('.html', '.md')
+                md_content = ''
+                md_lines_count=0
+                if os.path.isfile(f"docs/MD/{md_file}"):
+                    with open(f"docs/MD/{md_file}", 'r', encoding='utf-8') as f:
+                        md_content = f.read()
+                        print(md_content)
+
+                # Convertir le markdown en HTML (si du contenu est présent)
+                md_html = ''
+                if md_content:
+                    md_html = f'<div class="md-content">{markdown.markdown(md_content)}</div>'
+                    md_lines_count = len(md_html.splitlines())
+
+                
+     
+                index_content += f'  <td class="crf"> <a href="docs/Templates/{file}">{file}</a> </td> \n '
+                if  md_lines_count>1 : index_content += f'  <td class=doc > {md_html} </td> </tr>\n '
+                else:index_content += f'  <td class="doc"> N/A </td> </tr>\n '
+
+          
+            index_content += f'</tbody></table>' 
 
     # Termine le contenu HTML
     index_content += '''
@@ -130,5 +219,5 @@ def generate_index_html(directory):
     print("Le fichier index.html a été généré avec succès.")
 
 # Exemple d'utilisation : générer le fichier index.html pour un dossier spécifique
-execution_path = rf'{os.getcwd()}/docs/Templates'
+execution_path = rf'{os.getcwd()}/docs'
 generate_index_html(execution_path)

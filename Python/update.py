@@ -17,7 +17,6 @@ from tkinter.filedialog import askopenfilename
 from tkinter import messagebox
 from pathlib import Path
 
-
 # Chemin vers le fichier HTML
 chemin_html = f"{os.getcwd()}/Python/Template_CRF.html"
 
@@ -339,7 +338,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
                         content+=             f" <td style='width:300px; text-align:center;'> {rep} </td> \n"
                         content+=            f"<td style='width:50px; text-align:center; color:red; font-size: 10px;'> <b> {I_Status}{i_SasName} </b></td> \n" 
                         content+=" </tr>\n"
-                        JSON_EXPORT = get_JSONLIGNE(JSON_EXPORT,V_description,F_description,G_description,GI_key,I_description,Message,rep,I_Status,i_SasName)            
+                        JSON_EXPORT = get_JSONLIGNE(JSON_EXPORT,V_description,F_description,G_description,GI_key,I_description,Message,rep,i_Display,I_Status,i_SasName)            
                         # print("écriture de ",I_description)
                         # para = doc.add_paragraph()
                         # run = para.add_run("")
@@ -378,7 +377,7 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
         return content,doc,JSON_EXPORT
         
 def get_JSONLIGNE(JSON_EXPORT, V_description, F_description, G_description, GI_key,
-                  I_description, Message, rep, I_Status, i_SasName):
+                  I_description, Message, rep,display, I_Status, i_SasName):
     # Assure-toi que la clé 'Patient' existe dans JSON_EXPORT
     if 'visites' not in JSON_EXPORT:
         JSON_EXPORT['visites'] = []
@@ -405,12 +404,13 @@ def get_JSONLIGNE(JSON_EXPORT, V_description, F_description, G_description, GI_k
         groupe = {"G_description": G_description, "questions": []}
         fiche['groupes'].append(groupe)
 
+
     # Ajout de la question dans le groupe
     question = {
          "GI_key": GI_key,
         "I_description": I_description,
         "Message": Message if Message else None,
-        "rep": rep if rep else None,
+        "rep": rep if rep else display,
         "I_Status": I_Status,
         "i_SasName": i_SasName
     }
@@ -495,17 +495,15 @@ def main():
 ) #remove_details_tags(content)
     # if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
     # else: print("Liste des checks vide!")
-
-    # with open( f"{output_path}/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
-    #         f.write(content)
+    if not os.path.exists(f"{output_path}/docs/MD/{file_name}.md"):
+        with open( f"{output_path}/docs/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
+                f.write(f"# DOCUMENTATION POUR LE FICHIER {file_name}")
+                
     customjs = f"const jsonData = {json.dumps(JSON_EXPORT)};"
-    
     final_export_0=contenu_html.replace("// <JSONDATA>",customjs)
     final_export=final_export_0.replace("/* <css></css> */",css)
     with open( f"{output_path}/docs/Templates/{file_name}.html" , 'w', encoding='utf-8') as f:
         f.write(final_export)
-
-    
 
 
 if __name__ == "__main__":

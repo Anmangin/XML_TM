@@ -220,10 +220,72 @@ code {
 .show {
     display: block !important;; /* Affiche l'élément en tant que bloc */
 }
-@media print {
+
+  @media print {
+    h1 {
+        page-break-before: always; /* Force un saut de page avant chaque h1 */
+        text-align: center; /* Centre le texte */
+        margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
+        margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+    }
+    h2 {
+        page-break-before: always;
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    h3 {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    section {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+
+    .sidebar {
+        position: fixed; /* La sidebar reste fixe à gauche */
+        top: 0;
+        left: 0;
+        width: 250px;  /* Largeur normale de la sidebar */
+        padding: 0px; /* Espaces internes */
+        background-color: #f4f4f4;
+        margin-left: 0mm;
+        box-shadow: none; /* Enlève l'ombre pendant l'impression */
+        border:none;
+        height: 100%;  /* Prend toute la hauteur de la page */
+        padding: 5px;
+        font-size: 10px; /* Réduit la taille de la police pour s'ajuster */
+        line-height: 1.05; /* Réduit l'espacement entre les lignes pour plus de texte */
+        display: block;
+        page-break-inside: avoid; /* Évite que la sidebar soit coupée entre les pages */
+        page-break-before: always; /* Force la sidebar à commencer sur chaque nouvelle page */
+    }
+
+
+    .sidebar a{
+        padding: 0px; /* Espaces internes */
+        margin: -0mm;
+        font-size: 9pt; /* Ajuste la taille de la police pour l'impression */
+    }
+    .sidebar button{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .sidebar h3{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .content {
+            width: 70%;  /* Largeur normale de la sidebar */
+            padding: 0px; /* Espaces internes */
+            background-color: #f4f4f4;
+            margin-left: 270px;
+            
+    
+        }
+
+    
     /* Empêcher la coupure de l'élément */
     body {
-        margin-left: -20mm; /* Décale la page de 20mm vers la gauche */
+         margin-left: 0mm; 
     }
     .no-break {
         page-break-inside: avoid;
@@ -239,11 +301,45 @@ code {
         display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
     }
 }
+
+#toggle-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#toggle-button.released {
+    background-color: #6C757D;
+}
+
+/* Par défaut, les éléments sont cachés */
+[data-visual="DM"] {
+    display: table-cell;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de se déplacer sur plusieurs lignes si nécessaire */
+}
+
+.column {
+    flex: 1 1 200px; /* Permet à chaque colonne de croître, de rétrécir, et d'avoir une largeur de base de 200px */
+    margin: 10px;
+}
+
+.priority-column {
+    flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
+    
+}
      </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
+        <button id="toggle-button" class="pressed" data-state="DM">DM</button>
         <button id="export">Enregistrer les modifications</button>
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
@@ -276,7 +372,7 @@ code {
 
 <script>
 
-const jsonData = {"visites": [{"V_description": "Adverse Events", "fiches": [{"F_description": "Adverse Event", "groupes": [{"G_description": "AE1", "questions": [{"GI_key": "0f62d8ba-137e-4947-9b26-2a37e10359b9", "I_description": "Verbatim", "Message": null, "rep": null, "I_Status": "", "i_SasName": "AETERM"}, {"GI_key": "765d79d7-e225-4879-9f73-21a85646b753", "I_description": "description of event", "Message": null, "rep": null, "I_Status": "", "i_SasName": "AEDESC"}]}, {"G_description": "AE2", "questions": [{"GI_key": "013fb251-8b43-4304-b05f-6ffd6663c264", "I_description": "CTCAE SOC", "Message": null, "rep": "\ud83d\udd18 Radio bouton trop long", "I_Status": "", "i_SasName": "AESOC"}, {"GI_key": "6c3715e2-30e3-4d71-9657-822f0bb5d6c2", "I_description": "CTCAE Term", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Dynamic codelist filter:[Adverse Event.*][AE2.*][AEPT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nif ([Adverse Event][AE2][AESOC] == 1) '1';\nelse if ([Adverse Event][AE2][AESOC] == 2) '2';\nelse if ([Adverse Event][AE2][AESOC] == 3) '3';\nelse if ([Adverse Event][AE2][AESOC] == 4) '4';\nelse if ([Adverse Event][AE2][AESOC] == 5) '5';\nelse if ([Adverse Event][AE2][AESOC] == 6) '6';\nelse if ([Adverse Event][AE2][AESOC] == 7) '7';\nelse if ([Adverse Event][AE2][AESOC] == 8) '8';\nelse if ([Adverse Event][AE2][AESOC] == 9) '9';\nelse if ([Adverse Event][AE2][AESOC] == 10) '10';\nelse if ([Adverse Event][AE2][AESOC] == 11) '11';\nelse if ([Adverse Event][AE2][AESOC] == 12) '12';\nelse if ([Adverse Event][AE2][AESOC] == 13) '13';\nelse if ([Adverse Event][AE2][AESOC] == 14) '14';\nelse if ([Adverse Event][AE2][AESOC] == 15) '15';\nelse if ([Adverse Event][AE2][AESOC] == 16) '16';\nelse if ([Adverse Event][AE2][AESOC] == 17) '17';\nelse if ([Adverse Event][AE2][AESOC] == 18) '18';\nelse if ([Adverse Event][AE2][AESOC] == 19) '19';\nelse if ([Adverse Event][AE2][AESOC] == 20) '20';\nelse if ([Adverse Event][AE2][AESOC] == 21) '21';\nelse if ([Adverse Event][AE2][AESOC] == 22) '22';\nelse if ([Adverse Event][AE2][AESOC] == 23) '23';\nelse if ([Adverse Event][AE2][AESOC] == 24) '24';\nelse if ([Adverse Event][AE2][AESOC] == 25) '25';\nelse if ([Adverse Event][AE2][AESOC] == 26) '26'; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 Radio bouton trop long", "I_Status": "", "i_SasName": "AEPT"}]}, {"G_description": "AE3", "questions": [{"GI_key": "540d408d-fe0a-48b2-a935-7670af5f2611", "I_description": "Ongoing  at the <br> beginning of treatment", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AESGO]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nisEmpty([Adverse Event][AE3][AESDT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AESGO"}, {"GI_key": "36742316-fffd-4367-adf2-657518537831", "I_description": "Start date <i>(if day is not know, fill with UK e.g : UK/01/2001)</i>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AESDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE3][AESGO] != '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AESDT"}, {"GI_key": "0ac9ee81-f397-4440-8433-6b4243012740", "I_description": "Ongoing at <br>the end of treatment  and/or <br> at the end of short-time follow up", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AEEGO]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nisEmpty([Adverse Event][AE3][AEEDT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AEEGO"}, {"GI_key": "b95d0ca9-f696-4749-b899-5302d4333ce3", "I_description": "End date <i>(if day or month is not know, fill with UK e.g : UK/UK/2001)</i>", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> Valid:[Adverse Event.*][AE3.*][AEEDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nisDate1LEDate2([Adverse Event][AE3][AESDT],[Adverse Event][AE3][AEEDT]); \n#data Expression \n \n</code></pre> </td><td> The toxicity end date has to be after the toxicity start date, please correct.</td> </tr><tr><td> Enabled:[Adverse Event.*][AE3.*][AEEDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE3][AEEGO] != '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AEEDT"}, {"GI_key": "337bec73-7567-436d-a061-94cd6959c391", "I_description": "Cycle at which the event <u>started</u>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AECYCLE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE3][AESGO] != '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AECYCLE"}]}, {"G_description": "AE4", "questions": [{"GI_key": "47f1731e-37f9-4a97-88ba-a8b765bce65a", "I_description": "Grade", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[AEGR]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[AEGR] > 0 && [AEGR] < 6; \n#data Expression \n \n</code></pre> </td><td> The grade should be between 1 and 5. Please correct.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AEGR"}, {"GI_key": "4febd4ee-57df-4836-8869-f5f9d94ab733", "I_description": "DLT", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "AEDLT"}, {"GI_key": "d45eba3d-b4bf-4f30-9537-98b515739c8d", "I_description": "<b><font color=\"#ff0033\">SAE</font></b>", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "AESER"}, {"GI_key": "02781066-d29f-4d3e-9d03-24ff16b7c474", "I_description": "FLAG", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Adverse Event.*][AE4.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \n'1' \n</code></pre> </td><td> </td> </tr></table></details>", "rep": null, "I_Status": "\ud83d\udc7b", "i_SasName": "FLAG"}, {"GI_key": "f725b5d6-6a0b-4801-bd9b-b15e0f7599b2", "I_description": "MISSING_VAR", "Message": null, "rep": null, "I_Status": "", "i_SasName": "MISSING_"}]}, {"G_description": "AE5", "questions": [{"GI_key": "62ff82de-b27d-44de-a48b-f5b3068b9386", "I_description": "Date of SAE reporting to PV", "Message": null, "rep": null, "I_Status": "", "i_SasName": "AESERDT"}, {"GI_key": "d44bcb31-43d6-4b00-b27d-d2398314f639", "I_description": "CIOMS Number", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[AECIOMS]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar cioms = [AECIOMS];\nvar lg = cioms.length;\n\nlg == 9 || lg == 0; \n#data Expression \n \n</code></pre> </td><td> The CIOMS number must contain 9 digits. Please correct.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AECIOMS"}]}, {"G_description": "AE6", "questions": [{"GI_key": "efe15d4b-76ef-48be-bc64-51a4859f5238", "I_description": "Related to", "Message": null, "rep": "\ud83d\udd18 1 - <b>Drug 1</b><br>\ud83d\udd18 2 - <b>Drug 2</b><br>\ud83d\udd18 3 - <b>Drug 3</b><br>\ud83d\udd18 4 - <b>Cancer</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "AEREL"}, {"GI_key": "dae14c48-d5d5-49f5-a755-37ba22712832", "I_description": "<font color=\"#0033ff\">If other, specify</font>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[Adverse Event.*][AE6.*][AEREL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE6][AEREL] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AEREL_S"}, {"GI_key": "8e9f94d9-84e6-48b3-8239-30e396873010", "I_description": "Action", "Message": null, "rep": "\ud83d\udd18 0 - <b>No action</b><br>\ud83d\udd18 1 - <b>Action 1</b><br>\ud83d\udd18 2 - <b>Action 2</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "AEACN"}, {"GI_key": "bedc9507-f74f-4104-9e16-886ece4019e9", "I_description": "<font color=\"#0033ff\">If other, specify</font>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[Adverse Event.*][AE6.*][AEACN_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE6][AEACN] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "AEACN_S"}, {"GI_key": "0284b741-d2ae-460f-a4a7-586bed124f42", "I_description": "Treatment required", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "AETRTYN"}]}, {"G_description": "AEMEDDRA", "questions": [{"GI_key": "204ec6bb-915b-4ab7-8784-ccab99e56545", "I_description": "Verbatim term:", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "MEDVERB"}, {"GI_key": "85c5c553-3dd6-46cb-b726-55937cf499cf", "I_description": "SOC code:", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "SOCCOD"}, {"GI_key": "d14ed0f1-26fa-47da-8d6b-8c6da093053c", "I_description": "SOC name:", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "SOCNAM"}, {"GI_key": "83e83e0f-016e-4827-8787-5f92b3cb0125", "I_description": "PT code:", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "PTCOD"}, {"GI_key": "aa84c001-4734-42a1-bb20-f9c914d152ca", "I_description": "PT term:", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "PTNAM"}, {"GI_key": "a028c0a3-7980-4366-843c-2ecd0f279a26", "I_description": "LLT code:", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "LLTCOD"}, {"GI_key": "cfb8914f-82bc-446b-a291-0bc48946c6b2", "I_description": "LLT term", "Message": null, "rep": null, "I_Status": "\ud83d\udd12", "i_SasName": "LLTNAM"}]}]}]}]};
+const jsonData = {"visites": [{"V_description": "Adverse Events", "fiches": [{"F_description": "Adverse Event", "groupes": [{"G_description": "AE1", "questions": [{"GI_key": "0f62d8ba-137e-4947-9b26-2a37e10359b9", "I_description": "Verbatim", "Message": null, "rep": "Char - 70", "I_Status": "", "i_SasName": "AETERM"}, {"GI_key": "765d79d7-e225-4879-9f73-21a85646b753", "I_description": "description of event", "Message": null, "rep": "Char - 200", "I_Status": "", "i_SasName": "AEDESC"}]}, {"G_description": "AE2", "questions": [{"GI_key": "013fb251-8b43-4304-b05f-6ffd6663c264", "I_description": "CTCAE SOC", "Message": null, "rep": "\ud83d\udd18 Radio bouton trop long", "I_Status": "", "i_SasName": "AESOC"}, {"GI_key": "6c3715e2-30e3-4d71-9657-822f0bb5d6c2", "I_description": "CTCAE Term", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Dynamic codelist filter:[Adverse Event.*][AE2.*][AEPT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nif ([Adverse Event][AE2][AESOC] == 1) '1';\nelse if ([Adverse Event][AE2][AESOC] == 2) '2';\nelse if ([Adverse Event][AE2][AESOC] == 3) '3';\nelse if ([Adverse Event][AE2][AESOC] == 4) '4';\nelse if ([Adverse Event][AE2][AESOC] == 5) '5';\nelse if ([Adverse Event][AE2][AESOC] == 6) '6';\nelse if ([Adverse Event][AE2][AESOC] == 7) '7';\nelse if ([Adverse Event][AE2][AESOC] == 8) '8';\nelse if ([Adverse Event][AE2][AESOC] == 9) '9';\nelse if ([Adverse Event][AE2][AESOC] == 10) '10';\nelse if ([Adverse Event][AE2][AESOC] == 11) '11';\nelse if ([Adverse Event][AE2][AESOC] == 12) '12';\nelse if ([Adverse Event][AE2][AESOC] == 13) '13';\nelse if ([Adverse Event][AE2][AESOC] == 14) '14';\nelse if ([Adverse Event][AE2][AESOC] == 15) '15';\nelse if ([Adverse Event][AE2][AESOC] == 16) '16';\nelse if ([Adverse Event][AE2][AESOC] == 17) '17';\nelse if ([Adverse Event][AE2][AESOC] == 18) '18';\nelse if ([Adverse Event][AE2][AESOC] == 19) '19';\nelse if ([Adverse Event][AE2][AESOC] == 20) '20';\nelse if ([Adverse Event][AE2][AESOC] == 21) '21';\nelse if ([Adverse Event][AE2][AESOC] == 22) '22';\nelse if ([Adverse Event][AE2][AESOC] == 23) '23';\nelse if ([Adverse Event][AE2][AESOC] == 24) '24';\nelse if ([Adverse Event][AE2][AESOC] == 25) '25';\nelse if ([Adverse Event][AE2][AESOC] == 26) '26'; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 Radio bouton trop long", "I_Status": "", "i_SasName": "AEPT"}]}, {"G_description": "AE3", "questions": [{"GI_key": "540d408d-fe0a-48b2-a935-7670af5f2611", "I_description": "Ongoing  at the <br> beginning of treatment", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AESGO]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nisEmpty([Adverse Event][AE3][AESDT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 100", "I_Status": "", "i_SasName": "AESGO"}, {"GI_key": "36742316-fffd-4367-adf2-657518537831", "I_description": "Start date <i>(if day is not know, fill with UK e.g : UK/01/2001)</i>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AESDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE3][AESGO] != '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "AESDT"}, {"GI_key": "0ac9ee81-f397-4440-8433-6b4243012740", "I_description": "Ongoing at <br>the end of treatment  and/or <br> at the end of short-time follow up", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AEEGO]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nisEmpty([Adverse Event][AE3][AEEDT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 100", "I_Status": "", "i_SasName": "AEEGO"}, {"GI_key": "b95d0ca9-f696-4749-b899-5302d4333ce3", "I_description": "End date <i>(if day or month is not know, fill with UK e.g : UK/UK/2001)</i>", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> Valid:[Adverse Event.*][AE3.*][AEEDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nisDate1LEDate2([Adverse Event][AE3][AESDT],[Adverse Event][AE3][AEEDT]); \n#data Expression \n \n</code></pre> </td><td> The toxicity end date has to be after the toxicity start date, please correct.</td> </tr><tr><td> Enabled:[Adverse Event.*][AE3.*][AEEDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE3][AEEGO] != '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "AEEDT"}, {"GI_key": "337bec73-7567-436d-a061-94cd6959c391", "I_description": "Cycle at which the event <u>started</u>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[Adverse Event.*][AE3.*][AECYCLE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE3][AESGO] != '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 2", "I_Status": "", "i_SasName": "AECYCLE"}]}, {"G_description": "AE4", "questions": [{"GI_key": "47f1731e-37f9-4a97-88ba-a8b765bce65a", "I_description": "Grade", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[AEGR]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[AEGR] > 0 && [AEGR] < 6; \n#data Expression \n \n</code></pre> </td><td> The grade should be between 1 and 5. Please correct.</td> </tr></table></details>", "rep": "Num - 1", "I_Status": "", "i_SasName": "AEGR"}, {"GI_key": "4febd4ee-57df-4836-8869-f5f9d94ab733", "I_description": "DLT", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "AEDLT"}, {"GI_key": "d45eba3d-b4bf-4f30-9537-98b515739c8d", "I_description": "<b><font color=\"#ff0033\">SAE</font></b>", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "AESER"}, {"GI_key": "02781066-d29f-4d3e-9d03-24ff16b7c474", "I_description": "FLAG", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Adverse Event.*][AE4.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \n'1' \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "\ud83d\udc7b", "i_SasName": "FLAG"}, {"GI_key": "f725b5d6-6a0b-4801-bd9b-b15e0f7599b2", "I_description": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}, {"G_description": "AE5", "questions": [{"GI_key": "62ff82de-b27d-44de-a48b-f5b3068b9386", "I_description": "Date of SAE reporting to PV", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "AESERDT"}, {"GI_key": "d44bcb31-43d6-4b00-b27d-d2398314f639", "I_description": "CIOMS Number", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[AECIOMS]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar cioms = [AECIOMS];\nvar lg = cioms.length;\n\nlg == 9 || lg == 0; \n#data Expression \n \n</code></pre> </td><td> The CIOMS number must contain 9 digits. Please correct.</td> </tr></table></details>", "rep": "Char - 9", "I_Status": "", "i_SasName": "AECIOMS"}]}, {"G_description": "AE6", "questions": [{"GI_key": "efe15d4b-76ef-48be-bc64-51a4859f5238", "I_description": "Related to", "Message": null, "rep": "\ud83d\udd18 1 - <b>Drug 1</b><br>\ud83d\udd18 2 - <b>Drug 2</b><br>\ud83d\udd18 3 - <b>Drug 3</b><br>\ud83d\udd18 4 - <b>Cancer</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "AEREL"}, {"GI_key": "dae14c48-d5d5-49f5-a755-37ba22712832", "I_description": "<font color=\"#0033ff\">If other, specify</font>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[Adverse Event.*][AE6.*][AEREL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE6][AEREL] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "AEREL_S"}, {"GI_key": "8e9f94d9-84e6-48b3-8239-30e396873010", "I_description": "Action", "Message": null, "rep": "\ud83d\udd18 0 - <b>No action</b><br>\ud83d\udd18 1 - <b>Action 1</b><br>\ud83d\udd18 2 - <b>Action 2</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "AEACN"}, {"GI_key": "bedc9507-f74f-4104-9e16-886ece4019e9", "I_description": "<font color=\"#0033ff\">If other, specify</font>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[Adverse Event.*][AE6.*][AEACN_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Adverse Event][AE6][AEACN] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "AEACN_S"}, {"GI_key": "0284b741-d2ae-460f-a4a7-586bed124f42", "I_description": "Treatment required", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "AETRTYN"}]}, {"G_description": "AEMEDDRA", "questions": [{"GI_key": "204ec6bb-915b-4ab7-8784-ccab99e56545", "I_description": "Verbatim term:", "Message": null, "rep": "Char - 200", "I_Status": "\ud83d\udd12", "i_SasName": "MEDVERB"}, {"GI_key": "85c5c553-3dd6-46cb-b726-55937cf499cf", "I_description": "SOC code:", "Message": null, "rep": "Char - 200", "I_Status": "\ud83d\udd12", "i_SasName": "SOCCOD"}, {"GI_key": "d14ed0f1-26fa-47da-8d6b-8c6da093053c", "I_description": "SOC name:", "Message": null, "rep": "Char - 200", "I_Status": "\ud83d\udd12", "i_SasName": "SOCNAM"}, {"GI_key": "83e83e0f-016e-4827-8787-5f92b3cb0125", "I_description": "PT code:", "Message": null, "rep": "Char - 200", "I_Status": "\ud83d\udd12", "i_SasName": "PTCOD"}, {"GI_key": "aa84c001-4734-42a1-bb20-f9c914d152ca", "I_description": "PT term:", "Message": null, "rep": "Char - 200", "I_Status": "\ud83d\udd12", "i_SasName": "PTNAM"}, {"GI_key": "a028c0a3-7980-4366-843c-2ecd0f279a26", "I_description": "LLT code:", "Message": null, "rep": "Char - 200", "I_Status": "\ud83d\udd12", "i_SasName": "LLTCOD"}, {"GI_key": "cfb8914f-82bc-446b-a291-0bc48946c6b2", "I_description": "LLT term", "Message": null, "rep": "Char - 200", "I_Status": "\ud83d\udd12", "i_SasName": "LLTNAM"}]}]}]}]};
 
 function setupExportButton() {
     const exportButton = document.getElementById("export");
@@ -291,7 +387,7 @@ function setupExportButton() {
         const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
         const a = document.createElement("a");
         a.href = url;
-        a.download = "modifications.js"; // Nom du fichier à télécharger
+        a.download = "modifications.hmt"; // Nom du fichier à télécharger
         document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
         a.click(); // Téléchargement
         document.body.removeChild(a); // Suppression de l'élément
@@ -361,7 +457,6 @@ jsonData.visites.forEach((visite, visitIndex) => {
 
 // Fonction visibleonly
 function visibleonly(data, type, index) {
-
 
     if (type === 'visite') {
 
@@ -512,6 +607,7 @@ function generateFiche(fiche, activate, fid) {
 
         // Créer une table pour les questions
         const table = document.createElement('table');
+        table.className="no-break"
 
         // Ajouter l'en-tête de la table
         const headerRow = document.createElement('tr');
@@ -519,16 +615,25 @@ function generateFiche(fiche, activate, fid) {
         th0.innerText = '🛠️';
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
+        th0.setAttribute('data-visual', "DM");
 
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
         const th2 = document.createElement('th');
         th2.innerText = 'Response';
+        const th3 = document.createElement('th');
+        th3.innerText = 'Sas';
+        th3.setAttribute('data-visual', "DM");
+        const th4 = document.createElement('th');
+        th4.innerText = 'Report';
+        th4.setAttribute('data-visual', "DM");
 
-        headerRow.appendChild(th0);
+        // headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
+        headerRow.appendChild(th3);
+        headerRow.appendChild(th4);
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
@@ -537,6 +642,7 @@ function generateFiche(fiche, activate, fid) {
 
             // Colonne pour l'outil
             const td0 = document.createElement('td');
+            td0.setAttribute('data-visual', "DM");
             td0.id = `td0${question.GI_key}`;
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
@@ -552,10 +658,40 @@ function generateFiche(fiche, activate, fid) {
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
 
+            const td3 = document.createElement('td');
+            td3.innerHTML = question.i_SasName || 'N/A';
+            td3.setAttribute('data-visual', "DM");
+            
+            const td4 = document.createElement('td'); // Crée une cellule de tableau
+            td4.setAttribute('data-visual', "DM");
+            const issue = document.createElement('button'); // Crée un bouton
+            issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
+            issue.id = "report-issue"; // Donne un ID au bouton
+            issue.setAttribute('data-fiche', fiche.F_description);
+            issue.setAttribute('data-question', question.I_description);
+            issue.setAttribute('data-SasName', question.i_SasName);
+            issue.addEventListener('click', () => {
+                const ficheDescription = event.target.getAttribute('data-fiche');
+                const questionDescription = event.target.getAttribute('data-question');
+                const SasName = event.target.getAttribute('data-SasName');
+
+                // Remplacez l'URL avec votre propre logique
+                title= ` Problème avec ${ficheDescription} SasName:${SasName}`;
+                description = `# Problème identifié sur : \n## fiche:${ficheDescription} \n### SasName:${SasName} \n\n question= ${questionDescription} \n\n détail :`;
+
+                const url = `https://github.com/Anmangin/XML_TM/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(description)}&labels=bug`;
+                window.open(url, '_blank');
+            });
+
+            td4.appendChild(issue); // Ajoute le bouton à la cellule
+
+            
             // Ajouter les colonnes à la ligne
-            row.appendChild(td0);
+            // row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
@@ -568,6 +704,7 @@ function generateFiche(fiche, activate, fid) {
     // Ajouter la section au contenu principal
     mainContent.appendChild(section);
 }
+
 
 
 window.addEventListener('beforeunload', (event) => {
@@ -583,7 +720,7 @@ window.addEventListener('beforeunload', (event) => {
         function generateFiches(visite,vid) {
 
             const h1 = document.createElement('h1');
-            h1.innerText = visite.V_description;
+            h1.innerText = "Visite " + visite.V_description;
             h1.id = `${vid}`
             mainContent.appendChild(h1);
      
@@ -605,6 +742,65 @@ window.addEventListener('beforeunload', (event) => {
     
 
     </script>
+
+<script>
+   
+    // Récupère le bouton et ajoute un événement de clic
+    const toggleButton = document.getElementById('toggle-button');
+
+    toggleButton.addEventListener('click', () => {
+        const currentState = toggleButton.getAttribute('data-state');
+        let newState, buttonText;
+
+        // Basculer entre les deux états
+        if (currentState === "DM") {
+            newState = "Investigateur";
+            buttonText = "Investigateur";
+            toggleButton.classList.remove('pressed');
+            toggleButton.classList.add('released');
+        } else {
+            newState = "DM";
+            buttonText = "DM";
+            toggleButton.classList.remove('released');
+            toggleButton.classList.add('pressed');
+        }
+
+        // Met à jour l'état du bouton
+        toggleButton.setAttribute('data-state', newState);
+        toggleButton.innerText = buttonText;
+
+        // Afficher/Masquer les éléments en fonction de l'état
+        document.querySelectorAll('[data-visual]').forEach(el => {
+            if (el.getAttribute('data-visual') === newState) {
+                el.style.display = "table-cell";
+            } else {
+                el.style.display = "none";
+            }
+        });
+    });
+
+    // Afficher initialement les éléments de l'état par défaut (DM)
+    document.querySelectorAll('[data-visual="DM"]').forEach(el => {
+        el.style.display = "table-cell";
+    });
+
+
+
+
+        let h1list = document.getElementsByTagName('h1');
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+        }
+
+        for (let title of h1list) {
+            title.classList.remove('hidden');
+            title.classList.add('show');
+        }
+
+</script>
 </body>
 
 </html>

@@ -215,12 +215,70 @@ code {
 }
 
   @media print {
+    h1 {
+        page-break-before: always; /* Force un saut de page avant chaque h1 */
+        text-align: center; /* Centre le texte */
+        margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
+        margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+    }
+    h2 {
+        page-break-before: always;
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    h3 {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    section {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+
     .sidebar {
-        display: none;
-      }
+        position: fixed; /* La sidebar reste fixe à gauche */
+        top: 0;
+        left: 0;
+        width: 250px;  /* Largeur normale de la sidebar */
+        padding: 0px; /* Espaces internes */
+        background-color: #f4f4f4;
+        margin-left: 0mm;
+        box-shadow: none; /* Enlève l'ombre pendant l'impression */
+        border:none;
+        height: 100%;  /* Prend toute la hauteur de la page */
+        padding: 5px;
+        font-size: 10px; /* Réduit la taille de la police pour s'ajuster */
+        line-height: 1.05; /* Réduit l'espacement entre les lignes pour plus de texte */
+        display: block;
+        page-break-inside: avoid; /* Évite que la sidebar soit coupée entre les pages */
+        page-break-before: always; /* Force la sidebar à commencer sur chaque nouvelle page */
+    }
+
+
+    .sidebar a{
+        padding: 0px; /* Espaces internes */
+        margin: -0mm;
+        font-size: 9pt; /* Ajuste la taille de la police pour l'impression */
+    }
+    .sidebar button{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .sidebar h3{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .content {
+            width: 70%;  /* Largeur normale de la sidebar */
+            padding: 0px; /* Espaces internes */
+            background-color: #f4f4f4;
+            margin-left: 270px;
+            
+    
+        }
+
+    
     /* Empêcher la coupure de l'élément */
     body {
-        margin-left: -20mm; /* Décale la page de 20mm vers la gauche */
+         margin-left: 0mm; 
     }
     .no-break {
         page-break-inside: avoid;
@@ -235,4 +293,37 @@ code {
     .no-print {
         display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
     }
+}
+
+#toggle-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#toggle-button.released {
+    background-color: #6C757D;
+}
+
+/* Par défaut, les éléments sont cachés */
+[data-visual="DM"] {
+    display: table-cell;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de se déplacer sur plusieurs lignes si nécessaire */
+}
+
+.column {
+    flex: 1 1 200px; /* Permet à chaque colonne de croître, de rétrécir, et d'avoir une largeur de base de 200px */
+    margin: 10px;
+}
+
+.priority-column {
+    flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
+    
 }

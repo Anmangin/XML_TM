@@ -220,10 +220,72 @@ code {
 .show {
     display: block !important;; /* Affiche l'élément en tant que bloc */
 }
-@media print {
+
+  @media print {
+    h1 {
+        page-break-before: always; /* Force un saut de page avant chaque h1 */
+        text-align: center; /* Centre le texte */
+        margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
+        margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+    }
+    h2 {
+        page-break-before: always;
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    h3 {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+    section {
+        padding: 0px; /* Espaces internes */
+        margin-bottom: 0px;
+    }
+
+    .sidebar {
+        position: fixed; /* La sidebar reste fixe à gauche */
+        top: 0;
+        left: 0;
+        width: 250px;  /* Largeur normale de la sidebar */
+        padding: 0px; /* Espaces internes */
+        background-color: #f4f4f4;
+        margin-left: 0mm;
+        box-shadow: none; /* Enlève l'ombre pendant l'impression */
+        border:none;
+        height: 100%;  /* Prend toute la hauteur de la page */
+        padding: 5px;
+        font-size: 10px; /* Réduit la taille de la police pour s'ajuster */
+        line-height: 1.05; /* Réduit l'espacement entre les lignes pour plus de texte */
+        display: block;
+        page-break-inside: avoid; /* Évite que la sidebar soit coupée entre les pages */
+        page-break-before: always; /* Force la sidebar à commencer sur chaque nouvelle page */
+    }
+
+
+    .sidebar a{
+        padding: 0px; /* Espaces internes */
+        margin: -0mm;
+        font-size: 9pt; /* Ajuste la taille de la police pour l'impression */
+    }
+    .sidebar button{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .sidebar h3{
+        display: none !important;; /* Cache complètement l'élément */
+    }
+    .content {
+            width: 70%;  /* Largeur normale de la sidebar */
+            padding: 0px; /* Espaces internes */
+            background-color: #f4f4f4;
+            margin-left: 270px;
+            
+    
+        }
+
+    
     /* Empêcher la coupure de l'élément */
     body {
-        margin-left: -20mm; /* Décale la page de 20mm vers la gauche */
+         margin-left: 0mm; 
     }
     .no-break {
         page-break-inside: avoid;
@@ -239,11 +301,45 @@ code {
         display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
     }
 }
+
+#toggle-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#toggle-button.released {
+    background-color: #6C757D;
+}
+
+/* Par défaut, les éléments sont cachés */
+[data-visual="DM"] {
+    display: table-cell;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de se déplacer sur plusieurs lignes si nécessaire */
+}
+
+.column {
+    flex: 1 1 200px; /* Permet à chaque colonne de croître, de rétrécir, et d'avoir une largeur de base de 200px */
+    margin: 10px;
+}
+
+.priority-column {
+    flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
+    
+}
      </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
+        <button id="toggle-button" class="pressed" data-state="DM">DM</button>
         <button id="export">Enregistrer les modifications</button>
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
@@ -276,7 +372,7 @@ code {
 
 <script>
 
-const jsonData = {"visites": [{"V_description": "Quality of Life", "fiches": [{"F_description": "SF-36", "groupes": [{"G_description": "QLQHEAD", "questions": [{"GI_key": "a33e2b20-e08f-4385-8aa7-c3e78d9a46d8", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQYN"}, {"GI_key": "cfb1b069-fd56-4257-a634-7a8c1ed22403", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQDT"}, {"GI_key": "28a020b0-7f39-4a89-a884-1fff396cc9db", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQNO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQNO_R"}, {"GI_key": "6af31c06-cdda-499a-9c33-4fd57c0cccd5", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": null, "I_Status": "", "i_SasName": "QLQEXPDT"}]}, {"G_description": "SF36G1", "questions": [{"GI_key": "16edeca4-9606-4f87-919c-3854f406aadc", "I_description": "1. Dans l'ensemble, pensez-vous que votre sant\u00e9 est :", "Message": null, "rep": "\ud83d\udd18 1 - <b>Excellente</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s bonne</b><br>\ud83d\udd18 3 - <b>Bonne</b><br>\ud83d\udd18 4 - <b>M\u00e9diocre</b><br>\ud83d\udd18 5 - <b>Mauvaise</b>", "I_Status": "", "i_SasName": "Q0SFGH1"}]}, {"G_description": "SF36G2", "questions": [{"GI_key": "3c1c5d16-aa7c-48b3-bccc-7593a10b896e", "I_description": "2. Par rapport au m\u00eame jour de la semaine derni\u00e8re, comment trouvez-vous votre \u00e9tat de sant\u00e9 en ce moment ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Bien meilleur que la semaine derni\u00e8re</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t meilleur</b><br>\ud83d\udd18 3 - <b>\u00c0 peu pr\u00e8s pareil</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t moins bon</b><br>\ud83d\udd18 5 - <b>Beaucoup moins bon</b>", "I_Status": "", "i_SasName": "Q0SFHT"}]}, {"G_description": "SF36G3", "questions": [{"GI_key": "8cd5f078-eb2e-4414-9af7-67b0add60572", "I_description": "a. Efforts physiques importants tels que courir, soulever un objet lourd, faire du sport", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP1"}, {"GI_key": "14a50a49-cd53-46bb-b974-8ece1ef4ab92", "I_description": "b. Efforts physiques mod\u00e9r\u00e9s tels que d\u00e9placer une table, passer l'aspirateur, jouer aux boules", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP2"}, {"GI_key": "489e8e5e-50bc-4f50-9eba-27df780cd0b6", "I_description": "c. Soulever et porter les courses", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP3"}, {"GI_key": "51071afb-5de8-477d-94c9-ee34fbed6b26", "I_description": "d. Monter plusieurs \u00e9tages par l'escalier", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP4"}, {"GI_key": "5f1a9ae4-5254-436f-91e0-222c23a08ce0", "I_description": "e. Monter un \u00e9tage par l'escalier", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP5"}, {"GI_key": "3cd1c283-172a-4e33-8cae-f87be4790fac", "I_description": "f. Se pencher en avant, se mettre \u00e0 genoux, s'accroupir", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP6"}, {"GI_key": "1de49b41-5ba5-4fa9-9fc4-d963e58b5495", "I_description": "g. Marcher plus d'un km \u00e0 pied", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP7"}, {"GI_key": "8faa5eb6-ec50-4b59-9824-46bec9021107", "I_description": "h. Marcher plusieurs centaines de m\u00e8tres", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP8"}, {"GI_key": "85249981-800b-4248-9dd7-a86e82c1b853", "I_description": "i. Marcher une centaine de m\u00e8tres", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP9"}, {"GI_key": "51dd935c-f64b-4e7e-b103-5976cfa04f5d", "I_description": "j. Prendre un bain, une douche ou s'habiller", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP10"}]}, {"G_description": "SF36G4", "questions": [{"GI_key": "38d2923d-8aff-4216-b950-a41100778ac7", "I_description": "a. Avez-vous r\u00e9duit le temps pass\u00e9 \u00e0 votre travail ou \u00e0 vos activit\u00e9s habituelles ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFR1"}, {"GI_key": "f2622fea-f421-4592-bef9-1bb20ab3ea98", "I_description": "b. Avez-vous accompli moins de choses que vous auriez souhait\u00e9 ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRP2"}, {"GI_key": "22175024-1880-4a62-a8c0-bada8e5ac44d", "I_description": "c. Avez-vous d\u00fb arr\u00eater de faire certaines choses ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRP3"}, {"GI_key": "c8c9975a-9286-42cd-8b12-79cfe2094ae6", "I_description": "d. Avez-vous eu des difficult\u00e9s \u00e0 faire votre travail ou toute autre activit\u00e9 ? (par exemple, cela vous a demand\u00e9 un effort suppl\u00e9mentaire)", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRP4"}]}, {"G_description": "SF36G5", "questions": [{"GI_key": "2427a18e-d905-4bfd-a24b-c2acebc5dabb", "I_description": "a. Avez-vous r\u00e9duit le temps pass\u00e9 \u00e0 votre travail ou \u00e0 vos activit\u00e9s habituelles ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRE1"}, {"GI_key": "b2cc3ec2-2df6-46f0-bace-bbb0392c94d5", "I_description": "b. Avez-vous accompli moins de choses que vous auriez souhait\u00e9 ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRE2"}, {"GI_key": "de040954-5792-4341-8f08-5f6f02962415", "I_description": "c. Avez-vous eu des difficult\u00e9s \u00e0 faire ce que vous aviez \u00e0 faire avec autant de soin et d'attention que d'habitude ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRE3"}]}, {"G_description": "SF36G6", "questions": [{"GI_key": "97a105d8-4547-4862-819b-99909fbbc8da", "I_description": "6. Au cours de cette derni\u00e8re semaine dans quelle mesure votre \u00e9tat de sant\u00e9, physique ou \u00e9motionnel, vous a-t-il g\u00ean\u00e9(e) dans votre vie sociale et vos relations avec les autres, votre famille, vos amis, vos connaissances", "Message": null, "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un petit peu</b><br>\ud83d\udd18 3 - <b>Moyennement</b><br>\ud83d\udd18 4 - <b>Beaucoup</b><br>\ud83d\udd18 5 - <b>Enorm\u00e9ment</b>", "I_Status": "", "i_SasName": "Q0SFSF1"}]}, {"G_description": "SF36G7", "questions": [{"GI_key": "4a84794e-12d1-4bbb-9929-2340a657735a", "I_description": "7. Au cours de cette derni\u00e8re semaine, quelle a \u00e9t\u00e9 l'intensit\u00e9 de vos douleurs physiques ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Nulle</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s faible</b><br>\ud83d\udd18 3 - <b>Faible</b><br>\ud83d\udd18 4 - <b>Moyenne</b><br>\ud83d\udd18 5 - <b>Grande</b><br>\ud83d\udd18 6 - <b>Tr\u00e8s grande</b>", "I_Status": "", "i_SasName": "Q0SFBP1"}]}, {"G_description": "SF36G8", "questions": [{"GI_key": "c4d4ec80-c239-439c-8e08-c60f2b5f826e", "I_description": "8. Au cours de cette derni\u00e8re semaine, dans quelle mesure vos douleurs physiques vous ont-elles limit\u00e9(e) dans votre travail ou vos activit\u00e9s domestiques ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un petit peu</b><br>\ud83d\udd18 3 - <b>Moyennement</b><br>\ud83d\udd18 4 - <b>Beaucoup</b><br>\ud83d\udd18 5 - <b>Enorm\u00e9ment</b>", "I_Status": "", "i_SasName": "Q0SFBP2"}]}, {"G_description": "SF36G9", "questions": [{"GI_key": "64999e1f-c0c9-4bb9-9049-be0670ede43b", "I_description": "a. vous vous \u00eates senti(e) dynamique ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT1"}, {"GI_key": "df9a85a6-2988-4fd7-8a8c-6fd3156604d4", "I_description": "b. vous vous \u00eates senti(e) tr\u00e8s nerveux(se) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH1"}, {"GI_key": "aaa29018-21dc-43a3-98f4-f2f41f2032d6", "I_description": "c. vous vous \u00eates senti(e) si d\u00e9courag\u00e9(e) que rien ne pouvait vous remonter le moral ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH2"}, {"GI_key": "48378a1d-1a99-4530-897b-37216588aefb", "I_description": "d. vous vous \u00eates senti(e) calme et d\u00e9tendu(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH3"}, {"GI_key": "8bb481d0-809e-4aa6-b6eb-71dbb4cc45c3", "I_description": "e. vous vous \u00eates senti(e) d\u00e9bordant(e) d'\u00e9nergie ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT2"}, {"GI_key": "3178469b-2c97-42b2-89bd-0771a61fe3de", "I_description": "f. vous vous \u00eates senti(e) triste et abattu(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH4"}, {"GI_key": "a805394c-9bb2-49ca-a0e6-c9e8ef0f7789", "I_description": "g. vous vous \u00eates senti(e) \u00e9puis\u00e9(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT3"}, {"GI_key": "08e789a4-a961-428e-8089-c8e676cc9e48", "I_description": "h. vous vous \u00eates senti(e) heureux(se) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH5"}, {"GI_key": "1335aed7-4c1e-49db-a1c7-8d3354736a2b", "I_description": "i. vous vous \u00eates senti(e) fatigu\u00e9(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT4"}]}, {"G_description": "SF36G10", "questions": [{"GI_key": "524223dd-598f-4bd0-a6a0-7642e6b9b58e", "I_description": "10. Au cours de cette derni\u00e8re semaine, y a-t-il eu des moments o\u00f9 votre \u00e9tat de sant\u00e9, physique ou \u00e9motionnel, vous a g\u00ean\u00e9(e) dans votre vie et vos relations avec les autres, votre famille, vos amis, vos connaissances ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Une bonne partie du temps</b><br>\ud83d\udd18 3 - <b>De temps en temps</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFSF2"}]}, {"G_description": "SF36G11", "questions": [{"GI_key": "1581cc8c-ac2f-4d1e-83b1-23b93d28eb1b", "I_description": "a. Je tombe malade plus facilement que les autres", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH2"}, {"GI_key": "dad7ed2b-16c6-48d3-8569-da72ac10f4f7", "I_description": "b. Je me porte aussi bien que n'importe qui", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH3"}, {"GI_key": "1265c1e9-0197-4b71-baac-0be5e3922c68", "I_description": "c. Je m'attends \u00e0 ce que ma sant\u00e9 se d\u00e9grade", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH4"}, {"GI_key": "429f6785-e01b-4b49-88bf-672bcbcd59b6", "I_description": "d. Je suis en excellente sant\u00e9", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH5"}]}]}]}]};
+const jsonData = {"visites": [{"V_description": "Quality of Life", "fiches": [{"F_description": "SF-36", "groupes": [{"G_description": "QLQHEAD", "questions": [{"GI_key": "a33e2b20-e08f-4385-8aa7-c3e78d9a46d8", "I_description": "Questionnaire rempli par le patient", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "QLQYN"}, {"GI_key": "cfb1b069-fd56-4257-a634-7a8c1ed22403", "I_description": "Date de remplissage du questionnaire par le patient", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQDT"}, {"GI_key": "28a020b0-7f39-4a89-a884-1fff396cc9db", "I_description": "Raison de non remplissage du questionnaire", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQNO_R]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "QLQNO_R"}, {"GI_key": "6af31c06-cdda-499a-9c33-4fd57c0cccd5", "I_description": "Date \u00e0 laquelle le questionnaire aurait d\u00fb \u00eatre rempli", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[QLQHEAD.*][QLQEXPDT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[QLQHEAD][QLQYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "QLQEXPDT"}]}, {"G_description": "SF36G1", "questions": [{"GI_key": "16edeca4-9606-4f87-919c-3854f406aadc", "I_description": "1. Dans l'ensemble, pensez-vous que votre sant\u00e9 est :", "Message": null, "rep": "\ud83d\udd18 1 - <b>Excellente</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s bonne</b><br>\ud83d\udd18 3 - <b>Bonne</b><br>\ud83d\udd18 4 - <b>M\u00e9diocre</b><br>\ud83d\udd18 5 - <b>Mauvaise</b>", "I_Status": "", "i_SasName": "Q0SFGH1"}]}, {"G_description": "SF36G2", "questions": [{"GI_key": "3c1c5d16-aa7c-48b3-bccc-7593a10b896e", "I_description": "2. Par rapport au m\u00eame jour de la semaine derni\u00e8re, comment trouvez-vous votre \u00e9tat de sant\u00e9 en ce moment ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Bien meilleur que la semaine derni\u00e8re</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t meilleur</b><br>\ud83d\udd18 3 - <b>\u00c0 peu pr\u00e8s pareil</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t moins bon</b><br>\ud83d\udd18 5 - <b>Beaucoup moins bon</b>", "I_Status": "", "i_SasName": "Q0SFHT"}]}, {"G_description": "SF36G3", "questions": [{"GI_key": "8cd5f078-eb2e-4414-9af7-67b0add60572", "I_description": "a. Efforts physiques importants tels que courir, soulever un objet lourd, faire du sport", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP1"}, {"GI_key": "14a50a49-cd53-46bb-b974-8ece1ef4ab92", "I_description": "b. Efforts physiques mod\u00e9r\u00e9s tels que d\u00e9placer une table, passer l'aspirateur, jouer aux boules", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP2"}, {"GI_key": "489e8e5e-50bc-4f50-9eba-27df780cd0b6", "I_description": "c. Soulever et porter les courses", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP3"}, {"GI_key": "51071afb-5de8-477d-94c9-ee34fbed6b26", "I_description": "d. Monter plusieurs \u00e9tages par l'escalier", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP4"}, {"GI_key": "5f1a9ae4-5254-436f-91e0-222c23a08ce0", "I_description": "e. Monter un \u00e9tage par l'escalier", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP5"}, {"GI_key": "3cd1c283-172a-4e33-8cae-f87be4790fac", "I_description": "f. Se pencher en avant, se mettre \u00e0 genoux, s'accroupir", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP6"}, {"GI_key": "1de49b41-5ba5-4fa9-9fc4-d963e58b5495", "I_description": "g. Marcher plus d'un km \u00e0 pied", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP7"}, {"GI_key": "8faa5eb6-ec50-4b59-9824-46bec9021107", "I_description": "h. Marcher plusieurs centaines de m\u00e8tres", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP8"}, {"GI_key": "85249981-800b-4248-9dd7-a86e82c1b853", "I_description": "i. Marcher une centaine de m\u00e8tres", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP9"}, {"GI_key": "51dd935c-f64b-4e7e-b103-5976cfa04f5d", "I_description": "j. Prendre un bain, une douche ou s'habiller", "Message": null, "rep": "\ud83d\udd18 1 - <b>Oui, beaucoup limit\u00e9(e)</b><br>\ud83d\udd18 2 - <b>Oui, un peu limit\u00e9(e)</b><br>\ud83d\udd18 3 - <b>Non, pas du tout limit\u00e9(e)</b>", "I_Status": "", "i_SasName": "Q0SFP10"}]}, {"G_description": "SF36G4", "questions": [{"GI_key": "38d2923d-8aff-4216-b950-a41100778ac7", "I_description": "a. Avez-vous r\u00e9duit le temps pass\u00e9 \u00e0 votre travail ou \u00e0 vos activit\u00e9s habituelles ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFR1"}, {"GI_key": "f2622fea-f421-4592-bef9-1bb20ab3ea98", "I_description": "b. Avez-vous accompli moins de choses que vous auriez souhait\u00e9 ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRP2"}, {"GI_key": "22175024-1880-4a62-a8c0-bada8e5ac44d", "I_description": "c. Avez-vous d\u00fb arr\u00eater de faire certaines choses ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRP3"}, {"GI_key": "c8c9975a-9286-42cd-8b12-79cfe2094ae6", "I_description": "d. Avez-vous eu des difficult\u00e9s \u00e0 faire votre travail ou toute autre activit\u00e9 ? (par exemple, cela vous a demand\u00e9 un effort suppl\u00e9mentaire)", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRP4"}]}, {"G_description": "SF36G5", "questions": [{"GI_key": "2427a18e-d905-4bfd-a24b-c2acebc5dabb", "I_description": "a. Avez-vous r\u00e9duit le temps pass\u00e9 \u00e0 votre travail ou \u00e0 vos activit\u00e9s habituelles ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRE1"}, {"GI_key": "b2cc3ec2-2df6-46f0-bace-bbb0392c94d5", "I_description": "b. Avez-vous accompli moins de choses que vous auriez souhait\u00e9 ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRE2"}, {"GI_key": "de040954-5792-4341-8f08-5f6f02962415", "I_description": "c. Avez-vous eu des difficult\u00e9s \u00e0 faire ce que vous aviez \u00e0 faire avec autant de soin et d'attention que d'habitude ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Quelques fois</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFRE3"}]}, {"G_description": "SF36G6", "questions": [{"GI_key": "97a105d8-4547-4862-819b-99909fbbc8da", "I_description": "6. Au cours de cette derni\u00e8re semaine dans quelle mesure votre \u00e9tat de sant\u00e9, physique ou \u00e9motionnel, vous a-t-il g\u00ean\u00e9(e) dans votre vie sociale et vos relations avec les autres, votre famille, vos amis, vos connaissances", "Message": null, "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un petit peu</b><br>\ud83d\udd18 3 - <b>Moyennement</b><br>\ud83d\udd18 4 - <b>Beaucoup</b><br>\ud83d\udd18 5 - <b>Enorm\u00e9ment</b>", "I_Status": "", "i_SasName": "Q0SFSF1"}]}, {"G_description": "SF36G7", "questions": [{"GI_key": "4a84794e-12d1-4bbb-9929-2340a657735a", "I_description": "7. Au cours de cette derni\u00e8re semaine, quelle a \u00e9t\u00e9 l'intensit\u00e9 de vos douleurs physiques ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Nulle</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s faible</b><br>\ud83d\udd18 3 - <b>Faible</b><br>\ud83d\udd18 4 - <b>Moyenne</b><br>\ud83d\udd18 5 - <b>Grande</b><br>\ud83d\udd18 6 - <b>Tr\u00e8s grande</b>", "I_Status": "", "i_SasName": "Q0SFBP1"}]}, {"G_description": "SF36G8", "questions": [{"GI_key": "c4d4ec80-c239-439c-8e08-c60f2b5f826e", "I_description": "8. Au cours de cette derni\u00e8re semaine, dans quelle mesure vos douleurs physiques vous ont-elles limit\u00e9(e) dans votre travail ou vos activit\u00e9s domestiques ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Pas du tout</b><br>\ud83d\udd18 2 - <b>Un petit peu</b><br>\ud83d\udd18 3 - <b>Moyennement</b><br>\ud83d\udd18 4 - <b>Beaucoup</b><br>\ud83d\udd18 5 - <b>Enorm\u00e9ment</b>", "I_Status": "", "i_SasName": "Q0SFBP2"}]}, {"G_description": "SF36G9", "questions": [{"GI_key": "64999e1f-c0c9-4bb9-9049-be0670ede43b", "I_description": "a. vous vous \u00eates senti(e) dynamique ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT1"}, {"GI_key": "df9a85a6-2988-4fd7-8a8c-6fd3156604d4", "I_description": "b. vous vous \u00eates senti(e) tr\u00e8s nerveux(se) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH1"}, {"GI_key": "aaa29018-21dc-43a3-98f4-f2f41f2032d6", "I_description": "c. vous vous \u00eates senti(e) si d\u00e9courag\u00e9(e) que rien ne pouvait vous remonter le moral ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH2"}, {"GI_key": "48378a1d-1a99-4530-897b-37216588aefb", "I_description": "d. vous vous \u00eates senti(e) calme et d\u00e9tendu(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH3"}, {"GI_key": "8bb481d0-809e-4aa6-b6eb-71dbb4cc45c3", "I_description": "e. vous vous \u00eates senti(e) d\u00e9bordant(e) d'\u00e9nergie ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT2"}, {"GI_key": "3178469b-2c97-42b2-89bd-0771a61fe3de", "I_description": "f. vous vous \u00eates senti(e) triste et abattu(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH4"}, {"GI_key": "a805394c-9bb2-49ca-a0e6-c9e8ef0f7789", "I_description": "g. vous vous \u00eates senti(e) \u00e9puis\u00e9(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT3"}, {"GI_key": "08e789a4-a961-428e-8089-c8e676cc9e48", "I_description": "h. vous vous \u00eates senti(e) heureux(se) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFMH5"}, {"GI_key": "1335aed7-4c1e-49db-a1c7-8d3354736a2b", "I_description": "i. vous vous \u00eates senti(e) fatigu\u00e9(e) ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Tr\u00e8s souvent</b><br>\ud83d\udd18 3 - <b>Souvent</b><br>\ud83d\udd18 4 - <b>Quelques fois</b><br>\ud83d\udd18 5 - <b>Rarement</b><br>\ud83d\udd18 6 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFVT4"}]}, {"G_description": "SF36G10", "questions": [{"GI_key": "524223dd-598f-4bd0-a6a0-7642e6b9b58e", "I_description": "10. Au cours de cette derni\u00e8re semaine, y a-t-il eu des moments o\u00f9 votre \u00e9tat de sant\u00e9, physique ou \u00e9motionnel, vous a g\u00ean\u00e9(e) dans votre vie et vos relations avec les autres, votre famille, vos amis, vos connaissances ?", "Message": null, "rep": "\ud83d\udd18 1 - <b>En permanence</b><br>\ud83d\udd18 2 - <b>Une bonne partie du temps</b><br>\ud83d\udd18 3 - <b>De temps en temps</b><br>\ud83d\udd18 4 - <b>Rarement</b><br>\ud83d\udd18 5 - <b>Jamais</b>", "I_Status": "", "i_SasName": "Q0SFSF2"}]}, {"G_description": "SF36G11", "questions": [{"GI_key": "1581cc8c-ac2f-4d1e-83b1-23b93d28eb1b", "I_description": "a. Je tombe malade plus facilement que les autres", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH2"}, {"GI_key": "dad7ed2b-16c6-48d3-8569-da72ac10f4f7", "I_description": "b. Je me porte aussi bien que n'importe qui", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH3"}, {"GI_key": "1265c1e9-0197-4b71-baac-0be5e3922c68", "I_description": "c. Je m'attends \u00e0 ce que ma sant\u00e9 se d\u00e9grade", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH4"}, {"GI_key": "429f6785-e01b-4b49-88bf-672bcbcd59b6", "I_description": "d. Je suis en excellente sant\u00e9", "Message": null, "rep": "\ud83d\udd18 1 - <b>Totalement vraie</b><br>\ud83d\udd18 2 - <b>Plut\u00f4t vraie</b><br>\ud83d\udd18 3 - <b>Je ne sais pas</b><br>\ud83d\udd18 4 - <b>Plut\u00f4t fausse</b><br>\ud83d\udd18 5 - <b>Totalement fausse</b>", "I_Status": "", "i_SasName": "Q0SFGH5"}]}]}]}]};
 
 function setupExportButton() {
     const exportButton = document.getElementById("export");
@@ -291,7 +387,7 @@ function setupExportButton() {
         const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
         const a = document.createElement("a");
         a.href = url;
-        a.download = "modifications.js"; // Nom du fichier à télécharger
+        a.download = "modifications.hmt"; // Nom du fichier à télécharger
         document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
         a.click(); // Téléchargement
         document.body.removeChild(a); // Suppression de l'élément
@@ -361,7 +457,6 @@ jsonData.visites.forEach((visite, visitIndex) => {
 
 // Fonction visibleonly
 function visibleonly(data, type, index) {
-
 
     if (type === 'visite') {
 
@@ -512,6 +607,7 @@ function generateFiche(fiche, activate, fid) {
 
         // Créer une table pour les questions
         const table = document.createElement('table');
+        table.className="no-break"
 
         // Ajouter l'en-tête de la table
         const headerRow = document.createElement('tr');
@@ -519,16 +615,25 @@ function generateFiche(fiche, activate, fid) {
         th0.innerText = '🛠️';
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
+        th0.setAttribute('data-visual', "DM");
 
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
         const th2 = document.createElement('th');
         th2.innerText = 'Response';
+        const th3 = document.createElement('th');
+        th3.innerText = 'Sas';
+        th3.setAttribute('data-visual', "DM");
+        const th4 = document.createElement('th');
+        th4.innerText = 'Report';
+        th4.setAttribute('data-visual', "DM");
 
-        headerRow.appendChild(th0);
+        // headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
+        headerRow.appendChild(th3);
+        headerRow.appendChild(th4);
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
@@ -537,6 +642,7 @@ function generateFiche(fiche, activate, fid) {
 
             // Colonne pour l'outil
             const td0 = document.createElement('td');
+            td0.setAttribute('data-visual', "DM");
             td0.id = `td0${question.GI_key}`;
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
@@ -552,10 +658,40 @@ function generateFiche(fiche, activate, fid) {
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
 
+            const td3 = document.createElement('td');
+            td3.innerHTML = question.i_SasName || 'N/A';
+            td3.setAttribute('data-visual', "DM");
+            
+            const td4 = document.createElement('td'); // Crée une cellule de tableau
+            td4.setAttribute('data-visual', "DM");
+            const issue = document.createElement('button'); // Crée un bouton
+            issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
+            issue.id = "report-issue"; // Donne un ID au bouton
+            issue.setAttribute('data-fiche', fiche.F_description);
+            issue.setAttribute('data-question', question.I_description);
+            issue.setAttribute('data-SasName', question.i_SasName);
+            issue.addEventListener('click', () => {
+                const ficheDescription = event.target.getAttribute('data-fiche');
+                const questionDescription = event.target.getAttribute('data-question');
+                const SasName = event.target.getAttribute('data-SasName');
+
+                // Remplacez l'URL avec votre propre logique
+                title= ` Problème avec ${ficheDescription} SasName:${SasName}`;
+                description = `# Problème identifié sur : \n## fiche:${ficheDescription} \n### SasName:${SasName} \n\n question= ${questionDescription} \n\n détail :`;
+
+                const url = `https://github.com/Anmangin/XML_TM/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(description)}&labels=bug`;
+                window.open(url, '_blank');
+            });
+
+            td4.appendChild(issue); // Ajoute le bouton à la cellule
+
+            
             // Ajouter les colonnes à la ligne
-            row.appendChild(td0);
+            // row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
@@ -568,6 +704,7 @@ function generateFiche(fiche, activate, fid) {
     // Ajouter la section au contenu principal
     mainContent.appendChild(section);
 }
+
 
 
 window.addEventListener('beforeunload', (event) => {
@@ -583,7 +720,7 @@ window.addEventListener('beforeunload', (event) => {
         function generateFiches(visite,vid) {
 
             const h1 = document.createElement('h1');
-            h1.innerText = visite.V_description;
+            h1.innerText = "Visite " + visite.V_description;
             h1.id = `${vid}`
             mainContent.appendChild(h1);
      
@@ -605,6 +742,65 @@ window.addEventListener('beforeunload', (event) => {
     
 
     </script>
+
+<script>
+   
+    // Récupère le bouton et ajoute un événement de clic
+    const toggleButton = document.getElementById('toggle-button');
+
+    toggleButton.addEventListener('click', () => {
+        const currentState = toggleButton.getAttribute('data-state');
+        let newState, buttonText;
+
+        // Basculer entre les deux états
+        if (currentState === "DM") {
+            newState = "Investigateur";
+            buttonText = "Investigateur";
+            toggleButton.classList.remove('pressed');
+            toggleButton.classList.add('released');
+        } else {
+            newState = "DM";
+            buttonText = "DM";
+            toggleButton.classList.remove('released');
+            toggleButton.classList.add('pressed');
+        }
+
+        // Met à jour l'état du bouton
+        toggleButton.setAttribute('data-state', newState);
+        toggleButton.innerText = buttonText;
+
+        // Afficher/Masquer les éléments en fonction de l'état
+        document.querySelectorAll('[data-visual]').forEach(el => {
+            if (el.getAttribute('data-visual') === newState) {
+                el.style.display = "table-cell";
+            } else {
+                el.style.display = "none";
+            }
+        });
+    });
+
+    // Afficher initialement les éléments de l'état par défaut (DM)
+    document.querySelectorAll('[data-visual="DM"]').forEach(el => {
+        el.style.display = "table-cell";
+    });
+
+
+
+
+        let h1list = document.getElementsByTagName('h1');
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+        }
+
+        for (let title of h1list) {
+            title.classList.remove('hidden');
+            title.classList.add('show');
+        }
+
+</script>
 </body>
 
 </html>

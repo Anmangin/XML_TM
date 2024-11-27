@@ -11,6 +11,7 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
+        <button id="toggle-button" class="pressed" data-state="DM">DM</button>
         <button id="export">Enregistrer les modifications</button>
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
@@ -58,7 +59,7 @@ function setupExportButton() {
         const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
         const a = document.createElement("a");
         a.href = url;
-        a.download = "modifications.js"; // Nom du fichier à télécharger
+        a.download = "modifications.hmt"; // Nom du fichier à télécharger
         document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
         a.click(); // Téléchargement
         document.body.removeChild(a); // Suppression de l'élément
@@ -128,7 +129,6 @@ jsonData.visites.forEach((visite, visitIndex) => {
 
 // Fonction visibleonly
 function visibleonly(data, type, index) {
-
 
     if (type === 'visite') {
 
@@ -279,6 +279,7 @@ function generateFiche(fiche, activate, fid) {
 
         // Créer une table pour les questions
         const table = document.createElement('table');
+        table.className="no-break"
 
         // Ajouter l'en-tête de la table
         const headerRow = document.createElement('tr');
@@ -286,16 +287,25 @@ function generateFiche(fiche, activate, fid) {
         th0.innerText = '🛠️';
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
+        th0.setAttribute('data-visual', "DM");
 
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
         const th2 = document.createElement('th');
         th2.innerText = 'Response';
+        const th3 = document.createElement('th');
+        th3.innerText = 'Sas';
+        th3.setAttribute('data-visual', "DM");
+        const th4 = document.createElement('th');
+        th4.innerText = 'Report';
+        th4.setAttribute('data-visual', "DM");
 
-        headerRow.appendChild(th0);
+        // headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
+        headerRow.appendChild(th3);
+        headerRow.appendChild(th4);
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
@@ -304,6 +314,7 @@ function generateFiche(fiche, activate, fid) {
 
             // Colonne pour l'outil
             const td0 = document.createElement('td');
+            td0.setAttribute('data-visual', "DM");
             td0.id = `td0${question.GI_key}`;
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
@@ -319,10 +330,40 @@ function generateFiche(fiche, activate, fid) {
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
 
+            const td3 = document.createElement('td');
+            td3.innerHTML = question.i_SasName || 'N/A';
+            td3.setAttribute('data-visual', "DM");
+            
+            const td4 = document.createElement('td'); // Crée une cellule de tableau
+            td4.setAttribute('data-visual', "DM");
+            const issue = document.createElement('button'); // Crée un bouton
+            issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
+            issue.id = "report-issue"; // Donne un ID au bouton
+            issue.setAttribute('data-fiche', fiche.F_description);
+            issue.setAttribute('data-question', question.I_description);
+            issue.setAttribute('data-SasName', question.i_SasName);
+            issue.addEventListener('click', () => {
+                const ficheDescription = event.target.getAttribute('data-fiche');
+                const questionDescription = event.target.getAttribute('data-question');
+                const SasName = event.target.getAttribute('data-SasName');
+
+                // Remplacez l'URL avec votre propre logique
+                title= ` Problème avec ${ficheDescription} SasName:${SasName}`;
+                description = `# Problème identifié sur : \n## fiche:${ficheDescription} \n### SasName:${SasName} \n\n question= ${questionDescription} \n\n détail :`;
+
+                const url = `https://github.com/Anmangin/XML_TM/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(description)}&labels=bug`;
+                window.open(url, '_blank');
+            });
+
+            td4.appendChild(issue); // Ajoute le bouton à la cellule
+
+            
             // Ajouter les colonnes à la ligne
-            row.appendChild(td0);
+            // row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
+            row.appendChild(td3);
+            row.appendChild(td4);
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
@@ -335,6 +376,7 @@ function generateFiche(fiche, activate, fid) {
     // Ajouter la section au contenu principal
     mainContent.appendChild(section);
 }
+
 
 
 window.addEventListener('beforeunload', (event) => {
@@ -350,7 +392,7 @@ window.addEventListener('beforeunload', (event) => {
         function generateFiches(visite,vid) {
 
             const h1 = document.createElement('h1');
-            h1.innerText = visite.V_description;
+            h1.innerText = "Visite " + visite.V_description;
             h1.id = `${vid}`
             mainContent.appendChild(h1);
      
@@ -372,6 +414,65 @@ window.addEventListener('beforeunload', (event) => {
     
 
     </script>
+
+<script>
+   
+    // Récupère le bouton et ajoute un événement de clic
+    const toggleButton = document.getElementById('toggle-button');
+
+    toggleButton.addEventListener('click', () => {
+        const currentState = toggleButton.getAttribute('data-state');
+        let newState, buttonText;
+
+        // Basculer entre les deux états
+        if (currentState === "DM") {
+            newState = "Investigateur";
+            buttonText = "Investigateur";
+            toggleButton.classList.remove('pressed');
+            toggleButton.classList.add('released');
+        } else {
+            newState = "DM";
+            buttonText = "DM";
+            toggleButton.classList.remove('released');
+            toggleButton.classList.add('pressed');
+        }
+
+        // Met à jour l'état du bouton
+        toggleButton.setAttribute('data-state', newState);
+        toggleButton.innerText = buttonText;
+
+        // Afficher/Masquer les éléments en fonction de l'état
+        document.querySelectorAll('[data-visual]').forEach(el => {
+            if (el.getAttribute('data-visual') === newState) {
+                el.style.display = "table-cell";
+            } else {
+                el.style.display = "none";
+            }
+        });
+    });
+
+    // Afficher initialement les éléments de l'état par défaut (DM)
+    document.querySelectorAll('[data-visual="DM"]').forEach(el => {
+        el.style.display = "table-cell";
+    });
+
+
+
+
+        let h1list = document.getElementsByTagName('h1');
+        let sectionlist = document.getElementsByTagName('section');
+
+        for (let section of sectionlist) {
+                section.classList.remove('hidden');
+                section.classList.add('show');
+        }
+
+        for (let title of h1list) {
+            title.classList.remove('hidden');
+            title.classList.add('show');
+        }
+
+</script>
 </body>
 
 </html>
