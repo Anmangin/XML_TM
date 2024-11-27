@@ -33,7 +33,7 @@ jobs:
     # 4. Exécuter le script Python sur chaque fichier XML du répertoire data/
     - name: Run XML to Markdown script
       run: |
-        for file in INFILE/XML/*.xml; do
+        for file in XML/*.xml; do
           python Python/update.py "$file"
         done
         python Python/generate_index.py

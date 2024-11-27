@@ -5,7 +5,7 @@ import subprocess
 execution_path = os.getcwd()
 
 # Construire le chemin vers le dossier contenant les fichiers XML
-path = os.path.join(execution_path, 'INFILE', 'XML')
+path = os.path.join(execution_path, 'XML')
 
 # Vérifier que le chemin existe
 if not os.path.exists(path):
