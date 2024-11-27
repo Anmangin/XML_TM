@@ -127,6 +127,8 @@ td.doc {
   </style>
 </head>
 <body>
+
+   
   <h1>Bienvenue dans la liste des templates pour le service de Gustave Roussy</h1>
   <div class="intro">
     <p>Vous trouverez ci-dessous les templates disponibles pour l'outil TrialMaster, un standard développé par le service du BBE (DCR) pour la gestion des données cliniques. Certains documents sont réservés à la consultation uniquement et sont affichés en texte plus petit.</p>
@@ -184,6 +186,7 @@ td.doc {
             for file in categories[category]:
                 # Charge le fichier markdown correspondant si il existe
                 md_file = file.replace('.html', '.md')
+                xml_file= file.replace('.html', '.xml')
                 md_content = ''
                 md_lines_count=0
                 if os.path.isfile(f"docs/MD/{md_file}"):
@@ -199,7 +202,7 @@ td.doc {
 
                 
      
-                index_content += f'  <td class="crf"> <a href="docs/Templates/{file}">{file}</a> </td> \n '
+                index_content += f'  <td class="crf"> <a href="docs/Templates/{file}">{file}</a> <br>  <button class="downloadBtn" data-filename="{xml_file}">Télécharger le xml</button> </td> \n '
                 if  md_lines_count>1 : index_content += f'  <td class=doc > {md_html} </td> </tr>\n '
                 else:index_content += f'  <td class="doc"> N/A </td> </tr>\n '
 
@@ -208,6 +211,33 @@ td.doc {
 
     # Termine le contenu HTML
     index_content += '''
+
+    <script>
+        // Sélectionner tous les éléments avec la classe 'downloadBtn'
+        document.querySelectorAll('.downloadBtn').forEach(function(button) {
+            button.addEventListener('click', function () { 
+                // Récupérer la valeur de l'attribut data-filename du bouton
+                const fileName = this.getAttribute('data-filename');
+                
+                // Créer l'URL du fichier à télécharger
+                const fileUrl = "https://raw.githubusercontent.com/Anmangin/XML_TM/Working-Branch-TM-5.0-Update-3/XML/" + fileName;
+                console.log(fileUrl); // Affiche l'URL dans la console
+
+                // Effectuer la requête pour obtenir le fichier
+                fetch(fileUrl)
+                    .then(response => response.blob()) // Récupérer la réponse en tant que Blob
+                    .then(blob => {
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob); // Créer un URL de l'objet Blob
+                        link.download = fileName; // Utiliser le nom du fichier récupéré
+                        link.click(); // Simuler un clic pour démarrer le téléchargement
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors du téléchargement:', error);
+                    });
+            });
+        });
+    </script>
 </body>
 </html>
 '''
