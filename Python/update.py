@@ -18,7 +18,11 @@ from tkinter import messagebox
 from pathlib import Path
 
 # Chemin vers le fichier HTML
+<<<<<<< HEAD:Python/update.py
 chemin_html = f"{os.getcwd()}/Python/Template_CRF.html"
+=======
+chemin_html = rf"{os.getcwd()}\templage.html"
+>>>>>>> 2dc5bbd6dc9771e642eb547aafd1535c45e1eec3:update.py
 
 # Lire le contenu du fichier HTML
 
@@ -370,7 +374,11 @@ def exporter_donnees_markdown_eCRF(data,ACTversion,display_Edit=True):
 
 
 
+<<<<<<< HEAD:Python/update.py
         with open(rf"{os.getcwd()}/Python/sidebar.js", 'r', encoding='utf-8') as file:
+=======
+        with open(rf"{os.getcwd()}\sidebar.js", 'r', encoding='utf-8') as file:
+>>>>>>> 2dc5bbd6dc9771e642eb547aafd1535c45e1eec3:update.py
             js = file.read()    
         content+=f"  </div><script>{js}</script> </body>\n\n\n"
         
@@ -480,7 +488,11 @@ def main():
     # doc.save(f"{output_path}/DOCX/{file_name}.docx")
 
 
+<<<<<<< HEAD:Python/update.py
     with open(f"{os.getcwd()}/Python/style.css", 'r', encoding='utf-8') as file:
+=======
+    with open(rf"{os.getcwd()}\style.css", 'r', encoding='utf-8') as file:
+>>>>>>> 2dc5bbd6dc9771e642eb547aafd1535c45e1eec3:update.py
             css = file.read()    
 
 
@@ -495,14 +507,24 @@ def main():
 ) #remove_details_tags(content)
     # if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
     # else: print("Liste des checks vide!")
+<<<<<<< HEAD:Python/update.py
     if not os.path.exists(f"{output_path}/docs/MD/{file_name}.md"):
         with open( f"{output_path}/docs/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
                 f.write(f"# DOCUMENTATION POUR LE FICHIER {file_name}")
                 
+=======
+
+    with open( rf"{output_path}\MD\{file_name}.md" , 'w', encoding='utf-8') as f:
+            f.write(content)
+>>>>>>> 2dc5bbd6dc9771e642eb547aafd1535c45e1eec3:update.py
     customjs = f"const jsonData = {json.dumps(JSON_EXPORT)};"
     final_export_0=contenu_html.replace("// <JSONDATA>",customjs)
     final_export=final_export_0.replace("/* <css></css> */",css)
+<<<<<<< HEAD:Python/update.py
     with open( f"{output_path}/docs/Templates/{file_name}.html" , 'w', encoding='utf-8') as f:
+=======
+    with open( rf"{output_path}\HTML\{file_name}.html" , 'w', encoding='utf-8') as f:
+>>>>>>> 2dc5bbd6dc9771e642eb547aafd1535c45e1eec3:update.py
         f.write(final_export)
 
 
