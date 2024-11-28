@@ -7,7 +7,7 @@
      <style>
         /* Global Styles */
 body {
-    max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
+    max-width: 902px; /* Largeur utilisable dans Word avec marges standards */
     margin: 0 auto; /* Centre le contenu horizontalement */
     padding: 0; /* Pas de marge interne supplémentaire */
     font-family: 'Arial', sans-serif; /* Police standard Word */
@@ -86,7 +86,7 @@ body {
     margin-left: 50px; /* Décalage pour laisser de la place à la sidebar */
     padding: 20px;
     background-color: #fff;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     width:100%;
 }
 
@@ -96,12 +96,15 @@ section {
 }
 h1 {
 display: none;
+width:100%;
 }
+
 /* Titre */
 h2, h3 {
     color: #3b7bc0;
     text-align: center;
     margin-bottom: 20px;
+    width:100%;
 }
 
 h2 {
@@ -213,7 +216,8 @@ code {
 
 /* Cacher les sections avec la classe "hidden" */
 .hidden {
-    display: none !important;; /* Cache complètement l'élément */
+    /* display: none !important;; Cache complètement l'élément */
+    visibility: hidden  !important; /* L'élément est invisible mais prend de la place */
 }
 
 /* Montrer les sections avec la classe "show" */
@@ -227,19 +231,23 @@ code {
         text-align: center; /* Centre le texte */
         margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
         margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+        width:100%;
     }
     h2 {
         page-break-before: always;
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
     h3 {
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
     section {
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
 
     .sidebar {
@@ -248,7 +256,7 @@ code {
         left: 0;
         width: 250px;  /* Largeur normale de la sidebar */
         padding: 0px; /* Espaces internes */
-        background-color: #f4f4f4;
+
         margin-left: 0mm;
         box-shadow: none; /* Enlève l'ombre pendant l'impression */
         border:none;
@@ -274,9 +282,8 @@ code {
         display: none !important;; /* Cache complètement l'élément */
     }
     .content {
-            width: 70%;  /* Largeur normale de la sidebar */
+            width: 75%;  /* Largeur normale de la sidebar */
             padding: 0px; /* Espaces internes */
-            background-color: #f4f4f4;
             margin-left: 270px;
             
     
@@ -285,20 +292,16 @@ code {
     
     /* Empêcher la coupure de l'élément */
     body {
+         max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
          margin-left: 0mm; 
+         font-size: 12pt; /* Ajuste la taille de la police pour l'impression */
     }
     .no-break {
         page-break-inside: avoid;
         break-inside: avoid; /* Pour les navigateurs modernes */
     }
-    
-    /* Autres styles pour l'impression (par exemple, masquer les éléments inutiles) */
-    body {
-        font-size: 12pt; /* Ajuste la taille de la police pour l'impression */
-    }
-
     .no-print {
-        display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
+        display: none !important;
     }
 }
 
@@ -334,13 +337,68 @@ code {
     flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
     
 }
+
+.center-content {
+    text-align: center; /* Centre le contenu horizontalement */
+}
+
+.center-content button {
+    display: inline-block; /* Permet de centrer le bouton */
+}
      </style>
+     <title> </title>
+     
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <button id="toggle-button" class="pressed" data-state="DM">DM</button>
-        <!-- <button id="export">Enregistrer les modifications</button> -->
+        <button id="print">imprimer les modifications</button>
+
+      
+
+        <script>
+               // Sélectionne le bouton et ajoute un écouteur d'événement
+        // Récupérer le chemin de l'URL
+        const pathname = window.location.pathname;
+
+        // Extraire uniquement le nom du fichier
+        let filename = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+        // Décoder les caractères spéciaux (comme %20 pour les espaces)
+        filename = decodeURIComponent(filename);
+
+        // Supprimer les extensions multiples (comme .html.pdf)
+        filename = filename.replace(/\.(\w+)(\.\w+)+$/, ''); // Garde la première extension uniquement
+
+        // Supprimer toute extension si nécessaire
+        filename = filename.replace(/\.\w+$/, '');
+
+        // Modifier le contenu de la balise <title>
+        document.title = filename;
+            // Sélectionne le bouton et ajoute un écouteur d'événement
+            document.getElementById('print').addEventListener('click', function () {
+                // Vérifie si le document contient un 🔴
+                if (document.body.innerText.includes('🔴')) {
+                    // Obtenir la date actuelle et formater en YY.MM.DD
+                    const now = new Date();
+                    const year = String(now.getFullYear()).slice(-2); // Année sur 2 chiffres
+                    const month = String(now.getMonth() + 1).padStart(2, '0'); // Mois sur 2 chiffres
+                    const day = String(now.getDate()).padStart(2, '0'); // Jour sur 2 chiffres
+        
+                    // Ajouter -MOD:YY.MM.DD au nom du fichier
+                    filename += `-MOD:${year}.${month}.${day}`;
+                }
+        
+                // Mettre à jour le titre de la page
+                document.title = filename;
+        
+                // Lance la boîte de dialogue d'impression
+                window.print();
+            });
+        </script>
+
+
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
     </div>
@@ -348,7 +406,21 @@ code {
     <!-- Main Content -->
     <div class="content" id="main-content">
     </div>
-
+    <div class="content" id="change-log" style="margin-top: 20px;">
+        <h3>Liste des changements à faire</h3>
+        <table id="change-table" border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Fiche</th>
+                    <th>caption</th>
+                    <th>Description modifié</th>
+                    <th>Response Type</th>
+                    <th>SAS Name</th>
+                </tr>
+            </thead>
+            <tbody id="change-list"></tbody>
+        </table>
+    </div>
     <script>
         function loadJSON(filePath) {
     return fetch(filePath) // Charge le fichier JSON à partir du chemin spécifié
@@ -372,48 +444,8 @@ code {
 
 <script>
 
-const jsonData = {"visites": [{"V_description": "Baseline", "fiches": [{"F_description": "F06 - Description of Prior Breast cancer disease", "groupes": [{"G_description": "PRC1", "questions": [{"GI_key": "f212e9d4-d2eb-4fb4-8fb3-92107d6af5cd", "I_description": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}, {"GI_key": "45770cd5-dd62-450f-b07d-c4073b172810", "I_description": "Date of initial diagnosis \\r\\n<i>(first biopsy)</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "BIOP"}, {"GI_key": "65dbec2d-e6e2-4ef4-a42a-66ffd1a61432", "I_description": "Side of primary", "Message": null, "rep": "\ud83d\udd18 1 - <b>Unilateral</b><br>\ud83d\udd18 2 - <b>Bilateral</b>", "I_Status": "", "i_SasName": "TUMSIDE"}, {"GI_key": "803c5f87-b151-4f1a-bc8e-83a1b0a73e36", "I_description": "Tumor size (mm)", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[F06 - Description of Prior Breast cancer disease.*][PRC1.*][TUMSIZE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nNumber([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE])>0 \n#data Expression \n \n</code></pre> </td><td> Size can't be 0</td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "TUMSIZE"}, {"GI_key": "16ac30eb-cbec-4649-a906-74fdcc89b905", "I_description": "T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[F06 - Description of Prior Breast cancer disease.*][PRC1.*][T]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar size= Number([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE]);\nvar t = [F06 - Description of Prior Breast cancer disease][PRC1][T];\nisEmpty([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE]) \n||\nisEmpty([F06 - Description of Prior Breast cancer disease][PRC1][T])\n||\n(t = \"T1\" && size <= 20)\n||\n(t = \"T2\" && size <= 50 && size>20 )\n||\n(t = \"T3\" && size > 50)\n||\n(t = \"T4\" && size > 50) \n#data Expression \n \n</code></pre> </td><td> Lenth is not compatible with the T filled ([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE]), please correct</td> </tr></table></details>", "rep": "\ud83d\udd18 Tx - <b>Tx - Primary tumor cannot be assessed</b><br>\ud83d\udd18 T1 - <b>T1 - Tumor \u2264 20 mm in greatest dimension</b><br>\ud83d\udd18 T2 - <b>T2 - Tumor > 20 mm but \u2264 50 mm in greatest dimension</b><br>\ud83d\udd18 T3 - <b>T3 - Tumor > 50 mm in greatest dimension</b><br>\ud83d\udd18 T4 - <b>T4 - Tumor of any size with direct extension to the chest wall and/or to the skin (ulceration or skin nodules)</b>", "I_Status": "", "i_SasName": "T"}, {"GI_key": "7771e80c-9448-434b-85a6-2fb22e5d035c", "I_description": "N", "Message": null, "rep": "\ud83d\udd18 Nx - <b>Nx - Regional lymph nodes cannot be assessed (for example, previously removed)</b><br>\ud83d\udd18 N0 - <b>N0 - No regional lymph node metastases</b><br>\ud83d\udd18 N+ - <b>N+ - Tumor of any size with direct extension to the chest wall and/or to the skin (ulceration or skin nodules)</b>", "I_Status": "", "i_SasName": "N"}, {"GI_key": "a69bdc4e-7208-455c-95b6-6fe9c095e465", "I_description": "\u25baNumber of total invaded lymph nodes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\r\\n<i>if too many to count, fill with 99</i>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[F06 - Description of Prior Breast cancer disease.*][PRC1.*][N_LYMPH]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[F06 - Description of Prior Breast cancer disease][PRC1][N] == 'N+' \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 2", "I_Status": "", "i_SasName": "N_LYMPH"}, {"GI_key": "10a201bb-7b8f-42f0-9b40-9d1ee54dfd3b", "I_description": "Tumor Stage", "Message": null, "rep": "\ud83d\udd18 1 - <b>Stage I</b><br>\ud83d\udd18 2 - <b>Stage II</b><br>\ud83d\udd18 3 - <b>Stage III</b><br>\ud83d\udd18 4 - <b>Stage IV</b>", "I_Status": "", "i_SasName": "Stage"}, {"GI_key": "7e683420-e5a7-410c-a133-5f73dd02d2e0", "I_description": "Tumor grade", "Message": null, "rep": "\ud83d\udd18 1 - <b>Grade 1</b><br>\ud83d\udd18 2 - <b>Grade 2</b><br>\ud83d\udd18 3 - <b>Grade 3</b><br>\ud83d\udd18 X - <b>Grade X</b>", "I_Status": "", "i_SasName": "GRADE"}, {"GI_key": "4af68a05-a754-483b-afc4-be48c4f646a5", "I_description": "Histologic type", "Message": null, "rep": "\ud83d\udd18 1 - <b>Ductal</b><br>\ud83d\udd18 2 - <b>Lobular</b><br>\ud83d\udd18 3 - <b>Mixed ductal and lobular</b><br>\ud83d\udd18 4 - <b>Unknown</b><br>\ud83d\udd18 5 - <b>Other</b>", "I_Status": "", "i_SasName": "HISTO"}, {"GI_key": "1df518cd-49e1-417d-b470-c623fca4fd9b", "I_description": "\u25baOther, specify", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[PRC1.*][HISTO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[PRC1][HISTO] == '5'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "HISTO_S"}]}, {"G_description": "PRC2", "questions": [{"GI_key": "670f85f4-61b8-4eed-95da-d4371fe2d538", "I_description": "ER receptor", "Message": null, "rep": "\ud83d\udd18 0 - <b>Negative</b><br>\ud83d\udd18 1 - <b>Positive</b>", "I_Status": "", "i_SasName": "ERR"}, {"GI_key": "a7cf3789-5b7b-4989-92cb-f1bee9354f89", "I_description": "PR receptor", "Message": null, "rep": "\ud83d\udd18 0 - <b>Negative</b><br>\ud83d\udd18 1 - <b>Positive</b>", "I_Status": "", "i_SasName": "PRR"}, {"GI_key": "e0556788-601b-4a81-b694-ae0d2397af3c", "I_description": "Ki67", "Message": null, "rep": "\ud83d\udd18 0 - <b>Not done</b><br>\ud83d\udd18 1 - <b>Done</b>", "I_Status": "", "i_SasName": "Ki67"}, {"GI_key": "eeefecfd-05e0-430d-86a1-fb233cb8af6d", "I_description": "\u25baKi67 staining (%)", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[PRC2.*][KI_PCT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[PRC2][Ki67] == '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "KI_PCT"}, {"GI_key": "90367d5b-0d10-4d5b-8029-0dc0fda5e261", "I_description": "HER2", "Message": null, "rep": "\ud83d\udd18 0 - <b>Negative</b><br>\ud83d\udd18 1 - <b>Positive</b>", "I_Status": "", "i_SasName": "HER2"}, {"GI_key": "43f14f34-8b95-49a0-9976-32bbd27ba819", "I_description": "FISH", "Message": null, "rep": "\ud83d\udd18 0 - <b>Not amplified</b><br>\ud83d\udd18 1 - <b>Amplified</b><br>\ud83d\udd18 9 - <b>Not done</b>", "I_Status": "", "i_SasName": "FISH"}, {"GI_key": "374e23da-5082-4ede-a310-c50e66dd1ca0", "I_description": "HER2 Immunohistochemistry", "Message": null, "rep": "\ud83d\udd18 0 - <b>0</b><br>\ud83d\udd18 1 - <b>1+</b><br>\ud83d\udd18 2 - <b>2+</b><br>\ud83d\udd18 3 - <b>+3</b><br>\ud83d\udd18 99 - <b>Not done</b>", "I_Status": "", "i_SasName": "HER2_RES"}]}]}]}]};
+const jsonData = {"visites": [{"V_description": "Baseline", "fiches": [{"F_description": "F06 - Description of Prior Breast cancer disease", "groupes": [{"G_description": "PRC1", "questions": [{"GI_key": "f212e9d4-d2eb-4fb4-8fb3-92107d6af5cd", "Item_Order": 1, "I_description": "MISSING_VAR", "I_caption": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}, {"GI_key": "45770cd5-dd62-450f-b07d-c4073b172810", "Item_Order": 2, "I_description": "Date of initial diagnosis \\r\\n<i>(first biopsy)</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", "I_caption": "BIOP_DT", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "BIOP"}, {"GI_key": "65dbec2d-e6e2-4ef4-a42a-66ffd1a61432", "Item_Order": 3, "I_description": "Side of primary", "I_caption": "TUMSIDE", "Message": null, "rep": "\ud83d\udd18 1 - <b>Unilateral</b><br>\ud83d\udd18 2 - <b>Bilateral</b>", "I_Status": "", "i_SasName": "TUMSIDE"}, {"GI_key": "803c5f87-b151-4f1a-bc8e-83a1b0a73e36", "Item_Order": 4, "I_description": "Tumor size (mm)", "I_caption": "TUMSIZE", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[F06 - Description of Prior Breast cancer disease.*][PRC1.*][TUMSIZE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nNumber([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE])>0 \n#data Expression \n \n</code></pre> </td><td> Size can't be 0</td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "TUMSIZE"}, {"GI_key": "16ac30eb-cbec-4649-a906-74fdcc89b905", "Item_Order": 5, "I_description": "T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", "I_caption": "T", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Valid:[F06 - Description of Prior Breast cancer disease.*][PRC1.*][T]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar size= Number([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE]);\nvar t = [F06 - Description of Prior Breast cancer disease][PRC1][T];\nisEmpty([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE]) \n||\nisEmpty([F06 - Description of Prior Breast cancer disease][PRC1][T])\n||\n(t = \"T1\" && size <= 20)\n||\n(t = \"T2\" && size <= 50 && size>20 )\n||\n(t = \"T3\" && size > 50)\n||\n(t = \"T4\" && size > 50) \n#data Expression \n \n</code></pre> </td><td> Lenth is not compatible with the T filled ([F06 - Description of Prior Breast cancer disease][PRC1][TUMSIZE]), please correct</td> </tr></table></details>", "rep": "\ud83d\udd18 Tx - <b>Tx - Primary tumor cannot be assessed</b><br>\ud83d\udd18 T1 - <b>T1 - Tumor \u2264 20 mm in greatest dimension</b><br>\ud83d\udd18 T2 - <b>T2 - Tumor > 20 mm but \u2264 50 mm in greatest dimension</b><br>\ud83d\udd18 T3 - <b>T3 - Tumor > 50 mm in greatest dimension</b><br>\ud83d\udd18 T4 - <b>T4 - Tumor of any size with direct extension to the chest wall and/or to the skin (ulceration or skin nodules)</b>", "I_Status": "", "i_SasName": "T"}, {"GI_key": "7771e80c-9448-434b-85a6-2fb22e5d035c", "Item_Order": 6, "I_description": "N", "I_caption": "N", "Message": null, "rep": "\ud83d\udd18 Nx - <b>Nx - Regional lymph nodes cannot be assessed (for example, previously removed)</b><br>\ud83d\udd18 N0 - <b>N0 - No regional lymph node metastases</b><br>\ud83d\udd18 N+ - <b>N+ - Tumor of any size with direct extension to the chest wall and/or to the skin (ulceration or skin nodules)</b>", "I_Status": "", "i_SasName": "N"}, {"GI_key": "a69bdc4e-7208-455c-95b6-6fe9c095e465", "Item_Order": 7, "I_description": "\u25baNumber of total invaded lymph nodes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\r\\n<i>if too many to count, fill with 99</i>", "I_caption": "N_LYMPH", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[F06 - Description of Prior Breast cancer disease.*][PRC1.*][N_LYMPH]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[F06 - Description of Prior Breast cancer disease][PRC1][N] == 'N+' \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 2", "I_Status": "", "i_SasName": "N_LYMPH"}, {"GI_key": "10a201bb-7b8f-42f0-9b40-9d1ee54dfd3b", "Item_Order": 8, "I_description": "Tumor Stage", "I_caption": "Stage", "Message": null, "rep": "\ud83d\udd18 1 - <b>Stage I</b><br>\ud83d\udd18 2 - <b>Stage II</b><br>\ud83d\udd18 3 - <b>Stage III</b><br>\ud83d\udd18 4 - <b>Stage IV</b>", "I_Status": "", "i_SasName": "Stage"}, {"GI_key": "7e683420-e5a7-410c-a133-5f73dd02d2e0", "Item_Order": 9, "I_description": "Tumor grade", "I_caption": "GRADE", "Message": null, "rep": "\ud83d\udd18 1 - <b>Grade 1</b><br>\ud83d\udd18 2 - <b>Grade 2</b><br>\ud83d\udd18 3 - <b>Grade 3</b><br>\ud83d\udd18 X - <b>Grade X</b>", "I_Status": "", "i_SasName": "GRADE"}, {"GI_key": "4af68a05-a754-483b-afc4-be48c4f646a5", "Item_Order": 10, "I_description": "Histologic type", "I_caption": "HISTO", "Message": null, "rep": "\ud83d\udd18 1 - <b>Ductal</b><br>\ud83d\udd18 2 - <b>Lobular</b><br>\ud83d\udd18 3 - <b>Mixed ductal and lobular</b><br>\ud83d\udd18 4 - <b>Unknown</b><br>\ud83d\udd18 5 - <b>Other</b>", "I_Status": "", "i_SasName": "HISTO"}, {"GI_key": "1df518cd-49e1-417d-b470-c623fca4fd9b", "Item_Order": 11, "I_description": "\u25baOther, specify", "I_caption": "HISTO_S", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[PRC1.*][HISTO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[PRC1][HISTO] == '5'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "HISTO_S"}]}, {"G_description": "PRC2", "questions": [{"GI_key": "670f85f4-61b8-4eed-95da-d4371fe2d538", "Item_Order": 12, "I_description": "ER receptor", "I_caption": "ERR", "Message": null, "rep": "\ud83d\udd18 0 - <b>Negative</b><br>\ud83d\udd18 1 - <b>Positive</b>", "I_Status": "", "i_SasName": "ERR"}, {"GI_key": "a7cf3789-5b7b-4989-92cb-f1bee9354f89", "Item_Order": 13, "I_description": "PR receptor", "I_caption": "PRR", "Message": null, "rep": "\ud83d\udd18 0 - <b>Negative</b><br>\ud83d\udd18 1 - <b>Positive</b>", "I_Status": "", "i_SasName": "PRR"}, {"GI_key": "e0556788-601b-4a81-b694-ae0d2397af3c", "Item_Order": 14, "I_description": "Ki67", "I_caption": "Ki67", "Message": null, "rep": "\ud83d\udd18 0 - <b>Not done</b><br>\ud83d\udd18 1 - <b>Done</b>", "I_Status": "", "i_SasName": "Ki67"}, {"GI_key": "eeefecfd-05e0-430d-86a1-fb233cb8af6d", "Item_Order": 15, "I_description": "\u25baKi67 staining (%)", "I_caption": "KI_PCT", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> Enabled:[PRC2.*][KI_PCT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[PRC2][Ki67] == '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "KI_PCT"}, {"GI_key": "90367d5b-0d10-4d5b-8029-0dc0fda5e261", "Item_Order": 16, "I_description": "HER2", "I_caption": "HER2", "Message": null, "rep": "\ud83d\udd18 0 - <b>Negative</b><br>\ud83d\udd18 1 - <b>Positive</b>", "I_Status": "", "i_SasName": "HER2"}, {"GI_key": "43f14f34-8b95-49a0-9976-32bbd27ba819", "Item_Order": 17, "I_description": "FISH", "I_caption": "FISH", "Message": null, "rep": "\ud83d\udd18 0 - <b>Not amplified</b><br>\ud83d\udd18 1 - <b>Amplified</b><br>\ud83d\udd18 9 - <b>Not done</b>", "I_Status": "", "i_SasName": "FISH"}, {"GI_key": "374e23da-5082-4ede-a310-c50e66dd1ca0", "Item_Order": 18, "I_description": "HER2 Immunohistochemistry", "I_caption": "HER2_RES", "Message": null, "rep": "\ud83d\udd18 0 - <b>0</b><br>\ud83d\udd18 1 - <b>1+</b><br>\ud83d\udd18 2 - <b>2+</b><br>\ud83d\udd18 3 - <b>+3</b><br>\ud83d\udd18 99 - <b>Not done</b>", "I_Status": "", "i_SasName": "HER2_RES"}]}]}]}]};
 
-function setupExportButton() {
-    const exportButton = document.getElementById("export");
-    if (!exportButton) {
-        console.error("Bouton avec l'ID 'export' introuvable !");
-        return;
-    }
-
-    exportButton.addEventListener("click", () => {
-        const dataStr = `const jsonData = ${JSON.stringify(jsonData, null, 2)};`; // Conversion en JavaScript formaté
-        const blob = new Blob([dataStr], { type: "application/javascript" }); // Création d'un blob de type JS
-        const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "modifications.hmt"; // Nom du fichier à télécharger
-        document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
-        a.click(); // Téléchargement
-        document.body.removeChild(a); // Suppression de l'élément
-        URL.revokeObjectURL(url); // Libération de l'URL temporaire
-    });
-}
-
-// Appeler la fonction pour lier l'événement au bouton après le chargement du DOM
-setupExportButton();
-
-
-function addOldValueToGIKey(jsonData, targetGIKey, varname, oldValue) {
-    jsonData.visites.forEach(visit => {
-        visit.fiches.forEach(fiche => {
-            fiche.groupes.forEach(groupe => {
-                groupe.questions.forEach(question => {
-                    if (question.GI_key === targetGIKey) {
-                        if (question.hasOwnProperty(varname)) {
-                            question[`${varname}_new`] = oldValue; // Ajoute un champ oldValue à la variable spécifiée
-                        }
-                    }
-                });
-            });
-        });
-    });
-}
 
 const exportData  = {};
 const sidebarLinks = document.getElementById('sidebar-links');
@@ -514,79 +546,122 @@ function visibleonly(data, type, index) {
     }
 }
 
+// Fonction pour ajouter l'écouteur d'événements de manière globale
+function updateExportData(td1, td2, td3) {
+    const formKey = td1.getAttribute("data-form");
+    const sourceKey = td1.getAttribute("data-source");
+    const datacaption = td1.getAttribute("data-caption");
+    const dataorder = td1.getAttribute("data-order");
 
+    const sourceresp = td2.getAttribute("data-source");
+    const sourceSAS = td3.getAttribute("data-source");
+    console.log(sourceSAS)
 
-        // Fonction pour ajouter l'écouteur d'événements de manière globale
+    // Récupérer les valeurs actuelles des cellules
+    const currentDescription = td1.innerText;
+    const currentResponseType = td2.innerText;
+    const currentSasName = td3.innerText;
+
+    // Récupérer les valeurs modifiées des champs de saisie
+    const modifyTXT1 = document.getElementById(aeraID + '1').value;
+    const modifyHTML2 = document.getElementById(aeraID + '2').value;
+    const modifyTXT3 = document.getElementById(aeraID + '3').value;
+    const displayTxT1 = (modifyTXT1 === sourceKey) ? "N/A" : modifyTXT1;
+    const displayTxT2 = (modifyHTML2 === sourceresp) ? "N/A" : modifyHTML2;
+    const displayTxT3 = (modifyTXT3 === sourceSAS) ? "N/A" : modifyTXT3;
+
+    // Vérifier s'il y a un changement
+    if (modifyTXT1 !== currentDescription || modifyHTML2 !== currentResponseType || modifyTXT3 !== currentSasName) {
+        // Si des changements sont détectés, mettre à jour l'objet exportData
+        if (!exportData[formKey]) {
+            exportData[formKey] = {}; // Initialiser l'objet pour le formulaire s'il n'existe pas
+        }
+        exportData[formKey][datacaption] = {
+            dataorder:dataorder,
+            description: displayTxT1,
+            responseType: displayTxT2,
+            sasName: displayTxT3
+        };
+
+        // Appeler la fonction de mise à jour de la liste des changements
+        updateChangeLog();
+    }
+}
+
 function addGlobalClickListener() {
     document.addEventListener('click', (event) => {
-        
         if (event.target && (event.target.innerHTML === '✏️' || event.target.innerHTML === '💾')) {
-            
-        originID=event.target.getAttribute("id").substr(3); 
+            originID = event.target.getAttribute("id").substr(3);
 
-        td0 = document.getElementById('td0' + originID); 
-        td1 =  document.getElementById('td1' + originID); 
-        But =  document.getElementById("But" + originID); 
-    
-        aeraID ='ARE' + originID;
-        
+            td0 = document.getElementById('td0' + originID);
+            td1 = document.getElementById('td1' + originID);
+            td2 = document.getElementById('td2' + originID);
+            td3 = document.getElementById('td3' + originID);
+            But = document.getElementById("But" + originID);
 
+            aeraID = 'ARE' + originID;
 
-        if (event.target && event.target.innerHTML === '✏️') {
-           
-            //    console.log(event.target)
-            previousTXT=td1.innerText;
-            // addOldValueToGIKey(jsonData, originID, "Old_data", previousTXT);
-     
-        //     // Remplacer le texte statique par un champ texte (textarea)
-            td1.innerHTML = '';  // Supprimer l'ancien texte
-            const inputField = document.createElement('textarea');
-            inputField.id =  aeraID;
-            inputField.innerText = previousTXT || '';  // Valeur actuelle
-            td1.appendChild(inputField);
+            if (event.target && event.target.innerHTML === '✏️') {
+                // Récupérer les valeurs existantes
+                previousTXT = td1.innerHTML;
+                previousHTML2 = td2.innerHTML; // Contenu de td2
+                previousTXT3 = td3.innerText;
 
-        //     // Créer un bouton "Save"
-        console.log(td0)
-            td0.innerHTML = '';
-            const savebutton= document.createElement('button');
-            savebutton.id="But" + originID;          
-            savebutton.innerHTML = '💾';
+                // Remplacer le texte statique par des champs texte (textarea)
+                td1.innerHTML = '';
+                td2.innerHTML = '';
+                td3.innerHTML = '';
 
-            td0.appendChild(savebutton);
-        }
+                const inputField1 = document.createElement('textarea');
+                inputField1.id = aeraID + '1';
+                inputField1.innerText = previousTXT || ''; // Valeur actuelle de td1
+                td1.appendChild(inputField1);
+
+                const inputField2 = document.createElement('textarea');
+                inputField2.id = aeraID + '2';
+                inputField2.innerText = previousHTML2; // Valeur actuelle de td2
+                td2.appendChild(inputField2);
+
+                const inputField3 = document.createElement('textarea');
+                inputField3.id = aeraID + '3';
+                inputField3.innerText = previousTXT3 || ''; // Valeur actuelle de td3
+                td3.appendChild(inputField3);
+
+                // Créer un bouton "Save"
+                td0.innerHTML = '';
+                const saveButton = document.createElement('button');
+                saveButton.id = "But" + originID;
+                saveButton.innerHTML = '💾';
+                td0.appendChild(saveButton);
+            }
+
             // Quand on clique sur "Save", sauvegarder la modification
             if (event.target && event.target.innerHTML === '💾') {
-                modifyTXT = document.getElementById(aeraID).value; 
-                addOldValueToGIKey(jsonData, originID, "I_description", modifyTXT);
-                console.log(jsonData)
-                if (!exportData[originID]) {
-                    exportData[originID] = [modifyTXT];
-    }
+                updateExportData(td1, td2, td3);
+                console.log(exportData)
+                const modifyTXT1 = document.getElementById(aeraID + '1').value;
+                const modifyHTML2 = document.getElementById(aeraID + '2').value;
+                const modifyTXT3 = document.getElementById(aeraID + '3').value;
 
-                td1.innerHTML = '';
-                const tdsimple= document.createElement('td');
-                tdsimple.id='td1' + originID;
-                tdsimple.innerHTML=modifyTXT;
-                console.log(tdsimple)
-                td1.appendChild(tdsimple);  // Ajouter tdsimple comme enfant de td1
-
-
-               
               
-                
-                // td1.appendChild(modifyTXT);
 
-                // QuestionID.innerText = modifyTXT;  // Mettre à jour la valeur de la question
+                // Mise à jour de td1, td2, et td3 avec les nouvelles valeurs
+                td1.innerHTML = modifyTXT1;
+                td2.innerHTML = modifyHTML2;
+                td3.innerHTML = modifyTXT3;
+
+                // Remise à zéro de td0 et ajout du bouton "Modifier"
                 td0.innerHTML = '';
-
-                const modbutton= document.createElement('button');
-                modbutton.id="But" + originID;          
-                modbutton.innerHTML = '✏️';
-                td0.appendChild(modbutton);
-  // Ajouter le bouton "Modifier"
+                const modButton = document.createElement('button');
+                modButton.id = "But" + originID;
+                modButton.innerHTML = '🔴✏️';
+                td0.appendChild(modButton);
             }
-}});
-         }
+        }
+    });
+}
+
+
          addGlobalClickListener()        
 // Fonction pour générer les fiches
 function generateFiche(fiche, activate, fid) {
@@ -616,7 +691,6 @@ function generateFiche(fiche, activate, fid) {
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
         th0.setAttribute('data-visual', "DM");
-
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
@@ -626,18 +700,29 @@ function generateFiche(fiche, activate, fid) {
         th3.innerText = 'Sas';
         th3.setAttribute('data-visual', "DM");
         const th4 = document.createElement('th');
-        th4.innerText = 'Report';
+        th4.innerText = 'EditCheck';
         th4.setAttribute('data-visual', "DM");
+        th4.className="no-print";
+        const th5 = document.createElement('th');
+        th5.innerText = 'Report';
+        th5.setAttribute('data-visual', "DM");
+        th5.className="no-print";
 
-        // headerRow.appendChild(th0);
+
+
+        headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
         headerRow.appendChild(th3);
         headerRow.appendChild(th4);
+        headerRow.appendChild(th5);
+
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
+        index=0
         groupe.questions.forEach(question => {
+            index+=1
             const row = document.createElement('tr');
 
             // Colonne pour l'outil
@@ -647,23 +732,43 @@ function generateFiche(fiche, activate, fid) {
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
             editButton.id = `But${question.GI_key}`;
+            editButton.className="no-print";
             td0.appendChild(editButton);
 
             // Colonne pour la description
             const td1 = document.createElement('td');
             td1.innerHTML = question.I_description || 'N/A';
             td1.id = `td1${question.GI_key}`;
+            td1.setAttribute('data-source', question.I_description);
+            td1.setAttribute('data-form', fiche.F_description);
+            td1.setAttribute('data-caption', question.I_caption);
+            td1.setAttribute('data-order', question.Item_Order);
+            
 
             // Colonne pour la réponse
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
+            td2.id = `td2${question.GI_key}`;
+            td2.setAttribute('data-source', question.rep);
 
             const td3 = document.createElement('td');
             td3.innerHTML = question.i_SasName || 'N/A';
             td3.setAttribute('data-visual', "DM");
-            
+            td3.id = `td3${question.GI_key}`;
+            td3.setAttribute('data-source', question.i_SasName);
+
             const td4 = document.createElement('td'); // Crée une cellule de tableau
             td4.setAttribute('data-visual', "DM");
+            td4.className="no-print";
+
+            
+            td4.innerHTML = question.Message; // Ajoute l'emoji au bouton
+            
+            const td5 = document.createElement('td'); // Crée une cellule de tableau
+            td5.classList.add('center-content'); // Ajoute la classe pour le centrage
+
+            td5.setAttribute('data-visual', "DM");
+            td5.className="no-print";
             const issue = document.createElement('button'); // Crée un bouton
             issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
             issue.id = "report-issue"; // Donne un ID au bouton
@@ -683,19 +788,45 @@ function generateFiche(fiche, activate, fid) {
                 window.open(url, '_blank');
             });
 
-            td4.appendChild(issue); // Ajoute le bouton à la cellule
+            td5.appendChild(issue); // Ajoute le bouton à la cellule
 
             
             // Ajouter les colonnes à la ligne
-            // row.appendChild(td0);
+            
+            row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
             row.appendChild(td3);
             row.appendChild(td4);
+            row.appendChild(td5);
+
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
+            const rowp = document.createElement('tr');
+rowp.style.position = "relative"; // Position de la ligne pour utiliser la position absolue de la cellule
+rowp.style.height = "0px"; // Hauteur de la ligne
+rowp.style.overflow = "hidden"; // Permet au contenu de dépasser la hauteur
+rowp.style.visibility = "hidden"; // Masque la ligne, mais pas son contenu
+
+// const tdx = document.createElement('td');
+// tdx.colSpan = 6; // Ajustez selon le nombre de colonnes
+// tdx.style.position = "absolute"; // Permet de positionner le texte par-dessus le tableau
+// tdx.style.top = "0px"; // Positionne le texte à l'endroit souhaité (ajustez si nécessaire)
+// tdx.style.left = "0px"; // Positionne le texte à l'endroit souhaité (ajustez si nécessaire)
+// tdx.style.textAlign = 'left';
+// tdx.style.zIndex = "10"; // Place le texte au-dessus des autres éléments (ajustez si nécessaire)
+// tdx.textContent = '+'; // Contenu du texte
+
+// // Ajoutez la cellule au tableau
+// rowp.appendChild(tdx);
+// table.appendChild(rowp);
+
+          
         });
+
+            // Ajouter une ligne de séparation "+" après chaque ligne sauf la dernière
+   
 
         // Ajouter la table à la section
         section.appendChild(table);
@@ -800,7 +931,43 @@ window.addEventListener('beforeunload', (event) => {
             title.classList.add('show');
         }
 
+// Fonction pour afficher les changements dans la section du tableau
+
+
+function updateChangeLog() {
+    const changeList = document.getElementById('change-list');
+    changeList.innerHTML = ''; // Réinitialiser le corps du tableau avant de le remplir
+    console.log(exportData)
+    // Vérifier s'il y a des modifications enregistrées
+    if (Object.keys(exportData).length > 0) {
+        // Trier l'objet exportData par la propriété dataorder
+        const sortedEntries = Object.entries(exportData).sort(([, a], [, b]) => a.dataorder - b.dataorder);
+        
+        for (const [formKey, formValue] of sortedEntries) {
+            for (const [sourceKey, value] of Object.entries(formValue)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formKey}</td>
+                    <td>${sourceKey}</td>
+                    <td>${value.description}</td>
+                    <td>${value.responseType}</td>
+                    <td>${value.sasName}</td>
+                `;
+                changeList.appendChild(row);
+            }
+        }
+    } else {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td colspan="5" style="text-align: center;">Aucun changement enregistré.</td>
+        `;
+        changeList.appendChild(row);
+    }
+}
+
 </script>
+
+
 </body>
 
 </html>

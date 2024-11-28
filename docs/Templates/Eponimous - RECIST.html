@@ -7,7 +7,7 @@
      <style>
         /* Global Styles */
 body {
-    max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
+    max-width: 902px; /* Largeur utilisable dans Word avec marges standards */
     margin: 0 auto; /* Centre le contenu horizontalement */
     padding: 0; /* Pas de marge interne supplémentaire */
     font-family: 'Arial', sans-serif; /* Police standard Word */
@@ -86,7 +86,7 @@ body {
     margin-left: 50px; /* Décalage pour laisser de la place à la sidebar */
     padding: 20px;
     background-color: #fff;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     width:100%;
 }
 
@@ -96,12 +96,15 @@ section {
 }
 h1 {
 display: none;
+width:100%;
 }
+
 /* Titre */
 h2, h3 {
     color: #3b7bc0;
     text-align: center;
     margin-bottom: 20px;
+    width:100%;
 }
 
 h2 {
@@ -213,7 +216,8 @@ code {
 
 /* Cacher les sections avec la classe "hidden" */
 .hidden {
-    display: none !important;; /* Cache complètement l'élément */
+    /* display: none !important;; Cache complètement l'élément */
+    visibility: hidden  !important; /* L'élément est invisible mais prend de la place */
 }
 
 /* Montrer les sections avec la classe "show" */
@@ -227,19 +231,23 @@ code {
         text-align: center; /* Centre le texte */
         margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
         margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+        width:100%;
     }
     h2 {
         page-break-before: always;
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
     h3 {
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
     section {
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
 
     .sidebar {
@@ -248,7 +256,7 @@ code {
         left: 0;
         width: 250px;  /* Largeur normale de la sidebar */
         padding: 0px; /* Espaces internes */
-        background-color: #f4f4f4;
+
         margin-left: 0mm;
         box-shadow: none; /* Enlève l'ombre pendant l'impression */
         border:none;
@@ -274,9 +282,8 @@ code {
         display: none !important;; /* Cache complètement l'élément */
     }
     .content {
-            width: 70%;  /* Largeur normale de la sidebar */
+            width: 75%;  /* Largeur normale de la sidebar */
             padding: 0px; /* Espaces internes */
-            background-color: #f4f4f4;
             margin-left: 270px;
             
     
@@ -285,20 +292,16 @@ code {
     
     /* Empêcher la coupure de l'élément */
     body {
+         max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
          margin-left: 0mm; 
+         font-size: 12pt; /* Ajuste la taille de la police pour l'impression */
     }
     .no-break {
         page-break-inside: avoid;
         break-inside: avoid; /* Pour les navigateurs modernes */
     }
-    
-    /* Autres styles pour l'impression (par exemple, masquer les éléments inutiles) */
-    body {
-        font-size: 12pt; /* Ajuste la taille de la police pour l'impression */
-    }
-
     .no-print {
-        display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
+        display: none !important;
     }
 }
 
@@ -334,13 +337,68 @@ code {
     flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
     
 }
+
+.center-content {
+    text-align: center; /* Centre le contenu horizontalement */
+}
+
+.center-content button {
+    display: inline-block; /* Permet de centrer le bouton */
+}
      </style>
+     <title> </title>
+     
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <button id="toggle-button" class="pressed" data-state="DM">DM</button>
-        <!-- <button id="export">Enregistrer les modifications</button> -->
+        <button id="print">imprimer les modifications</button>
+
+      
+
+        <script>
+               // Sélectionne le bouton et ajoute un écouteur d'événement
+        // Récupérer le chemin de l'URL
+        const pathname = window.location.pathname;
+
+        // Extraire uniquement le nom du fichier
+        let filename = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+        // Décoder les caractères spéciaux (comme %20 pour les espaces)
+        filename = decodeURIComponent(filename);
+
+        // Supprimer les extensions multiples (comme .html.pdf)
+        filename = filename.replace(/\.(\w+)(\.\w+)+$/, ''); // Garde la première extension uniquement
+
+        // Supprimer toute extension si nécessaire
+        filename = filename.replace(/\.\w+$/, '');
+
+        // Modifier le contenu de la balise <title>
+        document.title = filename;
+            // Sélectionne le bouton et ajoute un écouteur d'événement
+            document.getElementById('print').addEventListener('click', function () {
+                // Vérifie si le document contient un 🔴
+                if (document.body.innerText.includes('🔴')) {
+                    // Obtenir la date actuelle et formater en YY.MM.DD
+                    const now = new Date();
+                    const year = String(now.getFullYear()).slice(-2); // Année sur 2 chiffres
+                    const month = String(now.getMonth() + 1).padStart(2, '0'); // Mois sur 2 chiffres
+                    const day = String(now.getDate()).padStart(2, '0'); // Jour sur 2 chiffres
+        
+                    // Ajouter -MOD:YY.MM.DD au nom du fichier
+                    filename += `-MOD:${year}.${month}.${day}`;
+                }
+        
+                // Mettre à jour le titre de la page
+                document.title = filename;
+        
+                // Lance la boîte de dialogue d'impression
+                window.print();
+            });
+        </script>
+
+
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
     </div>
@@ -348,7 +406,21 @@ code {
     <!-- Main Content -->
     <div class="content" id="main-content">
     </div>
-
+    <div class="content" id="change-log" style="margin-top: 20px;">
+        <h3>Liste des changements à faire</h3>
+        <table id="change-table" border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Fiche</th>
+                    <th>caption</th>
+                    <th>Description modifié</th>
+                    <th>Response Type</th>
+                    <th>SAS Name</th>
+                </tr>
+            </thead>
+            <tbody id="change-list"></tbody>
+        </table>
+    </div>
     <script>
         function loadJSON(filePath) {
     return fetch(filePath) // Charge le fichier JSON à partir du chemin spécifié
@@ -372,48 +444,8 @@ code {
 
 <script>
 
-const jsonData = {"visites": [{"V_description": "RECIST", "fiches": [{"F_description": "RECIST Evaluation", "groupes": [{"G_description": "RC1", "questions": [{"GI_key": "3e869c16-6bc0-4ffc-ab69-933fcb1a86b3", "I_description": "Tumor assessment period", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "Label_re"}, {"GI_key": "cda1d1d2-63fa-4b97-8735-477a21b35a65", "I_description": "Date of local evaluation", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "RCDT"}, {"GI_key": "e90d954d-7122-4449-9c5c-1d70b42f04b6", "I_description": "FLAG", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Recist.*][RC1.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \n'1'; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "\ud83d\udc7b", "i_SasName": "FLAG"}, {"GI_key": "5fcd87fe-6d36-4f43-bfac-65016d48945f", "I_description": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}, {"G_description": "RC2", "questions": [{"GI_key": "812531cb-0f0e-4280-80c7-4f899de89718", "I_description": "Order n\u00b0", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC2.*][RCTLORD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \nGroupInstanceNo; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 100", "I_Status": "\ud83d\udd12", "i_SasName": "RCTLORD"}, {"GI_key": "45019773-4d6b-46a3-81e3-1c3e07ebcab1", "I_description": "Site", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 7:[Recist.*][RC2.*][RCTLSITE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> DVA:[Recist.*][RC2.*][RCTLSITE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1 && !isEmpty([Recist.1][RC2][RCTLSITE]); \n#data Expression \n[Recist.1][RC2.@][RCTLSITE]; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Colon</b><br>\ud83d\udd18 2 - <b>Lung</b><br>\ud83d\udd18 3 - <b>Liver</b><br>\ud83d\udd18 4 - <b>Bone</b><br>\ud83d\udd18 5 - <b>Brain</b><br>\ud83d\udd18 6 - <b>Nodes</b><br>\ud83d\udd18 7 - <b>Rectum</b><br>\ud83d\udd18 8 - <b>Kidneys/Adrenals</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "RCTLSITE"}, {"GI_key": "53c1e3dc-323b-4bec-9f51-8674a43be164", "I_description": "Location", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC2.*][RCTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1 && !isEmpty([Recist.1][RC2.@][RCTL_S]); \n#data Expression \n[Recist.1][RC2.@][RCTL_S]; \n</code></pre> </td><td> </td> </tr><tr><td> 7:[Recist.*][RC2.*][RCTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "RCTL_S"}, {"GI_key": "35aa0467-ce9b-4508-987f-582955846541", "I_description": "Longest diameter (mm)", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC2.*][RCTLDIAM]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]) && [Recist][RC3][RCTLRESP] != '5'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC2.*][RCTLDIAM]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "RCTLDIAM"}, {"GI_key": "a500fec8-b3ae-4ffc-815f-399d5b8079e5", "I_description": "Method", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC2.*][RCTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC3][RCTLRESP] != '5' && !isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC2.*][RCTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>CT SCAN</b><br>\ud83d\udd18 2 - <b>MRI</b>", "I_Status": "", "i_SasName": "RCTLMOD"}]}, {"G_description": "RC3", "questions": [{"GI_key": "dda0f6cb-ed4a-4607-97b0-25cbd3842289", "I_description": "<font color=\"#808080\">Sum of longest diameters (mm)</font>", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC3.*][RCTLSUM]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar res = 0;\nvar resp = 0;\n\nres = Number([Recist.@][RC2.1][RCTLDIAM]) + Number([Recist.@][RC2.2][RCTLDIAM])+ Number([Recist.@][RC2.3][RCTLDIAM]) + Number([Recist.@][RC2.4][RCTLDIAM]) + Number([Recist.@][RC2.5][RCTLDIAM]);\n\nresp = [Recist][RC3][RCTLRESP];\n\nif (resp == 5)\n    '';\nelse if (res == 0)\n    '0';\nelse\n    res; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 4", "I_Status": "\ud83d\udd12", "i_SasName": "RCTLSUM"}, {"GI_key": "91856272-d1fe-47ba-8b8f-511d43e49d65", "I_description": "<font color=\"#808080\">Minimum sum of diameters</font>", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC3.*][RCTLMIN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC3][RCTLRESP] != '5'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> DVA:[Recist.*][RC3.*][RCTLMIN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar res = 0;\nvar l1 =  [Recist.@][RC2.1][RCTLDIAM];\nvar l2 =  [Recist.@][RC2.2][RCTLDIAM];\nvar l3 =  [Recist.@][RC2.3][RCTLDIAM];\nvar l4 =  [Recist.@][RC2.4][RCTLDIAM];\nvar l5 =  [Recist.@][RC2.5][RCTLDIAM];\n\nvar l1p =  [Recist.1][RC2.1][RCTLDIAM];\nvar l2p =  [Recist.1][RC2.2][RCTLDIAM];\nvar l3p =  [Recist.1][RC2.3][RCTLDIAM];\nvar l4p =  [Recist.1][RC2.4][RCTLDIAM];\nvar l5p =  [Recist.1][RC2.5][RCTLDIAM];\n\nres = Number([Recist.@][RC2.1][RCTLDIAM]) + Number([Recist.@][RC2.2][RCTLDIAM])+ Number([Recist.@][RC2.3][RCTLDIAM]) + Number([Recist.@][RC2.4][RCTLDIAM]) + Number([Recist.@][RC2.5][RCTLDIAM]);\n\nif ([Recist.<][RC3][RCTLMIN]<res  \n|| ( isEmpty(l1) && !isEmpty(l1p))\n|| ( isEmpty(l2) && !isEmpty(l2p))\n|| ( isEmpty(l3) && !isEmpty(l3p))\n|| ( isEmpty(l4) && !isEmpty(l4p))\n|| ( isEmpty(l5) && !isEmpty(l5p))\n )[Recist.<][RC3][RCTLMIN];\n\nelse res; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 5", "I_Status": "\ud83d\udd12", "i_SasName": "RCTLMIN"}, {"GI_key": "b3e943a9-1901-4291-9f31-480388616b5c", "I_description": "Response of target lesions", "Message": "<details> <summary>7 EditCheck </summary><table><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\nif ([Recist][RC3][RCTLRESP]==1) {\nif(\n( [Recist][RC2.1][RCTLSITE]=='6' && [Recist][RC2.1][RCTLDIAM]>9 ) \n||\n([Recist][RC2.1][RCTLSITE]!='6' && !isEmpty([Recist][RC2.1][RCTLSITE]) && \n[Recist][RC2.1][RCTLDIAM]>0 )  )res=false;\n\nelse if(\n( [Recist][RC2.2][RCTLSITE]=='6' && [Recist][RC2.2][RCTLDIAM]>9 ) \n||\n([Recist][RC2.2][RCTLSITE]!='6' && !isEmpty([Recist][RC2.2][RCTLSITE]) && \n[Recist][RC2.2][RCTLDIAM]>0 )  )res=false;\n\nelse if(\n( [Recist][RC2.3][RCTLSITE]=='6' && [Recist][RC2.3][RCTLDIAM]>9 ) \n||\n([Recist][RC2.3][RCTLSITE]!='6' && !isEmpty([Recist][RC2.3][RCTLSITE]) && \n[Recist][RC2.3][RCTLDIAM]>0 )  )res=false;\n\nelse if(\n( [Recist][RC2.4][RCTLSITE]=='6' && [Recist][RC2.4][RCTLDIAM]>9 ) \n||\n([Recist][RC2.4][RCTLSITE]!='6' && !isEmpty([Recist][RC2.4][RCTLSITE]) && \n[Recist][RC2.4][RCTLDIAM]>0 )  )res=false;\n\n\nelse if(\n( [Recist][RC2.5][RCTLSITE]=='6' && [Recist][RC2.5][RCTLDIAM]>9 ) \n||\n([Recist][RC2.5][RCTLSITE]!='6' && !isEmpty([Recist][RC2.5][RCTLSITE]) && \n[Recist][RC2.5][RCTLDIAM]>0 )  )res=false;\n}\n\n\n\nres; \n#data Expression \n \n</code></pre> </td><td> Sum of longest diameters has to be 0 for a complete response, actualy the sum is [Recist][RC3][RCTLSUM] . Please correct.</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar sbaseline = Number([Recist.1][RC3][RCTLSUM]);\nvar sactuel = Number([Recist.@][RC3][RCTLSUM]);\n\nif ( ( (1 -(sactuel / sbaseline) >= 0.3)  && [Recist][RC3][RCTLRESP]=='2') ||\n([Recist][RC3][RCTLRESP]!='2') ) true;\nelse false; \n#data Expression \n \n</code></pre> </td><td> Sum on longest lesion has to decrease at least 30 % from baseline assessment to be evaluate as partial response, please verify.</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n((Number([Recist.@][RC3][RCTLSUM]) / Number([Recist.@][RC3][RCTLMIN]) -1 )>=0.2   \n\n\n&& [Recist.@][RC3][RCTLRESP]=='4' ) || [Recist.@][RC3][RCTLRESP] !='4' || [Recist.@][RC6][RCNEW] != '0'; \n#data Expression \n \n</code></pre> </td><td> An increase from Nadir to the sum is expected from 20 % (or appearance of new lesions), please verify.</td> </tr><tr><td> 21:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo == '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC3][RCTLRESP]==5 || \n(\n( isEmpty([Recist][RC2.1][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.1][RCTLSITE]) && !isEmpty([Recist][RC2.1][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.2][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.2][RCTLSITE]) && !isEmpty([Recist][RC2.2][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.3][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.3][RCTLSITE]) && !isEmpty([Recist][RC2.3][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.4][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.4][RCTLSITE]) && !isEmpty([Recist][RC2.4][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.5][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.5][RCTLSITE]) && !isEmpty([Recist][RC2.5][RCTLDIAM]) ))\n) \n#data Expression \n \n</code></pre> </td><td> A diameter is missing, please fill out or select \"Not evaluable\".</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=false;\nif ([Recist][RC3][RCTLRESP]!='5' ) res=true;  \n\nif (!isEmpty([Recist][RC2.1][RCTLSITE]) && isEmpty([Recist][RC2.1][RCTLDIAM])) res=true;\nif (!isEmpty([Recist][RC2.2][RCTLSITE]) && isEmpty([Recist][RC2.2][RCTLDIAM])) res=true;\nif (!isEmpty([Recist][RC2.3][RCTLSITE]) && isEmpty([Recist][RC2.3][RCTLDIAM]))res=true;\nif (!isEmpty([Recist][RC2.4][RCTLSITE]) && isEmpty([Recist][RC2.4][RCTLDIAM])) res=true;\nif (!isEmpty([Recist][RC2.5][RCTLSITE]) && isEmpty([Recist][RC2.5][RCTLDIAM])) res=true;\n\n\nres; \n#data Expression \n \n</code></pre> </td><td> All the target are evaluated, the patient is evaluable, please correct.</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=false;\nif ([Recist][RC3][RCTLRESP] =='1' ) res=true;  \n\nelse if ([Recist][RC3][RCTLSUM] != '0') res=true;\nelse res=false; \n#data Expression \n \n</code></pre> </td><td> If the sum of longest diameters is 0, the response should be \"Complete response\". Please correct.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Complete response</b><br>\ud83d\udd18 2 - <b>Partial response</b><br>\ud83d\udd18 3 - <b>Stable disease</b><br>\ud83d\udd18 4 - <b>Progressive disease</b><br>\ud83d\udd18 5 - <b>Not evaluable</b>", "I_Status": "", "i_SasName": "RCTLRESP"}]}, {"G_description": "RC4", "questions": [{"GI_key": "805fee19-687d-46a5-810c-efcde366461c", "I_description": "Order n\u00b0", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC4.*][RCNTLORD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4][RCNTLSIT]); \n#data Expression \nGroupInstanceNo; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 100", "I_Status": "\ud83d\udd12", "i_SasName": "RCNTLORD"}, {"GI_key": "80eef242-371a-4dbc-aba0-2f94f0b61e83", "I_description": "Site", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 7:[Recist.*][RC4.*][RCNTLSIT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> DVA:[Recist.*][RC4.*][RCNTLSIT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1 && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n[Recist.1][RC4.@][RCNTLSIT]; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Colon</b><br>\ud83d\udd18 2 - <b>Lung</b><br>\ud83d\udd18 3 - <b>Liver</b><br>\ud83d\udd18 4 - <b>Bone</b><br>\ud83d\udd18 5 - <b>Brain</b><br>\ud83d\udd18 6 - <b>Nodes</b><br>\ud83d\udd18 7 - <b>Rectum</b><br>\ud83d\udd18 8 - <b>Kidneys/Adrenals</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "RCNTLSIT"}, {"GI_key": "90e7f61e-4914-4eb4-9208-976f1fe346f3", "I_description": "Location", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 7:[Recist.*][RC4.*][RCNTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> DVA:[Recist.*][RC4.*][RCNTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTL_S]) && FormInstanceNo>1; \n#data Expression \n[Recist.1][RC4.@][RCNTL_S]; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "RCNTL_S"}, {"GI_key": "81eca2a1-8871-4cb8-a1a3-98b3f1ec5b31", "I_description": "Irradiated", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC4.*][RCNTLRAD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC5][RCNTLRES] != '4' && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC4.*][RCNTLRAD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "RCNTLRAD"}, {"GI_key": "a72e2cbb-edd1-44e6-b358-b313bbef4aff", "I_description": "Lesion present", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC4.*][RCNTLPRE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC5][RCNTLRES] != '4' && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC4.*][RCNTLPRE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "RCNTLPRE"}, {"GI_key": "5f5ceb70-05df-45aa-a0b8-28d682a57853", "I_description": "Method", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC4.*][RCNTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC5][RCNTLRES] != '4' && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC4.*][RCNTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>CT SCAN</b><br>\ud83d\udd18 2 - <b>MRI</b>", "I_Status": "", "i_SasName": "RCNTLMOD"}]}, {"G_description": "RC5", "questions": [{"GI_key": "a558c467-07e9-4bf1-9c82-2100e3a75d54", "I_description": "Response of non-target lesions", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> Valid:[Recist.*][RC5.*][RCNTLRES]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar arr=[Recist.@][RC4][RCNTLPRE].ALL;\n(arrayAllNos(arr) && [Recist.@][RC5][RCNTLRES]=='1' )||[Recist.@][RC5][RCNTLRES] != '1' \n#data Expression \n \n</code></pre> </td><td> All non target lesion has to be absent for a complete response, please correct.</td> </tr><tr><td> Valid:[Recist.*][RC5.*][RCNTLRES]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar arr=[Recist.@][RC4][RCNTLPRE].ALL;\n(arrayAllNos(arr) && [Recist.@][RC5][RCNTLRES] == '1') || !arrayAllNos(arr) || arrayAnyEmpty(arr); \n#data Expression \n \n</code></pre> </td><td> Since all non lesion target is absent, response expected is \"Complete response\", please correct.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Complete response</b><br>\ud83d\udd18 2 - <b>Non-CR / Non-PD</b><br>\ud83d\udd18 3 - <b>Progressive disease</b><br>\ud83d\udd18 4 - <b>Not evaluable</b>", "I_Status": "", "i_SasName": "RCNTLRES"}]}, {"G_description": "RC6", "questions": [{"GI_key": "e0988fd0-a119-4f9e-a48e-13ca99286d03", "I_description": "Appearance of new lesions", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "RCNEW"}]}, {"G_description": "RC7", "questions": [{"GI_key": "884a1bd0-8c99-41a7-a7a7-af678dc91ffc", "I_description": "<b><font color=\"#ff0033\">Global response</font></b>", "Message": "<details> <summary>7 EditCheck </summary><table><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] !='5' \n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] == '5') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be evaluable, please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] =='5' \n      && [Recist][RC5][RCNTLRES] != '3' \n      && [Recist][RC6][RCNEW] != '1' \n      && [Recist][RC7][RCRESP] != '5') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should not be evaluable, please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ( [Recist][RC6][RCNEW] == '1' \n     && [Recist][RC7][RCRESP] != '4') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> New lesions has appear on the patient. The global response should be \"Progressive disease\".\nplease verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ( ([Recist][RC3][RCTLRESP] == '4' || [Recist][RC5][RCNTLRES] == '3') \n       && ([Recist][RC7][RCRESP] != '4') ) res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Progressive disease\", please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] == '1' \n     && [Recist][RC5][RCNTLRES] == '1' \n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '1') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Complete response\", please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] == '3'\n     && [Recist][RC5][RCNTLRES] != '2'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '3') res=false;  \n\n\nif ([Recist][RC3][RCTLRESP] == '3'\n     && [Recist][RC5][RCNTLRES] != '4'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '3') res=false;  \n\n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Stable disease\", please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] == '1'\n     && [Recist][RC5][RCNTLRES] == '2'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '2') res=false;  \n\nif ([Recist][RC3][RCTLRESP] == '1'\n     && [Recist][RC5][RCNTLRES] == '4'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '2') res=false;  \n\nif ([Recist][RC3][RCTLRESP] == '2'\n     && [Recist][RC5][RCNTLRES] != '3'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '2') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Partial response\", please verify the results entered.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Complete response</b><br>\ud83d\udd18 2 - <b>Partial response</b><br>\ud83d\udd18 3 - <b>Stable disease</b><br>\ud83d\udd18 4 - <b>Progressive disease</b><br>\ud83d\udd18 5 - <b>Not evaluable</b>", "I_Status": "", "i_SasName": "RCRESP"}]}]}]}]};
+const jsonData = {"visites": [{"V_description": "RECIST", "fiches": [{"F_description": "RECIST Evaluation", "groupes": [{"G_description": "RC1", "questions": [{"GI_key": "3e869c16-6bc0-4ffc-ab69-933fcb1a86b3", "Item_Order": 1, "I_description": "Tumor assessment period", "I_caption": "LABEL_RECIST", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "Label_re"}, {"GI_key": "cda1d1d2-63fa-4b97-8735-477a21b35a65", "Item_Order": 2, "I_description": "Date of local evaluation", "I_caption": "RCDT", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "RCDT"}, {"GI_key": "e90d954d-7122-4449-9c5c-1d70b42f04b6", "Item_Order": 3, "I_description": "FLAG", "I_caption": "FLAG", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Recist.*][RC1.*][FLAG]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \n'1'; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "\ud83d\udc7b", "i_SasName": "FLAG"}, {"GI_key": "5fcd87fe-6d36-4f43-bfac-65016d48945f", "Item_Order": 4, "I_description": "MISSING_VAR", "I_caption": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}, {"G_description": "RC2", "questions": [{"GI_key": "812531cb-0f0e-4280-80c7-4f899de89718", "Item_Order": 5, "I_description": "Order n\u00b0", "I_caption": "RCTLORD", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC2.*][RCTLORD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \nGroupInstanceNo; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 100", "I_Status": "\ud83d\udd12", "i_SasName": "RCTLORD"}, {"GI_key": "45019773-4d6b-46a3-81e3-1c3e07ebcab1", "Item_Order": 6, "I_description": "Site", "I_caption": "RCTLSITE", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 7:[Recist.*][RC2.*][RCTLSITE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> DVA:[Recist.*][RC2.*][RCTLSITE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1 && !isEmpty([Recist.1][RC2][RCTLSITE]); \n#data Expression \n[Recist.1][RC2.@][RCTLSITE]; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Colon</b><br>\ud83d\udd18 2 - <b>Lung</b><br>\ud83d\udd18 3 - <b>Liver</b><br>\ud83d\udd18 4 - <b>Bone</b><br>\ud83d\udd18 5 - <b>Brain</b><br>\ud83d\udd18 6 - <b>Nodes</b><br>\ud83d\udd18 7 - <b>Rectum</b><br>\ud83d\udd18 8 - <b>Kidneys/Adrenals</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "RCTLSITE"}, {"GI_key": "53c1e3dc-323b-4bec-9f51-8674a43be164", "Item_Order": 7, "I_description": "Location", "I_caption": "RCTL_S", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC2.*][RCTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1 && !isEmpty([Recist.1][RC2.@][RCTL_S]); \n#data Expression \n[Recist.1][RC2.@][RCTL_S]; \n</code></pre> </td><td> </td> </tr><tr><td> 7:[Recist.*][RC2.*][RCTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "RCTL_S"}, {"GI_key": "35aa0467-ce9b-4508-987f-582955846541", "Item_Order": 8, "I_description": "Longest diameter (mm)", "I_caption": "RCTLDIAM", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC2.*][RCTLDIAM]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]) && [Recist][RC3][RCTLRESP] != '5'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC2.*][RCTLDIAM]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "RCTLDIAM"}, {"GI_key": "a500fec8-b3ae-4ffc-815f-399d5b8079e5", "Item_Order": 9, "I_description": "Method", "I_caption": "RCTLMOD", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC2.*][RCTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC3][RCTLRESP] != '5' && !isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC2.*][RCTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC2.@][RCTLSITE]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>CT SCAN</b><br>\ud83d\udd18 2 - <b>MRI</b>", "I_Status": "", "i_SasName": "RCTLMOD"}]}, {"G_description": "RC3", "questions": [{"GI_key": "dda0f6cb-ed4a-4607-97b0-25cbd3842289", "Item_Order": 10, "I_description": "<font color=\"#808080\">Sum of longest diameters (mm)</font>", "I_caption": "RCTLSUM", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC3.*][RCTLSUM]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar res = 0;\nvar resp = 0;\n\nres = Number([Recist.@][RC2.1][RCTLDIAM]) + Number([Recist.@][RC2.2][RCTLDIAM])+ Number([Recist.@][RC2.3][RCTLDIAM]) + Number([Recist.@][RC2.4][RCTLDIAM]) + Number([Recist.@][RC2.5][RCTLDIAM]);\n\nresp = [Recist][RC3][RCTLRESP];\n\nif (resp == 5)\n    '';\nelse if (res == 0)\n    '0';\nelse\n    res; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 4", "I_Status": "\ud83d\udd12", "i_SasName": "RCTLSUM"}, {"GI_key": "91856272-d1fe-47ba-8b8f-511d43e49d65", "Item_Order": 11, "I_description": "<font color=\"#808080\">Minimum sum of diameters</font>", "I_caption": "RCTLMIN", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC3.*][RCTLMIN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC3][RCTLRESP] != '5'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> DVA:[Recist.*][RC3.*][RCTLMIN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nvar res = 0;\nvar l1 =  [Recist.@][RC2.1][RCTLDIAM];\nvar l2 =  [Recist.@][RC2.2][RCTLDIAM];\nvar l3 =  [Recist.@][RC2.3][RCTLDIAM];\nvar l4 =  [Recist.@][RC2.4][RCTLDIAM];\nvar l5 =  [Recist.@][RC2.5][RCTLDIAM];\n\nvar l1p =  [Recist.1][RC2.1][RCTLDIAM];\nvar l2p =  [Recist.1][RC2.2][RCTLDIAM];\nvar l3p =  [Recist.1][RC2.3][RCTLDIAM];\nvar l4p =  [Recist.1][RC2.4][RCTLDIAM];\nvar l5p =  [Recist.1][RC2.5][RCTLDIAM];\n\nres = Number([Recist.@][RC2.1][RCTLDIAM]) + Number([Recist.@][RC2.2][RCTLDIAM])+ Number([Recist.@][RC2.3][RCTLDIAM]) + Number([Recist.@][RC2.4][RCTLDIAM]) + Number([Recist.@][RC2.5][RCTLDIAM]);\n\nif ([Recist.<][RC3][RCTLMIN]<res  \n|| ( isEmpty(l1) && !isEmpty(l1p))\n|| ( isEmpty(l2) && !isEmpty(l2p))\n|| ( isEmpty(l3) && !isEmpty(l3p))\n|| ( isEmpty(l4) && !isEmpty(l4p))\n|| ( isEmpty(l5) && !isEmpty(l5p))\n )[Recist.<][RC3][RCTLMIN];\n\nelse res; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Num - 5", "I_Status": "\ud83d\udd12", "i_SasName": "RCTLMIN"}, {"GI_key": "b3e943a9-1901-4291-9f31-480388616b5c", "Item_Order": 12, "I_description": "Response of target lesions", "I_caption": "RCTLRESP", "Message": "<details> <summary>7 EditCheck </summary><table><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\nif ([Recist][RC3][RCTLRESP]==1) {\nif(\n( [Recist][RC2.1][RCTLSITE]=='6' && [Recist][RC2.1][RCTLDIAM]>9 ) \n||\n([Recist][RC2.1][RCTLSITE]!='6' && !isEmpty([Recist][RC2.1][RCTLSITE]) && \n[Recist][RC2.1][RCTLDIAM]>0 )  )res=false;\n\nelse if(\n( [Recist][RC2.2][RCTLSITE]=='6' && [Recist][RC2.2][RCTLDIAM]>9 ) \n||\n([Recist][RC2.2][RCTLSITE]!='6' && !isEmpty([Recist][RC2.2][RCTLSITE]) && \n[Recist][RC2.2][RCTLDIAM]>0 )  )res=false;\n\nelse if(\n( [Recist][RC2.3][RCTLSITE]=='6' && [Recist][RC2.3][RCTLDIAM]>9 ) \n||\n([Recist][RC2.3][RCTLSITE]!='6' && !isEmpty([Recist][RC2.3][RCTLSITE]) && \n[Recist][RC2.3][RCTLDIAM]>0 )  )res=false;\n\nelse if(\n( [Recist][RC2.4][RCTLSITE]=='6' && [Recist][RC2.4][RCTLDIAM]>9 ) \n||\n([Recist][RC2.4][RCTLSITE]!='6' && !isEmpty([Recist][RC2.4][RCTLSITE]) && \n[Recist][RC2.4][RCTLDIAM]>0 )  )res=false;\n\n\nelse if(\n( [Recist][RC2.5][RCTLSITE]=='6' && [Recist][RC2.5][RCTLDIAM]>9 ) \n||\n([Recist][RC2.5][RCTLSITE]!='6' && !isEmpty([Recist][RC2.5][RCTLSITE]) && \n[Recist][RC2.5][RCTLDIAM]>0 )  )res=false;\n}\n\n\n\nres; \n#data Expression \n \n</code></pre> </td><td> Sum of longest diameters has to be 0 for a complete response, actualy the sum is [Recist][RC3][RCTLSUM] . Please correct.</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar sbaseline = Number([Recist.1][RC3][RCTLSUM]);\nvar sactuel = Number([Recist.@][RC3][RCTLSUM]);\n\nif ( ( (1 -(sactuel / sbaseline) >= 0.3)  && [Recist][RC3][RCTLRESP]=='2') ||\n([Recist][RC3][RCTLRESP]!='2') ) true;\nelse false; \n#data Expression \n \n</code></pre> </td><td> Sum on longest lesion has to decrease at least 30 % from baseline assessment to be evaluate as partial response, please verify.</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n((Number([Recist.@][RC3][RCTLSUM]) / Number([Recist.@][RC3][RCTLMIN]) -1 )>=0.2   \n\n\n&& [Recist.@][RC3][RCTLRESP]=='4' ) || [Recist.@][RC3][RCTLRESP] !='4' || [Recist.@][RC6][RCNEW] != '0'; \n#data Expression \n \n</code></pre> </td><td> An increase from Nadir to the sum is expected from 20 % (or appearance of new lesions), please verify.</td> </tr><tr><td> 21:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo == '1'; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC3][RCTLRESP]==5 || \n(\n( isEmpty([Recist][RC2.1][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.1][RCTLSITE]) && !isEmpty([Recist][RC2.1][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.2][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.2][RCTLSITE]) && !isEmpty([Recist][RC2.2][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.3][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.3][RCTLSITE]) && !isEmpty([Recist][RC2.3][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.4][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.4][RCTLSITE]) && !isEmpty([Recist][RC2.4][RCTLDIAM]) ))\n&&\n( isEmpty([Recist][RC2.5][RCTLSITE]) ||\n ( !isEmpty([Recist][RC2.5][RCTLSITE]) && !isEmpty([Recist][RC2.5][RCTLDIAM]) ))\n) \n#data Expression \n \n</code></pre> </td><td> A diameter is missing, please fill out or select \"Not evaluable\".</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=false;\nif ([Recist][RC3][RCTLRESP]!='5' ) res=true;  \n\nif (!isEmpty([Recist][RC2.1][RCTLSITE]) && isEmpty([Recist][RC2.1][RCTLDIAM])) res=true;\nif (!isEmpty([Recist][RC2.2][RCTLSITE]) && isEmpty([Recist][RC2.2][RCTLDIAM])) res=true;\nif (!isEmpty([Recist][RC2.3][RCTLSITE]) && isEmpty([Recist][RC2.3][RCTLDIAM]))res=true;\nif (!isEmpty([Recist][RC2.4][RCTLSITE]) && isEmpty([Recist][RC2.4][RCTLDIAM])) res=true;\nif (!isEmpty([Recist][RC2.5][RCTLSITE]) && isEmpty([Recist][RC2.5][RCTLDIAM])) res=true;\n\n\nres; \n#data Expression \n \n</code></pre> </td><td> All the target are evaluated, the patient is evaluable, please correct.</td> </tr><tr><td> Valid:[Recist.*][RC3.*][RCTLRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=false;\nif ([Recist][RC3][RCTLRESP] =='1' ) res=true;  \n\nelse if ([Recist][RC3][RCTLSUM] != '0') res=true;\nelse res=false; \n#data Expression \n \n</code></pre> </td><td> If the sum of longest diameters is 0, the response should be \"Complete response\". Please correct.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Complete response</b><br>\ud83d\udd18 2 - <b>Partial response</b><br>\ud83d\udd18 3 - <b>Stable disease</b><br>\ud83d\udd18 4 - <b>Progressive disease</b><br>\ud83d\udd18 5 - <b>Not evaluable</b>", "I_Status": "", "i_SasName": "RCTLRESP"}]}, {"G_description": "RC4", "questions": [{"GI_key": "805fee19-687d-46a5-810c-efcde366461c", "Item_Order": 13, "I_description": "Order n\u00b0", "I_caption": "RCNTLORD", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Recist.*][RC4.*][RCNTLORD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4][RCNTLSIT]); \n#data Expression \nGroupInstanceNo; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 100", "I_Status": "\ud83d\udd12", "i_SasName": "RCNTLORD"}, {"GI_key": "80eef242-371a-4dbc-aba0-2f94f0b61e83", "Item_Order": 14, "I_description": "Site", "I_caption": "RCNTLSIT", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 7:[Recist.*][RC4.*][RCNTLSIT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> DVA:[Recist.*][RC4.*][RCNTLSIT]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1 && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n[Recist.1][RC4.@][RCNTLSIT]; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Colon</b><br>\ud83d\udd18 2 - <b>Lung</b><br>\ud83d\udd18 3 - <b>Liver</b><br>\ud83d\udd18 4 - <b>Bone</b><br>\ud83d\udd18 5 - <b>Brain</b><br>\ud83d\udd18 6 - <b>Nodes</b><br>\ud83d\udd18 7 - <b>Rectum</b><br>\ud83d\udd18 8 - <b>Kidneys/Adrenals</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "RCNTLSIT"}, {"GI_key": "90e7f61e-4914-4eb4-9208-976f1fe346f3", "Item_Order": 15, "I_description": "Location", "I_caption": "RCNTL_S", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 7:[Recist.*][RC4.*][RCNTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nFormInstanceNo>1; \n#data Expression \n \n</code></pre> </td><td> </td> </tr><tr><td> DVA:[Recist.*][RC4.*][RCNTL_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTL_S]) && FormInstanceNo>1; \n#data Expression \n[Recist.1][RC4.@][RCNTL_S]; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "", "i_SasName": "RCNTL_S"}, {"GI_key": "81eca2a1-8871-4cb8-a1a3-98b3f1ec5b31", "Item_Order": 16, "I_description": "Irradiated", "I_caption": "RCNTLRAD", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC4.*][RCNTLRAD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC5][RCNTLRES] != '4' && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC4.*][RCNTLRAD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "RCNTLRAD"}, {"GI_key": "a72e2cbb-edd1-44e6-b358-b313bbef4aff", "Item_Order": 17, "I_description": "Lesion present", "I_caption": "RCNTLPRE", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC4.*][RCNTLPRE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC5][RCNTLRES] != '4' && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC4.*][RCNTLPRE]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "RCNTLPRE"}, {"GI_key": "5f5ceb70-05df-45aa-a0b8-28d682a57853", "Item_Order": 18, "I_description": "Method", "I_caption": "RCNTLMOD", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> 2:[Recist.*][RC4.*][RCNTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[Recist][RC5][RCNTLRES] != '4' && !isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr><tr><td> Enabled:[Recist.*][RC4.*][RCNTLMOD]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n!isEmpty([Recist.1][RC4.@][RCNTLSIT]); \n#data Expression \n \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>CT SCAN</b><br>\ud83d\udd18 2 - <b>MRI</b>", "I_Status": "", "i_SasName": "RCNTLMOD"}]}, {"G_description": "RC5", "questions": [{"GI_key": "a558c467-07e9-4bf1-9c82-2100e3a75d54", "Item_Order": 19, "I_description": "Response of non-target lesions", "I_caption": "RCNTLRES", "Message": "<details> <summary>2 EditCheck </summary><table><tr><td> Valid:[Recist.*][RC5.*][RCNTLRES]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar arr=[Recist.@][RC4][RCNTLPRE].ALL;\n(arrayAllNos(arr) && [Recist.@][RC5][RCNTLRES]=='1' )||[Recist.@][RC5][RCNTLRES] != '1' \n#data Expression \n \n</code></pre> </td><td> All non target lesion has to be absent for a complete response, please correct.</td> </tr><tr><td> Valid:[Recist.*][RC5.*][RCNTLRES]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar arr=[Recist.@][RC4][RCNTLPRE].ALL;\n(arrayAllNos(arr) && [Recist.@][RC5][RCNTLRES] == '1') || !arrayAllNos(arr) || arrayAnyEmpty(arr); \n#data Expression \n \n</code></pre> </td><td> Since all non lesion target is absent, response expected is \"Complete response\", please correct.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Complete response</b><br>\ud83d\udd18 2 - <b>Non-CR / Non-PD</b><br>\ud83d\udd18 3 - <b>Progressive disease</b><br>\ud83d\udd18 4 - <b>Not evaluable</b>", "I_Status": "", "i_SasName": "RCNTLRES"}]}, {"G_description": "RC6", "questions": [{"GI_key": "e0988fd0-a119-4f9e-a48e-13ca99286d03", "Item_Order": 20, "I_description": "Appearance of new lesions", "I_caption": "RCNEW", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "RCNEW"}]}, {"G_description": "RC7", "questions": [{"GI_key": "884a1bd0-8c99-41a7-a7a7-af678dc91ffc", "Item_Order": 21, "I_description": "<b><font color=\"#ff0033\">Global response</font></b>", "I_caption": "RCRESP", "Message": "<details> <summary>7 EditCheck </summary><table><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] !='5' \n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] == '5') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be evaluable, please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] =='5' \n      && [Recist][RC5][RCNTLRES] != '3' \n      && [Recist][RC6][RCNEW] != '1' \n      && [Recist][RC7][RCRESP] != '5') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should not be evaluable, please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ( [Recist][RC6][RCNEW] == '1' \n     && [Recist][RC7][RCRESP] != '4') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> New lesions has appear on the patient. The global response should be \"Progressive disease\".\nplease verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ( ([Recist][RC3][RCTLRESP] == '4' || [Recist][RC5][RCNTLRES] == '3') \n       && ([Recist][RC7][RCRESP] != '4') ) res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Progressive disease\", please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] == '1' \n     && [Recist][RC5][RCNTLRES] == '1' \n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '1') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Complete response\", please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] == '3'\n     && [Recist][RC5][RCNTLRES] != '2'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '3') res=false;  \n\n\nif ([Recist][RC3][RCTLRESP] == '3'\n     && [Recist][RC5][RCNTLRES] != '4'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '3') res=false;  \n\n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Stable disease\", please verify the results entered.</td> </tr><tr><td> Valid:[Recist.*][RC7.*][RCRESP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \nvar res=true;\n\nif ([Recist][RC3][RCTLRESP] == '1'\n     && [Recist][RC5][RCNTLRES] == '2'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '2') res=false;  \n\nif ([Recist][RC3][RCTLRESP] == '1'\n     && [Recist][RC5][RCNTLRES] == '4'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '2') res=false;  \n\nif ([Recist][RC3][RCTLRESP] == '2'\n     && [Recist][RC5][RCNTLRES] != '3'\n     && [Recist][RC6][RCNEW] != '1' \n     && [Recist][RC7][RCRESP] != '2') res=false;  \n\nres; \n#data Expression \n \n</code></pre> </td><td> The global response should be \"Partial response\", please verify the results entered.</td> </tr></table></details>", "rep": "\ud83d\udd18 1 - <b>Complete response</b><br>\ud83d\udd18 2 - <b>Partial response</b><br>\ud83d\udd18 3 - <b>Stable disease</b><br>\ud83d\udd18 4 - <b>Progressive disease</b><br>\ud83d\udd18 5 - <b>Not evaluable</b>", "I_Status": "", "i_SasName": "RCRESP"}]}]}]}]};
 
-function setupExportButton() {
-    const exportButton = document.getElementById("export");
-    if (!exportButton) {
-        console.error("Bouton avec l'ID 'export' introuvable !");
-        return;
-    }
-
-    exportButton.addEventListener("click", () => {
-        const dataStr = `const jsonData = ${JSON.stringify(jsonData, null, 2)};`; // Conversion en JavaScript formaté
-        const blob = new Blob([dataStr], { type: "application/javascript" }); // Création d'un blob de type JS
-        const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "modifications.hmt"; // Nom du fichier à télécharger
-        document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
-        a.click(); // Téléchargement
-        document.body.removeChild(a); // Suppression de l'élément
-        URL.revokeObjectURL(url); // Libération de l'URL temporaire
-    });
-}
-
-// Appeler la fonction pour lier l'événement au bouton après le chargement du DOM
-setupExportButton();
-
-
-function addOldValueToGIKey(jsonData, targetGIKey, varname, oldValue) {
-    jsonData.visites.forEach(visit => {
-        visit.fiches.forEach(fiche => {
-            fiche.groupes.forEach(groupe => {
-                groupe.questions.forEach(question => {
-                    if (question.GI_key === targetGIKey) {
-                        if (question.hasOwnProperty(varname)) {
-                            question[`${varname}_new`] = oldValue; // Ajoute un champ oldValue à la variable spécifiée
-                        }
-                    }
-                });
-            });
-        });
-    });
-}
 
 const exportData  = {};
 const sidebarLinks = document.getElementById('sidebar-links');
@@ -514,79 +546,122 @@ function visibleonly(data, type, index) {
     }
 }
 
+// Fonction pour ajouter l'écouteur d'événements de manière globale
+function updateExportData(td1, td2, td3) {
+    const formKey = td1.getAttribute("data-form");
+    const sourceKey = td1.getAttribute("data-source");
+    const datacaption = td1.getAttribute("data-caption");
+    const dataorder = td1.getAttribute("data-order");
 
+    const sourceresp = td2.getAttribute("data-source");
+    const sourceSAS = td3.getAttribute("data-source");
+    console.log(sourceSAS)
 
-        // Fonction pour ajouter l'écouteur d'événements de manière globale
+    // Récupérer les valeurs actuelles des cellules
+    const currentDescription = td1.innerText;
+    const currentResponseType = td2.innerText;
+    const currentSasName = td3.innerText;
+
+    // Récupérer les valeurs modifiées des champs de saisie
+    const modifyTXT1 = document.getElementById(aeraID + '1').value;
+    const modifyHTML2 = document.getElementById(aeraID + '2').value;
+    const modifyTXT3 = document.getElementById(aeraID + '3').value;
+    const displayTxT1 = (modifyTXT1 === sourceKey) ? "N/A" : modifyTXT1;
+    const displayTxT2 = (modifyHTML2 === sourceresp) ? "N/A" : modifyHTML2;
+    const displayTxT3 = (modifyTXT3 === sourceSAS) ? "N/A" : modifyTXT3;
+
+    // Vérifier s'il y a un changement
+    if (modifyTXT1 !== currentDescription || modifyHTML2 !== currentResponseType || modifyTXT3 !== currentSasName) {
+        // Si des changements sont détectés, mettre à jour l'objet exportData
+        if (!exportData[formKey]) {
+            exportData[formKey] = {}; // Initialiser l'objet pour le formulaire s'il n'existe pas
+        }
+        exportData[formKey][datacaption] = {
+            dataorder:dataorder,
+            description: displayTxT1,
+            responseType: displayTxT2,
+            sasName: displayTxT3
+        };
+
+        // Appeler la fonction de mise à jour de la liste des changements
+        updateChangeLog();
+    }
+}
+
 function addGlobalClickListener() {
     document.addEventListener('click', (event) => {
-        
         if (event.target && (event.target.innerHTML === '✏️' || event.target.innerHTML === '💾')) {
-            
-        originID=event.target.getAttribute("id").substr(3); 
+            originID = event.target.getAttribute("id").substr(3);
 
-        td0 = document.getElementById('td0' + originID); 
-        td1 =  document.getElementById('td1' + originID); 
-        But =  document.getElementById("But" + originID); 
-    
-        aeraID ='ARE' + originID;
-        
+            td0 = document.getElementById('td0' + originID);
+            td1 = document.getElementById('td1' + originID);
+            td2 = document.getElementById('td2' + originID);
+            td3 = document.getElementById('td3' + originID);
+            But = document.getElementById("But" + originID);
 
+            aeraID = 'ARE' + originID;
 
-        if (event.target && event.target.innerHTML === '✏️') {
-           
-            //    console.log(event.target)
-            previousTXT=td1.innerText;
-            // addOldValueToGIKey(jsonData, originID, "Old_data", previousTXT);
-     
-        //     // Remplacer le texte statique par un champ texte (textarea)
-            td1.innerHTML = '';  // Supprimer l'ancien texte
-            const inputField = document.createElement('textarea');
-            inputField.id =  aeraID;
-            inputField.innerText = previousTXT || '';  // Valeur actuelle
-            td1.appendChild(inputField);
+            if (event.target && event.target.innerHTML === '✏️') {
+                // Récupérer les valeurs existantes
+                previousTXT = td1.innerHTML;
+                previousHTML2 = td2.innerHTML; // Contenu de td2
+                previousTXT3 = td3.innerText;
 
-        //     // Créer un bouton "Save"
-        console.log(td0)
-            td0.innerHTML = '';
-            const savebutton= document.createElement('button');
-            savebutton.id="But" + originID;          
-            savebutton.innerHTML = '💾';
+                // Remplacer le texte statique par des champs texte (textarea)
+                td1.innerHTML = '';
+                td2.innerHTML = '';
+                td3.innerHTML = '';
 
-            td0.appendChild(savebutton);
-        }
+                const inputField1 = document.createElement('textarea');
+                inputField1.id = aeraID + '1';
+                inputField1.innerText = previousTXT || ''; // Valeur actuelle de td1
+                td1.appendChild(inputField1);
+
+                const inputField2 = document.createElement('textarea');
+                inputField2.id = aeraID + '2';
+                inputField2.innerText = previousHTML2; // Valeur actuelle de td2
+                td2.appendChild(inputField2);
+
+                const inputField3 = document.createElement('textarea');
+                inputField3.id = aeraID + '3';
+                inputField3.innerText = previousTXT3 || ''; // Valeur actuelle de td3
+                td3.appendChild(inputField3);
+
+                // Créer un bouton "Save"
+                td0.innerHTML = '';
+                const saveButton = document.createElement('button');
+                saveButton.id = "But" + originID;
+                saveButton.innerHTML = '💾';
+                td0.appendChild(saveButton);
+            }
+
             // Quand on clique sur "Save", sauvegarder la modification
             if (event.target && event.target.innerHTML === '💾') {
-                modifyTXT = document.getElementById(aeraID).value; 
-                addOldValueToGIKey(jsonData, originID, "I_description", modifyTXT);
-                console.log(jsonData)
-                if (!exportData[originID]) {
-                    exportData[originID] = [modifyTXT];
-    }
+                updateExportData(td1, td2, td3);
+                console.log(exportData)
+                const modifyTXT1 = document.getElementById(aeraID + '1').value;
+                const modifyHTML2 = document.getElementById(aeraID + '2').value;
+                const modifyTXT3 = document.getElementById(aeraID + '3').value;
 
-                td1.innerHTML = '';
-                const tdsimple= document.createElement('td');
-                tdsimple.id='td1' + originID;
-                tdsimple.innerHTML=modifyTXT;
-                console.log(tdsimple)
-                td1.appendChild(tdsimple);  // Ajouter tdsimple comme enfant de td1
-
-
-               
               
-                
-                // td1.appendChild(modifyTXT);
 
-                // QuestionID.innerText = modifyTXT;  // Mettre à jour la valeur de la question
+                // Mise à jour de td1, td2, et td3 avec les nouvelles valeurs
+                td1.innerHTML = modifyTXT1;
+                td2.innerHTML = modifyHTML2;
+                td3.innerHTML = modifyTXT3;
+
+                // Remise à zéro de td0 et ajout du bouton "Modifier"
                 td0.innerHTML = '';
-
-                const modbutton= document.createElement('button');
-                modbutton.id="But" + originID;          
-                modbutton.innerHTML = '✏️';
-                td0.appendChild(modbutton);
-  // Ajouter le bouton "Modifier"
+                const modButton = document.createElement('button');
+                modButton.id = "But" + originID;
+                modButton.innerHTML = '🔴✏️';
+                td0.appendChild(modButton);
             }
-}});
-         }
+        }
+    });
+}
+
+
          addGlobalClickListener()        
 // Fonction pour générer les fiches
 function generateFiche(fiche, activate, fid) {
@@ -616,7 +691,6 @@ function generateFiche(fiche, activate, fid) {
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
         th0.setAttribute('data-visual', "DM");
-
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
@@ -626,18 +700,29 @@ function generateFiche(fiche, activate, fid) {
         th3.innerText = 'Sas';
         th3.setAttribute('data-visual', "DM");
         const th4 = document.createElement('th');
-        th4.innerText = 'Report';
+        th4.innerText = 'EditCheck';
         th4.setAttribute('data-visual', "DM");
+        th4.className="no-print";
+        const th5 = document.createElement('th');
+        th5.innerText = 'Report';
+        th5.setAttribute('data-visual', "DM");
+        th5.className="no-print";
 
-        // headerRow.appendChild(th0);
+
+
+        headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
         headerRow.appendChild(th3);
         headerRow.appendChild(th4);
+        headerRow.appendChild(th5);
+
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
+        index=0
         groupe.questions.forEach(question => {
+            index+=1
             const row = document.createElement('tr');
 
             // Colonne pour l'outil
@@ -647,23 +732,43 @@ function generateFiche(fiche, activate, fid) {
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
             editButton.id = `But${question.GI_key}`;
+            editButton.className="no-print";
             td0.appendChild(editButton);
 
             // Colonne pour la description
             const td1 = document.createElement('td');
             td1.innerHTML = question.I_description || 'N/A';
             td1.id = `td1${question.GI_key}`;
+            td1.setAttribute('data-source', question.I_description);
+            td1.setAttribute('data-form', fiche.F_description);
+            td1.setAttribute('data-caption', question.I_caption);
+            td1.setAttribute('data-order', question.Item_Order);
+            
 
             // Colonne pour la réponse
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
+            td2.id = `td2${question.GI_key}`;
+            td2.setAttribute('data-source', question.rep);
 
             const td3 = document.createElement('td');
             td3.innerHTML = question.i_SasName || 'N/A';
             td3.setAttribute('data-visual', "DM");
-            
+            td3.id = `td3${question.GI_key}`;
+            td3.setAttribute('data-source', question.i_SasName);
+
             const td4 = document.createElement('td'); // Crée une cellule de tableau
             td4.setAttribute('data-visual', "DM");
+            td4.className="no-print";
+
+            
+            td4.innerHTML = question.Message; // Ajoute l'emoji au bouton
+            
+            const td5 = document.createElement('td'); // Crée une cellule de tableau
+            td5.classList.add('center-content'); // Ajoute la classe pour le centrage
+
+            td5.setAttribute('data-visual', "DM");
+            td5.className="no-print";
             const issue = document.createElement('button'); // Crée un bouton
             issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
             issue.id = "report-issue"; // Donne un ID au bouton
@@ -683,19 +788,45 @@ function generateFiche(fiche, activate, fid) {
                 window.open(url, '_blank');
             });
 
-            td4.appendChild(issue); // Ajoute le bouton à la cellule
+            td5.appendChild(issue); // Ajoute le bouton à la cellule
 
             
             // Ajouter les colonnes à la ligne
-            // row.appendChild(td0);
+            
+            row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
             row.appendChild(td3);
             row.appendChild(td4);
+            row.appendChild(td5);
+
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
+            const rowp = document.createElement('tr');
+rowp.style.position = "relative"; // Position de la ligne pour utiliser la position absolue de la cellule
+rowp.style.height = "0px"; // Hauteur de la ligne
+rowp.style.overflow = "hidden"; // Permet au contenu de dépasser la hauteur
+rowp.style.visibility = "hidden"; // Masque la ligne, mais pas son contenu
+
+// const tdx = document.createElement('td');
+// tdx.colSpan = 6; // Ajustez selon le nombre de colonnes
+// tdx.style.position = "absolute"; // Permet de positionner le texte par-dessus le tableau
+// tdx.style.top = "0px"; // Positionne le texte à l'endroit souhaité (ajustez si nécessaire)
+// tdx.style.left = "0px"; // Positionne le texte à l'endroit souhaité (ajustez si nécessaire)
+// tdx.style.textAlign = 'left';
+// tdx.style.zIndex = "10"; // Place le texte au-dessus des autres éléments (ajustez si nécessaire)
+// tdx.textContent = '+'; // Contenu du texte
+
+// // Ajoutez la cellule au tableau
+// rowp.appendChild(tdx);
+// table.appendChild(rowp);
+
+          
         });
+
+            // Ajouter une ligne de séparation "+" après chaque ligne sauf la dernière
+   
 
         // Ajouter la table à la section
         section.appendChild(table);
@@ -800,7 +931,43 @@ window.addEventListener('beforeunload', (event) => {
             title.classList.add('show');
         }
 
+// Fonction pour afficher les changements dans la section du tableau
+
+
+function updateChangeLog() {
+    const changeList = document.getElementById('change-list');
+    changeList.innerHTML = ''; // Réinitialiser le corps du tableau avant de le remplir
+    console.log(exportData)
+    // Vérifier s'il y a des modifications enregistrées
+    if (Object.keys(exportData).length > 0) {
+        // Trier l'objet exportData par la propriété dataorder
+        const sortedEntries = Object.entries(exportData).sort(([, a], [, b]) => a.dataorder - b.dataorder);
+        
+        for (const [formKey, formValue] of sortedEntries) {
+            for (const [sourceKey, value] of Object.entries(formValue)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formKey}</td>
+                    <td>${sourceKey}</td>
+                    <td>${value.description}</td>
+                    <td>${value.responseType}</td>
+                    <td>${value.sasName}</td>
+                `;
+                changeList.appendChild(row);
+            }
+        }
+    } else {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td colspan="5" style="text-align: center;">Aucun changement enregistré.</td>
+        `;
+        changeList.appendChild(row);
+    }
+}
+
 </script>
+
+
 </body>
 
 </html>

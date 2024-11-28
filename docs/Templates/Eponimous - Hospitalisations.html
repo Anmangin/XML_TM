@@ -7,7 +7,7 @@
      <style>
         /* Global Styles */
 body {
-    max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
+    max-width: 902px; /* Largeur utilisable dans Word avec marges standards */
     margin: 0 auto; /* Centre le contenu horizontalement */
     padding: 0; /* Pas de marge interne supplémentaire */
     font-family: 'Arial', sans-serif; /* Police standard Word */
@@ -86,7 +86,7 @@ body {
     margin-left: 50px; /* Décalage pour laisser de la place à la sidebar */
     padding: 20px;
     background-color: #fff;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     width:100%;
 }
 
@@ -96,12 +96,15 @@ section {
 }
 h1 {
 display: none;
+width:100%;
 }
+
 /* Titre */
 h2, h3 {
     color: #3b7bc0;
     text-align: center;
     margin-bottom: 20px;
+    width:100%;
 }
 
 h2 {
@@ -213,7 +216,8 @@ code {
 
 /* Cacher les sections avec la classe "hidden" */
 .hidden {
-    display: none !important;; /* Cache complètement l'élément */
+    /* display: none !important;; Cache complètement l'élément */
+    visibility: hidden  !important; /* L'élément est invisible mais prend de la place */
 }
 
 /* Montrer les sections avec la classe "show" */
@@ -227,19 +231,23 @@ code {
         text-align: center; /* Centre le texte */
         margin-top: 30%; /* Ajoute un espace avant le h1 pour le centrer verticalement */
         margin-bottom: 0; /* Enlève la marge inférieure pour éviter de l'espace inutile après le h1 */
+        width:100%;
     }
     h2 {
         page-break-before: always;
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
     h3 {
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
     section {
         padding: 0px; /* Espaces internes */
         margin-bottom: 0px;
+        width:100%;
     }
 
     .sidebar {
@@ -248,7 +256,7 @@ code {
         left: 0;
         width: 250px;  /* Largeur normale de la sidebar */
         padding: 0px; /* Espaces internes */
-        background-color: #f4f4f4;
+
         margin-left: 0mm;
         box-shadow: none; /* Enlève l'ombre pendant l'impression */
         border:none;
@@ -274,9 +282,8 @@ code {
         display: none !important;; /* Cache complètement l'élément */
     }
     .content {
-            width: 70%;  /* Largeur normale de la sidebar */
+            width: 75%;  /* Largeur normale de la sidebar */
             padding: 0px; /* Espaces internes */
-            background-color: #f4f4f4;
             margin-left: 270px;
             
     
@@ -285,20 +292,16 @@ code {
     
     /* Empêcher la coupure de l'élément */
     body {
+         max-width: 602px; /* Largeur utilisable dans Word avec marges standards */
          margin-left: 0mm; 
+         font-size: 12pt; /* Ajuste la taille de la police pour l'impression */
     }
     .no-break {
         page-break-inside: avoid;
         break-inside: avoid; /* Pour les navigateurs modernes */
     }
-    
-    /* Autres styles pour l'impression (par exemple, masquer les éléments inutiles) */
-    body {
-        font-size: 12pt; /* Ajuste la taille de la police pour l'impression */
-    }
-
     .no-print {
-        display: none; /* Masque les éléments spécifiques à l'écran qui ne sont pas nécessaires à l'impression */
+        display: none !important;
     }
 }
 
@@ -334,13 +337,68 @@ code {
     flex: 2 1 200px; /* Cette colonne prend plus d'espace lorsqu'il y en a */
     
 }
+
+.center-content {
+    text-align: center; /* Centre le contenu horizontalement */
+}
+
+.center-content button {
+    display: inline-block; /* Permet de centrer le bouton */
+}
      </style>
+     <title> </title>
+     
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <button id="toggle-button" class="pressed" data-state="DM">DM</button>
-        <!-- <button id="export">Enregistrer les modifications</button> -->
+        <button id="print">imprimer les modifications</button>
+
+      
+
+        <script>
+               // Sélectionne le bouton et ajoute un écouteur d'événement
+        // Récupérer le chemin de l'URL
+        const pathname = window.location.pathname;
+
+        // Extraire uniquement le nom du fichier
+        let filename = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+        // Décoder les caractères spéciaux (comme %20 pour les espaces)
+        filename = decodeURIComponent(filename);
+
+        // Supprimer les extensions multiples (comme .html.pdf)
+        filename = filename.replace(/\.(\w+)(\.\w+)+$/, ''); // Garde la première extension uniquement
+
+        // Supprimer toute extension si nécessaire
+        filename = filename.replace(/\.\w+$/, '');
+
+        // Modifier le contenu de la balise <title>
+        document.title = filename;
+            // Sélectionne le bouton et ajoute un écouteur d'événement
+            document.getElementById('print').addEventListener('click', function () {
+                // Vérifie si le document contient un 🔴
+                if (document.body.innerText.includes('🔴')) {
+                    // Obtenir la date actuelle et formater en YY.MM.DD
+                    const now = new Date();
+                    const year = String(now.getFullYear()).slice(-2); // Année sur 2 chiffres
+                    const month = String(now.getMonth() + 1).padStart(2, '0'); // Mois sur 2 chiffres
+                    const day = String(now.getDate()).padStart(2, '0'); // Jour sur 2 chiffres
+        
+                    // Ajouter -MOD:YY.MM.DD au nom du fichier
+                    filename += `-MOD:${year}.${month}.${day}`;
+                }
+        
+                // Mettre à jour le titre de la page
+                document.title = filename;
+        
+                // Lance la boîte de dialogue d'impression
+                window.print();
+            });
+        </script>
+
+
         <h3>Table des matières</h3>
         <div id="sidebar-links"></div>
     </div>
@@ -348,7 +406,21 @@ code {
     <!-- Main Content -->
     <div class="content" id="main-content">
     </div>
-
+    <div class="content" id="change-log" style="margin-top: 20px;">
+        <h3>Liste des changements à faire</h3>
+        <table id="change-table" border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Fiche</th>
+                    <th>caption</th>
+                    <th>Description modifié</th>
+                    <th>Response Type</th>
+                    <th>SAS Name</th>
+                </tr>
+            </thead>
+            <tbody id="change-list"></tbody>
+        </table>
+    </div>
     <script>
         function loadJSON(filePath) {
     return fetch(filePath) // Charge le fichier JSON à partir du chemin spécifié
@@ -372,48 +444,8 @@ code {
 
 <script>
 
-const jsonData = {"visites": [{"V_description": "Hospitalisation", "fiches": [{"F_description": "Hospitalisation Yes/No", "groupes": [{"G_description": "HO1", "questions": [{"GI_key": "5068dc58-1f16-4a5a-97d9-b4ab416e4113", "I_description": "Was the patient hospitalised or admitted to an emergency unit at least once during the study?", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOYN"}, {"GI_key": "322026ba-3c7b-433b-a91a-6141febbeef7", "I_description": "<i><font color=\"#993333\">If yes, please complete an Hospitalisation form.</font></i>", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "HOYNC"}, {"GI_key": "5c91074d-6078-410f-9c8d-7741cbf14736", "I_description": "Start date of collection of hospitalisation data", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOCOLSDT"}, {"GI_key": "a7cda2c5-fc51-4083-8999-8bf5063ee949", "I_description": "End date of collection of hospitalisation data", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOCOLEDT"}, {"GI_key": "266404b3-6e3b-4ad6-8b34-841bffb4f0ab", "I_description": "Flag Hosp YN", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Hospitalisation YN.*][HO1.*][FLAGHOYN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nif ([Hospitalisation YN][HO1][HOYN] == '1')\n    '1';\nelse\n    ''; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "\ud83d\udc7b", "i_SasName": "FLAGHOYN"}, {"GI_key": "d5cecac8-5d6c-4bb2-ac08-22744317aa2e", "I_description": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}]}, {"F_description": "Hospitalisation", "groupes": [{"G_description": "HO2", "questions": [{"GI_key": "855df8fd-c9aa-4b2d-8161-1b5f335955c9", "I_description": "Start date", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOSDT"}, {"GI_key": "4bde6777-e7be-44d0-8806-c9a806da3e32", "I_description": "End date", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOEDT"}, {"GI_key": "2ce5a3f4-601a-4a61-931b-41193e80b247", "I_description": "Hospitalisation in the recruitment centre", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOENCTYN"}, {"GI_key": "5afb6e04-5911-48b2-a540-cde2e105fec2", "I_description": "If no, centre name", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOENCT_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOENCTYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 60", "I_Status": "", "i_SasName": "HOENCT_S"}, {"GI_key": "81c584a5-4f1b-4656-ac5c-56129e10dcc5", "I_description": "GHM", "Message": null, "rep": "Char - 6", "I_Status": "", "i_SasName": "HOGHM"}, {"GI_key": "638182c6-54f7-414c-9355-c1a70cb37e50", "I_description": "Type of cares (multiple responses possible)", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "HOTYPCOM"}, {"GI_key": "f94b6ba8-e720-440a-a3ac-d3fa2e9c3589", "I_description": "Surgery", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPS"}, {"GI_key": "2b72cae8-7de8-4836-a07a-51d6414218ef", "I_description": "Chemotherapy", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPCT"}, {"GI_key": "c0264a14-6f44-4094-b88c-bb9ac3879508", "I_description": "Radiotherapy", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPRT"}, {"GI_key": "23ddec67-38d5-4b76-87f7-de31ad2b0b93", "I_description": "Supportive care", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPSC"}, {"GI_key": "00188345-bde7-44e7-90b9-7127024a6bc8", "I_description": "Palliative care", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPPC"}, {"GI_key": "f1eb1e37-c9d9-4c6b-aec6-f544e7d86536", "I_description": "Other", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPO"}, {"GI_key": "dd395802-9cd4-4adf-8225-81ec991492a2", "I_description": "If other, specify", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOTYPO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOTYPO] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HOTYPO_S"}, {"GI_key": "edeb11f5-115b-4a69-a2c7-a7f5c75c584a", "I_description": "Ward (multiple responses possible)", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "HOWCOM"}, {"GI_key": "ad7e36df-cc75-4b47-902d-f6743555b930", "I_description": "Day hospital", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWDH"}, {"GI_key": "4dbc2169-04bb-4108-b4a9-74d2ff93d015", "I_description": "Inpatient medical unit", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWIMU"}, {"GI_key": "e8f9dc49-feae-4556-ac99-627306ba70c3", "I_description": "Inpatient surgical unit", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWISU"}, {"GI_key": "7b9c3ac6-57c3-4b55-81db-51ab619135ba", "I_description": "Emergency unit", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWEU"}, {"GI_key": "d2a9fce0-3b5b-4208-afa3-ac17d494ad71", "I_description": "Intensive care unit", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWICU"}, {"GI_key": "7e119f09-d5dd-4f6a-8b14-7beae6ab368a", "I_description": "If intensive care unit, number of days", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOWICUNB]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOWICU] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "HOWICUNB"}, {"GI_key": "030f1678-bd43-403c-b543-bd5486d01fb6", "I_description": "Home care hospitalisation", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWHCH"}, {"GI_key": "10212b7b-e758-4313-931d-c6de7e6b1b76", "I_description": "Other", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWO"}, {"GI_key": "4c0e245f-a346-4076-a9c8-03b8beae8d68", "I_description": "If other, specify", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOWO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOWO] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HOWO_S"}, {"GI_key": "b298a330-8fcd-4f27-9962-12514c8e40d1", "I_description": "Primary reason for hospitalisation", "Message": null, "rep": "\ud83d\udd18 1 - <b>Surgical intervention</b><br>\ud83d\udd18 2 - <b>Administration of chemotherapy</b><br>\ud83d\udd18 3 - <b>Radiotherapy</b><br>\ud83d\udd18 4 - <b>Toxicity</b><br>\ud83d\udd18 5 - <b>Progression</b><br>\ud83d\udd18 6 - <b>Palliative care</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "HOREAS"}, {"GI_key": "dcae81c6-0c05-413f-84a5-4151a05e8734", "I_description": "If toxicity, specify", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HORSTX_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOREAS] == '4'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HORSTX_S"}, {"GI_key": "0aab931d-acb1-4846-98c0-3cfe3980f51b", "I_description": "If other, specify", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HORSO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOREAS] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HORSO_S"}, {"GI_key": "2b3fe60a-3ae4-4474-9dfd-e31c449cb539", "I_description": "Flag Hosp", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Hospitalisation.*][HO2.*][FLAGHOSP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nif (!isEmpty([Hospitalisation.@][HO2][HOSDT]))\n    '1';\nelse\n    ''; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "\ud83d\udc7b", "i_SasName": "FLAGHOSP"}, {"GI_key": "314aab6a-e692-408c-9ad0-a04b4472451a", "I_description": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}]}]}]};
+const jsonData = {"visites": [{"V_description": "Hospitalisation", "fiches": [{"F_description": "Hospitalisation Yes/No", "groupes": [{"G_description": "HO1", "questions": [{"GI_key": "5068dc58-1f16-4a5a-97d9-b4ab416e4113", "Item_Order": 1, "I_description": "Was the patient hospitalised or admitted to an emergency unit at least once during the study?", "I_caption": "HOYN", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOYN"}, {"GI_key": "322026ba-3c7b-433b-a91a-6141febbeef7", "Item_Order": 2, "I_description": "<i><font color=\"#993333\">If yes, please complete an Hospitalisation form.</font></i>", "I_caption": "HOYNC", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "HOYNC"}, {"GI_key": "5c91074d-6078-410f-9c8d-7741cbf14736", "Item_Order": 3, "I_description": "Start date of collection of hospitalisation data", "I_caption": "HOCOLSDT", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOCOLSDT"}, {"GI_key": "a7cda2c5-fc51-4083-8999-8bf5063ee949", "Item_Order": 4, "I_description": "End date of collection of hospitalisation data", "I_caption": "HOCOLEDT", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOCOLEDT"}, {"GI_key": "266404b3-6e3b-4ad6-8b34-841bffb4f0ab", "Item_Order": 5, "I_description": "Flag Hosp YN", "I_caption": "FLAGHOYN", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVC:[Hospitalisation YN.*][HO1.*][FLAGHOYN]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nif ([Hospitalisation YN][HO1][HOYN] == '1')\n    '1';\nelse\n    ''; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "\ud83d\udc7b", "i_SasName": "FLAGHOYN"}, {"GI_key": "d5cecac8-5d6c-4bb2-ac08-22744317aa2e", "Item_Order": 6, "I_description": "MISSING_VAR", "I_caption": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}]}, {"F_description": "Hospitalisation", "groupes": [{"G_description": "HO2", "questions": [{"GI_key": "855df8fd-c9aa-4b2d-8161-1b5f335955c9", "Item_Order": 7, "I_description": "Start date", "I_caption": "HOSDT", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOSDT"}, {"GI_key": "4bde6777-e7be-44d0-8806-c9a806da3e32", "Item_Order": 8, "I_description": "End date", "I_caption": "HOEDT", "Message": null, "rep": "\ud83d\udcc5 DD/MM/YYYY", "I_Status": "", "i_SasName": "HOEDT"}, {"GI_key": "2ce5a3f4-601a-4a61-931b-41193e80b247", "Item_Order": 9, "I_description": "Hospitalisation in the recruitment centre", "I_caption": "HOENCTYN", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOENCTYN"}, {"GI_key": "5afb6e04-5911-48b2-a540-cde2e105fec2", "Item_Order": 10, "I_description": "If no, centre name", "I_caption": "HOENCT_S", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOENCT_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOENCTYN] == '0'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 60", "I_Status": "", "i_SasName": "HOENCT_S"}, {"GI_key": "81c584a5-4f1b-4656-ac5c-56129e10dcc5", "Item_Order": 11, "I_description": "GHM", "I_caption": "HOGHM", "Message": null, "rep": "Char - 6", "I_Status": "", "i_SasName": "HOGHM"}, {"GI_key": "638182c6-54f7-414c-9355-c1a70cb37e50", "Item_Order": 12, "I_description": "Type of cares (multiple responses possible)", "I_caption": "HOTYPCOM", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "HOTYPCOM"}, {"GI_key": "f94b6ba8-e720-440a-a3ac-d3fa2e9c3589", "Item_Order": 13, "I_description": "Surgery", "I_caption": "HOTYPS", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPS"}, {"GI_key": "2b72cae8-7de8-4836-a07a-51d6414218ef", "Item_Order": 14, "I_description": "Chemotherapy", "I_caption": "HOTYPCT", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPCT"}, {"GI_key": "c0264a14-6f44-4094-b88c-bb9ac3879508", "Item_Order": 15, "I_description": "Radiotherapy", "I_caption": "HOTYPRT", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPRT"}, {"GI_key": "23ddec67-38d5-4b76-87f7-de31ad2b0b93", "Item_Order": 16, "I_description": "Supportive care", "I_caption": "HOTYPSC", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPSC"}, {"GI_key": "00188345-bde7-44e7-90b9-7127024a6bc8", "Item_Order": 17, "I_description": "Palliative care", "I_caption": "HOTYPPC", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPPC"}, {"GI_key": "f1eb1e37-c9d9-4c6b-aec6-f544e7d86536", "Item_Order": 18, "I_description": "Other", "I_caption": "HOTYPO", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOTYPO"}, {"GI_key": "dd395802-9cd4-4adf-8225-81ec991492a2", "Item_Order": 19, "I_description": "If other, specify", "I_caption": "HOTYPO_S", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOTYPO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOTYPO] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HOTYPO_S"}, {"GI_key": "edeb11f5-115b-4a69-a2c7-a7f5c75c584a", "Item_Order": 20, "I_description": "Ward (multiple responses possible)", "I_caption": "HOWCOM", "Message": null, "rep": "Char - 1", "I_Status": "", "i_SasName": "HOWCOM"}, {"GI_key": "ad7e36df-cc75-4b47-902d-f6743555b930", "Item_Order": 21, "I_description": "Day hospital", "I_caption": "HOWDH", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWDH"}, {"GI_key": "4dbc2169-04bb-4108-b4a9-74d2ff93d015", "Item_Order": 22, "I_description": "Inpatient medical unit", "I_caption": "HOWIMU", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWIMU"}, {"GI_key": "e8f9dc49-feae-4556-ac99-627306ba70c3", "Item_Order": 23, "I_description": "Inpatient surgical unit", "I_caption": "HOWISU", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWISU"}, {"GI_key": "7b9c3ac6-57c3-4b55-81db-51ab619135ba", "Item_Order": 24, "I_description": "Emergency unit", "I_caption": "HOWEU", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWEU"}, {"GI_key": "d2a9fce0-3b5b-4208-afa3-ac17d494ad71", "Item_Order": 25, "I_description": "Intensive care unit", "I_caption": "HOWICU", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWICU"}, {"GI_key": "7e119f09-d5dd-4f6a-8b14-7beae6ab368a", "Item_Order": 26, "I_description": "If intensive care unit, number of days", "I_caption": "HOWICUNB", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOWICUNB]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOWICU] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Num - 3", "I_Status": "", "i_SasName": "HOWICUNB"}, {"GI_key": "030f1678-bd43-403c-b543-bd5486d01fb6", "Item_Order": 27, "I_description": "Home care hospitalisation", "I_caption": "HOWHCH", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWHCH"}, {"GI_key": "10212b7b-e758-4313-931d-c6de7e6b1b76", "Item_Order": 28, "I_description": "Other", "I_caption": "HOWO", "Message": null, "rep": "\ud83d\udd18 1 - <b>Yes</b><br>\ud83d\udd18 0 - <b>No</b>", "I_Status": "", "i_SasName": "HOWO"}, {"GI_key": "4c0e245f-a346-4076-a9c8-03b8beae8d68", "Item_Order": 29, "I_description": "If other, specify", "I_caption": "HOWO_S", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HOWO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOWO] == '1'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HOWO_S"}, {"GI_key": "b298a330-8fcd-4f27-9962-12514c8e40d1", "Item_Order": 30, "I_description": "Primary reason for hospitalisation", "I_caption": "HOREAS", "Message": null, "rep": "\ud83d\udd18 1 - <b>Surgical intervention</b><br>\ud83d\udd18 2 - <b>Administration of chemotherapy</b><br>\ud83d\udd18 3 - <b>Radiotherapy</b><br>\ud83d\udd18 4 - <b>Toxicity</b><br>\ud83d\udd18 5 - <b>Progression</b><br>\ud83d\udd18 6 - <b>Palliative care</b><br>\ud83d\udd18 99 - <b>Other</b>", "I_Status": "", "i_SasName": "HOREAS"}, {"GI_key": "dcae81c6-0c05-413f-84a5-4151a05e8734", "Item_Order": 31, "I_description": "If toxicity, specify", "I_caption": "HORSTX_S", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HORSTX_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOREAS] == '4'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HORSTX_S"}, {"GI_key": "0aab931d-acb1-4846-98c0-3cfe3980f51b", "Item_Order": 32, "I_description": "If other, specify", "I_caption": "HORSO_S", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> 5:[HO2.*][HORSO_S]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \n[HO2][HOREAS] == '99'; \n#data Expression \n \n</code></pre> </td><td> This item is required.</td> </tr></table></details>", "rep": "Char - 200", "I_Status": "", "i_SasName": "HORSO_S"}, {"GI_key": "2b3fe60a-3ae4-4474-9dfd-e31c449cb539", "Item_Order": 33, "I_description": "Flag Hosp", "I_caption": "FLAGHOSP", "Message": "<details> <summary>1 EditCheck </summary><table><tr><td> DVA:[Hospitalisation.*][HO2.*][FLAGHOSP]</td> </tr><tr> <td> <pre><code class='javascript'>#Action Expression \ntrue; \n#data Expression \nif (!isEmpty([Hospitalisation.@][HO2][HOSDT]))\n    '1';\nelse\n    ''; \n</code></pre> </td><td> </td> </tr></table></details>", "rep": "Char - 50", "I_Status": "\ud83d\udc7b", "i_SasName": "FLAGHOSP"}, {"GI_key": "314aab6a-e692-408c-9ad0-a04b4472451a", "Item_Order": 34, "I_description": "MISSING_VAR", "I_caption": "MISSING_VAR", "Message": null, "rep": "Num - 50", "I_Status": "", "i_SasName": "MISSING_"}]}]}]}]};
 
-function setupExportButton() {
-    const exportButton = document.getElementById("export");
-    if (!exportButton) {
-        console.error("Bouton avec l'ID 'export' introuvable !");
-        return;
-    }
-
-    exportButton.addEventListener("click", () => {
-        const dataStr = `const jsonData = ${JSON.stringify(jsonData, null, 2)};`; // Conversion en JavaScript formaté
-        const blob = new Blob([dataStr], { type: "application/javascript" }); // Création d'un blob de type JS
-        const url = URL.createObjectURL(blob); // Génération d'une URL pour le blob
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "modifications.hmt"; // Nom du fichier à télécharger
-        document.body.appendChild(a); // Ajout temporaire pour l'activation du clic
-        a.click(); // Téléchargement
-        document.body.removeChild(a); // Suppression de l'élément
-        URL.revokeObjectURL(url); // Libération de l'URL temporaire
-    });
-}
-
-// Appeler la fonction pour lier l'événement au bouton après le chargement du DOM
-setupExportButton();
-
-
-function addOldValueToGIKey(jsonData, targetGIKey, varname, oldValue) {
-    jsonData.visites.forEach(visit => {
-        visit.fiches.forEach(fiche => {
-            fiche.groupes.forEach(groupe => {
-                groupe.questions.forEach(question => {
-                    if (question.GI_key === targetGIKey) {
-                        if (question.hasOwnProperty(varname)) {
-                            question[`${varname}_new`] = oldValue; // Ajoute un champ oldValue à la variable spécifiée
-                        }
-                    }
-                });
-            });
-        });
-    });
-}
 
 const exportData  = {};
 const sidebarLinks = document.getElementById('sidebar-links');
@@ -514,79 +546,122 @@ function visibleonly(data, type, index) {
     }
 }
 
+// Fonction pour ajouter l'écouteur d'événements de manière globale
+function updateExportData(td1, td2, td3) {
+    const formKey = td1.getAttribute("data-form");
+    const sourceKey = td1.getAttribute("data-source");
+    const datacaption = td1.getAttribute("data-caption");
+    const dataorder = td1.getAttribute("data-order");
 
+    const sourceresp = td2.getAttribute("data-source");
+    const sourceSAS = td3.getAttribute("data-source");
+    console.log(sourceSAS)
 
-        // Fonction pour ajouter l'écouteur d'événements de manière globale
+    // Récupérer les valeurs actuelles des cellules
+    const currentDescription = td1.innerText;
+    const currentResponseType = td2.innerText;
+    const currentSasName = td3.innerText;
+
+    // Récupérer les valeurs modifiées des champs de saisie
+    const modifyTXT1 = document.getElementById(aeraID + '1').value;
+    const modifyHTML2 = document.getElementById(aeraID + '2').value;
+    const modifyTXT3 = document.getElementById(aeraID + '3').value;
+    const displayTxT1 = (modifyTXT1 === sourceKey) ? "N/A" : modifyTXT1;
+    const displayTxT2 = (modifyHTML2 === sourceresp) ? "N/A" : modifyHTML2;
+    const displayTxT3 = (modifyTXT3 === sourceSAS) ? "N/A" : modifyTXT3;
+
+    // Vérifier s'il y a un changement
+    if (modifyTXT1 !== currentDescription || modifyHTML2 !== currentResponseType || modifyTXT3 !== currentSasName) {
+        // Si des changements sont détectés, mettre à jour l'objet exportData
+        if (!exportData[formKey]) {
+            exportData[formKey] = {}; // Initialiser l'objet pour le formulaire s'il n'existe pas
+        }
+        exportData[formKey][datacaption] = {
+            dataorder:dataorder,
+            description: displayTxT1,
+            responseType: displayTxT2,
+            sasName: displayTxT3
+        };
+
+        // Appeler la fonction de mise à jour de la liste des changements
+        updateChangeLog();
+    }
+}
+
 function addGlobalClickListener() {
     document.addEventListener('click', (event) => {
-        
         if (event.target && (event.target.innerHTML === '✏️' || event.target.innerHTML === '💾')) {
-            
-        originID=event.target.getAttribute("id").substr(3); 
+            originID = event.target.getAttribute("id").substr(3);
 
-        td0 = document.getElementById('td0' + originID); 
-        td1 =  document.getElementById('td1' + originID); 
-        But =  document.getElementById("But" + originID); 
-    
-        aeraID ='ARE' + originID;
-        
+            td0 = document.getElementById('td0' + originID);
+            td1 = document.getElementById('td1' + originID);
+            td2 = document.getElementById('td2' + originID);
+            td3 = document.getElementById('td3' + originID);
+            But = document.getElementById("But" + originID);
 
+            aeraID = 'ARE' + originID;
 
-        if (event.target && event.target.innerHTML === '✏️') {
-           
-            //    console.log(event.target)
-            previousTXT=td1.innerText;
-            // addOldValueToGIKey(jsonData, originID, "Old_data", previousTXT);
-     
-        //     // Remplacer le texte statique par un champ texte (textarea)
-            td1.innerHTML = '';  // Supprimer l'ancien texte
-            const inputField = document.createElement('textarea');
-            inputField.id =  aeraID;
-            inputField.innerText = previousTXT || '';  // Valeur actuelle
-            td1.appendChild(inputField);
+            if (event.target && event.target.innerHTML === '✏️') {
+                // Récupérer les valeurs existantes
+                previousTXT = td1.innerHTML;
+                previousHTML2 = td2.innerHTML; // Contenu de td2
+                previousTXT3 = td3.innerText;
 
-        //     // Créer un bouton "Save"
-        console.log(td0)
-            td0.innerHTML = '';
-            const savebutton= document.createElement('button');
-            savebutton.id="But" + originID;          
-            savebutton.innerHTML = '💾';
+                // Remplacer le texte statique par des champs texte (textarea)
+                td1.innerHTML = '';
+                td2.innerHTML = '';
+                td3.innerHTML = '';
 
-            td0.appendChild(savebutton);
-        }
+                const inputField1 = document.createElement('textarea');
+                inputField1.id = aeraID + '1';
+                inputField1.innerText = previousTXT || ''; // Valeur actuelle de td1
+                td1.appendChild(inputField1);
+
+                const inputField2 = document.createElement('textarea');
+                inputField2.id = aeraID + '2';
+                inputField2.innerText = previousHTML2; // Valeur actuelle de td2
+                td2.appendChild(inputField2);
+
+                const inputField3 = document.createElement('textarea');
+                inputField3.id = aeraID + '3';
+                inputField3.innerText = previousTXT3 || ''; // Valeur actuelle de td3
+                td3.appendChild(inputField3);
+
+                // Créer un bouton "Save"
+                td0.innerHTML = '';
+                const saveButton = document.createElement('button');
+                saveButton.id = "But" + originID;
+                saveButton.innerHTML = '💾';
+                td0.appendChild(saveButton);
+            }
+
             // Quand on clique sur "Save", sauvegarder la modification
             if (event.target && event.target.innerHTML === '💾') {
-                modifyTXT = document.getElementById(aeraID).value; 
-                addOldValueToGIKey(jsonData, originID, "I_description", modifyTXT);
-                console.log(jsonData)
-                if (!exportData[originID]) {
-                    exportData[originID] = [modifyTXT];
-    }
+                updateExportData(td1, td2, td3);
+                console.log(exportData)
+                const modifyTXT1 = document.getElementById(aeraID + '1').value;
+                const modifyHTML2 = document.getElementById(aeraID + '2').value;
+                const modifyTXT3 = document.getElementById(aeraID + '3').value;
 
-                td1.innerHTML = '';
-                const tdsimple= document.createElement('td');
-                tdsimple.id='td1' + originID;
-                tdsimple.innerHTML=modifyTXT;
-                console.log(tdsimple)
-                td1.appendChild(tdsimple);  // Ajouter tdsimple comme enfant de td1
-
-
-               
               
-                
-                // td1.appendChild(modifyTXT);
 
-                // QuestionID.innerText = modifyTXT;  // Mettre à jour la valeur de la question
+                // Mise à jour de td1, td2, et td3 avec les nouvelles valeurs
+                td1.innerHTML = modifyTXT1;
+                td2.innerHTML = modifyHTML2;
+                td3.innerHTML = modifyTXT3;
+
+                // Remise à zéro de td0 et ajout du bouton "Modifier"
                 td0.innerHTML = '';
-
-                const modbutton= document.createElement('button');
-                modbutton.id="But" + originID;          
-                modbutton.innerHTML = '✏️';
-                td0.appendChild(modbutton);
-  // Ajouter le bouton "Modifier"
+                const modButton = document.createElement('button');
+                modButton.id = "But" + originID;
+                modButton.innerHTML = '🔴✏️';
+                td0.appendChild(modButton);
             }
-}});
-         }
+        }
+    });
+}
+
+
          addGlobalClickListener()        
 // Fonction pour générer les fiches
 function generateFiche(fiche, activate, fid) {
@@ -616,7 +691,6 @@ function generateFiche(fiche, activate, fid) {
         th0.style.width = '1px';
         th0.style.whiteSpace = 'nowrap';
         th0.setAttribute('data-visual', "DM");
-
         const th1 = document.createElement('th');
         th1.innerText = 'Question Description';
 
@@ -626,18 +700,29 @@ function generateFiche(fiche, activate, fid) {
         th3.innerText = 'Sas';
         th3.setAttribute('data-visual', "DM");
         const th4 = document.createElement('th');
-        th4.innerText = 'Report';
+        th4.innerText = 'EditCheck';
         th4.setAttribute('data-visual', "DM");
+        th4.className="no-print";
+        const th5 = document.createElement('th');
+        th5.innerText = 'Report';
+        th5.setAttribute('data-visual', "DM");
+        th5.className="no-print";
 
-        // headerRow.appendChild(th0);
+
+
+        headerRow.appendChild(th0);
         headerRow.appendChild(th1);
         headerRow.appendChild(th2);
         headerRow.appendChild(th3);
         headerRow.appendChild(th4);
+        headerRow.appendChild(th5);
+
         table.appendChild(headerRow);
 
         // Ajouter les lignes pour chaque question
+        index=0
         groupe.questions.forEach(question => {
+            index+=1
             const row = document.createElement('tr');
 
             // Colonne pour l'outil
@@ -647,23 +732,43 @@ function generateFiche(fiche, activate, fid) {
             const editButton = document.createElement('button');
             editButton.innerHTML = '✏️';
             editButton.id = `But${question.GI_key}`;
+            editButton.className="no-print";
             td0.appendChild(editButton);
 
             // Colonne pour la description
             const td1 = document.createElement('td');
             td1.innerHTML = question.I_description || 'N/A';
             td1.id = `td1${question.GI_key}`;
+            td1.setAttribute('data-source', question.I_description);
+            td1.setAttribute('data-form', fiche.F_description);
+            td1.setAttribute('data-caption', question.I_caption);
+            td1.setAttribute('data-order', question.Item_Order);
+            
 
             // Colonne pour la réponse
             const td2 = document.createElement('td');
             td2.innerHTML = question.rep || 'N/A';
+            td2.id = `td2${question.GI_key}`;
+            td2.setAttribute('data-source', question.rep);
 
             const td3 = document.createElement('td');
             td3.innerHTML = question.i_SasName || 'N/A';
             td3.setAttribute('data-visual', "DM");
-            
+            td3.id = `td3${question.GI_key}`;
+            td3.setAttribute('data-source', question.i_SasName);
+
             const td4 = document.createElement('td'); // Crée une cellule de tableau
             td4.setAttribute('data-visual', "DM");
+            td4.className="no-print";
+
+            
+            td4.innerHTML = question.Message; // Ajoute l'emoji au bouton
+            
+            const td5 = document.createElement('td'); // Crée une cellule de tableau
+            td5.classList.add('center-content'); // Ajoute la classe pour le centrage
+
+            td5.setAttribute('data-visual', "DM");
+            td5.className="no-print";
             const issue = document.createElement('button'); // Crée un bouton
             issue.innerHTML = "❗"; // Ajoute l'emoji au bouton
             issue.id = "report-issue"; // Donne un ID au bouton
@@ -683,19 +788,45 @@ function generateFiche(fiche, activate, fid) {
                 window.open(url, '_blank');
             });
 
-            td4.appendChild(issue); // Ajoute le bouton à la cellule
+            td5.appendChild(issue); // Ajoute le bouton à la cellule
 
             
             // Ajouter les colonnes à la ligne
-            // row.appendChild(td0);
+            
+            row.appendChild(td0);
             row.appendChild(td1);
             row.appendChild(td2);
             row.appendChild(td3);
             row.appendChild(td4);
+            row.appendChild(td5);
+
 
             // Ajouter la ligne au tableau
             table.appendChild(row);
+            const rowp = document.createElement('tr');
+rowp.style.position = "relative"; // Position de la ligne pour utiliser la position absolue de la cellule
+rowp.style.height = "0px"; // Hauteur de la ligne
+rowp.style.overflow = "hidden"; // Permet au contenu de dépasser la hauteur
+rowp.style.visibility = "hidden"; // Masque la ligne, mais pas son contenu
+
+// const tdx = document.createElement('td');
+// tdx.colSpan = 6; // Ajustez selon le nombre de colonnes
+// tdx.style.position = "absolute"; // Permet de positionner le texte par-dessus le tableau
+// tdx.style.top = "0px"; // Positionne le texte à l'endroit souhaité (ajustez si nécessaire)
+// tdx.style.left = "0px"; // Positionne le texte à l'endroit souhaité (ajustez si nécessaire)
+// tdx.style.textAlign = 'left';
+// tdx.style.zIndex = "10"; // Place le texte au-dessus des autres éléments (ajustez si nécessaire)
+// tdx.textContent = '+'; // Contenu du texte
+
+// // Ajoutez la cellule au tableau
+// rowp.appendChild(tdx);
+// table.appendChild(rowp);
+
+          
         });
+
+            // Ajouter une ligne de séparation "+" après chaque ligne sauf la dernière
+   
 
         // Ajouter la table à la section
         section.appendChild(table);
@@ -800,7 +931,43 @@ window.addEventListener('beforeunload', (event) => {
             title.classList.add('show');
         }
 
+// Fonction pour afficher les changements dans la section du tableau
+
+
+function updateChangeLog() {
+    const changeList = document.getElementById('change-list');
+    changeList.innerHTML = ''; // Réinitialiser le corps du tableau avant de le remplir
+    console.log(exportData)
+    // Vérifier s'il y a des modifications enregistrées
+    if (Object.keys(exportData).length > 0) {
+        // Trier l'objet exportData par la propriété dataorder
+        const sortedEntries = Object.entries(exportData).sort(([, a], [, b]) => a.dataorder - b.dataorder);
+        
+        for (const [formKey, formValue] of sortedEntries) {
+            for (const [sourceKey, value] of Object.entries(formValue)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formKey}</td>
+                    <td>${sourceKey}</td>
+                    <td>${value.description}</td>
+                    <td>${value.responseType}</td>
+                    <td>${value.sasName}</td>
+                `;
+                changeList.appendChild(row);
+            }
+        }
+    } else {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td colspan="5" style="text-align: center;">Aucun changement enregistré.</td>
+        `;
+        changeList.appendChild(row);
+    }
+}
+
 </script>
+
+
 </body>
 
 </html>
