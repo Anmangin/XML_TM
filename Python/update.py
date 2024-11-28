@@ -462,7 +462,7 @@ def main():
 
     # Gestion des chemins locaux
     if len(sys.argv) <= 1:
-        # output_path += "_LOCAL"
+        output_path += "/LOCAL"
         ensure_directories(output_path, sub_dirs=["JSON"])
         if not confirm_execution(output_path):
             return

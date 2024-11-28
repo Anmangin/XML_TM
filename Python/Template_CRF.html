@@ -15,7 +15,29 @@
     <div class="sidebar" id="sidebar">
         <button id="toggle-button" class="pressed" data-state="DM">DM</button>
         <button id="print">imprimer les modifications</button>
-
+        <button onclick="saveAsWord()">Save as Word</button>
+        <script>
+            function saveAsWord() {
+                // Sélectionne le contenu de la page
+                const content = document.documentElement.outerHTML;
+    
+                // Crée un blob avec le contenu en type MIME pour Word
+                const blob = new Blob(['\ufeff' + content], {
+                    type: 'application/msword'
+                });
+    
+                // Crée un lien temporaire pour télécharger le fichier
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'page.doc'; // Nom du fichier par défaut
+    
+                // Simule un clic sur le lien pour lancer le téléchargement
+                link.click();
+    
+                // Libère l'URL temporaire
+                URL.revokeObjectURL(link.href);
+            }
+        </script>
       
 
         <script>
