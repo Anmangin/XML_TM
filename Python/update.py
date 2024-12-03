@@ -27,7 +27,7 @@ contenu_html = Path(chemin_html).read_text(encoding='utf-8')
 
 # Paramètres globaux
 logprint = False
-unic_form = True
+unic_form = False
 DICO = {}
 
 
@@ -463,7 +463,8 @@ def main():
     # Gestion des chemins locaux
     if len(sys.argv) <= 1:
         output_path += "/LOCAL"
-        ensure_directories(output_path, sub_dirs=["JSON"])
+        ensure_directories(output_path, sub_dirs=["docs"])
+        ensure_directories(output_path+"/docs", sub_dirs=["Templates"])
         if not confirm_execution(output_path):
             return
     ensure_directories(output_path)
@@ -478,9 +479,6 @@ def main():
     content ,doc,JSON_EXPORT= exporter_donnees_markdown_eCRF(data,"5.0.3.27.Update 3b",True)
     
 
-    ensure_directories(f"{output_path}/DOCX")
-    ensure_directories(f"{output_path}/HTML")
-    ensure_directories(f"{output_path}/MD")
     # doc.save(f"{output_path}/DOCX/{file_name}.docx")
 
 
@@ -499,8 +497,10 @@ def main():
 ) #remove_details_tags(content)
     # if len(JSON_EXPORT)>0:save_json(JSON_EXPORT,f"{output_path}/JSON", f"{file_name}_CRFS.json")
     # else: print("Liste des checks vide!")
-    if not os.path.exists(f"{output_path}/docs/MD/{file_name}.md"):
-        with open( f"{output_path}/docs/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
+    print(len(sys.argv))
+    if len(sys.argv) >1:
+        if not os.path.exists(f"{output_path}/docs/MD/{file_name}.md"):
+            with open( f"{output_path}/docs/MD/{file_name}.md" , 'w', encoding='utf-8') as f:
                 f.write(f"# DOCUMENTATION POUR LE FICHIER {file_name}")
                 
     customjs = f"const jsonData = {json.dumps(JSON_EXPORT)};"
