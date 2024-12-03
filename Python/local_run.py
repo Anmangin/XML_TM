@@ -27,3 +27,5 @@ for xml_file in xml_files:
         subprocess.run(['python', 'Python/update.py', xml_path], check=True)
     except subprocess.CalledProcessError as e:
         print(f"Erreur lors de l'exécution pour le fichier {xml_path} : {e}")
+    
+subprocess.run(['python', 'Python/generate_index.py'], check=True)
