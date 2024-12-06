@@ -1,4 +1,10 @@
 {
+
+  "ProPatient" : {
+    "racine": "ProPatient",
+    "keyname": "ProObjectGuid",
+    "fields": ["Caption", "ProFormGuid"]
+  },
     "ProPatientVisit": {
       "racine": "ProPatientVisit",
       "keyname": "ProObjectGuid",
@@ -42,7 +48,7 @@
       "racine": "ProItem",
       "keyname": "ProObjectGuid",
       "prefix":"I_",
-      "fields": ["Description", "Scale", "SasName", "MinLength", "MaxLength", "ProControlTypeId", "SasType", "ProCodeListGuid", "ProDataTypeId", "Hidden", "ReadOnly", "Disabled","Display","Caption","Status"]
+      "fields": ["Description", "Scale", "SasName", "MinLength", "MaxLength", "ProControlTypeId","ProItemCategoryGuid", "SasType", "ProCodeListGuid", "ProDataTypeId", "Hidden", "ReadOnly", "Disabled","Display","Caption","Status"]
     },
     "ProCodeList": {
       "racine": "ProCodeList",
@@ -68,6 +74,13 @@
         "racine": "ProScriptFunction",
         "keyname": "ProObjectGuid",
       "fields": ["Prototype", "Description", "Body"]
+    },
+    "ProItemCategory":{
+        "racine": "ProItemCategory",
+        "keyname": "ProObjectGuid",
+      "fields": ["Caption", "Description"]
     }
   }
   
+
+
