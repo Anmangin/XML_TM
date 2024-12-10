@@ -1,9 +1,0 @@
-Une erreur est survenue :
-Traceback (most recent call last):
-  File "c:\Users\a_mangin\Documents\GitHub\XML_TM\Python\update.py", line 82, in main
-    JSON_EXPORT= exporter_donnees_markdown_eCRF(data,unic_form)
-  File "c:\Users\a_mangin\Documents\GitHub\XML_TM\Python\XML_Function.py", line 183, in exporter_donnees_markdown_eCRF
-    order,JSON_EXPORT = ADD_FORM(data,"Patient Template",ProFormGuid,order,JSON_EXPORT)
-  File "c:\Users\a_mangin\Documents\GitHub\XML_TM\Python\XML_Function.py", line 251, in ADD_FORM
-    if Cat_Description:rep= Cat_Description + "<br>" +  rep
-UnboundLocalError: local variable 'Cat_Description' referenced before assignment
