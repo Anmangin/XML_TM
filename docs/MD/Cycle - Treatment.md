@@ -1,3 +1,0 @@
-# DOCUMENTATION POUR LE FICHIER Cycle - Treatment
-
-test

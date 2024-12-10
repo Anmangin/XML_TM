@@ -1,1 +1,0 @@
-# DOCUMENTATION POUR LE FICHIER Eponimous - End Of Treatment

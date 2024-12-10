@@ -1,1 +1,0 @@
-# DOCUMENTATION POUR LE FICHIER Baseline - Prior Treatment
