@@ -147,7 +147,7 @@ jsonData.visites.forEach((visite, visitIndex) => {
     visitLink.innerText = `${visitIndex + 1}: ${visite.V_description}`;
 	generateFiches(visite,vindex);  
     visitLink.addEventListener('click', () => {
-        console.log(visitLink.href)
+
         visibleonly(jsonData, 'visite', vindex);
     });
     sidebarLinks.appendChild(visitLink);
@@ -181,11 +181,11 @@ function visibleonly(data, type, index) {
         // Gérer la visibilité des visites
        
        if (visit.id==index){
-        console.log("analyse de",visit,'trouvé',index);
+
         visit.classList.remove('hidden');
         visit.classList.add('show');
         } else {
-            console.log("analyse de",visit,'caché' , index);
+
             visit.classList.remove('show');
             visit.classList.add('hidden');
         }
@@ -193,6 +193,7 @@ function visibleonly(data, type, index) {
 
 
         };
+        
 
         let sectionlist = document.getElementsByTagName('section');
 
@@ -211,6 +212,20 @@ function visibleonly(data, type, index) {
 
 
     } else if (type === 'fiche') {
+        let h1list = document.getElementsByTagName('h1');
+        for (let visit of h1list) {
+            VIsitindex=index.split('f')[0];;
+            if (visit.id==VIsitindex) {
+                visit.classList.remove('hidden');
+                visit.classList.add('show');
+            }
+        else {
+            visit.classList.remove('show');
+            visit.classList.add('hidden');
+            }
+
+        }
+
 
         let sectionlist = document.getElementsByTagName('section');
 
@@ -238,7 +253,7 @@ function updateExportData(td1, td2, td3) {
 
     const sourceresp = td2.getAttribute("data-source");
     const sourceSAS = td3.getAttribute("data-source");
-    console.log(sourceSAS)
+
 
     // Récupérer les valeurs actuelles des cellules
     const currentDescription = td1.innerText;
@@ -321,7 +336,7 @@ function addGlobalClickListener() {
             // Quand on clique sur "Save", sauvegarder la modification
             if (event.target && event.target.innerHTML === '💾') {
                 updateExportData(td1, td2, td3);
-                console.log(exportData)
+
                 const modifyTXT1 = document.getElementById(aeraID + '1').value;
                 const modifyHTML2 = document.getElementById(aeraID + '2').value;
                 const modifyTXT3 = document.getElementById(aeraID + '3').value;
@@ -620,7 +635,7 @@ window.addEventListener('beforeunload', (event) => {
 function updateChangeLog() {
     const changeList = document.getElementById('change-list');
     changeList.innerHTML = ''; // Réinitialiser le corps du tableau avant de le remplir
-    console.log(exportData)
+
     // Vérifier s'il y a des modifications enregistrées
     if (Object.keys(exportData).length > 0) {
         // Trier l'objet exportData par la propriété dataorder

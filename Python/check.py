@@ -194,7 +194,7 @@ def main():
             return
 
     # Lecture des données et configuration
-    config_path = os.path.join(execution_path, "config.json")
+    config_path = os.path.join(execution_path,"Python", "config.json")
     data = lire_et_trier_donnees(Pathin, config_path)
    
     # Export des données
